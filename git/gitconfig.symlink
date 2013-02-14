@@ -1,7 +1,9 @@
 # gitconfig
 [user]
-    name = Nick Nisi
-    email = nick@nisi.org
+	email = jbranchaud@gmail.com
+	name = jbranchaud
+[credential]
+	helper = osxkeychain
 [alias]
     ci = commit -a
     co = checkout
