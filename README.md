@@ -1,6 +1,9 @@
-# Dotfiles
+# dotfiles
 
-These are my dotfiles, which contain my custom system configuration preferences. 
+These are my dotfiles, which contain my custom system configuration
+preferences.
+Thanks to [Nick Nisi](https://github.com/nicknisi) for providing such a
+well crafted [dotfiles](https://github.com/nicknisi/dotfiles) framework.
 
 ## Contents
 
@@ -15,7 +18,7 @@ These are my dotfiles, which contain my custom system configuration preferences.
 
 ### Automatic Installation
 
-	curl -L https://raw.github.com/nicknisi/dotfiles/master/tools/install.sh | sh
+	curl -L https://raw.github.com/jbranchaud/dotfiles/master/tools/install.sh | sh
 
 ### Manual Installation
 
@@ -23,7 +26,7 @@ These are my dotfiles, which contain my custom system configuration preferences.
 
 First, clone the repository to your home directory and name it ".dotfiles"
 
-	git clone git@github.com:nicknisi/dotfiles.git ~/.dotfiles
+	git clone git@github.com:jbranchaud/dotfiles.git ~/.dotfiles
 
 Then cd into that directory
 
