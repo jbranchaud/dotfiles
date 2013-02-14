@@ -1,5 +1,19 @@
 autoload colors && colors
 
+PROMPT='
+%{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}
+$(prompt_char) '
+
+function collapse_pwd {
+    echo $(pwd | sed -e "s,^$HOME,~,")
+}
+
+function prompt_char {
+    git branch >/dev/null 2>/dev/null && echo '±' && return
+    hg root >/dev/null 2>/dev/null && echo '☿' && return
+    echo '○'
+}
+
 git_branch() {
   echo $(/usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
@@ -51,5 +65,5 @@ directory_name(){
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'%{$FG[199]%}♥%{$reset_color%} $(directory_name) %{$fg_bold[magenta]%}➜%{$reset_color%} '
-export RPROMPT=$'$(git_dirty)$(need_push)$(suspended_jobs)'
+#export PROMPT=$'%{$FG[199]%}♥%{$reset_color%} $(directory_name) %{$fg_bold[magenta]%}➜%{$reset_color%} '
+#export RPROMPT=$'$(git_dirty)$(need_push)$(suspended_jobs)'
