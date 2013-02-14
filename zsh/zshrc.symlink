@@ -23,6 +23,17 @@ export EDITOR='vim'
 
 export PATH=/usr/local/bin:$PATH
 
+# JPF and DiSE stuff
+export JPF_HOME=$HOME/Documents/research/jpf-core
+export JPF=$JPF_HOME/bin/jpf
+export testHome=$HOME/Documents/research/dise-tests
+export DISE=$HOME/Documents/research/jpf-regression
+export SYMBC=$HOME/Documents/research/jpf-symbc
+
+# My Scripts Directory
+export MYBIN=$HOME/mybin
+export PATH=$MYBIN:$PATH
+
 # load rvm
 if [[ -d ~/.rvm ]]; then
     source ~/.rvm/scripts/rvm
