@@ -5,35 +5,35 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let vundle manage vundle
-Bundle 'gmarik/vundle'
+"Bundle 'gmarik/vundle'
 
 " my vim plugins
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'mileszs/ack.vim'
+"Bundle 'kien/ctrlp.vim'
+"Bundle 'scrooloose/nerdtree'
+"Bundle 'mileszs/ack.vim'
 " Bundle 'scrooloose/syntastic'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'othree/html5.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'itspriddle/vim-jquery'
-Bundle 'tpope/vim-markdown'
-Bundle 'mmalecki/vim-node.js'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'tpope/vim-ragtag'
-Bundle 'tpope/vim-surround'
+"Bundle 'Raimondi/delimitMate'
+"Bundle 'tpope/vim-commentary'
+"Bundle 'tpope/vim-endwise'
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'othree/html5.vim'
+"Bundle 'pangloss/vim-javascript'
+"Bundle 'itspriddle/vim-jquery'
+"Bundle 'tpope/vim-markdown'
+"Bundle 'mmalecki/vim-node.js'
+"Bundle 'Lokaltog/vim-powerline'
+"Bundle 'tpope/vim-ragtag'
+"Bundle 'tpope/vim-surround'
 " Bundle 'sjl/vitality.vim'
-Bundle 'duff/vim-scratch'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'groenewege/vim-less'
-Bundle 'nono/vim-handlebars'
-Bundle 'tsaleh/vim-matchit'
-Bundle 'benmills/vimux'
-Bundle 'mattn/zencoding-vim'
-Bundle 'int3/vim-taglist-plus'
+"Bundle 'duff/vim-scratch'
+"Bundle 'cakebaker/scss-syntax.vim'
+"Bundle 'kchmck/vim-coffee-script'
+"Bundle 'groenewege/vim-less'
+"Bundle 'nono/vim-handlebars'
+"Bundle 'tsaleh/vim-matchit'
+"Bundle 'benmills/vimux'
+"Bundle 'mattn/zencoding-vim'
+"Bundle 'int3/vim-taglist-plus'
 
 filetype plugin indent on
 
@@ -277,6 +277,11 @@ nnoremap <C-y> 3<C-y>
 " moving up and down work as you would expect
 nnoremap <silent> j gj
 nnoremap <silent> k gk
+
+" toggle search result highlighting on/off
+map  <F12> :set hls!<CR>
+imap <F12> <ESC>:set hls!<CR>a
+vmap <F12> <ESC>:set hls!<CR>gv
 
 function! ToggleNuMode()
     if (&rnu == 1)
