@@ -7,12 +7,13 @@ well crafted [dotfiles](https://github.com/nicknisi/dotfiles) framework.
 
 ## Contents
 
-+ zsh configuration
-+ vim configuration
-+ tmux configuration
-+ git configuration
-+ osx configuration
-+ bash configuration
+- zsh configuration
+- vim configuration
+- tmux configuration
+- git configuration
+- hg configuration (coming soon)
+- osx configuration
+- bash configuration
 
 ## Install
 
