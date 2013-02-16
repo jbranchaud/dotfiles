@@ -1,11 +1,16 @@
 " vim settings
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle Settings - https://github.com/gmarik/vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 filetype off
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
 " let vundle manage vundle
-"Bundle 'gmarik/vundle'
+Bundle 'gmarik/vundle'
 
 " my vim plugins
 "Bundle 'kien/ctrlp.vim'
