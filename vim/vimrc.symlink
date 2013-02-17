@@ -5,6 +5,7 @@
 " Vundle Settings - https://github.com/gmarik/vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set nocompatible " not compatible with vi
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -54,7 +55,6 @@ abbr tempalte template
 
 "set winwidth=120
 
-set nocompatible " not compatible with vi
 set autoread " detect when a file is changed
 
 " make backspace behave in a sane manner
