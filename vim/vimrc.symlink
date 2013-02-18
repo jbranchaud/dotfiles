@@ -21,7 +21,7 @@ Bundle 'gmarik/vundle'
 "Bundle 'Raimondi/delimitMate'
 "Bundle 'tpope/vim-commentary'
 "Bundle 'tpope/vim-endwise'
-"Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-fugitive'
 "Bundle 'othree/html5.vim'
 "Bundle 'pangloss/vim-javascript'
 "Bundle 'itspriddle/vim-jquery'
@@ -76,6 +76,8 @@ set softtabstop=4
 
 " faster redrawing
 set ttyfast
+
+set t_RV= ttymouse=xterm2
 
 " allow matching of if/end, etc. with %
 " runtime macros/matchit.vim
@@ -323,7 +325,7 @@ function! ApplyLocalSettings(dirname)
         exec ":source" . l:settingsFile
     endif
 endfunction
-autocmd! BufEnter * call ApplyLocalSettings(expand("<afile>:p:h"))
+" autocmd! BufEnter * call ApplyLocalSettings(expand("<afile>:p:h"))
 
 " smart tab completion
 function! Smart_TabComplete()
