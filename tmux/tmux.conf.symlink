@@ -1,7 +1,14 @@
+# reattach to user namespace
+# need to have reattach-to-user-namespace installed, this can be
+# done with 'brew install reattach-to-user-namespace
+# based on: http://superuser.com/questions/397076/tmux-exits-with-exited-on-mac-os-x
 set -g default-command "reattach-to-user-namespace -l zsh"
 # tmux display things in 256 colors
 set -g default-terminal "screen-256color"
 set -g status-utf8 on
+
+# set default shell to zsh
+set-option -g default-shell "/bin/bash"
 
 set -g history-limit 20000
 
@@ -13,9 +20,6 @@ bind C-a send-prefix
 # Activity Monitoring
 setw -g monitor-activity off
 set -g visual-activity off
-
-# reattach to user namespace
-# set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 # Rather than constraining window size to the maximum size of any client 
 # connected to the *session*, constrain window size to the maximum size of any 
