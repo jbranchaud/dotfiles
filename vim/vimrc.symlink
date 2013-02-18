@@ -77,6 +77,10 @@ set softtabstop=4
 " faster redrawing
 set ttyfast
 
+" adding the following line because the characters '2c' were getting
+" prepended to the beginning of each vim session. I don't know why this
+" line fixes that, but the solution came from this superuser question:
+" http://superuser.com/questions/553601/vim-has-unexpected-key-presses-on-startup-what-could-be-causing-this/553610#comment672979_553610
 set t_RV= ttymouse=xterm2
 
 " allow matching of if/end, etc. with %
