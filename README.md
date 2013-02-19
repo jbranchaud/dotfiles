@@ -11,7 +11,7 @@ well crafted [dotfiles](https://github.com/nicknisi/dotfiles) framework.
 - vim configuration
 - tmux configuration
 - git configuration
-- hg configuration (coming soon)
+- hg configuration
 - osx configuration
 - bash configuration
 
