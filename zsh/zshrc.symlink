@@ -33,6 +33,7 @@ export JPF=$JPF_HOME/bin/jpf
 export testHome=$HOME/Documents/research/dise-tests
 export DISE=$HOME/Documents/research/jpf-regression
 export SYMBC=$HOME/Documents/research/jpf-symbc
+export staticAnalyzer=$HOME/Documents/research/static-analyzer
 
 # My Scripts Directory
 export MYBIN=$HOME/mybin
@@ -57,3 +58,8 @@ if [[ -d ~/bin ]]; then
 fi
 
 [ -z "$TMUX" ] && export TERM=xterm-256color
+
+# startup zsh with tmux
+# http://unix.stackexchange.com/a/41276
+if [ "$TMUX" = "" ]; then tmux; fi
+
