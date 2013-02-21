@@ -11,3 +11,14 @@ when this project is installed on a machine for the first time.
 - [Rake](http://rake.rubyforge.org/) - Ruby Make is used to install,
     backup, restore, and uninstall this project
 
+## tmux
+
+[tmux](http://tmux.sourceforge.net/) is a terminal multiplexer.
+
+- [tmux](http://tmux.sourceforge.net/) - if you don't have it already,
+    you are going to need tmux itself
+- [libevent](http://libevent.org/) - tmux depends on libevent
+- reattach to user namespace - this is common tmux feature that requires
+    installation of reattach-to-user-namespace which can easily be installed
+    with homebrew: `brew install reattach-to-user-namespace`.
+
