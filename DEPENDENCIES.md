@@ -6,6 +6,9 @@ when this project is installed on a machine for the first time.
 
 ## Installation
 
+Installing the set of dotfiles on the current machine uses Rake which
+is Ruby.
+
 - [Ruby](http://www.ruby-lang.org/en/) - this is standard on most
     machines
 - [Rake](http://rake.rubyforge.org/) - Ruby Make is used to install,
