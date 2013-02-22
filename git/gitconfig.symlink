@@ -29,6 +29,9 @@
     # see the outgoing commits/unpushed commits
     outgoing = log --branches --not --remotes
 
+    # get the number of outgoing commits/unpushed commits
+    outcount = "!sh -c 'git log --branches --not --remotes --oneline | wc -l | tr -d \" \"'"
+
     # stash shortcuts
     sp = stash pop
     sw = stash save
