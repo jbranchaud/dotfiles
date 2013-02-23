@@ -353,7 +353,7 @@ function! Smart_TabComplete()
         return "\<C-X>\<C-O>"                         " plugin matching
     endif
 endfunction
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+"inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
