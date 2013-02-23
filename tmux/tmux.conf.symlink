@@ -8,7 +8,7 @@ set -g default-terminal "screen-256color"
 set -g status-utf8 on
 
 # set default shell to zsh
-set-option -g default-shell "/bin/bash"
+set-option -g default-shell "/bin/zsh"
 
 set -g history-limit 20000
 
