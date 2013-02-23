@@ -1,7 +1,7 @@
 autoload colors && colors
 
 PROMPT='
-%{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
+%{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}$(hg_prompt_info)$(adv_git_prompt)
 $(prompt_char) '
 
 function collapse_pwd {
@@ -12,6 +12,24 @@ function prompt_char {
     git branch >/dev/null 2>/dev/null && echo '±' && return
     hg root >/dev/null 2>/dev/null && echo '☿' && return
     echo '○'
+}
+
+# this function wraps zsh's git_prompt_info function so that whenever
+# we are in a git repo, it will append the number of local commits that
+# exist (in parentheses). Currently, it relies on a git alias I created
+# called outcount which counts the number of outgoing commits.
+function adv_git_prompt {
+    gitprompt=$(git_prompt_info)
+    if [ "$gitprompt" != "" ]
+    then
+        gitoutcount=$(git outcount)
+        if [ "$gitoutcount" != "" ]
+        then
+            echo "$gitprompt ($gitoutcount)"
+        fi
+    else
+        echo ''
+    fi
 }
 
 function hg_prompt_info {
