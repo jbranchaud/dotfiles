@@ -152,7 +152,8 @@ tm_date='#[fg=colour245] %R  %d %b'
 tm_host='#[fg=colour198,bg=colour232,bold]#h'
 tm_session_name='#[fg=colour198,bg=colour232,bold] ❤ #S'
 tm_mail='#[fg=colour196,bold]✉ #(~/.dotfiles/applescripts/mail.scpt -ug)'
-tm_battery='#(~/.dotfiles/bin/battery_indicator.sh)'
+#tm_battery='#(~/.dotfiles/bin/battery_indicator.sh)'
+tm_battery='#(~/.dotfiles/bin/battery_percent.sh)'
 
 set -g status-left-length 32
 set -g status-right-length 150
