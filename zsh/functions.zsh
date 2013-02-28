@@ -2,6 +2,18 @@
 # functions
 ####################
 
+# set a timer for the given amount of time, where the time is specified by:
+# seconds - xs, e.g. 10s for 10 seconds
+# minutes - xm, e.g. 3m for 3 minutes
+#   hours - xh, e.g. 24h for 24 hours
+#    days - xd, e.g. 8d for 8 days
+# Or you can use a combination of these, e.g. 2h 30m to get 2 hours and
+# 30 minutes.
+function timer() {
+    (sleep "$@" && osascript -e 'tell app "System Events" to display dialog "Boom!"') 2>&1 >/dev/null &
+    echo "timer set for $@."
+}
+
 # print available colors and their numbers
 function colours() {
     for i in {0..255}; do
