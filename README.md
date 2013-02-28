@@ -73,3 +73,10 @@ By default, the *.zshrc* file will source any file within .dotfiles that has the
 ## Vim Per Machine and Per Project Configuration
 
 The vimrc in this project will check for the existence of a `~/.vimrc.local`, as well as a `./.vimrc.project` allowing per-machine and per-project vim configurations.
+
+## FIXMEs
+
+- the `git outgoing` command that I have added as an alias gets an error
+when it is used inside of a newly initialized repository. Figure out how
+to make this more robust. It doesn't technically break anything, but there
+is no need to have such an unnecessary error message displayed.
