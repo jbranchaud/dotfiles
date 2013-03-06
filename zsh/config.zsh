@@ -15,10 +15,10 @@ setopt HIST_VERIFY
 setopt EXTENDED_HISTORY
 setopt HIST_REDUCE_BLANKS
 #setopt SHARE_HISTORY
-setopt NO_SHARE_HISTORY # do not share history between terminal sessions
 setopt HIST_IGNORE_ALL_DUPS
 setopt INC_APPEND_HISTORY SHARE_HISTORY
 setopt APPEND_HISTORY
+setopt NO_SHARE_HISTORY # do not share history between terminal sessions
 
 setopt COMPLETE_ALIASES
 
