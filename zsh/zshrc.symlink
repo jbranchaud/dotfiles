@@ -44,6 +44,11 @@ if [[ -d ~/.rvm ]]; then
     source ~/.rvm/scripts/rvm
 fi
 
+# load autojump (j)
+if [ -f `brew --prefix`/etc/autojump ]; then
+    . `brew --prefix`/etc/autojump
+fi
+
 # add /usr/local/sbin
 if [[ -d /usr/local/sbin ]]; then
     export PATH=/usr/local/sbin:$PATH
