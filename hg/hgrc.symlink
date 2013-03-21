@@ -22,6 +22,10 @@ ignore = ~/.hgignore
 prompt   = ~/.dotfiles/hg/bin/prompt.py
 #histedit = ~/lib/dotfiles/mercurial/histedit/hg_histedit.py
 #hggit    = ~/.hg-git/hggit
+pager =
+
+[pager]
+pager = LESS='FRX' less
 
 [progress]
 delay = 1.0
