@@ -22,7 +22,7 @@ function adv_git_prompt {
     gitprompt=$(git_prompt_info)
     if [ "$gitprompt" != "" ]
     then
-        gitoutcount=$(git outcount)
+        gitoutcount=$(git outcount 2>/dev/null)
         if [ "$gitoutcount" != "" ]
         then
             echo "$gitprompt ($gitoutcount)"
