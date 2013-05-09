@@ -34,6 +34,8 @@ export testHome=$HOME/Documents/research/dise-tests
 export DISE=$HOME/Documents/research/jpf-regression
 export SYMBC=$HOME/Documents/research/jpf-symbc
 export staticAnalyzer=$HOME/Documents/research/static-analyzer
+export DYLD_LIBRARY_PATH=$SYMBC/lib
+# decaf
 export DEVAL=$HOME/Documents/research/deval
 export DEVALSUB=$DEVAL/devalsub
 
