@@ -44,9 +44,9 @@ export MYBIN=$HOME/mybin
 export PATH=$MYBIN:$PATH
 
 # Setting up CLASSPATH for Java
-export SOOTJAR=$HOME/Documents/java/sootclasses-2.5.0.jar
-export JASMINJAR=$HOME/Documents/java/jasminclasses-2.5.0.jar
-export POLYGLOTJAR=$HOME/Documents/java/polyglotclasses-1.3.5.jar
+export SOOTJAR=$HOME/Documents/soot/lib/sootclasses-2.5.0.jar
+export JASMINJAR=$HOME/Documents/soot/lib/jasminclasses-2.5.0.jar
+export POLYGLOTJAR=$HOME/Documents/soot/lib/polyglotclasses-1.3.5.jar
 export CLASSPATH=$SOOTJAR:$JASMINJAR:$POLYGLOTJAR:$CLASSPATH
 
 # load rvm
