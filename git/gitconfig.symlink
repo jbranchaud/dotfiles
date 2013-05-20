@@ -26,6 +26,9 @@
     # show what I did today
     day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
 
+    # get the name of the current branch
+    currbranch = rev-parse --abbrev-ref HEAD
+
     # see the outgoing commits/unpushed commits
     outgoing = log --branches --not --remotes
 
