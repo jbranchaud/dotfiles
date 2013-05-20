@@ -50,7 +50,7 @@ function git-rename() {
 function git-branch-commit-count() {
     if [ "$(git currbranch)" = "master" ]
     then
-        git cherry 2>/dev/null | wc -l | tr -d " "
+        git cherry origin/master 2>/dev/null | wc -l | tr -d " "
     else
         git cherry master $(git currbranch) 2>/dev/null | wc -l | tr -d " "
     fi
