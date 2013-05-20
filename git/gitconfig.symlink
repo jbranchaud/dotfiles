@@ -33,7 +33,7 @@
     outgoing = log --branches --not --remotes
 
     # get the number of outgoing commits/unpushed commits
-    outcount = "!sh -c 'git log --branches --not --remotes --oneline 2>/dev/null | wc -l | tr -d \" \"'"
+    outcountall = "!sh -c 'git log --branches --not --remotes --oneline 2>/dev/null | wc -l | tr -d \" \"'"
 
     # stash shortcuts
     sp = stash pop

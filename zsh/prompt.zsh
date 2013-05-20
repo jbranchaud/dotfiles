@@ -17,15 +17,15 @@ function prompt_char {
 # this function wraps zsh's git_prompt_info function so that whenever
 # we are in a git repo, it will append the number of local commits that
 # exist (in parentheses). Currently, it relies on a git alias I created
-# called outcount which counts the number of outgoing commits.
+# called outcountall which counts the number of outgoing commits.
 function adv_git_prompt {
     gitprompt=$(git_prompt_info)
     if [ "$gitprompt" != "" ]
     then
-        gitoutcount=$(git outcount 2>/dev/null)
-        if [ "$gitoutcount" != "" ]
+        gitoutcountall=$(git outcountall 2>/dev/null)
+        if [ "$gitoutcountall" != "" ]
         then
-            echo "$gitprompt ($gitoutcount)"
+            echo "$gitprompt ($gitoutcountall)"
         fi
     else
         echo ''
