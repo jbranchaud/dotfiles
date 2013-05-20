@@ -22,10 +22,16 @@ function adv_git_prompt {
     gitprompt=$(git_prompt_info)
     if [ "$gitprompt" != "" ]
     then
+        gitoutcountcurr=$(git-branch-commit-count 2>/dev/null)
         gitoutcountall=$(git outcountall 2>/dev/null)
         if [ "$gitoutcountall" != "" ]
         then
-            echo "$gitprompt ($gitoutcountall)"
+            if [ "$gitoutcountcurr" != "" ]
+            then
+                echo "$gitprompt ($gitoutcountcurr/$gitoutcountall)"
+            else
+                echo "$gitprompt ($gitoutcountall)"
+            fi
         fi
     else
         echo ''

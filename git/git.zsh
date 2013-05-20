@@ -41,3 +41,18 @@ function git-rename() {
     git mv $1 "${2}-"
     git mv "${2}-" $2
 }
+
+# determine the number of pending commits on the current branch
+# if on master, then do:
+# $ git cherry
+# if on some branch, branch1, then do:
+# $ git cherry master branch1
+function git-branch-commit-count() {
+    if [ "$(git currbranch)" = "master" ]
+    then
+        git cherry 2>/dev/null | wc -l | tr -d " "
+    else
+        git cherry master $(git currbranch) 2>/dev/null | wc -l | tr -d " "
+    fi
+}
+
