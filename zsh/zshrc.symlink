@@ -36,7 +36,9 @@ export SYMBC=$HOME/Documents/research/jpf-symbc
 export staticAnalyzer=$HOME/Documents/research/static-analyzer
 export DYLD_LIBRARY_PATH=$SYMBC/lib
 # decaf
-export DEVAL=$HOME/Documents/research/deval
+#export DEVAL=$HOME/Documents/research/deval
+#export DEVALSUB=$DEVAL/devalsub
+export DEVAL=/Users/jbranchaud/Documents/git/deval
 export DEVALSUB=$DEVAL/devalsub
 
 # My Scripts Directory
@@ -48,6 +50,9 @@ export SOOTJAR=$HOME/Documents/soot/lib/sootclasses-2.5.0.jar
 export JASMINJAR=$HOME/Documents/soot/lib/jasminclasses-2.5.0.jar
 export POLYGLOTJAR=$HOME/Documents/soot/lib/polyglotclasses-1.3.5.jar
 export CLASSPATH=$SOOTJAR:$JASMINJAR:$POLYGLOTJAR:$CLASSPATH
+
+# nodejs and npm stuff
+export NODE_PATH=/usr/local/lib/node_modules
 
 # load rvm
 if [[ -d ~/.rvm ]]; then
