@@ -40,6 +40,7 @@ Bundle 'tpope/vim-fugitive'
 "Bundle 'benmills/vimux'
 "Bundle 'mattn/zencoding-vim'
 "Bundle 'int3/vim-taglist-plus'
+Bundle 'ervandew/supertab'
 
 filetype plugin indent on
 
