@@ -113,3 +113,9 @@ function extract() {
         echo "'$1' is not a valid file"
     fi
 }
+
+# Quick markdown to pdf function
+function md2pdf() {
+    pdffilename=${1/\.md/\.pdf}
+    pandoc -s -o $pdffilename $1
+}
