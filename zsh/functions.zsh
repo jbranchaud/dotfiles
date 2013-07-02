@@ -119,3 +119,9 @@ function md2pdf() {
     pdffilename=${1/\.md/\.pdf}
     pandoc -s -o $pdffilename $1
 }
+
+# Quick tex to pdf function
+function tex2pdf() {
+    pdffilename=${1/\.tex/\.pdf}
+    pandoc -s -o $pdffilename $1
+}
