@@ -30,7 +30,8 @@
     currbranch = rev-parse --abbrev-ref HEAD
 
     # see the outgoing commits/unpushed commits
-    outgoing = log --branches --not --remotes
+    #outgoing = log --branches --not --remotes
+    outgoing = log master@{u}..
 
     # get the number of outgoing commits/unpushed commits
     outcountall = "!sh -c 'git log --branches --not --remotes --oneline 2>/dev/null | wc -l | tr -d \" \"'"
