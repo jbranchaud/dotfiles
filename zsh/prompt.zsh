@@ -24,16 +24,19 @@ function adv_git_prompt {
     then
         #gitoutcountcurr=$(git-branch-commit-count 2>/dev/null)
         #gitoutcountall=$(git outcountall 2>/dev/null)
-        #if [ "$gitoutcountall" != "" ]
-        #then
-        #    if [ "$gitoutcountcurr" != "" ]
-        #    then
-        #        echo "$gitprompt ($gitoutcountcurr/$gitoutcountall)"
-        #    else
-        #        echo "$gitprompt ($gitoutcountall)"
-        #    fi
-        #fi
-        echo "$gitprompt"
+        git_outgoing_on_curr=$(git outgoing-count 2>/dev/null)
+        git_outgoing_on_master=$(git rev-list master@{u}..master --count 2>/dev/null)
+        if [ "$git_outgoing_on_master" != "" ]
+        then
+            if [ "$git_outgoing_on_curr" != "" ]
+            then
+                echo "$gitprompt ($git_outgoing_on_curr/$git_outgoing_on_master)"
+            else
+                echo "$gitprompt ($git_outgoing_on_master)"
+            fi
+        else
+            echo "$gitprompt"
+        fi
     else
         echo ''
     fi
