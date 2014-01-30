@@ -21,6 +21,8 @@
     gdc = diff --cached
     # show changed files for a commit
     cf = show --pretty="format:" --name-only
+    # undo modifications to tracked file
+    whoops = checkout --
     # undo a commit
     undo = reset --soft
     # show what I did today
