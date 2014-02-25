@@ -78,6 +78,9 @@ set softtabstop=4
 " faster redrawing
 set ttyfast
 
+" highlight the current line, make it easier to find
+set cursorline
+
 " adding the following line because the characters '2c' were getting
 " prepended to the beginning of each vim session. I don't know why this
 " line fixes that, but the solution came from this superuser question:
