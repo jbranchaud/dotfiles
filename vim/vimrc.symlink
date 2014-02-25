@@ -193,12 +193,11 @@ endtry
 " => Files, backups, and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"set nobackup
-"set nowritebackup
-"set noswapfile
+set writebackup " enable the writing of backups
+set backup " overwrites existing backups with same name
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
+set backupskip=/tmp/*,/private/tmp/*
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => StatusLine
