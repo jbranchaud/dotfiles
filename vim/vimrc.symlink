@@ -54,6 +54,16 @@ abbr funciton function
 abbr teh the
 abbr tempalte template
 
+"""" Spelling/Dictionaries
+"
+" /usr/share/dict/words
+" Standard dictionary
+"
+" ~/.vim/custom-dictionary.utf-8.add
+" Custom words, this is under version control.
+set dictionary=/usr/share/dict/words
+set spellfile=~/.vim/custom-dictionary.utf-8.add
+
 "set winwidth=120
 
 set autoread " detect when a file is changed
@@ -113,7 +123,7 @@ if has("autocmd")
     autocmd FocusLost * silent! wa
     autocmd BufNewFile,BufRead *.json set filetype=javascript
     autocmd BufNewFile,BufRead *.ejs set filetype=html
-    autocmd BufRead,BufNewFile *.md set filetype=markdown
+    autocmd BufRead,BufNewFile *.md set filetype=markdown spell
 endif
 
 " code folding settings

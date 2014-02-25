@@ -1,4 +1,6 @@
+# vim
 vim/vim.symlink/bundle/
+*.spl
 
 # Python
 *.pyc
