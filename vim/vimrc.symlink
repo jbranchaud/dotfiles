@@ -124,7 +124,7 @@ if has("autocmd")
     autocmd FocusLost * silent! wa
     autocmd BufNewFile,BufRead *.json set filetype=javascript
     autocmd BufNewFile,BufRead *.ejs set filetype=html
-    autocmd BufRead,BufNewFile *.md set filetype=markdown spell
+    autocmd BufRead,BufNewFile *.md set filetype=markdown spell nocursorline
 endif
 
 " code folding settings
