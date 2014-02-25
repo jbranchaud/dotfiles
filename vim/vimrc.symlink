@@ -175,7 +175,6 @@ set relativenumber " show relative line numbers
 set textwidth=76
 
 set wrap " turn on line wrapping
-"set nowrap "turn off line wrapping
 "set wrapmargin=8 " wrap lines when coming within n characters from side
 set linebreak " set soft wrapping
 set showbreak=… " show ellipsis at breaking
