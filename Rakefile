@@ -7,6 +7,7 @@ def linkables
   linkables.each do |linkable|
     file = linkable.split('/').last.split('.symlink').last
     target = "#{ENV["HOME"]}/.#{file}"
+    puts "#{file}"
     yield linkable, file, target if block_given?
   end
 end
@@ -32,7 +33,9 @@ end
 desc "create all the symlinks"
 task :install do
   linkables do |linkable, file, target|
+    puts "#{target}"
     unless File.exists?(target)
+      puts "- #{target}"
       `ln -s "$PWD/#{linkable}" "#{target}"`
     end
   end
