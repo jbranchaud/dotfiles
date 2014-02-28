@@ -15,11 +15,6 @@
 #
 
 '.source.css':
-  'Snippet Name':
-    'prefix': 'hello'
-    'body': 'Hello World!'
-
-'.source.css':
   'Natural box layout':
     'prefix': 'boxsizing'
     'body': '*, *:before, *:after {
