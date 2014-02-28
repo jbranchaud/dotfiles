@@ -1,0 +1,21 @@
+'exception-reporting':
+  'userId': '323b1cc1-20eb-0d76-83ab-7b534af0a1ca'
+'release-notes':
+  'viewedVersion': '0.60.0'
+'welcome':
+  'showOnStartup': false
+'metrics':
+  'userId': 'ec902788e2c9c9ad7be33a2f20a205a96e49fb4f'
+'editor':
+  'fontSize': 14
+  'showInvisibles': true
+'core':
+  'themes': [
+    'atom-dark-ui'
+    'atom-dark-syntax'
+  ]
+  'ignoredNames': [
+    '.git'
+    '.svn'
+    '.DS_Store'
+  ]

@@ -1,3 +1,7 @@
+# atom
+atom/atom.symlink/packages/
+atom/atom.symlink/storage/
+
 # vim
 vim/vim.symlink/bundle/
 *.spl
