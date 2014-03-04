@@ -7,6 +7,7 @@ well crafted [dotfiles](https://github.com/nicknisi/dotfiles) framework.
 
 ## Contents
 
+- atom configuration
 - zsh configuration
 - vim configuration
 - tmux configuration
@@ -54,7 +55,7 @@ Symlink the necessary files. The task will perform a search  for all files in th
 	
 ## Uninstall
 
-If you would like to bring back your previous configuration, run the uninstalll task. This will remove the created symlinks.
+If you would like to bring back your previous configuration, run the uninstall task. This will remove the created symlinks.
 
 #### Uninstall
 
