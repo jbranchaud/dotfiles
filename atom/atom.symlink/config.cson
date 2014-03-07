@@ -11,8 +11,8 @@
   'showInvisibles': true
 'core':
   'themes': [
-    'atom-dark-ui'
-    'atom-dark-syntax'
+    'neutron-ui'
+    'neutron-syntax'
   ]
   'ignoredNames': [
     '.git'
