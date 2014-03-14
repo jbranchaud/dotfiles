@@ -14,7 +14,7 @@ jekyll = require './inits/jekyll.coffee'
 atom.workspaceView.eachEditorView (editorView) ->
   editor = editorView.getEditor()
   if path.extname(editor.getPath()) is '.md'
-    editor.setSoftWrap(false)
+    editor.setTabLength(4)
 
 # demo command from http://jasonrudolph.com/blog/2014/03/02/defining-atom-commands-in-your-init-script/
 atom.workspaceView.command 'dot-atom:demo', ->
