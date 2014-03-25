@@ -5,3 +5,4 @@ Thumbs.db
 *.swp
 .hg
 .hgignore
+npm-debug.log
