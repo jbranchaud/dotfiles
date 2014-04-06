@@ -15,4 +15,9 @@
 # 'body':
 #   'ctrl-P': 'core:move-up'
 #   'ctrl-p': 'core:move-down'
-#
+
+'.platform-darwin':
+  'ctrl-t': 'tree-view:toggle'
+
+'.editor':
+  'ctrl-t': 'tree-view:toggle'
