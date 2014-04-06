@@ -54,11 +54,6 @@ export CLASSPATH=$SOOTJAR:$JASMINJAR:$POLYGLOTJAR:$CLASSPATH
 # nodejs and npm stuff
 export NODE_PATH=/usr/local/lib/node_modules
 
-# load rvm
-if [[ -d ~/.rvm ]]; then
-    source ~/.rvm/scripts/rvm
-fi
-
 # load autojump (j)
 if [ -f `brew --prefix`/etc/autojump ]; then
     . `brew --prefix`/etc/autojump
@@ -77,9 +72,19 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
+# load rvm
+if [[ -d ~/.rvm ]]; then
+    source ~/.rvm/scripts/rvm
+fi
+
+# add rvm to PATH
+export PATH=~/.rvm:$PATH
+
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
 # startup zsh with tmux
 # http://unix.stackexchange.com/a/41276
 if [ "$TMUX" = "" ]; then tmux; fi
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
