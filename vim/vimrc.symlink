@@ -18,7 +18,7 @@ Plugin 'gmarik/vundle'
 
 " my vim plugins
 "Plugin 'kien/ctrlp.vim'
-"Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 "Plugin 'mileszs/ack.vim'
 " Plugin 'scrooloose/syntastic'
 "Plugin 'Raimondi/delimitMate'
