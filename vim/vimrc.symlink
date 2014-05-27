@@ -48,9 +48,9 @@ Plugin 'tpope/vim-markdown'
 "Plugin 'ervandew/supertab'
 
 " Some Ruby/Rails Vim Plugins
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rails'
+Plugin 'vim-ruby/vim-ruby' " syntax highlighting and fancy ruby-specific commands
+Plugin 'tpope/vim-bundler' " access to bundler commands from vim
+Plugin 'tpope/vim-rails' " syntax highlighting and fancy rails-specific commands
 Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
 
 " We are now done adding plugins with Vundle
