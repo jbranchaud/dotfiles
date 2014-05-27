@@ -10,6 +10,9 @@ set nocompatible " not compatible with vi
 filetype off
 
 " set the runtime path to include Vundle and then initialize
+" Make sure you have the latest Vundle in the correct directory with:
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.dotfiles/vim/vim.symlink/bundle/Vundle.vim
+" To install all the of the following plugins, launch a vim session and run :PluginInstall
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -44,7 +47,7 @@ Plugin 'tpope/vim-fugitive'
 "Plugin 'mattn/zencoding-vim'
 "Plugin 'int3/vim-taglist-plus'
 "Plugin 'ervandew/supertab'
-"
+
 " Some Ruby/Rails Vim Plugins
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-bundler'
