@@ -21,7 +21,7 @@ Plugin 'gmarik/vundle'
 
 " my vim plugins
 "Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree' " file navigation within vim
 "Plugin 'mileszs/ack.vim'
 " Plugin 'scrooloose/syntastic'
 "Plugin 'Raimondi/delimitMate'
@@ -30,7 +30,7 @@ Plugin 'tpope/vim-fugitive'
 "Plugin 'othree/html5.vim'
 "Plugin 'pangloss/vim-javascript'
 "Plugin 'itspriddle/vim-jquery'
-Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
 "Plugin 'mmalecki/vim-node.js'
 "Plugin 'Lokaltog/vim-powerline'
 "Plugin 'tpope/vim-ragtag'
