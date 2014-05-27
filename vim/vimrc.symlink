@@ -7,7 +7,7 @@
 
 set nocompatible " not compatible with vi
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " let vundle manage vundle
@@ -41,6 +41,11 @@ Bundle 'tpope/vim-fugitive'
 "Bundle 'mattn/zencoding-vim'
 "Bundle 'int3/vim-taglist-plus'
 "Bundle 'ervandew/supertab'
+"
+" Some Ruby/Rails Vim Plugins
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-rails'
 
 filetype plugin indent on
 
