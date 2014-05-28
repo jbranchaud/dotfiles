@@ -141,6 +141,8 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.ejs set filetype=html
     autocmd BufRead,BufNewFile *.md set filetype=markdown spell nocursorline
     autocmd BufRead,BufNewFile *.erb setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd BufNewFile,BufRead *.less set filetype=css
+    autocmd BufNewFile,BufRead *.scss set filetype=css
 endif
 
 " code folding settings
