@@ -24,11 +24,11 @@ Plugin 'scrooloose/nerdtree' " file navigation within vim
 Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
 Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
 Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
+Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
 "Plugin 'kien/ctrlp.vim'
 "Plugin 'mileszs/ack.vim'
 " Plugin 'scrooloose/syntastic'
 "Plugin 'Raimondi/delimitMate'
-"Plugin 'tpope/vim-commentary'
 "Plugin 'othree/html5.vim'
 "Plugin 'itspriddle/vim-jquery'
 "Plugin 'mmalecki/vim-node.js'
