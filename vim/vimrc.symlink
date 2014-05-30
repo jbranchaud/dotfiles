@@ -17,7 +17,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let vundle manage vundle
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " my vim plugins
 Plugin 'scrooloose/nerdtree' " file navigation within vim
