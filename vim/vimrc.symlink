@@ -138,6 +138,7 @@ if has("autocmd")
     " save all files on focus lost, ignoring warnings about untitled buffers
     autocmd FocusLost * silent! wa
     autocmd BufNewFile,BufRead *.json set filetype=javascript
+    autocmd BufNewFile,BufRead *.jsx  set filetype=javascript
     autocmd BufNewFile,BufRead *.ejs set filetype=html
     autocmd BufRead,BufNewFile *.md set filetype=markdown spell nocursorline
     autocmd BufRead,BufNewFile *.erb setlocal ts=2 sts=2 sw=2 expandtab
