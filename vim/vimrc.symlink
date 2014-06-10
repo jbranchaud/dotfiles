@@ -25,6 +25,7 @@ Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
 Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
 Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
 Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
+Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffescript
 "Plugin 'Lokaltog/powerline' " fancy-pants vim statusline
 "Plugin 'kien/ctrlp.vim'
 "Plugin 'mileszs/ack.vim'
@@ -38,7 +39,6 @@ Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
 " Plugin 'sjl/vitality.vim'
 "Plugin 'duff/vim-scratch'
 "Plugin 'cakebaker/scss-syntax.vim'
-"Plugin 'kchmck/vim-coffee-script'
 "Plugin 'groenewege/vim-less'
 "Plugin 'nono/vim-handlebars'
 "Plugin 'tsaleh/vim-matchit'
