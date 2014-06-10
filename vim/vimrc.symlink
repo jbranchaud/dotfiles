@@ -22,10 +22,7 @@ Plugin 'gmarik/Vundle.vim'
 " my vim plugins
 Plugin 'scrooloose/nerdtree' " file navigation within vim
 Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
-Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
-Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
 Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
-Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffescript
 "Plugin 'Lokaltog/powerline' " fancy-pants vim statusline
 "Plugin 'kien/ctrlp.vim'
 "Plugin 'mileszs/ack.vim'
@@ -46,6 +43,11 @@ Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffes
 "Plugin 'mattn/zencoding-vim'
 "Plugin 'int3/vim-taglist-plus'
 "Plugin 'ervandew/supertab'
+
+" Language-Specific Plugins
+Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
+Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
+Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffescript
 
 " Some Ruby/Rails Vim Plugins
 Plugin 'vim-ruby/vim-ruby' " syntax highlighting and fancy ruby-specific commands
