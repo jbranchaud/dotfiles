@@ -45,6 +45,7 @@ Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
 "Plugin 'ervandew/supertab'
 
 " Language-Specific Plugins
+Plugin 'sheerun/vim-polyglot' " syntax, indentation, and stuff for all the languages
 Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
 Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
 Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffescript
