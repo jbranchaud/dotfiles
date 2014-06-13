@@ -15,6 +15,7 @@ well crafted [dotfiles](https://github.com/nicknisi/dotfiles) framework.
 - hg configuration
 - osx configuration
 - bash configuration
+- npm configuration
 
 ## Install
 
