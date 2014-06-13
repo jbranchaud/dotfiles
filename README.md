@@ -49,13 +49,17 @@ A backup task is included. This will find all the files that will be replaced an
 	
 #### Install
 
-Symlink the necessary files. The task will perform a search  for all files in the *.dotfiles* directory that have the ".symlink" suffix and create a symbolic link in the home directory that drops the suffix and prefixes with a '.'
+Symlink the necessary files. The task will perform a search for all files
+in the *.dotfiles* directory that have the ".symlink" suffix and create a
+symbolic link in the home directory that drops the suffix and prefixes with
+a '.'
 
 	rake install
 	
 ## Uninstall
 
-If you would like to bring back your previous configuration, run the uninstall task. This will remove the created symlinks.
+If you would like to bring back your previous configuration, run the
+uninstall task. This will remove the created symlinks.
 
 #### Uninstall
 
@@ -63,14 +67,18 @@ If you would like to bring back your previous configuration, run the uninstall t
 	
 #### Restore
 	
-Then, if you would like to restore your previous configuration, run the restore task.
+Then, if you would like to restore your previous configuration, run the
+restore task.
 	
 	rake restore
 	
 ## ZSH Plugins
 
-By default, the *.zshrc* file will source any file within .dotfiles that has the *".zsh"* suffix.
+By default, the *.zshrc* file will source any file within .dotfiles that
+has the *".zsh"* suffix.
 
 ## Vim Per Machine and Per Project Configuration
 
-The vimrc in this project will check for the existence of a `~/.vimrc.local`, as well as a `./.vimrc.project` allowing per-machine and per-project vim configurations.
+The vimrc in this project will check for the existence of a `~/.vimrc.local`,
+as well as a `./.vimrc.project` allowing per-machine and per-project vim
+configurations.
