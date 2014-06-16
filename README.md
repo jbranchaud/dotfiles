@@ -49,7 +49,7 @@ The vim configuration relies on a couple of vim plugins, which are loaded in as 
 git submodule init
 git submodule update
 ```
-	
+
 #### Backup
 
 A backup task is included. This will find all the files that will be replaced and make a backup of them. For example, if you currently have a ".zshrc" file, it will be moved to ".zshrc.backup"
@@ -57,7 +57,7 @@ A backup task is included. This will find all the files that will be replaced an
 ```sh
 rake backup
 ```
-	
+
 #### Install
 
 Symlink the necessary files. The task will perform a search for all files
@@ -77,7 +77,7 @@ solution is to backup everything and then install.
 rake backup
 rake install
 ```
-	
+
 ## Uninstall
 
 If you would like to bring back your previous configuration, run the
@@ -88,16 +88,16 @@ uninstall task. This will remove the created symlinks.
 ```sh
 rake uninstall
 ```
-	
+
 #### Restore
-	
+
 Then, if you would like to restore your previous configuration, run the
 restore task.
 
 ```sh
 rake restore
 ```
-	
+
 ## ZSH Plugins
 
 By default, the *.zshrc* file will source any file within .dotfiles that
