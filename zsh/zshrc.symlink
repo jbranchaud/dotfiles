@@ -16,6 +16,10 @@ if [[ -a ~/.localrc ]]; then
     source ~/.localrc
 fi
 
+# include GitHub authentication tokens
+if [[ -e ~/.github_tokens ]]; then
+    source ~/.github_tokens
+fi
 
 # initialize autocomplete
 autoload -U compinit
