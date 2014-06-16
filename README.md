@@ -56,6 +56,13 @@ symbolic link in the home directory that drops the suffix and prefixes with
 a '.'
 
 	rake install
+
+If for some reason a file gets unlinked with its corresponding dotfile, you
+will not be able to renew that link with the `rake install` command. A quick
+solution is to backup everything and then install.
+
+    rake backup
+    rake install
 	
 ## Uninstall
 
