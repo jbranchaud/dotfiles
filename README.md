@@ -21,7 +21,9 @@ well crafted [dotfiles](https://github.com/nicknisi/dotfiles) framework.
 
 ### Automatic Installation
 
-	curl -L https://raw.github.com/jbranchaud/dotfiles/master/tools/install.sh | sh
+```sh
+curl -L https://raw.github.com/jbranchaud/dotfiles/master/tools/install.sh | sh
+```
 
 ### Manual Installation
 
@@ -29,24 +31,32 @@ well crafted [dotfiles](https://github.com/nicknisi/dotfiles) framework.
 
 First, clone the repository to your home directory and name it ".dotfiles"
 
-	git clone git@github.com:jbranchaud/dotfiles.git ~/.dotfiles
+```sh
+git clone git@github.com:jbranchaud/dotfiles.git ~/.dotfiles
+```
 
 Then cd into that directory
 
-	cd ~/.dotfiles
+```sh
+cd ~/.dotfiles
+```
 
 #### Init Submodules
 
 The vim configuration relies on a couple of vim plugins, which are loaded in as git submodules.
 
-	git submodule init
-	git submodule update
+```sh
+git submodule init
+git submodule update
+```
 	
 #### Backup
 
 A backup task is included. This will find all the files that will be replaced and make a backup of them. For example, if you currently have a ".zshrc" file, it will be moved to ".zshrc.backup"
-	
-	rake backup
+
+```sh
+rake backup
+```
 	
 #### Install
 
@@ -55,14 +65,18 @@ in the *.dotfiles* directory that have the ".symlink" suffix and create a
 symbolic link in the home directory that drops the suffix and prefixes with
 a '.'
 
-	rake install
+```sh
+rake install
+```
 
 If for some reason a file gets unlinked with its corresponding dotfile, you
 will not be able to renew that link with the `rake install` command. A quick
 solution is to backup everything and then install.
 
-    rake backup
-    rake install
+```sh
+rake backup
+rake install
+```
 	
 ## Uninstall
 
@@ -71,14 +85,18 @@ uninstall task. This will remove the created symlinks.
 
 #### Uninstall
 
-	rake uninstall
+```sh
+rake uninstall
+```
 	
 #### Restore
 	
 Then, if you would like to restore your previous configuration, run the
 restore task.
-	
-	rake restore
+
+```sh
+rake restore
+```
 	
 ## ZSH Plugins
 
