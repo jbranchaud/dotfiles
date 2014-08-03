@@ -88,6 +88,9 @@ export PATH=~/.rvm:$PATH
 # https://github.com/postmodern/chruby
 source /usr/local/share/chruby/chruby.sh
 
+# use ruby 2.1.1 by default with the help of chruby
+chruby 2.1.1
+
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
 # startup zsh with tmux
