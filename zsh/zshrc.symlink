@@ -84,6 +84,10 @@ fi
 # add rvm to PATH
 export PATH=~/.rvm:$PATH
 
+# source the chruby file, allows for changing versions of ruby
+# https://github.com/postmodern/chruby
+source /usr/local/share/chruby/chruby.sh
+
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
 # startup zsh with tmux
