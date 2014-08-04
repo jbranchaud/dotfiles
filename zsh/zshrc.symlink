@@ -82,10 +82,14 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
-# rbenv
+## Ruby and Ruby on Rails ##
+
+# rbenv #
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# default to using ruby 2.1.1 if not otherwise specified
 rbenv global 2.1.1
 
+# chruby #
 # source the chruby file, allows for changing versions of ruby
 # https://github.com/postmodern/chruby
 source /usr/local/share/chruby/chruby.sh
