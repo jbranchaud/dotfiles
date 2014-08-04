@@ -27,11 +27,15 @@ compinit
 
 for config ($DOTFILES/**/completion.sh) source $config
 
+# default editor is vim
 export EDITOR='vim'
 
 export PATH=/usr/local/bin:$PATH
 
-# JPF and DiSE stuff
+
+## Environment Variables (Generic) ##
+
+# JPF and DiSE stuff #
 export JPF_HOME=$HOME/Documents/research/jpf-core
 export JPF=$JPF_HOME/bin/jpf
 export testHome=$HOME/Documents/research/dise-tests
@@ -39,24 +43,26 @@ export DISE=$HOME/Documents/research/jpf-regression
 export SYMBC=$HOME/Documents/research/jpf-symbc
 export staticAnalyzer=$HOME/Documents/research/static-analyzer
 export DYLD_LIBRARY_PATH=$SYMBC/lib
-# decaf
+
+# DECAF #
 #export DEVAL=$HOME/Documents/research/deval
 #export DEVALSUB=$DEVAL/devalsub
 export DEVAL=/Users/jbranchaud/Documents/git/deval
 export DEVALSUB=$DEVAL/devalsub
 
-# My Scripts Directory
+# My Scripts Directory #
 export MYBIN=$HOME/mybin
 export PATH=$MYBIN:$PATH
 
-# Setting up CLASSPATH for Java
+# Setting up CLASSPATH for Java and SOOT tooling #
 export SOOTJAR=$HOME/Documents/soot/lib/sootclasses-2.5.0.jar
 export JASMINJAR=$HOME/Documents/soot/lib/jasminclasses-2.5.0.jar
 export POLYGLOTJAR=$HOME/Documents/soot/lib/polyglotclasses-1.3.5.jar
 export CLASSPATH=$SOOTJAR:$JASMINJAR:$POLYGLOTJAR:$CLASSPATH
 
-# nodejs and npm stuff
+# nodejs and npm stuff #
 export NODE_PATH=/usr/local/lib/node_modules
+
 
 # load autojump (j)
 if [ -f `brew --prefix`/etc/autojump ]; then
