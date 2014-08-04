@@ -97,6 +97,8 @@ source /usr/local/share/chruby/chruby.sh
 # use ruby 2.1.1 by default with the help of chruby
 chruby 2.1.1
 
+## TMUX ##
+
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
 # startup zsh with tmux
