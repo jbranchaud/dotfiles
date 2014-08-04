@@ -76,13 +76,9 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
-# load rvm
-if [[ -d ~/.rvm ]]; then
-    source ~/.rvm/scripts/rvm
-fi
-
-# add rvm to PATH
-export PATH=~/.rvm:$PATH
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+rbenv global 2.1.1
 
 # source the chruby file, allows for changing versions of ruby
 # https://github.com/postmodern/chruby
@@ -97,5 +93,3 @@ chruby 2.1.1
 # http://unix.stackexchange.com/a/41276
 if [ "$TMUX" = "" ]; then tmux; fi
 
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
