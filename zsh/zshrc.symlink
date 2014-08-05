@@ -92,6 +92,9 @@ fi
 # use ruby 2.1.1 by default with the help of chruby
 #chruby 2.1.1
 
+# set the GEM_PATH to be only the ~/.gem directory
+export GEM_PATH=$HOME/.rbenv/:$HOME/.gem
+
 # rbenv #
 # add rbenv to the path
 export PATH="$HOME/.rbenv/bin:$PATH"
