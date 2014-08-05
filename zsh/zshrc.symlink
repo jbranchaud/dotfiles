@@ -87,10 +87,10 @@ fi
 # chruby #
 # source the chruby file, allows for changing versions of ruby
 # https://github.com/postmodern/chruby
-source /usr/local/share/chruby/chruby.sh
+#source /usr/local/share/chruby/chruby.sh
 
 # use ruby 2.1.1 by default with the help of chruby
-chruby 2.1.1
+#chruby 2.1.1
 
 # rbenv #
 # add rbenv to the path
