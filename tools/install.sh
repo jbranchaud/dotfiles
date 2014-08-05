@@ -1,5 +1,5 @@
 echo "cloning repo to ~/.dotfiles"
-git clone git@github.com:nicknisi/dotfiles.git ~/.dotfiles
+git clone https://github.com/jbranchaud/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 echo "initializing git submodules"
 git submodule init
