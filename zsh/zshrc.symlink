@@ -93,6 +93,7 @@ fi
 #chruby 2.1.1
 
 # set the GEM_PATH to be only the ~/.gem directory
+export GEM_HOME=$HOME/.gem
 export GEM_PATH=$HOME/.rbenv/:$HOME/.gem
 
 # rbenv #
