@@ -95,6 +95,7 @@ fi
 # set the GEM_PATH to be only the ~/.gem directory
 export GEM_HOME=$HOME/.gem
 export GEM_PATH=$HOME/.rbenv/:$HOME/.gem
+export PATH="$HOME/.gem/bin:$PATH"
 
 # rbenv #
 # add rbenv to the path
