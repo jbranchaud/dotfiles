@@ -22,7 +22,7 @@ alias lld="ls -l | grep ^d"
 alias rmf="rm -rf"
 
 # shortcut to dotfiles
-alias dot="cd ~/.dotfiles"
+#alias dot="cd ~/.dotfiles"
 
 # Helpers
 alias grep='grep --color=auto'
