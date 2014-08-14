@@ -5,6 +5,7 @@
 [credential]
 	helper = osxkeychain
 [alias]
+    ap = add -p
     ci = commit -a
     co = checkout
     s = status --short
