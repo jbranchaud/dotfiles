@@ -26,9 +26,9 @@ fi
 
 # export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
 # setting a custom prompt, with git branch info
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
