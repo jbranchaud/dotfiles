@@ -5,6 +5,7 @@ atom/atom.symlink/storage/
 # vim
 vim/vim.symlink/bundle/
 *.spl
+.netrwhist
 
 # Python
 *.pyc
