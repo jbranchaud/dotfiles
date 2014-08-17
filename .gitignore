@@ -8,3 +8,6 @@ vim/vim.symlink/bundle/
 
 # Python
 *.pyc
+
+# Node-gyp
+.node-gyp
