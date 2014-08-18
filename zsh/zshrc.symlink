@@ -91,7 +91,7 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
 # use ruby 2.1.2 by default with the help of chruby
-#chruby 2.1.2
+chruby 2.1.2
 
 # set the GEM_PATH to be only the ~/.gem directory
 export GEM_HOME=$HOME/.gem
