@@ -94,9 +94,9 @@ source /usr/local/share/chruby/auto.sh
 chruby 2.1.2
 
 # set the GEM_PATH to be only the ~/.gem directory
-export GEM_HOME=$HOME/.gem
-export GEM_PATH=$HOME/.gem
-export PATH="$HOME/.gem/bin:$PATH"
+#export GEM_HOME=$HOME/.gem
+#export GEM_PATH=$HOME/.gem
+#export PATH="$HOME/.gem/bin:$PATH"
 
 ## TMUX ##
 
