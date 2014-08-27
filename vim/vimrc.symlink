@@ -49,6 +49,7 @@ Plugin 'sheerun/vim-polyglot' " syntax, indentation, and stuff for all the langu
 Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
 Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
 Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffescript
+Plugin 'chrisbra/csv.vim' " fun with csv files
 
 " Some Ruby/Rails Vim Plugins
 Plugin 'vim-ruby/vim-ruby' " syntax highlighting and fancy ruby-specific commands
