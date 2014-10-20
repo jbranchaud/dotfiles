@@ -24,6 +24,8 @@
     cf = show --pretty="format:" --name-only
     # undo modifications to tracked file
     whoops = checkout --
+    # unstage a file that has been added to staging
+    jk = reset HEAD
     # undo a commit
     undo = reset --soft
     # show what I did today
