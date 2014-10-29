@@ -21,7 +21,7 @@
     bd = branch -d
     # delete the specified branch even if it hasn't been merged
     # (git bD feature-branch)
-    bD = branch -D
+    bdd = branch -D
     # show files that have changed between two branches (git dbr master..branch)
     dbr = diff --name-status
     # show names of files that have changed between two branches (git dbn master..branch)
