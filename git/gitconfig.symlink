@@ -19,7 +19,7 @@
     # show files that have changed between two branches (git dbr master..branch)
     dbr = diff --name-status
     # show diff of cached files
-    gdc = diff --cached
+    dc = diff --cached
     # show changed files for a commit
     cf = show --pretty="format:" --name-only
     # undo modifications to tracked file
@@ -122,3 +122,7 @@
     editor = vim
 [rerere]
 	enabled = false
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
