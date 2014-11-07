@@ -19,7 +19,11 @@ call vundle#begin()
 " let vundle manage vundle
 Plugin 'gmarik/Vundle.vim'
 
+"
 " my vim plugins
+"
+
+" General Plugins
 Plugin 'scrooloose/nerdtree' " file navigation within vim
 Plugin 'scrooloose/syntastic' " syntax checking hacks for vim
 Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
