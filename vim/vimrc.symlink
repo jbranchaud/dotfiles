@@ -48,6 +48,7 @@ Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
 "Plugin 'mattn/zencoding-vim'
 "Plugin 'int3/vim-taglist-plus'
 "Plugin 'ervandew/supertab'
+"Plugin 'tpope/vim-cucumber' " syntax highlighting and commands for cucumber testing
 
 " Language-Specific Plugins
 Plugin 'sheerun/vim-polyglot' " syntax, indentation, and stuff for all the languages
@@ -61,7 +62,6 @@ Plugin 'vim-ruby/vim-ruby' " syntax highlighting and fancy ruby-specific command
 Plugin 'tpope/vim-bundler' " access to bundler commands from vim
 Plugin 'tpope/vim-rails' " syntax highlighting and fancy rails-specific commands
 Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
-Plugin 'tpope/vim-cucumber' " syntax highlighting and commands for cucumber testing
 
 " We are now done adding plugins with Vundle
 call vundle#end()
