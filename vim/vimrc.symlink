@@ -28,6 +28,21 @@ Plugin 'scrooloose/nerdtree' " file navigation within vim
 Plugin 'scrooloose/syntastic' " syntax checking hacks for vim
 Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
 Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
+
+" Language-Specific Plugins
+Plugin 'sheerun/vim-polyglot' " syntax, indentation, and stuff for all the languages
+Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
+Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
+Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffescript
+Plugin 'chrisbra/csv.vim' " fun with csv files
+
+" Some Ruby/Rails Vim Plugins
+Plugin 'vim-ruby/vim-ruby' " syntax highlighting and fancy ruby-specific commands
+Plugin 'tpope/vim-bundler' " access to bundler commands from vim
+Plugin 'tpope/vim-rails' " syntax highlighting and fancy rails-specific commands
+Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
+
+" Once Used, Unused Plugins
 "Plugin 'Lokaltog/powerline' " fancy-pants vim statusline
 "Plugin 'kien/ctrlp.vim'
 "Plugin 'mileszs/ack.vim'
@@ -49,19 +64,6 @@ Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
 "Plugin 'int3/vim-taglist-plus'
 "Plugin 'ervandew/supertab'
 "Plugin 'tpope/vim-cucumber' " syntax highlighting and commands for cucumber testing
-
-" Language-Specific Plugins
-Plugin 'sheerun/vim-polyglot' " syntax, indentation, and stuff for all the languages
-Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
-Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
-Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffescript
-Plugin 'chrisbra/csv.vim' " fun with csv files
-
-" Some Ruby/Rails Vim Plugins
-Plugin 'vim-ruby/vim-ruby' " syntax highlighting and fancy ruby-specific commands
-Plugin 'tpope/vim-bundler' " access to bundler commands from vim
-Plugin 'tpope/vim-rails' " syntax highlighting and fancy rails-specific commands
-Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
 
 " We are now done adding plugins with Vundle
 call vundle#end()
