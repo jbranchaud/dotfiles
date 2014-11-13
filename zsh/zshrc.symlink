@@ -93,11 +93,6 @@ source /usr/local/share/chruby/auto.sh
 # use ruby 2.1.4 by default with the help of chruby
 chruby 2.1.4
 
-# set the GEM_PATH to be only the ~/.gem directory
-#export GEM_HOME=$HOME/.gem
-#export GEM_PATH=$HOME/.gem
-#export PATH="$HOME/.gem/bin:$PATH"
-
 ## TMUX ##
 
 [ -z "$TMUX" ] && export TERM=xterm-256color
