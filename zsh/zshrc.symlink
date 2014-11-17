@@ -65,8 +65,8 @@ export NODE_PATH=/usr/local/lib/node_modules
 
 
 # load autojump (j)
-if [ -f `brew --prefix`/etc/autojump ]; then
-    . `brew --prefix`/etc/autojump
+if [ -f `brew --prefix`/etc/autojump.zsh ]; then
+    . `brew --prefix`/etc/autojump.zsh
 fi
 
 # add /usr/local/sbin
