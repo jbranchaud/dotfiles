@@ -89,3 +89,7 @@ done
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 10'"
 alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
+
+# Rails #
+# get the name of the latest migration file
+alias lrm="vi db/migrate/`ls db/migrate | tail -n 1`"
