@@ -99,4 +99,4 @@ chruby 2.1.4
 
 # startup zsh with tmux
 # http://unix.stackexchange.com/a/41276
-#if [ "$TMUX" = "" ]; then tmux; fi
+if [ "$TMUX" = "" ]; then tmux; fi
