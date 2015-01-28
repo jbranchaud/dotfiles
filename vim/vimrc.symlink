@@ -159,6 +159,9 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.erb setlocal ts=2 sts=2 sw=2 expandtab
     autocmd BufNewFile,BufRead *.less set filetype=css
     autocmd BufNewFile,BufRead *.scss set filetype=css
+
+    " spelling by filetype
+    autocmd FileType gitcommit setlocal spell
 endif
 
 " code folding settings
