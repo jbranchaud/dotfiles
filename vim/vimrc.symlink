@@ -161,7 +161,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.scss set filetype=css
 
     " spelling by filetype
-    autocmd FileType gitcommit setlocal spell
+    autocmd FileType gitcommit setlocal spell nocursorline
 endif
 
 " code folding settings
