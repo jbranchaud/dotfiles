@@ -38,6 +38,13 @@ function f() {
 }
 
 
+# jump to and vim the directory
+function jive() {
+    j "$1"
+    vi .
+}
+
+
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
     local port="${1:-8000}"
