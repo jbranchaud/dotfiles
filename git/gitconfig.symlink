@@ -5,6 +5,7 @@
 [credential]
 	helper = osxkeychain
 [alias]
+    commmit = commit # because I often misspell commit
     ap = add -p
     ci = commit -a
     co = checkout
