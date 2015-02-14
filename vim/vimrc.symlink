@@ -28,6 +28,7 @@ Plugin 'scrooloose/nerdtree' " file navigation within vim
 Plugin 'scrooloose/syntastic' " syntax checking hacks for vim
 Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
 Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
+Plugin 'tpope/vim-surround' " quoting/parenthesizing made simple
 
 " Language-Specific Plugins
 Plugin 'sheerun/vim-polyglot' " syntax, indentation, and stuff for all the languages
@@ -54,7 +55,6 @@ Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
 "Plugin 'itspriddle/vim-jquery'
 "Plugin 'mmalecki/vim-node.js'
 "Plugin 'tpope/vim-ragtag'
-"Plugin 'tpope/vim-surround'
 " Plugin 'sjl/vitality.vim'
 "Plugin 'duff/vim-scratch'
 "Plugin 'cakebaker/scss-syntax.vim'
