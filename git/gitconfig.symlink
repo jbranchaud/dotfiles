@@ -1,9 +1,9 @@
 # gitconfig
 [user]
-	email = jbranchaud@gmail.com
-	name = jbranchaud
+    email = jbranchaud@gmail.com
+    name = jbranchaud
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [alias]
     commmit = commit # because I often misspell commit
     ap = add -p
@@ -132,8 +132,8 @@
     pager = less -FXRS -x2
     editor = vim
 [rerere]
-	enabled = false
+    enabled = false
 [filter "media"]
-	clean = git media clean %f
-	smudge = git media smudge %f
-	required = true
+    clean = git media clean %f
+    smudge = git media smudge %f
+    required = true
