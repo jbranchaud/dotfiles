@@ -43,29 +43,6 @@ Plugin 'tpope/vim-rails' " syntax highlighting and fancy rails-specific commands
 Plugin 'thoughtbot/vim-rspec' " lightweight rspec spec runner
 Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
 
-" Once Used, Unused Plugins
-"Plugin 'wting/rust.vim' " file detection and syntax highlighting for rust
-"Plugin 'Lokaltog/powerline' " fancy-pants vim statusline
-"Plugin 'kien/ctrlp.vim'
-"Plugin 'mileszs/ack.vim'
-" Plugin 'scrooloose/syntastic'
-"Plugin 'Raimondi/delimitMate'
-"Plugin 'othree/html5.vim'
-"Plugin 'itspriddle/vim-jquery'
-"Plugin 'mmalecki/vim-node.js'
-"Plugin 'tpope/vim-ragtag'
-" Plugin 'sjl/vitality.vim'
-"Plugin 'duff/vim-scratch'
-"Plugin 'cakebaker/scss-syntax.vim'
-"Plugin 'groenewege/vim-less'
-"Plugin 'nono/vim-handlebars'
-"Plugin 'tsaleh/vim-matchit'
-"Plugin 'benmills/vimux'
-"Plugin 'mattn/zencoding-vim'
-"Plugin 'int3/vim-taglist-plus'
-"Plugin 'ervandew/supertab'
-"Plugin 'tpope/vim-cucumber' " syntax highlighting and commands for cucumber testing
-
 " We are now done adding plugins with Vundle
 call vundle#end()
 filetype plugin indent on
