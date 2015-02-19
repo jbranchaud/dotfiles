@@ -25,6 +25,7 @@ alias rmf="rm -rf"
 alias grep='grep --color=auto'
 alias df='df -h' # disk free, in Gigabytes, not bytes
 alias du='du -h -c' # calculate disk usage for a folder
+alias groutes='rake routes | grep $@' # search for a route
 
 # Markdown, PDF, LaTeX helpers
 alias pandocs="pandoc -s"
