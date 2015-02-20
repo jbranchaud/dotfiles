@@ -82,6 +82,11 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
+# add postgres bin to path
+if [[ -d /Applications/Postgres.app/Contents/Versions/9.4/bin ]]; then
+    export PATH=/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
+fi
+
 ## Ruby and Ruby on Rails ##
 
 # chruby #
