@@ -2,6 +2,7 @@
 alias g='git'
 alias ga='git add'
 alias gap='git add -p'
+alias gnap='git add -N . && gap'
 alias gc='git commit -v'
 alias gb='git branch'
 alias gcb='git checkout -b'
