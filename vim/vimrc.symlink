@@ -1,10 +1,6 @@
 " vim settings
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle Settings - https://github.com/gmarik/vundle
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " the following two lines are required by Vundle
 set nocompatible " not compatible with vi
 filetype off
