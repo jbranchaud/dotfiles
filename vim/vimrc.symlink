@@ -239,9 +239,6 @@ set laststatus=2 " show the status line all the time
 " clear search results on escape
 nnoremap <silent> <esc> :nohlsearch<cr><esc>
 
-" remap esc
-inoremap jk <esc>
-
 " remove extra whitespace
 nmap <leader><space> :%s/\s\+$<cr>
 
