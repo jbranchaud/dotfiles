@@ -2,7 +2,8 @@
 # need to have reattach-to-user-namespace installed, this can be
 # done with 'brew install reattach-to-user-namespace
 # based on: http://superuser.com/questions/397076/tmux-exits-with-exited-on-mac-os-x
-set -g default-command "reattach-to-user-namespace -l zsh"
+#set -g default-command "reattach-to-user-namespace -l zsh"
+set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
 # tmux display things in 256 colors
 set -g default-terminal "screen-256color"
 set -g status-utf8 on
