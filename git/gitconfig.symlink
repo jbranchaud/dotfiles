@@ -41,6 +41,7 @@
     undo = reset --soft
     # show what I did today
     today = "!sh -c 'git log --reverse --no-merges --oneline --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
+    today-all = "!sh -c 'git log --reverse --no-merges --oneline --branches=* --date=local --after=\"yesterday 11:59PM\"'"
     today-count = "!sh -c 'git log --reverse --no-merges --oneline --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\" | wc -l | tr -d \" \"'"
     today-long = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
 
