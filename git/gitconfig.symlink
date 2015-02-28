@@ -45,6 +45,9 @@
     today-count = "!sh -c 'git log --reverse --no-merges --oneline --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\" | wc -l | tr -d \" \"'"
     today-long = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
 
+    yesterday = "!sh -c 'git log --reverse --no-merges --oneline --branches=* --date=local --after=\"yesterday 12:01AM\" --author=\"`git config --get user.name`\"'"
+    yesterday-all = "!sh -c 'git log --reverse --no-merges --oneline --branches=* --date=local --after=\"yesterday 12:01AM\"'"
+
     # get the name of the current branch
     currbranch = rev-parse --abbrev-ref HEAD
 
