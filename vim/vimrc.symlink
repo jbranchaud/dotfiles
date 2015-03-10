@@ -21,11 +21,13 @@ Plugin 'gmarik/Vundle.vim'
 
 " General Plugins
 Plugin 'scrooloose/syntastic' " syntax checking hacks for vim
-Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
 Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
 Plugin 'tpope/vim-surround' " quoting/parenthesizing made simple
 Plugin 'tpope/vim-unimpaired' " pairs of handy bracket mappings
 Plugin 'tpope/vim-eunuch' " helpers for UNIX
+
+" Git Plugins
+Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
 Plugin 'gregsexton/gitv' " gitk for Vim
 
 " Language-Specific Plugins
