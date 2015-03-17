@@ -81,6 +81,7 @@
 
     undo = reset --soft HEAD~1
     amend = commit --amend -C HEAD
+    reset-author = commit --amend --reset-author -C HEAD
 
     # grep commands
 
