@@ -57,7 +57,7 @@ filetype plugin indent on
 abbr funciton function
 abbr teh the
 abbr tempalte template
-abbr bpry require "pry"; binding.pry
+abbr bpry require "pry"; binding.pry;
 
 """" Spelling/Dictionaries
 "
