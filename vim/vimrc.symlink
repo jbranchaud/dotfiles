@@ -43,6 +43,7 @@ Plugin 'tpope/vim-bundler' " access to bundler commands from vim
 Plugin 'tpope/vim-rails' " syntax highlighting and fancy rails-specific commands
 Plugin 'thoughtbot/vim-rspec' " lightweight rspec spec runner
 Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
+Plugin 'tpope/vim-cucumber' " Vim cucumber runtime files
 
 " We are now done adding plugins with Vundle
 call vundle#end()
