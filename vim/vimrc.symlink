@@ -48,6 +48,7 @@ Plugin 'tpope/vim-cucumber' " Vim cucumber runtime files
 " Some Clojure Vim Plugins
 Plugin 'guns/vim-clojure-static' " clojure runtime files
 Plugin 'tpope/vim-fireplace' " clojure repl support
+Plugin 'vim-scripts/paredit.vim' " structured editing of lisp s-expressions
 
 " We are now done adding plugins with Vundle
 call vundle#end()
