@@ -45,6 +45,10 @@ Plugin 'thoughtbot/vim-rspec' " lightweight rspec spec runner
 Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
 Plugin 'tpope/vim-cucumber' " Vim cucumber runtime files
 
+" Some Clojure Vim Plugins
+Plugin 'guns/vim-clojure-static' " clojure runtime files
+Plugin 'tpope/vim-fireplace' " clojure repl support
+
 " We are now done adding plugins with Vundle
 call vundle#end()
 filetype plugin indent on
