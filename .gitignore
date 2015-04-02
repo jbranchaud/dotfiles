@@ -1,6 +1,8 @@
 # atom
 atom/atom.symlink/packages/
 atom/atom.symlink/storage/
+atom/atom.symlink/.atom
+atom/atom.symlink/compile-cache
 
 # vim
 vim/vim.symlink/bundle/
