@@ -22,3 +22,13 @@
                   -moz-box-sizing: border-box;
                   box-sizing: border-box;
              }'
+
+'.text.html, .text.md':
+  'figure for captionss':
+    'prefix': 'cap'
+    'body': '<figure class="embed hide-smooth">
+               $1
+               <figcaption>
+                 $2
+               </figcaption>
+             </figure>'
