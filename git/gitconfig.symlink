@@ -9,6 +9,7 @@
     ap = add -p
     ci = commit -a
     co = checkout
+    put = push origin HEAD
     s = status --short
     ss  = status
     br = branch -v
