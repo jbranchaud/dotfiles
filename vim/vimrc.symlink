@@ -278,8 +278,9 @@ nmap <leader>l :set list!<cr>
 nmap <leader>n :bn<cr> " go to next buffer
 nmap <leader>p :bp<cr> " go to prev buffer
 nmap <leader>q :bd<cr> " close the current buffer
+
 " switch between current and last buffer
-nmap <leader>. <c-^>
+nmap <c-f> <c-^>
 
 " enable . command in visual mode
 vnoremap . :normal .<cr>
