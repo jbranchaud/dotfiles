@@ -349,12 +349,6 @@ endfunction
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Powerline settings
-" must have modified font installed to enable fancy
-" let g:Powerline_symbols = 'fancy'
-
-" let g:Powerline_stl_path_style = 'filename'
-
 " map fuzzyfinder (CtrlP) plugin
 nmap <silent> <leader>t :CtrlP<cr>
 nmap <silent> <leader>r :CtrlPBuffer<cr>
