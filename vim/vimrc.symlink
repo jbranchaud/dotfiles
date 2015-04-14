@@ -274,12 +274,6 @@ set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
 nmap <leader>l :set list!<cr>
 
-" Textmate style indentation
-vmap <leader>[ <gv
-vmap <leader>] >gv
-nmap <leader>[ <<
-nmap <leader>] >>
-
 " buffer shortcuts
 nmap <leader>n :bn<cr> " go to next buffer
 nmap <leader>p :bp<cr> " go to prev buffer
