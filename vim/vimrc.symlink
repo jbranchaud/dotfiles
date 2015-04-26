@@ -167,7 +167,7 @@ set wildmenu " enhanced command line completion
 set hidden " current buffer can be put into background
 set showcmd " show incomplete commands
 set wildmode=list:longest " complete files like a shell
-set scrolloff=17 " lines of text around cursor
+set scrolloff=9 " lines of text around cursor
 set shell=/bin/zsh
 set ruler " show postiion in file
 set cmdheight=1 " command bar height
