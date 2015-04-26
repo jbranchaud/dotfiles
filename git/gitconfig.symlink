@@ -38,6 +38,8 @@
     whoops = checkout --
     # unstage a file that has been added to staging
     jk = reset HEAD
+    # reset the last commit, leaving unstaged changes
+    doff = reset head^
     # undo a commit
     undo = reset --soft
     # show what I did today
