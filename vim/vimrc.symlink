@@ -26,6 +26,7 @@ Plugin 'tpope/vim-surround' " quoting/parenthesizing made simple
 Plugin 'tpope/vim-unimpaired' " pairs of handy bracket mappings
 Plugin 'tpope/vim-eunuch' " helpers for UNIX
 Plugin 'jlanzarotta/bufexplorer' " quick and easy buffer switching
+Plugin 'tpope/vim-repeat' " enhanced repeat, support for plugins
 
 " Git Plugins
 Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
