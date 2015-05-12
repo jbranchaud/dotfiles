@@ -29,6 +29,7 @@ Plugin 'jlanzarotta/bufexplorer' " quick and easy buffer switching
 Plugin 'vim-scripts/BufOnly.vim' " unload all except current buffer
 Plugin 'tpope/vim-repeat' " enhanced repeat, support for plugins
 Plugin 'tpope/vim-dispatch' " async build and test dispatcher
+Plugin 'jgdavey/tslime.vim' " send commands from vim to tmux
 Plugin 'jgdavey/vim-turbux' " turbo ruby testing with tmux
 
 " Git Plugins
