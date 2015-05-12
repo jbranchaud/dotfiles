@@ -98,7 +98,7 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
 # use ruby 2.1.4 by default with the help of chruby
-chruby 2.1.4
+chruby 2.2.2
 
 ## TMUX ##
 
