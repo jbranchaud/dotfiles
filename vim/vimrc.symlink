@@ -61,6 +61,7 @@ call vundle#end()
 filetype plugin indent on
 
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -82,6 +83,11 @@ set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
 
 "set winwidth=120
+
+" add man page plugin
+runtime! ftplugin/man.vim
+" normalize <Leader>K and K for accessing man pages
+nmap K <Leader>K
 
 set autoread " detect when a file is changed
 
