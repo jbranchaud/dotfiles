@@ -259,6 +259,9 @@ set laststatus=2 " show the status line all the time
 " clear search results on escape
 nnoremap <silent> <esc> :nohlsearch<cr><esc>
 
+" open the parent directory of current file
+nmap <leader>d :e %:h<cr>
+
 " remove extra whitespace
 nmap <leader><space> :%s/\s\+$<cr>
 
