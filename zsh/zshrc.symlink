@@ -103,7 +103,3 @@ chruby 2.2.2
 ## TMUX ##
 
 [ -z "$TMUX" ] && export TERM=xterm-256color
-
-# startup zsh with tmux
-# http://unix.stackexchange.com/a/41276
-if [ "$TMUX" = "" ]; then tmux; fi
