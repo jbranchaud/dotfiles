@@ -262,6 +262,9 @@ nnoremap <silent> <esc> :nohlsearch<cr><esc>
 " open the parent directory of current file
 nmap <leader>d :e %:h<cr>
 
+" create the parent directories if they don't exist
+nmap <leader>D :!mkdir -p %:h<cr>
+
 " remove extra whitespace
 nmap <leader><space> :%s/\s\+$<cr>
 
