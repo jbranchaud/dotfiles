@@ -57,7 +57,7 @@ Plugin 'tpope/vim-fireplace' " clojure repl support
 Plugin 'tpope/vim-sexp-mappings-for-regular-people' " vim sexp mappings for regular people
 
 " Color Themes
-Plugin 'jpo/vim-railscasts-theme' " railscasts-based vim color scheme
+Plugin 'jgdavey/vim-railscasts' " railscasts-based vim colr scheme
 
 " We are now done adding plugins with Vundle
 call vundle#end()
