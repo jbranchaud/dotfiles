@@ -56,6 +56,9 @@ Plugin 'guns/vim-clojure-static' " clojure runtime files
 Plugin 'tpope/vim-fireplace' " clojure repl support
 Plugin 'tpope/vim-sexp-mappings-for-regular-people' " vim sexp mappings for regular people
 
+" Color Themes
+Plugin 'jpo/vim-railscasts-theme' " railscasts-based vim color scheme
+
 " We are now done adding plugins with Vundle
 call vundle#end()
 filetype plugin indent on
@@ -210,7 +213,7 @@ set tm=500
 syntax on
 
 set background=dark
-colorscheme Tomorrow-Night-Bright
+colorscheme railscasts
 
 " set number " show line numbers
 set relativenumber " show relative line numbers
