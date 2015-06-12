@@ -31,6 +31,7 @@ Plugin 'tpope/vim-repeat' " enhanced repeat, support for plugins
 Plugin 'tpope/vim-dispatch' " async build and test dispatcher
 Plugin 'jgdavey/tslime.vim' " send commands from vim to tmux
 Plugin 'jgdavey/vim-turbux' " turbo ruby testing with tmux
+Plugin 'tpope/vim-abolish' " easy search, substitution, and abbreviation
 
 " Git Plugins
 Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
