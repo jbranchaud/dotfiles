@@ -5,66 +5,9 @@
 set nocompatible " not compatible with vi
 filetype off
 
-" set the runtime path to include Vundle and then initialize
-" Make sure you have the latest Vundle in the correct directory with:
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.dotfiles/vim/vim.symlink/bundle/Vundle.vim
-" To install all the of the following plugins, launch a vim session and run :PluginInstall
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let vundle manage vundle
-Plugin 'gmarik/Vundle.vim'
-
-"
-" my vim plugins
-"
-
-" General Plugins
-Plugin 'scrooloose/syntastic' " syntax checking hacks for vim
-Plugin 'tpope/vim-commentary' " easy comment things out and vice versa
-Plugin 'tpope/vim-surround' " quoting/parenthesizing made simple
-Plugin 'tpope/vim-unimpaired' " pairs of handy bracket mappings
-Plugin 'tpope/vim-eunuch' " helpers for UNIX
-Plugin 'jlanzarotta/bufexplorer' " quick and easy buffer switching
-Plugin 'vim-scripts/BufOnly.vim' " unload all except current buffer
-Plugin 'tpope/vim-repeat' " enhanced repeat, support for plugins
-Plugin 'tpope/vim-dispatch' " async build and test dispatcher
-Plugin 'jgdavey/tslime.vim' " send commands from vim to tmux
-Plugin 'jgdavey/vim-turbux' " turbo ruby testing with tmux
-Plugin 'tpope/vim-abolish' " easy search, substitution, and abbreviation
-
-" Git Plugins
-Plugin 'tpope/vim-fugitive' " illegal access to git commands from vim
-Plugin 'gregsexton/gitv' " gitk for Vim
-
-" Language-Specific Plugins
-Plugin 'sheerun/vim-polyglot' " syntax, indentation, and stuff for all the languages
-Plugin 'tpope/vim-markdown' " extra markdown syntax highlighting in vim
-Plugin 'pangloss/vim-javascript' " syntax highlighting and indentation for JavaScript
-Plugin 'kchmck/vim-coffee-script' " syntax, indentation, and commands for coffescript
-Plugin 'chrisbra/csv.vim' " fun with csv files
-Plugin 'rust-lang/rust.vim' " filetype plugin for Rust
-
-" Some Ruby/Rails Vim Plugins
-Plugin 'vim-ruby/vim-ruby' " syntax highlighting and fancy ruby-specific commands
-Plugin 'tpope/vim-bundler' " access to bundler commands from vim
-Plugin 'tpope/vim-rails' " syntax highlighting and fancy rails-specific commands
-Plugin 'thoughtbot/vim-rspec' " lightweight rspec spec runner
-Plugin 'tpope/vim-endwise' " auto-completes things like def-end blocks
-Plugin 'tpope/vim-cucumber' " Vim cucumber runtime files
-
-" Some Clojure Vim Plugins
-Plugin 'guns/vim-clojure-static' " clojure runtime files
-Plugin 'tpope/vim-fireplace' " clojure repl support
-Plugin 'tpope/vim-sexp-mappings-for-regular-people' " vim sexp mappings for regular people
-
-" Color Themes
-Plugin 'jgdavey/vim-railscasts' " railscasts-based vim colr scheme
-
-" We are now done adding plugins with Vundle
-call vundle#end()
+execute pathogen#infect()
+syntax on
 filetype plugin indent on
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
