@@ -14,3 +14,6 @@ vim/vim.symlink/bundle/
 
 # Node-gyp
 .node-gyp
+
+# Lein
+self-installs
