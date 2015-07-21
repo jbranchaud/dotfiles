@@ -233,7 +233,7 @@ noremap <space> :set hlsearch! hlsearch?<cr>
 
 " toggle invisible characters
 set invlist
-set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set listchars=tab:▸\ ,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
 nmap <leader>l :set list!<cr>
 
