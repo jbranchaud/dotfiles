@@ -51,6 +51,9 @@
     yesterday = "!sh -c 'git log --reverse --no-merges --oneline --branches=* --date=local --after=\"yesterday 12:01AM\" --author=\"`git config --get user.name`\"'"
     yesterday-all = "!sh -c 'git log --reverse --no-merges --oneline --branches=* --date=local --after=\"yesterday 12:01AM\"'"
 
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+
     # get the name of the current branch
     currbranch = rev-parse --abbrev-ref HEAD
 
