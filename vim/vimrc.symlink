@@ -5,7 +5,7 @@
 set nocompatible " not compatible with vi
 filetype off
 
-execute pathogen#infect()
+execute pathogen#infect('bundle/{}')
 syntax on
 filetype plugin indent on
 
