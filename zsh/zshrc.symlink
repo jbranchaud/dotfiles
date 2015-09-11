@@ -37,21 +37,6 @@ export PATH=/usr/local/bin:$PATH
 
 ## Environment Variables (Generic) ##
 
-# JPF and DiSE stuff #
-export JPF_HOME=$HOME/Documents/research/jpf-core
-export JPF=$JPF_HOME/bin/jpf
-export testHome=$HOME/Documents/research/dise-tests
-export DISE=$HOME/Documents/research/jpf-regression
-export SYMBC=$HOME/Documents/research/jpf-symbc
-export staticAnalyzer=$HOME/Documents/research/static-analyzer
-export DYLD_LIBRARY_PATH=$SYMBC/lib
-
-# DECAF #
-#export DEVAL=$HOME/Documents/research/deval
-#export DEVALSUB=$DEVAL/devalsub
-export DEVAL=/Users/jbranchaud/Documents/git/deval
-export DEVALSUB=$DEVAL/devalsub
-
 # My Scripts Directory #
 export MYBIN=$HOME/mybin
 export PATH=$MYBIN:$PATH
