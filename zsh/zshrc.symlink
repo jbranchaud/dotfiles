@@ -41,12 +41,6 @@ export PATH=/usr/local/bin:$PATH
 export MYBIN=$HOME/mybin
 export PATH=$MYBIN:$PATH
 
-# Setting up CLASSPATH for Java and SOOT tooling #
-export SOOTJAR=$HOME/Documents/soot/lib/sootclasses-2.5.0.jar
-export JASMINJAR=$HOME/Documents/soot/lib/jasminclasses-2.5.0.jar
-export POLYGLOTJAR=$HOME/Documents/soot/lib/polyglotclasses-1.3.5.jar
-export CLASSPATH=$SOOTJAR:$JASMINJAR:$POLYGLOTJAR:$CLASSPATH
-
 # nodejs and npm stuff #
 export NODE_PATH=/usr/local/lib/node_modules
 
