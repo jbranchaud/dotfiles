@@ -28,7 +28,7 @@ compinit
 for config ($DOTFILES/**/completion.sh) source $config
 
 # default editor is vim
-alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+# alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias vi="vim"
 export EDITOR='vim'
 
