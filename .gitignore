@@ -16,4 +16,5 @@ vim/vim.symlink/bundle/
 .node-gyp
 
 # Lein
-self-installs
+lein/lein.symlink/self-installs
+lein/lein.symlink/repl-history
