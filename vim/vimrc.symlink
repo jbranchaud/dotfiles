@@ -65,9 +65,6 @@ set cursorcolumn
 " http://superuser.com/questions/553601/vim-has-unexpected-key-presses-on-startup-what-could-be-causing-this/553610#comment672979_553610
 set t_RV= ttymouse=xterm2
 
-" allow matching of if/end, etc. with %
-" runtime macros/matchit.vim
-
 " highlight conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
