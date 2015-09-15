@@ -44,6 +44,10 @@ export PATH=$MYBIN:$PATH
 # nodejs and npm stuff #
 export NODE_PATH=/usr/local/lib/node_modules
 
+# Go Path
+export GOPATH=$HOME/code/go
+export PATH=$GOPATH/bin:$PATH
+
 eval "$(/Users/jbranchaud/Documents/git/hr/bin/hr init -)"
 
 # load autojump (j)
