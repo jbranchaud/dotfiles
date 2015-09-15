@@ -151,8 +151,8 @@ syntax on
 set background=dark
 colorscheme railscasts
 
-" set number " show line numbers
-set relativenumber " show relative line numbers
+set number " show line numbers
+" set relativenumber " show relative line numbers
 
 " the width that text can reach on a line
 set textwidth=76
