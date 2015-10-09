@@ -150,3 +150,5 @@
     required = true
 [interactive]
     singlekey = true
+[fetch]
+    prune = true
