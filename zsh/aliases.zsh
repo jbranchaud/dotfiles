@@ -30,6 +30,9 @@ alias df='df -h' # disk free, in Gigabytes, not bytes
 alias du='du -h -c' # calculate disk usage for a folder
 alias groutes='rake routes | grep $@' # search for a route
 
+# SSH
+alias sshjb='ssh jbranchaud@joshbranchaud.com'
+
 # Markdown, PDF, LaTeX helpers
 alias pandocs="pandoc -s"
 
