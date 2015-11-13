@@ -16,6 +16,7 @@ well crafted [dotfiles](https://github.com/nicknisi/dotfiles) framework.
 - osx configuration
 - bash configuration
 - npm configuration
+- psql configuration
 
 ## Install
 
