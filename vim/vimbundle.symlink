@@ -46,3 +46,4 @@ vim-scripts/bufexplorer.zip
 vim-scripts/bufkill.vim
 wgibbs/vim-irblack
 fatih/vim-go
+tpope/vim-sexp-mappings-for-regular-people
