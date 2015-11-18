@@ -374,3 +374,5 @@ Clojure's
 JDBC
 tablefunc
 crosstab
+psqlrc
+subquery
