@@ -109,3 +109,15 @@ has the *".zsh"* suffix.
 The vimrc in this project will check for the existence of a `~/.vimrc.local`,
 as well as a `./.vimrc.project` allowing per-machine and per-project vim
 configurations.
+
+## Vim Bundles
+
+Make sure all the vim plugins listed in the `~/.vimbundle` file are
+installed by running the install script:
+
+```
+$ ~/.dotfiles/bin/vimbundles.sh
+```
+
+Add new plugins by appending them to the bottom of the list in
+`~/.vimbundle` and then re-running the command above.
