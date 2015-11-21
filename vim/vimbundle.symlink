@@ -47,3 +47,4 @@ vim-scripts/bufkill.vim
 wgibbs/vim-irblack
 fatih/vim-go
 tpope/vim-sexp-mappings-for-regular-people
+tpope/vim-fireplace
