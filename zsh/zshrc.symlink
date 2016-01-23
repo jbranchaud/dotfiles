@@ -76,6 +76,11 @@ if [[ -d /Applications/Postgres.app/Contents/Versions/9.4/bin ]]; then
     export PATH=/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
 fi
 
+# add ansible to path
+if [[ -d /Users/jbranchaud/Documents/git/ansible/bin ]]; then
+    export PATH=/Users/jbranchaud/Documents/git/ansible/bin:$PATH
+fi
+
 ## Ruby and Ruby on Rails ##
 
 # chruby #
