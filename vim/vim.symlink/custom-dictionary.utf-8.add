@@ -443,3 +443,10 @@ joshbranchaud
 Webpack
 ansible
 webpack
+pgcrypto
+sha512
+md5
+sha1
+sha224
+sha256
+sha384
