@@ -72,8 +72,8 @@ if [[ -d ~/bin ]]; then
 fi
 
 # add postgres bin to path
-if [[ -d /Applications/Postgres.app/Contents/Versions/9.4/bin ]]; then
-    export PATH=/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
+if [[ -d /Applications/Postgres.app/Contents/Versions/latest/bin ]]; then
+    export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 fi
 
 # add ansible to path
