@@ -49,3 +49,4 @@ fatih/vim-go
 tpope/vim-sexp-mappings-for-regular-people
 tpope/vim-fireplace
 jgdavey/vim-hearth
+elixir-lang/vim-elixir
