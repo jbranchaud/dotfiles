@@ -2,6 +2,10 @@
 # functions
 ####################
 
+twiki () {
+    rake db:migrate && rake db:migrate:redo && rake db:test:prepare
+}
+
 # set a timer for the given amount of time, where the time is specified by:
 # seconds - xs, e.g. 10s for 10 seconds
 # minutes - xm, e.g. 3m for 3 minutes
