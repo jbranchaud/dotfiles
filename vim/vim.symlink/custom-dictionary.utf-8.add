@@ -468,3 +468,5 @@ redux
 devtools
 noop
 citext
+SCSS
+scss
