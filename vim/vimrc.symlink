@@ -197,6 +197,11 @@ set laststatus=2 " show the status line all the time
 " Additional, plugin-specific mappings are located under
 " the plugins section
 
+" copy to system clipboard
+map gy "*y
+" copy whole file to system clipboard
+nmap gY gg"*yG
+
 " " clear search results on escape
 " nnoremap <silent> <esc> :nohlsearch<cr><esc>
 
