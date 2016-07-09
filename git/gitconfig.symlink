@@ -133,6 +133,7 @@
 [diff]
     renames = copies
     mnemonicprefix = true
+	algorithm = patience
 [difftool]
     prompt = false
 [apply]
