@@ -46,7 +46,10 @@ vim-scripts/bufexplorer.zip
 vim-scripts/bufkill.vim
 wgibbs/vim-irblack
 fatih/vim-go
+guns/vim-sexp
 tpope/vim-sexp-mappings-for-regular-people
 tpope/vim-fireplace
 jgdavey/vim-hearth
 elixir-lang/vim-elixir
+rust-lang/rust.vim
+slashmili/alchemist.vim
