@@ -55,3 +55,4 @@ rust-lang/rust.vim
 slashmili/alchemist.vim
 junegunn/goyo.vim
 junegunn/seoul256.vim
+terryma/vim-multiple-cursors
