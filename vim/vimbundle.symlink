@@ -53,3 +53,4 @@ jgdavey/vim-hearth
 elixir-lang/vim-elixir
 rust-lang/rust.vim
 slashmili/alchemist.vim
+junegunn/goyo.vim
