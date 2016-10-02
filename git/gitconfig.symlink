@@ -14,6 +14,8 @@
     ss  = status
     br = branch -v
     brt = "!sh -c gbrt"
+    # hashrocket tree graph log
+    tree = log --graph --oneline --decorate --color --all
     # show a pretty log graph
     lg = log --graph --pretty=oneline --abbrev-commit --decorate
     # slight variation of pretty log graph
