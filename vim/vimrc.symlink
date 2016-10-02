@@ -66,6 +66,7 @@ abbr teh the
 abbr tempalte template
 abbr bpry require "pry"; binding.pry;
 abbr bbug require "byebug"; byebug;
+abbr epry require IEx; IEx.pry;
 
 """" Spelling/Dictionaries
 "
