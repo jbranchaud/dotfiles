@@ -8,6 +8,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'hashrocket/vim-hashrocket'
 Plug 'duff/vim-bufonly'
 Plug 'gregsexton/gitv'
+Plug 'junegunn/gv.vim'
 Plug 'jgdavey/tslime.vim'
 Plug 'jgdavey/vim-turbux'
 Plug 'rondale-sc/vim-spacejam'
