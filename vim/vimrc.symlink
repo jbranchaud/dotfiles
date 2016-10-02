@@ -335,16 +335,6 @@ map  <F12> :set hls!<CR>
 imap <F12> <ESC>:set hls!<CR>a
 vmap <F12> <ESC>:set hls!<CR>gv
 
-function! ToggleNuMode()
-    if (&rnu == 1)
-        setlocal nu
-    else
-        setlocal rnu
-    endif
-endfunction
-
-nnoremap <leader>/ :call ToggleNuMode()<cr>
-
 " find out what syntax stack a statement belongs to
 nmap <leader>s :call <SID>SynStack()<cr>
 function <SID>SynStack()
