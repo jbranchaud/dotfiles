@@ -319,9 +319,6 @@ map <leader>wc :wincmd q<cr>
 " equalize windows
 map <leader>= <C-w>=
 
-" toggle cursor line
-nnoremap <leader>i :set cursorline!<cr>
-
 " scroll the viewport faster
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
@@ -329,11 +326,6 @@ nnoremap <C-y> 3<C-y>
 " moving up and down work as you would expect
 nnoremap <silent> j gj
 nnoremap <silent> k gk
-
-" toggle search result highlighting on/off
-map  <F12> :set hls!<CR>
-imap <F12> <ESC>:set hls!<CR>a
-vmap <F12> <ESC>:set hls!<CR>gv
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Project Specific vimrc
