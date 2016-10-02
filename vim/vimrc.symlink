@@ -5,7 +5,55 @@
 set nocompatible " not compatible with vi
 filetype off
 
-execute pathogen#infect('bundle/{}')
+call plug#begin('~/.vim/bundle')
+
+Plug 'hashrocket/vim-hashrocket'
+Plug 'duff/vim-bufonly'
+Plug 'gregsexton/gitv'
+Plug 'jgdavey/tslime.vim'
+Plug 'jgdavey/vim-turbux'
+Plug 'rondale-sc/vim-spacejam'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/bufkill.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+
+Plug 'jgdavey/vim-railscasts'
+Plug 'junegunn/seoul256.vim'
+
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'vim-ruby/vim-ruby'
+Plug 'fatih/vim-go'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'tpope/vim-fireplace'
+Plug 'jgdavey/vim-hearth'
+Plug 'elixir-lang/vim-elixir'
+Plug 'rust-lang/rust.vim'
+Plug 'slashmili/alchemist.vim'
+
+call plug#end()
+
 syntax on
 filetype plugin indent on
 
