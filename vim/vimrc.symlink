@@ -1,7 +1,5 @@
 " vim settings
 
-
-" the following two lines are required by Vundle
 set nocompatible " not compatible with vi
 filetype off
 
