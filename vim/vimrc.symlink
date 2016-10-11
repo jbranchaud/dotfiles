@@ -130,6 +130,7 @@ filetype plugin indent on
 
 " file type specific settings
 if has("autocmd")
+    " quick-quit Vim help files
     autocmd FileType help nnoremap q :q<cr>
     autocmd FileType sql  setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
