@@ -143,7 +143,7 @@ if has("autocmd")
 
     " automatically resize panes on resize
     autocmd VimResized * exe "normal! \<c-w>="
-    autocmd BufWritePost .vimrc source $MYVIMRC
+    autocmd BufWritePost .vimrc exe ":source $MYVIMRC"
     " save all files on focus lost, ignoring warnings about untitled buffers
     autocmd FocusLost * silent! wa
     autocmd BufNewFile,BufRead *.json set filetype=javascript
