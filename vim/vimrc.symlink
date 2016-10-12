@@ -37,6 +37,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
+Plug 'jbranchaud/vim-fourohfour'
 
 Plug 'jgdavey/vim-railscasts'
 Plug 'junegunn/seoul256.vim'
