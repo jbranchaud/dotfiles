@@ -1,29 +1,32 @@
-'exception-reporting':
-  'userId': '323b1cc1-20eb-0d76-83ab-7b534af0a1ca'
-'release-notes':
-  'viewedVersion': '0.90.0'
-'welcome':
-  'showOnStartup': false
-'metrics':
-  'userId': 'ec902788e2c9c9ad7be33a2f20a205a96e49fb4f'
-'editor':
-  'softWrap': true
-  'softWrapAtPreferredLineLength': true
-  'fontSize': 12
-  'showInvisibles': true
-'core':
-  'themes': [
-    'neutron-ui'
-    'neutron-syntax'
-  ]
-  'ignoredNames': [
-    '.git'
-    '.svn'
-    '.DS_Store'
-  ]
-  'projectHome': '/Users/jbranchaud/Documents/git'
-  'disabledPackages': [
-    'prose'
-  ]
-'whitespace':
-  'ensureSingleTrailingNewline': false
+"*":
+  core:
+    disabledPackages: [
+      "prose"
+      "sling"
+    ]
+    ignoredNames: [
+      ".git"
+      ".svn"
+      ".DS_Store"
+    ]
+    projectHome: "/Users/jbranchaud/Documents/git"
+    themes: [
+      "neutron-ui"
+      "neutron-syntax"
+    ]
+  editor:
+    fontSize: 15
+    invisibles: {}
+    showInvisibles: true
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+  "exception-reporting":
+    userId: "323b1cc1-20eb-0d76-83ab-7b534af0a1ca"
+  metrics:
+    userId: "ec902788e2c9c9ad7be33a2f20a205a96e49fb4f"
+  "release-notes":
+    viewedVersion: "0.90.0"
+  welcome:
+    showOnStartup: false
+  whitespace:
+    ensureSingleTrailingNewline: false
