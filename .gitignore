@@ -9,6 +9,7 @@ atom/atom.symlink/blob-store
 # vim
 vim/vim.symlink/bundle/
 *.spl
+*.sug
 .netrwhist
 
 # Python
