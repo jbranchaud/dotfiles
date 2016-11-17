@@ -4,6 +4,7 @@ atom/atom.symlink/storage/
 atom/atom.symlink/.atom
 atom/atom.symlink/.apm
 atom/atom.symlink/compile-cache
+atom/atom.symlink/blob-store
 
 # vim
 vim/vim.symlink/bundle/
