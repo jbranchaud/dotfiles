@@ -6,7 +6,6 @@
 set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
 # tmux display things in 256 colors
 set -g default-terminal "screen-256color"
-set -g status-utf8 on
 
 # set default shell to zsh
 set-option -g default-shell "/bin/zsh"
@@ -84,10 +83,7 @@ bind -r K resize-pane -U 10
 bind -r L resize-pane -R 10
 
 # enable mouse mode
-setw -g mode-mouse on
-set -g mouse-select-pane on
-set -g mouse-resize-pane off
-set -g mouse-select-window on
+set -g mouse on
 
 # maximizing and restoring windows
 unbind Up
