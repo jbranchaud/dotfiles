@@ -51,7 +51,9 @@ export PATH=$GOPATH/bin:$PATH
 # Racket Path
 export PATH=/Applications/Racket\ v6.2.1/bin:$PATH
 
-eval "$(/Users/jbranchaud/Documents/git/hr/bin/hr init -)"
+if [[ -e /Users/jbranchaud/Documents/git/hr/bin/hr ]]; then
+    eval "$(/Users/jbranchaud/Documents/git/hr/bin/hr init -)"
+fi
 
 # load autojump (j)
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
