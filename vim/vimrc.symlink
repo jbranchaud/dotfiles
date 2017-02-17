@@ -125,6 +125,9 @@ set ttyfast
 " http://superuser.com/questions/553601/vim-has-unexpected-key-presses-on-startup-what-could-be-causing-this/553610#comment672979_553610
 set t_RV= ttymouse=xterm2
 
+" use netrw in tree liststyle
+let g:netrw_liststyle = 3
+
 " highlight conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
