@@ -79,6 +79,9 @@ if [[ -f ~/.ssh/id_rsa.pub ]]; then
   export SSH_FINGERPRINT=$(ssh-keygen -lf ~/.ssh/id_rsa.pub | awk '{print $2}')
 fi
 
+# Set up GPG for git commit signing
+export GPG_TTY=$(tty)
+
 case "$(uname -s)" in
   Darwin*)
     # ruby-build -> configure readline path from homebrew
