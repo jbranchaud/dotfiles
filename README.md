@@ -12,14 +12,14 @@
 ```
 
 <p align="center">
-  <b>:sparkles: Dorian's Dotfiles :sparkles:</b>
+  <b>:sparkles: My Fork of Dorian's Dotfiles :sparkles:</b>
 </p>
 
 <br />
 
-### Thanks for dropping by!
-
-This is my personal collection of configuration files.
+This is my slight variation on [Dorian's Dotfiles](https://github.com/dkarter/dotfiles). Dorian does an excellent job
+meticulously maintaining and updating those and you should start by looking
+there first.
 
 ![screenshot](./screenshot.png)
 ![image](https://user-images.githubusercontent.com/551858/188434274-2df6fe83-7824-4b45-a797-51a96a1b928b.png)
