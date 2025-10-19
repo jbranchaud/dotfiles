@@ -1,13 +1,18 @@
 ; vim: ft=gitconfig
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
+[user]
+  name = jbranchaud
+  email = jbranchaud@gmail.com
+  signingkey = 1A8656918A8D016B
 
 [push]
   default = tracking
   autoSetupRemote = true
   followTags = true
-  
+
 [color]
   ui = true
 
@@ -104,12 +109,13 @@
 [commit]
   template = ~/.gitmessage
   verbose = true
+  gpgsign = true
 
 [fetch]
   prune = true
   pruneTags = true
   all = true
-  
+
 [rebase]
   autosquash = true
   autoStash = true
