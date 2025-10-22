@@ -42,6 +42,11 @@ set_app_shortcut "$app_id" 'Activate the tab to the right' '\0'
 echo 'Getting brew packages...'
 brew bundle
 
+if [ -f Brewfile.local ]; then
+  echo 'Installing packages from Brewfile.local...'
+  brew bundle --file=Brewfile.local
+fi
+
 # NOTE: check this page if getting an error from xcodebuild:
 # https://stackoverflow.com/questions/17980759/xcode-select-active-developer-directory-error
 if ! command -v unicornleap &>/dev/null; then

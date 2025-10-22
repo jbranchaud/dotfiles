@@ -77,6 +77,24 @@ task sync  # Updates tools and configurations
 task nvim:commit # synchronizes neovim plugin manager lockfile (lazy-lock.json)
 ```
 
+### Personal Customizations (Fork-Friendly)
+
+To add your own packages without conflicts with upstream:
+
+```bash
+# Create your personal Brewfile
+cp Brewfile.local.example Brewfile.local
+
+# Add your packages to Brewfile.local
+echo "cask 'docker'" >> Brewfile.local
+
+# Install (both main and local Brewfiles)
+task brew:sync
+```
+
+The `Brewfile.local` is gitignored and will be automatically installed alongside
+the main Brewfile during setup and sync operations.
+
 ### Platform Detection
 
 The setup script automatically detects:
