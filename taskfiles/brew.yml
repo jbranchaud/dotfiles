@@ -9,9 +9,16 @@ tasks:
       Updates Homebrew packages
 
       Then automatically commits the changes to the Brewfile.lock.json file, if there are any.
+
+      Also installs packages from Brewfile.local if present.
     platforms: ['darwin']
     cmds:
       - brew bundle
+      - |
+        if [ -f Brewfile.local ]; then
+          echo "Installing packages from Brewfile.local..."
+          brew bundle --file=Brewfile.local
+        fi
       - task: commit
 
   commit:

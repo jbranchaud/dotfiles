@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+# Personal Brewfile
+#
+# This is an example personal Brewfile. Copy this to Brewfile.local and add
+# your own packages. Brewfile.local is gitignored to avoid conflicts with
+# upstream updates.
+#
+# Usage:
+#   cp Brewfile.local.example Brewfile.local
+#   # Edit Brewfile.local with your packages
+#   task brew:sync
+#
+# Example entries:
+# cask 'docker'
+# cask 'slack'
+# brew 'htop'
+# brew 'tree'

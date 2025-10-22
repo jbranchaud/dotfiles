@@ -9,3 +9,7 @@ config/vifm/vifmimgpdfpage
 
 # ignore tmuxinator files since they are workstation specific
 config/tmuxinator/*.yml
+
+# ignore personal Brewfile to avoid conflicts with upstream
+Brewfile.local
+Brewfile.local.lock.json
