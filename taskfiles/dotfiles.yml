@@ -125,6 +125,7 @@ tasks:
         - gitconfig
         - gitignore
         - gitmessage
+        - gnupg/gpg-agent.conf
         - ignore
         - prettierrc
         - pryrc
