@@ -40,7 +40,12 @@ set_app_shortcut "$app_id" 'Activate the tab to the left' '\0'
 set_app_shortcut "$app_id" 'Activate the tab to the right' '\0'
 
 echo 'Getting brew packages...'
-brew bundle
+if [ -f Brewfile.personal ]; then
+  echo 'Using Brewfile.personal...'
+  brew bundle --file=Brewfile.personal
+else
+  brew bundle
+fi
 
 if [ -f Brewfile.local ]; then
   echo 'Installing packages from Brewfile.local...'
