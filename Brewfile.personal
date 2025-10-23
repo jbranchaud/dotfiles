@@ -1,29 +1,4 @@
 # frozen_string_literal: true
-#
-# Personal Brewfile Template
-#
-# This is a template for maintaining your own copy of the Brewfile on your
-# personal branch. This approach gives you full control over what gets installed
-# while keeping the upstream Brewfile unchanged (avoiding merge conflicts).
-#
-# Setup (on your personal branch):
-#   1. Copy this file: cp Brewfile.personal.example Brewfile.personal
-#   2. Edit Brewfile.personal - remove packages you don't want, add your own
-#   3. Commit: git add Brewfile.personal && git commit -m "feat: add personal Brewfile"
-#
-# The setup and sync scripts will automatically use Brewfile.personal if it exists,
-# falling back to the main Brewfile if it doesn't.
-#
-# Staying in sync with upstream:
-#   - Use scripts/check_brewfile_changes.sh to detect upstream Brewfile changes
-#   - Manually review and merge desired changes into your Brewfile.personal
-#
-# Note: You can still use Brewfile.local for additional packages on top of
-# Brewfile.personal (useful for machine-specific packages).
-#
-# ============================================================================
-# Below is a copy of the current upstream Brewfile - customize as needed!
-# ============================================================================
 
 # Dual Panel File Browser
 cask 'marta'
@@ -38,7 +13,7 @@ cask 'cleanshot'
 cask 'hyperkey'
 
 # note taking app and Zettlekasten
-cask 'obsidian'
+# cask 'obsidian'
 
 # spotlight alternative
 cask 'raycast'
@@ -56,10 +31,10 @@ cask 'hammerspoon'
 cask 'ollama-app'
 
 # for Erlang
-brew 'wxwidgets'
-brew 'autoconf'
-brew 'fop'
-brew 'libiodbc'
+# brew 'wxwidgets'
+# brew 'autoconf'
+# brew 'fop'
+# brew 'libiodbc'
 brew 'openjdk'
 
 # for generating graphics
@@ -142,10 +117,10 @@ brew 'watch'
 brew 'duti'
 
 # for Nerves
-brew 'xz'
-brew 'pkg-config'
-brew 'squashfs'
-brew 'fwup'
+# brew 'xz'
+# brew 'pkg-config'
+# brew 'squashfs'
+# brew 'fwup'
 
 # GNU File, Shell, and Text utilities (also required by Nerves)
 # https://www.gnu.org/software/coreutils
@@ -162,3 +137,99 @@ brew 'figlet'
 
 # Mac App Store CLI
 brew 'mas'
+
+###########################################################
+###########################################################
+#                  Personal Additions                     #
+###########################################################
+###########################################################
+
+# logseq for notes
+cask 'logseq'
+
+# script automation
+cask 'script-kit'
+
+# Chat
+cask 'discord'
+cask 'slack'
+
+# HTTP server
+brew "caddy"
+
+# env management
+brew "direnv"
+
+# CLI Utilities
+brew "fzf"
+brew "bat"
+brew "exa"
+brew "fd"
+brew "ripgrep"
+
+# Multimedia processing
+brew "ffmpeg"
+
+# Version Control
+brew "gh"
+brew "libgit2"
+brew "git-delta"
+brew "difftastic"
+brew "git-gui"
+brew "jj"
+
+# File parsing tools
+brew "fx"
+brew "jq"
+brew "xsv"
+brew "yq"
+brew "csvlens"
+
+# Make-like tasks
+brew "just"
+
+# Development email server
+brew "mailhog"
+
+# MySQL
+brew "mysql"
+brew "mysql-client"
+
+# Document swiss army knife
+brew "pandoc"
+
+# Languages
+brew "pipx"
+brew "go"
+brew "rust"
+
+# Mac's Postgres.app
+cask "postgres-unofficial"
+
+# PSQL alternative
+brew "pgcli"
+
+# Timezone lib
+brew "tz"
+
+# Containers
+tap "dokku/repo"
+brew "dokku/repo/dokku"
+
+# Stripe CLI
+tap "stripe/stripe-cli"
+brew "stripe/stripe-cli/stripe"
+
+# screen resolution tool
+cask "betterdisplay"
+
+# These came from a `brew bundle dump`, not sure if they belong here yet
+# go "github.com/go-delve/delve/cmd/dlv"
+# go "golang.org/x/tools/cmd/godoc"
+# go "github.com/pressly/goose/v3/cmd/goose"
+# go "golang.org/x/tools/gopls"
+# go "github.com/plutov/oq"
+# go "github.com/jackc/pg_partialcopy"
+# go "github.com/google/pprof"
+# go "honnef.co/go/tools/cmd/staticcheck"
+# go "github.com/jackc/tern/v2"
