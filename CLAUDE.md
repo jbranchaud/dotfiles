@@ -82,58 +82,97 @@ task nvim:commit # synchronizes neovim plugin manager lockfile (lazy-lock.json)
 This setup supports personal customizations via a dedicated branch that you maintain
 separately from upstream. This minimizes merge conflicts when syncing with upstream.
 
-**Recommended workflow:**
+**Two approaches for Homebrew packages:**
 
-1. **Create your personal branch** (one-time setup):
-   ```bash
-   git checkout -b my-dotfiles
-   ```
+#### Option 1: Brewfile.local (Additive Approach)
 
-2. **Add your personal packages** to `Brewfile.local`:
-   ```bash
-   cp Brewfile.local.example Brewfile.local
+Add packages on top of the main Brewfile without modifying it:
 
-   # Add your packages
-   cat >> Brewfile.local <<'EOF'
-   cask 'docker'
-   cask 'slack'
-   brew 'htop'
-   EOF
+```bash
+# Create your personal branch
+git checkout -b my-dotfiles
 
-   git add Brewfile.local
-   git commit -m "feat: add personal Brewfile.local"
-   git push -u origin my-dotfiles
-   ```
+# Create additional packages file
+cp Brewfile.local.example Brewfile.local
 
-3. **Periodically sync with upstream**:
-   ```bash
-   # Fetch latest upstream changes
-   git fetch upstream
+# Add your packages
+cat >> Brewfile.local <<'EOF'
+cask 'slack'
+brew 'htop'
+EOF
 
-   # Option A: Merge (preserves commit history)
-   git merge upstream/main
+git add Brewfile.local
+git commit -m "feat: add personal Brewfile.local"
+git push -u origin my-dotfiles
+```
 
-   # Option B: Rebase (cleaner history, but rewrites commits)
-   git rebase upstream/main
-   ```
+**Pros:** Simple, keeps upstream Brewfile unchanged
+**Cons:** Cannot exclude packages from main Brewfile
 
-4. **Install everything**:
-   ```bash
-   task brew:sync  # Installs from both Brewfile and Brewfile.local
-   ```
+#### Option 2: Brewfile.personal (Full Control Approach)
+
+Maintain your own complete copy of the Brewfile:
+
+```bash
+# Create your personal branch
+git checkout -b my-dotfiles
+
+# Copy the current Brewfile
+cp Brewfile.personal.example Brewfile.personal
+
+# Edit to add/remove packages as desired
+vim Brewfile.personal
+
+git add Brewfile.personal
+git commit -m "feat: add personal Brewfile"
+git push -u origin my-dotfiles
+```
+
+The setup scripts will automatically use `Brewfile.personal` if it exists, falling back
+to the main `Brewfile` if not. You can still use `Brewfile.local` alongside
+`Brewfile.personal` for machine-specific packages.
+
+**Staying in sync with upstream Brewfile:**
+
+```bash
+# Check for upstream changes
+./scripts/check_brewfile_changes.sh
+
+# The script will show:
+# - Whether upstream Brewfile has changed
+# - Diff of changes
+# - Comparison with your Brewfile.personal (if it exists)
+```
+
+**Pros:** Full control, can exclude packages
+**Cons:** Requires manual tracking of upstream changes
+
+#### General Fork Workflow
+
+```bash
+# Periodically sync with upstream
+git fetch upstream
+
+# Option A: Merge (preserves commit history)
+git merge upstream/main
+
+# Option B: Rebase (cleaner history, but rewrites commits)
+git rebase upstream/main
+
+# Install everything
+task brew:sync
+```
 
 **Files safe to customize** (minimal conflict risk):
-- `Brewfile.local` - Your personal Homebrew packages (new file)
+- `Brewfile.personal` - Your complete Homebrew package list (new file)
+- `Brewfile.local` - Additional packages on top of Brewfile/Brewfile.personal
 - `gitconfig-personal` - Personal git settings (create if needed)
 - `config/zsh/local.zsh` - Personal shell customizations (create if needed)
 
 **Files likely to conflict** (review carefully when merging):
-- `Brewfile` - Main package list (avoid modifying)
+- `Brewfile` - Main package list (avoid modifying directly)
 - `config/nvim/` - Neovim configuration (frequently updated)
 - `taskfiles/` - Task definitions (occasionally updated)
-
-The `Brewfile.local` is automatically installed alongside the main Brewfile during
-both initial setup (`./setup.sh`) and sync operations (`task brew:sync`).
 
 ### Platform Detection
 
