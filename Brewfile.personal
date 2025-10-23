@@ -159,6 +159,7 @@ brew "caddy"
 
 # env management
 brew "direnv"
+brew "mise"
 
 # CLI Utilities
 brew "fzf"
