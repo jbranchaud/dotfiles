@@ -10,10 +10,17 @@ tasks:
 
       Then automatically commits the changes to the Brewfile.lock.json file, if there are any.
 
+      If Brewfile.personal exists, uses it instead of the main Brewfile.
       Also installs packages from Brewfile.local if present.
     platforms: ['darwin']
     cmds:
-      - brew bundle
+      - |
+        if [ -f Brewfile.personal ]; then
+          echo "Using Brewfile.personal..."
+          brew bundle --file=Brewfile.personal
+        else
+          brew bundle
+        fi
       - |
         if [ -f Brewfile.local ]; then
           echo "Installing packages from Brewfile.local..."

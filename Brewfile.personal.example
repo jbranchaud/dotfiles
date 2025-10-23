@@ -1,0 +1,164 @@
+# frozen_string_literal: true
+#
+# Personal Brewfile Template
+#
+# This is a template for maintaining your own copy of the Brewfile on your
+# personal branch. This approach gives you full control over what gets installed
+# while keeping the upstream Brewfile unchanged (avoiding merge conflicts).
+#
+# Setup (on your personal branch):
+#   1. Copy this file: cp Brewfile.personal.example Brewfile.personal
+#   2. Edit Brewfile.personal - remove packages you don't want, add your own
+#   3. Commit: git add Brewfile.personal && git commit -m "feat: add personal Brewfile"
+#
+# The setup and sync scripts will automatically use Brewfile.personal if it exists,
+# falling back to the main Brewfile if it doesn't.
+#
+# Staying in sync with upstream:
+#   - Use scripts/check_brewfile_changes.sh to detect upstream Brewfile changes
+#   - Manually review and merge desired changes into your Brewfile.personal
+#
+# Note: You can still use Brewfile.local for additional packages on top of
+# Brewfile.personal (useful for machine-specific packages).
+#
+# ============================================================================
+# Below is a copy of the current upstream Brewfile - customize as needed!
+# ============================================================================
+
+# Dual Panel File Browser
+cask 'marta'
+
+# Fast GPU rendered terminal emulator
+cask 'wezterm'
+
+# best screenshot tool on mac
+cask 'cleanshot'
+
+# setup a hyper key modifier
+cask 'hyperkey'
+
+# note taking app and Zettlekasten
+cask 'obsidian'
+
+# spotlight alternative
+cask 'raycast'
+
+# a terminal emulator (used primarily for wrapping terminal apps)
+cask 'iterm2'
+
+# allow accessing passwords from a CLI
+cask '1password-cli'
+
+# macOS automation using Lua
+cask 'hammerspoon'
+
+# run open source LLM models locally
+cask 'ollama-app'
+
+# for Erlang
+brew 'wxwidgets'
+brew 'autoconf'
+brew 'fop'
+brew 'libiodbc'
+brew 'openjdk'
+
+# for generating graphics
+brew 'graphviz'
+
+# code stats
+brew 'scc'
+
+# SQLite3
+brew 'sqlite'
+
+# image manipulation
+brew 'imagemagick'
+
+# easily copy tabular data
+brew 'yank'
+
+# format postgres sql files
+brew 'pgformatter'
+
+# Postgres pager
+brew 'pspg'
+
+# Postgres client
+brew 'libpq'
+
+# compile C stuff
+brew 'cmake'
+
+# c++ compiler
+brew 'gcc'
+
+# source control
+brew 'git'
+
+# GTags for use in Vim
+brew 'global'
+
+# Encryption + verification of signed downloads
+brew 'gnupg'
+
+# keep grep up to date
+brew 'grep'
+
+# show active process and their telemetry
+brew 'btop'
+
+# docker desktop for containers
+cask 'docker-desktop'
+
+# build tool
+brew 'make'
+
+# terminal multiplexer
+brew 'tmux'
+
+# vimium like jumps in tmux
+tap 'morantron/tmux-fingers'
+brew 'morantron/tmux-fingers/tmux-fingers'
+
+# download files from the terminal, used by some scripts
+brew 'wget'
+
+# OpenSSL - important for compiling things that support SSL
+brew 'openssl'
+
+# linter for bash scripts
+brew 'shellcheck'
+
+# keep ZSH up to date
+brew 'zsh'
+
+# required by ccls
+brew 'llvm'
+
+# the watch command
+brew 'watch'
+
+# set default application for opening files on mac
+brew 'duti'
+
+# for Nerves
+brew 'xz'
+brew 'pkg-config'
+brew 'squashfs'
+brew 'fwup'
+
+# GNU File, Shell, and Text utilities (also required by Nerves)
+# https://www.gnu.org/software/coreutils
+brew 'coreutils'
+
+# a more up to date version of curl than what macOS offers
+brew 'curl'
+
+# run things in parallel
+brew 'parallel'
+
+# pretty text display utils
+brew 'figlet'
+
+# Mac App Store CLI
+brew 'mas'
