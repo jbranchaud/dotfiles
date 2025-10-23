@@ -222,6 +222,9 @@ brew "stripe/stripe-cli/stripe"
 # screen resolution tool
 cask "betterdisplay"
 
+# Mac keychain management, gpg key
+brew "pinentry-mac"
+
 # These came from a `brew bundle dump`, not sure if they belong here yet
 # go "github.com/go-delve/delve/cmd/dlv"
 # go "golang.org/x/tools/cmd/godoc"
