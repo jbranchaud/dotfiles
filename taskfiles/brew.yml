@@ -15,17 +15,17 @@ tasks:
     platforms: ['darwin']
     cmds:
       - |
-        if [ -f Brewfile.personal ]; then
-          echo "Using Brewfile.personal..."
-          brew bundle --file=Brewfile.personal
-        else
-          brew bundle
-        fi
+          if [ -f Brewfile.personal ]; then
+            echo "Using Brewfile.personal..."
+            brew bundle --file=Brewfile.personal
+          else
+            brew bundle
+          fi
       - |
-        if [ -f Brewfile.local ]; then
-          echo "Installing packages from Brewfile.local..."
-          brew bundle --file=Brewfile.local
-        fi
+          if [ -f Brewfile.local ]; then
+            echo "Installing packages from Brewfile.local..."
+            brew bundle --file=Brewfile.local
+          fi
       - task: commit
 
   commit:
