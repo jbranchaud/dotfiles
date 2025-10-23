@@ -163,7 +163,6 @@ brew "direnv"
 # CLI Utilities
 brew "fzf"
 brew "bat"
-brew "exa"
 brew "fd"
 brew "ripgrep"
 
