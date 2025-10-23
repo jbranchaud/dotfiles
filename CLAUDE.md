@@ -164,12 +164,14 @@ task brew:sync
 ```
 
 **Files safe to customize** (minimal conflict risk):
+
 - `Brewfile.personal` - Your complete Homebrew package list (new file)
 - `Brewfile.local` - Additional packages on top of Brewfile/Brewfile.personal
 - `gitconfig-personal` - Personal git settings (create if needed)
 - `config/zsh/local.zsh` - Personal shell customizations (create if needed)
 
 **Files likely to conflict** (review carefully when merging):
+
 - `Brewfile` - Main package list (avoid modifying directly)
 - `config/nvim/` - Neovim configuration (frequently updated)
 - `taskfiles/` - Task definitions (occasionally updated)
