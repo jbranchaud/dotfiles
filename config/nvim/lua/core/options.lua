@@ -13,6 +13,7 @@ opt.incsearch = true -- do incremental searching
 opt.magic = true -- Use 'magic' patterns (extended regular expressions).
 
 opt.mouse = 'a' -- enable mouse usage
+opt.clipboard = 'unnamedplus' -- sync with system clipboard
 
 -- font for gui
 vim.cmd [[set guifont=CaskaydiaCove\ Nerd\ Font\ Mono]]
