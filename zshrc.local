@@ -1,4 +1,6 @@
-alias reload='source ~/.zshrc'
+alias reload='exec zsh'
+
+alias cat='bat'
 
 # Copied from https://github.com/junegunn/fzf/wiki/Examples#git
 fbr() {
