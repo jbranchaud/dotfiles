@@ -134,6 +134,7 @@ tasks:
         - zinitrc
         - zshenv
         - zshrc
+        - zshrc.local
     cmds:
       - for:
           var: FILES
