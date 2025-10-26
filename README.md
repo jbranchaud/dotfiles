@@ -49,6 +49,19 @@ Gotchas for NeoVim setup:
   see the full error message.
 - Make sure to run `:checkhealth` to know if you are missing anything
 
+# Staying in Sync
+
+As I develop on the `my-dotfiles` branch, I want to stay in sync with upstream
+changes that Dorian continues to make to his original repo. To facilitate that,
+I have a script that handles the fetching, rebasing, pushing, etc.
+
+```sh
+./sync-with-dorian.sh
+```
+
+Even if you run into a merge conflict, the script should still be re-runnable.
+Fix the conflict and then invoke it again.
+
 # Installation
 
 Easy..
