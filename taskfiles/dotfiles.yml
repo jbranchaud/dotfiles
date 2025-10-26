@@ -120,6 +120,7 @@ tasks:
         # ideally this list should be as small as possible, use XDG_CONFIG
         # folder instead
         - aliases
+        - aliases.local
         - ctags
         - gemrc
         - gitconfig

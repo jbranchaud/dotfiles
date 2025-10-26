@@ -1,0 +1,4 @@
+# reload the entire zsh config
+alias reload='exec zsh'
+
+alias cat='bat'
