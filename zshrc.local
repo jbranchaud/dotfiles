@@ -1,3 +1,8 @@
+# Set up GPG for git commit signing
+export GPG_TTY=$(tty)
+
+# ~~~ Git ~~~
+
 # Copied from https://github.com/junegunn/fzf/wiki/Examples#git
 fbr() {
   local branches branch
