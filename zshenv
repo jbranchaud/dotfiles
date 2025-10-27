@@ -1,5 +1,8 @@
+# define dotfiles directory location
+export DOTFILES_DIR="$HOME/dev/jbranchaud/dotfiles"
+
 # ensure dotfiles bin directory is loaded first
-export PATH="$HOME/.bin:/usr/local/sbin:$PATH"
+export PATH="$DOTFILES_DIR/bin:$HOME/.bin:/usr/local/sbin:$PATH"
 
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"

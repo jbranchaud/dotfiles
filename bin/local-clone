@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# local-clone: Clone a git repository into ~/dev/<owner>/<repo>
+
+set -e
+
+repo_url="$1"
+dev_base="$HOME/dev"
+
+if [[ -z "$repo_url" ]]; then
+  echo "Error: Please provide a repository URL" >&2
+  echo "Usage: local-clone <git-url>" >&2
+  exit 1
+fi
+
+# Extract owner and repo name from various git URL formats
+if [[ "$repo_url" =~ (github|gitlab|bitbucket)\.com[/:]([^/]+)/([^/]+)(\.git)?$ ]]; then
+  owner="${BASH_REMATCH[2]}"
+  repo="${BASH_REMATCH[3]}"
+elif [[ "$repo_url" =~ [:/]([^/]+)/([^/]+)(\.git)?$ ]]; then
+  owner="${BASH_REMATCH[1]}"
+  repo="${BASH_REMATCH[2]}"
+else
+  echo "Error: Could not parse repository URL" >&2
+  exit 1
+fi
+
+repo="${repo%.git}"
+target_dir="$dev_base/$owner"
+
+mkdir -p "$target_dir"
+clone_path="$target_dir/$repo"
+
+git clone "$repo_url" "$clone_path"
+echo "✓ Successfully cloned to $clone_path"
