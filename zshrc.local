@@ -1,3 +1,6 @@
+# Add cursor (launcher) to the path
+export PATH="/Applications/Cursor.app/Contents/Resources/app/bin:$PATH"
+
 # Set up GPG for git commit signing
 export GPG_TTY=$(tty)
 
