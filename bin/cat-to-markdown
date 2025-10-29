@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Read filenames from stdin and output as markdown with headings and code blocks
+#
+# Example of using it in a JavaScript project:
+# $ fd -e js | cat-to-markdown | pbcopy
+
+while IFS= read -r file; do
+  # Skip if file doesn't exist or isn't readable
+  if [[ ! -f "$file" ]] || [[ ! -r "$file" ]]; then
+    echo "# $file" >&2
+    echo "" >&2
+    echo "*(File not found or not readable)*" >&2
+    echo "" >&2
+    continue
+  fi
+
+  # Print the filename as a markdown heading
+  echo "# $file"
+  echo ""
+
+  # Print the file contents in a code block
+  echo '```'
+  cat "$file"
+  echo ""
+  echo '```'
+  echo ""
+done
