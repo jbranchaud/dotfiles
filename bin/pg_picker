@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Configuration
+POSTGRES_APP_PATH="/Applications/Postgres.app/Contents/Versions"
+ENVRC_FILE=".envrc"
+
+# Check if fzf is installed
+if ! command -v fzf &> /dev/null; then
+    echo "Error: fzf is not installed. Install it with: brew install fzf"
+    exit 1
+fi
+
+# Check if Postgres.app exists
+if [ ! -d "$POSTGRES_APP_PATH" ]; then
+    echo "Error: Postgres.app not found at $POSTGRES_APP_PATH"
+    exit 1
+fi
+
+# Find available PostgreSQL versions
+versions=()
+for version_path in "$POSTGRES_APP_PATH"/*; do
+    if [ -d "$version_path/bin" ] && [ -f "$version_path/bin/psql" ]; then
+        version=$(basename "$version_path")
+        versions+=("$version")
+    fi
+done
+
+# Check if any versions were found
+if [ ${#versions[@]} -eq 0 ]; then
+    echo "Error: No PostgreSQL versions found in $POSTGRES_APP_PATH"
+    exit 1
+fi
+
+# Use fzf to select a version
+selected_version=$(printf "%s\n" "${versions[@]}" | sort -V | fzf --prompt="Select PostgreSQL version: " --height=40% --reverse)
+
+# Check if a version was selected (user didn't cancel)
+if [ -z "$selected_version" ]; then
+    echo "No version selected. Exiting."
+    exit 0
+fi
+
+# Check if .envrc exists
+if [ ! -f "$ENVRC_FILE" ]; then
+    echo -n ".envrc does not exist in the current directory. Create it? (y/n): "
+    read -r response
+    if [[ ! "$response" =~ ^[Yy]$ ]]; then
+        echo "Aborted."
+        exit 0
+    fi
+    touch "$ENVRC_FILE"
+    echo "Created $ENVRC_FILE"
+fi
+
+# Prepare the PostgreSQL configuration lines
+pg_config="# PostgreSQL ${selected_version}
+export PG_VERSION=${selected_version}
+export PATH=\"${POSTGRES_APP_PATH}/\${PG_VERSION}/bin:\$PATH\""
+
+# Check if PostgreSQL configuration already exists in .envrc
+if grep -q "export PG_VERSION=" "$ENVRC_FILE" || grep -q "PostgreSQL.*bin:\$PATH" "$ENVRC_FILE"; then
+    echo ""
+    echo "PostgreSQL configuration already exists in $ENVRC_FILE"
+    echo -n "Replace it? (y/n): "
+    read -r response
+    if [[ "$response" =~ ^[Yy]$ ]]; then
+        # Remove existing PostgreSQL configuration
+        # This removes lines containing PG_VERSION and the Postgres.app PATH export
+        sed -i.bak '/# PostgreSQL/d; /export PG_VERSION=/d; /Postgres\.app.*bin.*PATH/d' "$ENVRC_FILE"
+        rm -f "${ENVRC_FILE}.bak"
+    else
+        echo "Aborted."
+        exit 0
+    fi
+fi
+
+# Add PostgreSQL configuration to .envrc
+echo "" >> "$ENVRC_FILE"
+echo "$pg_config" >> "$ENVRC_FILE"
+
+echo ""
+echo "✓ Added PostgreSQL ${selected_version} configuration to $ENVRC_FILE"
+echo ""
+echo "Run 'direnv allow' to apply the changes."
+
+# Optionally run direnv allow automatically
+echo -n "Run 'direnv allow' now? (y/n): "
+read -r response
+if [[ "$response" =~ ^[Yy]$ ]]; then
+    direnv allow
+    echo "✓ direnv configuration applied"
+fi
