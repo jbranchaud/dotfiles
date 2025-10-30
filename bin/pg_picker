@@ -57,18 +57,17 @@ fi
 # Prepare the PostgreSQL configuration lines
 pg_config="# PostgreSQL ${selected_version}
 export PG_VERSION=${selected_version}
-export PATH=\"${POSTGRES_APP_PATH}/\${PG_VERSION}/bin:\$PATH\""
+PATH_add ${POSTGRES_APP_PATH}/\${PG_VERSION}/bin"
 
 # Check if PostgreSQL configuration already exists in .envrc
-if grep -q "export PG_VERSION=" "$ENVRC_FILE" || grep -q "PostgreSQL.*bin:\$PATH" "$ENVRC_FILE"; then
+if grep -q "export PG_VERSION=" "$ENVRC_FILE" || grep -q "PATH_add.*Postgres\.app" "$ENVRC_FILE"; then
   echo ""
   echo "PostgreSQL configuration already exists in $ENVRC_FILE"
   echo -n "Replace it? (y/n): "
   read -r response
   if [[ "$response" =~ ^[Yy]$ ]]; then
     # Remove existing PostgreSQL configuration
-    # This removes lines containing PG_VERSION and the Postgres.app PATH export
-    sed -i.bak '/# PostgreSQL/d; /export PG_VERSION=/d; /Postgres\.app.*bin.*PATH/d' "$ENVRC_FILE"
+    sed -i.bak '/# PostgreSQL/d; /export PG_VERSION=/d; /PATH_add.*Postgres\.app/d' "$ENVRC_FILE"
     rm -f "${ENVRC_FILE}.bak"
   else
     echo "Aborted."
