@@ -6,9 +6,11 @@
 "cargo:htmlq" = "latest"                                                     # Like jq, but for HTML
 "cargo:wireman" = "latest"                                                   # GRPC TUI client
 "gem:tmuxinator" = "latest"                                                  # tmux session manager
+"npm:@anthropic-ai/claude-code" = "latest"                                   # AI agent
 "npm:@commitlint/cli" = "latest"                                             # linter for checking that commits are following conventional commits
 "npm:neovim" = "latest"                                                      # support for javascript plugins in neovim
 "npm:npkill" = "latest"                                                      # easily find and delete heavy node modules
+"npm:opencode-ai" = "latest"
 "npm:prettier" = "latest"                                                    # code formatter (js, ts, json, yaml and more)
 "npm:tldr" = "latest"                                                        # useful usage instructions for CLI apps
 "npm:trash-cli" = "latest"                                                   # rm -> system trash (cross platform)
@@ -20,7 +22,6 @@
 "ubi:babs/multiping" = "latest"                                              # ping multiple hosts in parallel
 "ubi:chmln/sd" = "latest"                                                    # a modern alternative for sed with sensible defaults
 "ubi:dlvhdr/diffnav" = "latest"                                              # A git diff pager based on delta but with a file tree, à la GitHub.
-"ubi:ethersync/ethersync" = "latest"                                         # pair programming collaboration tool
 "ubi:ismaelgv/rnr" = "latest"                                                # batch rename files and directories
 "ubi:joshmedeski/sesh" = "latest"                                            # tmux session manager
 "ubi:kdash-rs/kdash" = "latest"                                              # kubernetes dashboard in the terminal
@@ -83,3 +84,5 @@ zoxide = "latest"                                                            # a
 # needed to enable ruby gems install
 experimental = true
 disable_backends = ["asdf"]
+# use bun instead of npm when using npm:<package>
+npm.bun = true
