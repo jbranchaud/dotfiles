@@ -25,7 +25,7 @@ obj.__index = obj
 
 -- Metadata
 obj.name = 'ChromeTabSaver'
-obj.version = '0.5'
+obj.version = '0.6'
 obj.author = 'Josh Branchaud'
 obj.homepage = 'https://github.com/jbranchaud/dotfiles'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
@@ -180,6 +180,111 @@ function obj:saveConfig(config)
   else
     self.logger.e 'Failed to save configuration'
   end
+end
+
+--- ChromeTabSaver:isURLAllowlisted(url)
+--- Method
+--- Checks if a URL matches any pattern in the allowlist
+---
+--- Parameters:
+---  * url - The URL to check
+---
+--- Returns:
+---  * true if the URL is allowlisted, false otherwise
+function obj:isURLAllowlisted(url)
+  if not url then
+    return false
+  end
+
+  local config = self:loadConfig()
+  local allowlist = config.urlAllowlist or {}
+
+  -- If allowlist is empty, nothing is allowlisted
+  if #allowlist == 0 then
+    return false
+  end
+
+  -- Check each pattern in the allowlist
+  for _, pattern in ipairs(allowlist) do
+    -- Simple substring match (case-insensitive)
+    if url:lower():find(pattern:lower(), 1, true) then
+      self.logger.d('URL matched allowlist pattern "' .. pattern .. '": ' .. url)
+      return true
+    end
+  end
+
+  return false
+end
+
+--- ChromeTabSaver:getURLAllowlist()
+--- Method
+--- Gets the current URL allowlist
+---
+--- Returns:
+---  * Array of URL patterns
+function obj:getURLAllowlist()
+  local config = self:loadConfig()
+  return config.urlAllowlist or {}
+end
+
+--- ChromeTabSaver:addToAllowlist(pattern)
+--- Method
+--- Adds a URL pattern to the allowlist
+---
+--- Parameters:
+---  * pattern - URL pattern to add (e.g., "gmail.com", "github.com")
+---
+--- Returns:
+---  * true if added successfully, false otherwise
+function obj:addToAllowlist(pattern)
+  if not pattern or pattern == '' then
+    return false
+  end
+
+  local config = self:loadConfig()
+  if not config.urlAllowlist then
+    config.urlAllowlist = {}
+  end
+
+  -- Check if pattern already exists
+  for _, existingPattern in ipairs(config.urlAllowlist) do
+    if existingPattern == pattern then
+      self.logger.i('Pattern already in allowlist: ' .. pattern)
+      return false
+    end
+  end
+
+  table.insert(config.urlAllowlist, pattern)
+  self:saveConfig(config)
+  self.logger.i('Added to allowlist: ' .. pattern)
+  return true
+end
+
+--- ChromeTabSaver:removeFromAllowlist(pattern)
+--- Method
+--- Removes a URL pattern from the allowlist
+---
+--- Parameters:
+---  * pattern - URL pattern to remove
+---
+--- Returns:
+---  * true if removed successfully, false if not found
+function obj:removeFromAllowlist(pattern)
+  local config = self:loadConfig()
+  if not config.urlAllowlist then
+    return false
+  end
+
+  for i, existingPattern in ipairs(config.urlAllowlist) do
+    if existingPattern == pattern then
+      table.remove(config.urlAllowlist, i)
+      self:saveConfig(config)
+      self.logger.i('Removed from allowlist: ' .. pattern)
+      return true
+    end
+  end
+
+  return false
 end
 
 --- ChromeTabSaver:getPinnedCount()
@@ -349,27 +454,42 @@ function obj:saveAndCloseUnpinnedTabs()
   local tabsData = result.tabs
   local totalTabs = result.tabCount
 
-  -- Process unpinned tabs
+  -- Process unpinned tabs and filter out allowlisted URLs
   local currentTimestamp = os.date '%Y-%m-%d %H:%M:%S'
   local tabsToSave = {}
+  local tabsToClose = {} -- Track tab indices to close
   local savedCount = 0
+  local allowlistedCount = 0
 
   for i, tabInfo in ipairs(tabsData) do
     if i > pinnedCount then
-      table.insert(tabsToSave, {
-        url = tabInfo.tabURL,
-        title = tabInfo.tabTitle,
-        originalIndex = i,
-      })
-      savedCount = savedCount + 1
+      -- Check if URL is allowlisted
+      if self:isURLAllowlisted(tabInfo.tabURL) then
+        allowlistedCount = allowlistedCount + 1
+        self.logger.i('Skipping allowlisted tab: ' .. tabInfo.tabTitle)
+      else
+        -- Not allowlisted, so save and mark for closing
+        table.insert(tabsToSave, {
+          url = tabInfo.tabURL,
+          title = tabInfo.tabTitle,
+          originalIndex = i,
+        })
+        table.insert(tabsToClose, i)
+        savedCount = savedCount + 1
+      end
     end
   end
 
   if savedCount == 0 then
+    local message = 'No tabs to save'
+    if allowlistedCount > 0 then
+      message = message
+        .. string.format('\n(%d allowlisted tab%s kept open)', allowlistedCount, allowlistedCount == 1 and '' or 's')
+    end
     hs.notify
       .new({
         title = 'Chrome Tab Saver',
-        informativeText = 'No unpinned tabs to save',
+        informativeText = message,
       })
       :send()
     return 0
@@ -377,24 +497,22 @@ function obj:saveAndCloseUnpinnedTabs()
 
   -- Confirm with user before saving and closing
   local confirmMessage = string.format(
-    'Save and close %d unpinned tab%s?\n\n' ..
-    'Pinned tabs (%d) will be kept open.\n' ..
-    'Tabs will be saved to: %s',
+    'Save and close %d tab%s?\n\n' .. 'Pinned tabs (%d) will be kept open.\n',
     savedCount,
     savedCount == 1 and '' or 's',
-    pinnedCount,
-    self.savedTabsPath
+    pinnedCount
   )
 
-  local button = hs.dialog.blockAlert(
-    'Chrome Tab Saver - Confirm',
-    confirmMessage,
-    'Save & Close',
-    'Cancel'
-  )
+  if allowlistedCount > 0 then
+    confirmMessage = confirmMessage .. string.format('Allowlisted tabs (%d) will be kept open.\n', allowlistedCount)
+  end
+
+  confirmMessage = confirmMessage .. string.format('Tabs will be saved to: %s', self.savedTabsPath)
+
+  local button = hs.dialog.blockAlert('Chrome Tab Saver - Confirm', confirmMessage, 'Save & Close', 'Cancel')
 
   if button == 'Cancel' then
-    self.logger.i('User cancelled save operation')
+    self.logger.i 'User cancelled save operation'
     return 0
   end
 
@@ -416,22 +534,36 @@ function obj:saveAndCloseUnpinnedTabs()
   end
 
   -- Close the tabs (in reverse order to maintain indices)
-  local closeScript = string.format(
-    [[
+  -- Build AppleScript to close specific tab indices
+  local closeScript = [[
         tell application "Google Chrome"
             set frontWindow to front window
+            set indicesToClose to {]]
+
+  -- Sort indices in reverse order
+  table.sort(tabsToClose, function(a, b)
+    return a > b
+  end)
+
+  -- Build the list of indices
+  for i, idx in ipairs(tabsToClose) do
+    if i > 1 then
+      closeScript = closeScript .. ', '
+    end
+    closeScript = closeScript .. tostring(idx)
+  end
+
+  closeScript = closeScript
+    .. [[}
 
             -- Close in reverse order to maintain correct indices
-            repeat with i from %d to %d by -1
+            repeat with i in indicesToClose
                 try
                     close tab i of frontWindow
                 end try
             end repeat
         end tell
-    ]],
-    totalTabs,
-    pinnedCount + 1
-  )
+    ]]
 
   local closeOk, closeResult = hs.osascript.applescript(closeScript)
 
