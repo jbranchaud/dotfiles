@@ -25,7 +25,7 @@ obj.__index = obj
 
 -- Metadata
 obj.name = 'ChromeTabSaver'
-obj.version = '0.4'
+obj.version = '0.5'
 obj.author = 'Josh Branchaud'
 obj.homepage = 'https://github.com/jbranchaud/dotfiles'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
@@ -372,6 +372,29 @@ function obj:saveAndCloseUnpinnedTabs()
         informativeText = 'No unpinned tabs to save',
       })
       :send()
+    return 0
+  end
+
+  -- Confirm with user before saving and closing
+  local confirmMessage = string.format(
+    'Save and close %d unpinned tab%s?\n\n' ..
+    'Pinned tabs (%d) will be kept open.\n' ..
+    'Tabs will be saved to: %s',
+    savedCount,
+    savedCount == 1 and '' or 's',
+    pinnedCount,
+    self.savedTabsPath
+  )
+
+  local button = hs.dialog.blockAlert(
+    'Chrome Tab Saver - Confirm',
+    confirmMessage,
+    'Save & Close',
+    'Cancel'
+  )
+
+  if button == 'Cancel' then
+    self.logger.i('User cancelled save operation')
     return 0
   end
 
