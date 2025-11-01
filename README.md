@@ -51,12 +51,12 @@ Gotchas for NeoVim setup:
 
 # Staying in Sync
 
-As I develop on the `my-dotfiles` branch, I want to stay in sync with upstream
+As I develop on the `main` branch, I want to stay in sync with upstream
 changes that Dorian continues to make to his original repo. To facilitate that,
-I have a script that handles the fetching, rebasing, pushing, etc.
+I have a script that handles the fetching, merging, pushing, etc.
 
 ```sh
-./sync-with-dorian.sh
+./sync-with-upstream.sh
 ```
 
 Even if you run into a merge conflict, the script should still be re-runnable.
