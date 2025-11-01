@@ -1,150 +1,103 @@
 # ChromeTabSaver.spoon
 
-A Hammerspoon Spoon to save and close unpinned Chrome tabs to a JSON file organized by date.
+Save and close unpinned Chrome tabs to a JSON file organized by date, and restore them later.
 
 ## Features
 
-- 📁 Saves unpinned Chrome tabs to a JSON file organized by date
-- 🔒 Preserves pinned tabs (never saves or closes them)
-- 📅 Appends to existing dates if tabs were already saved today
-- ✅ Automatically closes unpinned tabs after saving
-- 👀 View saved tabs for any date
-- ♻️ Restore saved tabs from any date
-- 📝 Lists all dates that have saved tabs
+- 💾 Save all unpinned tabs from your front Chrome window
+- 🗂️ Organize saved tabs by date
+- 🔄 Restore tabs from any date
+- 👁️ View saved tabs for a specific date
+- ⚙️ Configurable data directory location
+- 🎯 Preserve pinned tabs (never saved or closed)
 
 ## Installation
 
-### Method 1: Manual Installation
-
-1. Download `ChromeTabSaver.spoon`
-2. Copy to `~/.config/hammerspoon/Spoons/` (or `~/.hammerspoon/Spoons/`)
-3. Add to your `init.lua`:
+1. Clone or copy this Spoon to `~/.hammerspoon/Spoons/ChromeTabSaver.spoon/`
+2. Add to your `~/.hammerspoon/init.lua`:
 
 ```lua
 hs.loadSpoon("ChromeTabSaver")
 
--- Bind hotkeys
 spoon.ChromeTabSaver:bindHotkeys({
-    save = {{"cmd", "alt", "ctrl"}, "S"},      -- Save and close unpinned tabs
-    view = {{"cmd", "alt", "ctrl"}, "V"},      -- View today's saved tabs
-    restore = {{"cmd", "alt", "ctrl"}, "R"}    -- Restore today's saved tabs
+    save = {{"cmd", "alt", "ctrl"}, "S"},
+    view = {{"cmd", "alt", "ctrl"}, "V"},
+    restore = {{"cmd", "alt", "ctrl"}, "R"}
 })
 ```
 
-### Method 2: Direct install to Spoons directory
-
-```bash
-# If using ~/.config/hammerspoon
-cp -r ChromeTabSaver.spoon ~/.config/hammerspoon/Spoons/
-
-# Or if using ~/.hammerspoon
-cp -r ChromeTabSaver.spoon ~/.hammerspoon/Spoons/
-```
+3. Reload Hammerspoon configuration
 
 ## Configuration
 
-On first use, the Spoon will ask you how many pinned tabs you have. This ensures pinned tabs are never saved or closed.
+### Default Location
 
-To reconfigure later, delete the config file:
-```bash
-rm ~/.config/hammerspoon/chrome_tab_saver_config.json
+By default, saved tabs and configuration are stored in:
+```
+~/.local/share/hammerspoon/ChromeTabSaver/
+├── saved_tabs.json
+└── config.json
 ```
 
-## Usage
+### Custom Location
 
-### Hotkeys (after binding)
-
-- **Save and Close**: `Cmd + Alt + Ctrl + S` - Saves all unpinned tabs and closes them
-- **View Today's Tabs**: `Cmd + Alt + Ctrl + V` - Shows tabs saved today
-- **Restore Today's Tabs**: `Cmd + Alt + Ctrl + R` - Reopens tabs saved today
-
-### Programmatic Usage
-
-```lua
--- Save and close unpinned tabs
-spoon.ChromeTabSaver:saveAndCloseUnpinnedTabs()
-
--- View tabs for a specific date
-spoon.ChromeTabSaver:viewSavedTabs("2025-10-28")
-
--- Restore tabs from a specific date
-spoon.ChromeTabSaver:restoreSavedTabs("2025-10-28")
-
--- List all dates with saved tabs
-local dates = spoon.ChromeTabSaver:listSavedDates()
-for _, date in ipairs(dates) do
-    print(date)
-end
-```
-
-### Custom Storage Path
+You can configure a custom data directory:
 
 ```lua
 hs.loadSpoon("ChromeTabSaver")
 
--- Change where tabs are saved
-spoon.ChromeTabSaver.savedTabsPath = os.getenv("HOME") .. "/Documents/chrome_tabs.json"
+-- Option 1: Set a custom data directory
+spoon.ChromeTabSaver:configure({
+    dataDir = os.getenv('HOME') .. '/Documents/ChromeTabSaver'
+})
 
-spoon.ChromeTabSaver:bindHotkeys({...})
+-- Option 2: Set individual file paths
+spoon.ChromeTabSaver:configure({
+    savedTabsPath = os.getenv('HOME') .. '/custom/path/tabs.json',
+    configPath = os.getenv('HOME') .. '/custom/path/config.json'
+})
+
+spoon.ChromeTabSaver:bindHotkeys({
+    save = {{"cmd", "alt", "ctrl"}, "S"},
+    view = {{"cmd", "alt", "ctrl"}, "V"},
+    restore = {{"cmd", "alt", "ctrl"}, "R"}
+})
 ```
+
+## First Run Setup
+
+On first run, you'll be prompted to enter the number of pinned tabs in your Chrome window. This ensures pinned tabs are never saved or closed.
+
+You can change this later by deleting the `config.json` file and running the save command again.
+
+## Usage
+
+### Save Tabs (⌘⌃⌥S)
+Saves all unpinned tabs from your front Chrome window and closes them. Pinned tabs remain untouched.
+
+### View Tabs (⌘⌃⌥V)
+Shows a list of tabs saved today (or a specific date).
+
+### Restore Tabs (⌘⌃⌥R)
+Reopens all tabs saved today (or a specific date) in Chrome.
 
 ## Data Format
 
-Tabs are saved to `~/.config/hammerspoon/saved_tabs.json` in this format:
+Tabs are saved in JSON format, organized by date:
 
 ```json
 {
-  "2025-10-28": [
+  "2025-11-01": [
     {
-      "url": "https://example.com/article",
-      "title": "Example Article - Example Site",
-      "savedAt": "2025-10-28 14:30:15",
+      "url": "https://example.com",
+      "title": "Example Domain",
+      "savedAt": "2025-11-01 14:30:00",
       "originalIndex": 3
-    },
-    {
-      "url": "https://github.com/trending",
-      "title": "Trending - GitHub",
-      "savedAt": "2025-10-28 14:30:15",
-      "originalIndex": 4
     }
-  ],
-  "2025-10-29": [
-    ...
   ]
 }
 ```
 
-## How It Works
-
-1. **Detection**: Gets all tabs from the front Chrome window using AppleScript
-2. **Filtering**: Skips the first N tabs (where N is your configured pinned tab count)
-3. **Saving**: Saves unpinned tab URLs and titles to JSON, appending to today's date
-4. **Closing**: Closes all unpinned tabs (in reverse order to maintain indices)
-
-## Limitations
-
-- Only works with Google Chrome (not Chromium, Brave, etc.)
-- Requires Chrome to be the frontmost application
-- AppleScript doesn't expose Chrome's pinned tab status directly, so you must configure the count manually
-- Pinned tabs must be at the start of the tab bar (Chrome's default behavior)
-
-## Troubleshooting
-
-**"Error accessing Chrome"**: Make sure Chrome is running and has at least one window open.
-
-**Wrong tabs being closed**: Check your pinned tab count is correct. Delete the config file to reconfigure:
-```bash
-rm ~/.config/hammerspoon/chrome_tab_saver_config.json
-```
-
-**Tabs not saving**: Check the Hammerspoon console for errors: `Cmd + Option + Ctrl + Shift + C`
-
-**Permission denied**: Grant Hammerspoon accessibility permissions in System Preferences → Security & Privacy → Accessibility
-
 ## License
 
-MIT
-
-## Author
-
-Created with assistance from Claude (Anthropic)
+MIT License - See LICENSE file for details

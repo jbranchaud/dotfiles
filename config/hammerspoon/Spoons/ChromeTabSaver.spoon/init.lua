@@ -2,11 +2,17 @@
 ---
 --- Save and close unpinned Chrome tabs to a JSON file organized by date
 ---
---- Download: https://github.com/yourusername/ChromeTabSaver.spoon
+--- Download: https://github.com/jbranchaud/dotfiles
 ---
 --- Usage:
 --- ```
 --- hs.loadSpoon("ChromeTabSaver")
+---
+--- -- Optional: Configure custom data directory (defaults to ~/.local/share/hammerspoon/ChromeTabSaver/)
+--- -- spoon.ChromeTabSaver:configure({
+--- --     dataDir = os.getenv('HOME') .. '/Documents/ChromeTabSaver'
+--- -- })
+---
 --- spoon.ChromeTabSaver:bindHotkeys({
 ---     save = {{"cmd", "alt", "ctrl"}, "S"},
 ---     view = {{"cmd", "alt", "ctrl"}, "V"},
@@ -19,14 +25,15 @@ obj.__index = obj
 
 -- Metadata
 obj.name = 'ChromeTabSaver'
-obj.version = '0.1'
+obj.version = '0.2'
 obj.author = 'Josh Branchaud'
 obj.homepage = 'https://github.com/jbranchaud/dotfiles'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
 
--- Configuration
-obj.savedTabsPath = os.getenv 'HOME' .. '/.config/hammerspoon/Spoons/ChromeTabSaver.spoon/saved_tabs.json'
-obj.configPath = os.getenv 'HOME' .. '/.config/hammerspoon/Spoons/ChromeTabSaver.spoon/chrome_tab_saver_config.json'
+-- Default Configuration (XDG Base Directory standard)
+local defaultDataDir = os.getenv 'HOME' .. '/.local/share/hammerspoon/ChromeTabSaver'
+obj.savedTabsPath = defaultDataDir .. '/saved_tabs.json'
+obj.configPath = defaultDataDir .. '/config.json'
 obj.logger = hs.logger.new 'ChromeTabSaver'
 
 --- ChromeTabSaver:init()
@@ -35,6 +42,98 @@ obj.logger = hs.logger.new 'ChromeTabSaver'
 function obj:init()
   self.logger.i 'Initializing ChromeTabSaver'
   return self
+end
+
+--- ChromeTabSaver:configure(config)
+--- Method
+--- Configures custom paths for saved tabs and config files
+---
+--- Parameters:
+---  * config - A table with optional keys:
+---   * savedTabsPath - Full path to saved tabs JSON file
+---   * configPath - Full path to config JSON file
+---   * dataDir - Directory path (will set both savedTabsPath and configPath within it)
+---
+--- Returns:
+---  * The ChromeTabSaver object for method chaining
+---
+--- Example:
+--- ```
+--- spoon.ChromeTabSaver:configure({
+---     dataDir = os.getenv('HOME') .. '/Documents/ChromeTabSaver'
+--- })
+--- ```
+---
+--- Or for full control:
+--- ```
+--- spoon.ChromeTabSaver:configure({
+---     savedTabsPath = os.getenv('HOME') .. '/custom/path/tabs.json',
+---     configPath = os.getenv('HOME') .. '/custom/path/config.json'
+--- })
+--- ```
+function obj:configure(config)
+  if not config then
+    return self
+  end
+
+  if config.dataDir then
+    self.savedTabsPath = config.dataDir .. '/saved_tabs.json'
+    self.configPath = config.dataDir .. '/config.json'
+    self.logger.i('Configured data directory: ' .. config.dataDir)
+  end
+
+  if config.savedTabsPath then
+    self.savedTabsPath = config.savedTabsPath
+    self.logger.i('Configured saved tabs path: ' .. config.savedTabsPath)
+  end
+
+  if config.configPath then
+    self.configPath = config.configPath
+    self.logger.i('Configured config path: ' .. config.configPath)
+  end
+
+  return self
+end
+
+--- ChromeTabSaver:ensureDataDirectoryExists()
+--- Method
+--- Creates the data directory if it doesn't exist
+---
+--- Returns:
+---  * true if directory exists or was created, false otherwise
+function obj:ensureDataDirectoryExists()
+  -- Extract directory from savedTabsPath
+  local dataDir = self.savedTabsPath:match '(.*/)'
+  if not dataDir then
+    self.logger.e('Could not determine data directory from path: ' .. self.savedTabsPath)
+    return false
+  end
+
+  -- Remove trailing slash
+  dataDir = dataDir:sub(1, -2)
+
+  -- Check if directory exists using hs.execute
+  -- hs.execute returns: output, status, type, rc
+  local output, status, type, rc = hs.execute('test -d "' .. dataDir .. '"')
+
+  if status then
+    -- Directory exists
+    return true
+  end
+
+  -- Directory doesn't exist, create it
+  self.logger.i('Creating data directory: ' .. dataDir)
+  local createOutput, createStatus, createType, createRc = hs.execute('mkdir -p "' .. dataDir .. '"')
+
+  if createStatus then
+    self.logger.i('Successfully created data directory: ' .. dataDir)
+    return true
+  else
+    self.logger.e('Failed to create data directory: ' .. dataDir)
+    self.logger.e('mkdir output: ' .. tostring(createOutput))
+    self.logger.e('mkdir rc: ' .. tostring(createRc))
+    return false
+  end
 end
 
 --- ChromeTabSaver:loadConfig()
@@ -68,6 +167,11 @@ end
 --- Parameters:
 ---  * config - A table with configuration values
 function obj:saveConfig(config)
+  if not self:ensureDataDirectoryExists() then
+    self.logger.e 'Cannot save config: data directory does not exist'
+    return
+  end
+
   local configOut = io.open(self.configPath, 'w')
   if configOut then
     configOut:write(hs.json.encode(config, true))
@@ -147,6 +251,11 @@ end
 --- Returns:
 ---  * true if successful, false otherwise
 function obj:saveTabs(savedTabs)
+  if not self:ensureDataDirectoryExists() then
+    self.logger.e 'Cannot save tabs: data directory does not exist'
+    return false
+  end
+
   local outFile = io.open(self.savedTabsPath, 'w')
   if outFile then
     outFile:write(hs.json.encode(savedTabs, true))
@@ -195,27 +304,27 @@ function obj:saveAndCloseUnpinnedTabs()
                 set currentTab to tab i of frontWindow
                 set tabURL to URL of currentTab
                 set tabTitle to title of currentTab
-                
+
                 -- Escape quotes and backslashes in title and URL for JSON
                 set tabTitle to my replaceText(tabTitle, "\\", "\\\\")
                 set tabTitle to my replaceText(tabTitle, "\"", "\\\"")
-                
+
                 set tabURL to my replaceText(tabURL, "\\", "\\\\")
                 set tabURL to my replaceText(tabURL, "\"", "\\\"")
-                
+
                 if i > 1 then
                     set tabsJSON to tabsJSON & ","
                 end if
-                
+
                 set tabsJSON to tabsJSON & "{\"tabURL\":\"" & tabURL & "\",\"tabTitle\":\"" & tabTitle & "\",\"tabIndex\":" & i & "}"
             end repeat
 
             set tabsJSON to tabsJSON & "]"
             set tabCount to count of tabs of frontWindow
-            
+
             return "{\"tabs\":" & tabsJSON & ",\"tabCount\":" & tabCount & "}"
         end tell
-        
+
         on replaceText(theText, searchString, replacementString)
             set AppleScript's text item delimiters to searchString
             set theTextItems to every text item of theText
