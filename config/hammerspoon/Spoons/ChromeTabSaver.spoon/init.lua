@@ -25,7 +25,7 @@ obj.__index = obj
 
 -- Metadata
 obj.name = 'ChromeTabSaver'
-obj.version = '0.2'
+obj.version = '0.3'
 obj.author = 'Josh Branchaud'
 obj.homepage = 'https://github.com/jbranchaud/dotfiles'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
@@ -350,14 +350,15 @@ function obj:saveAndCloseUnpinnedTabs()
   local totalTabs = result.tabCount
 
   -- Process unpinned tabs
+  local currentTimestamp = os.date '%Y-%m-%d %H:%M:%S'
+  local tabsToSave = {}
   local savedCount = 0
 
   for i, tabInfo in ipairs(tabsData) do
     if i > pinnedCount then
-      table.insert(savedTabs[currentDate], {
+      table.insert(tabsToSave, {
         url = tabInfo.tabURL,
         title = tabInfo.tabTitle,
-        savedAt = os.date '%Y-%m-%d %H:%M:%S',
         originalIndex = i,
       })
       savedCount = savedCount + 1
@@ -373,6 +374,12 @@ function obj:saveAndCloseUnpinnedTabs()
       :send()
     return 0
   end
+
+  -- Add the timestamped group to the date's array
+  table.insert(savedTabs[currentDate], {
+    timestamp = currentTimestamp,
+    tabs = tabsToSave,
+  })
 
   -- Save to file
   if not self:saveTabs(savedTabs) then
@@ -437,9 +444,9 @@ function obj:viewSavedTabs(date)
   local savedTabs = self:loadSavedTabs()
   date = date or os.date '%Y-%m-%d'
 
-  local tabsForDate = savedTabs[date]
+  local groupsForDate = savedTabs[date]
 
-  if not tabsForDate or #tabsForDate == 0 then
+  if not groupsForDate or #groupsForDate == 0 then
     hs.notify
       .new({
         title = 'Chrome Tab Saver',
@@ -449,20 +456,37 @@ function obj:viewSavedTabs(date)
     return
   end
 
-  -- Build message
-  local message = string.format('Found %d tabs saved on %s:\n\n', #tabsForDate, date)
-  for i, tab in ipairs(tabsForDate) do
-    local title = tab.title or 'Untitled'
-    if #title > 60 then
-      title = title:sub(1, 57) .. '...'
+  -- Build message showing all timestamped groups
+  local totalTabs = 0
+  for _, group in ipairs(groupsForDate) do
+    if group.tabs then
+      totalTabs = totalTabs + #group.tabs
     end
-    message = message .. string.format('%d. %s\n   %s\n\n', i, title, tab.url)
+  end
 
-    -- Limit display to first 20 tabs
-    if i >= 20 and #tabsForDate > 20 then
-      message = message .. string.format('... and %d more tabs\n', #tabsForDate - 20)
-      break
+  local message = string.format('Found %d save group(s) with %d total tabs on %s:\n\n', #groupsForDate, totalTabs, date)
+
+  for groupIdx, group in ipairs(groupsForDate) do
+    -- Handle both old format (flat tabs) and new format (timestamped groups)
+    local timestamp = group.timestamp or 'Unknown time'
+    local tabs = group.tabs or { group } -- Backward compatibility
+
+    message = message .. string.format('═══ Group %d: %s (%d tabs) ═══\n', groupIdx, timestamp, #tabs)
+
+    for i, tab in ipairs(tabs) do
+      local title = tab.title or 'Untitled'
+      if #title > 50 then
+        title = title:sub(1, 47) .. '...'
+      end
+      message = message .. string.format('  %d. %s\n     %s\n', i, title, tab.url)
+
+      -- Limit display per group
+      if i >= 10 and #tabs > 10 then
+        message = message .. string.format('     ... and %d more tabs in this group\n', #tabs - 10)
+        break
+      end
     end
+    message = message .. '\n'
   end
 
   hs.dialog.blockAlert('Saved Tabs - ' .. date, message, 'OK')
@@ -481,9 +505,9 @@ function obj:restoreSavedTabs(date)
   local savedTabs = self:loadSavedTabs()
   date = date or os.date '%Y-%m-%d'
 
-  local tabsForDate = savedTabs[date]
+  local groupsForDate = savedTabs[date]
 
-  if not tabsForDate or #tabsForDate == 0 then
+  if not groupsForDate or #groupsForDate == 0 then
     hs.notify
       .new({
         title = 'Chrome Tab Saver',
@@ -493,31 +517,71 @@ function obj:restoreSavedTabs(date)
     return 0
   end
 
+  -- If multiple groups, let user choose which one to restore
+  local selectedGroup
+  if #groupsForDate > 1 then
+    local choices = {}
+    for i, group in ipairs(groupsForDate) do
+      local timestamp = group.timestamp or 'Unknown time'
+      local tabCount = group.tabs and #group.tabs or 1
+      table.insert(choices, string.format('%d. %s (%d tabs)', i, timestamp, tabCount))
+    end
+    table.insert(choices, 'All groups')
+
+    local button, choice = hs.dialog.chooseFromList(choices, {
+      title = 'Chrome Tab Saver - Restore',
+      informativeText = 'Select which group to restore:',
+      defaultButton = 'Restore',
+      cancelButton = 'Cancel',
+    })
+
+    if button == 'Cancel' or not choice then
+      return 0
+    end
+
+    -- Extract the group number from the choice
+    local groupNum = tonumber(choice:match '^(%d+)%.')
+    if groupNum then
+      selectedGroup = { groupsForDate[groupNum] }
+    else
+      -- Restore all groups
+      selectedGroup = groupsForDate
+    end
+  else
+    -- Only one group, restore it
+    selectedGroup = groupsForDate
+  end
+
   -- Open tabs in Chrome
   local restoredCount = 0
-  for _, tab in ipairs(tabsForDate) do
-    -- Escape quotes in URL
-    local escapedURL = tab.url:gsub('"', '\\"')
+  for _, group in ipairs(selectedGroup) do
+    -- Handle both old format (flat tabs) and new format (timestamped groups)
+    local tabs = group.tabs or { group }
 
-    local openScript = string.format(
-      [[
-            tell application "Google Chrome"
-                if (count of windows) = 0 then
-                    make new window
-                end if
-                tell front window
-                    make new tab with properties {URL:"%s"}
-                end tell
-            end tell
-        ]],
-      escapedURL
-    )
+    for _, tab in ipairs(tabs) do
+      -- Escape quotes in URL
+      local escapedURL = tab.url:gsub('"', '\\"')
 
-    local ok, result = hs.osascript.applescript(openScript)
-    if ok then
-      restoredCount = restoredCount + 1
-    else
-      self.logger.e('Error opening tab: ' .. tab.url)
+      local openScript = string.format(
+        [[
+              tell application "Google Chrome"
+                  if (count of windows) = 0 then
+                      make new window
+                  end if
+                  tell front window
+                      make new tab with properties {URL:"%s"}
+                  end tell
+              end tell
+          ]],
+        escapedURL
+      )
+
+      local ok, result = hs.osascript.applescript(openScript)
+      if ok then
+        restoredCount = restoredCount + 1
+      else
+        self.logger.e('Error opening tab: ' .. tab.url)
+      end
     end
   end
 
