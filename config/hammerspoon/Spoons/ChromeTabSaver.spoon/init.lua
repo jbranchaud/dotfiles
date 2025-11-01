@@ -25,7 +25,7 @@ obj.__index = obj
 
 -- Metadata
 obj.name = 'ChromeTabSaver'
-obj.version = '0.3'
+obj.version = '0.4'
 obj.author = 'Josh Branchaud'
 obj.homepage = 'https://github.com/jbranchaud/dotfiles'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
@@ -494,101 +494,215 @@ end
 
 --- ChromeTabSaver:restoreSavedTabs([date])
 --- Method
---- Restore saved tabs from a specific date
+--- Restore saved tabs from a specific date, or show a picker of recent saves
 ---
 --- Parameters:
----  * date - Optional date string (YYYY-MM-DD), defaults to today
+---  * date - Optional date string (YYYY-MM-DD). If not provided, shows a picker
+---           of the last 20 save sessions across all dates
 ---
 --- Returns:
 ---  * Number of tabs restored
 function obj:restoreSavedTabs(date)
   local savedTabs = self:loadSavedTabs()
-  date = date or os.date '%Y-%m-%d'
 
-  local groupsForDate = savedTabs[date]
+  -- If date is specified, use the old behavior for that specific date
+  if date then
+    local groupsForDate = savedTabs[date]
 
-  if not groupsForDate or #groupsForDate == 0 then
+    if not groupsForDate or #groupsForDate == 0 then
+      hs.notify
+        .new({
+          title = 'Chrome Tab Saver',
+          informativeText = 'No tabs saved for ' .. date,
+        })
+        :send()
+      return 0
+    end
+
+    return self:restoreGroupsFromDate(groupsForDate, date)
+  end
+
+  -- No date specified: show picker of recent save sessions across all dates
+  local allGroups = {}
+
+  -- Collect all groups with their metadata
+  for dateKey, groups in pairs(savedTabs) do
+    for _, group in ipairs(groups) do
+      local timestamp = group.timestamp or 'Unknown time'
+      local tabCount = group.tabs and #group.tabs or 1
+
+      table.insert(allGroups, {
+        date = dateKey,
+        timestamp = timestamp,
+        tabCount = tabCount,
+        group = group,
+      })
+    end
+  end
+
+  if #allGroups == 0 then
     hs.notify
       .new({
         title = 'Chrome Tab Saver',
-        informativeText = 'No tabs saved for ' .. date,
+        informativeText = 'No saved tabs found',
       })
       :send()
     return 0
   end
 
-  -- If multiple groups, let user choose which one to restore
-  local selectedGroup
-  if #groupsForDate > 1 then
-    local choices = {}
-    for i, group in ipairs(groupsForDate) do
-      local timestamp = group.timestamp or 'Unknown time'
-      local tabCount = group.tabs and #group.tabs or 1
-      table.insert(choices, string.format('%d. %s (%d tabs)', i, timestamp, tabCount))
-    end
-    table.insert(choices, 'All groups')
+  -- Sort by timestamp (most recent first)
+  table.sort(allGroups, function(a, b)
+    -- Compare timestamps as strings (YYYY-MM-DD HH:MM:SS format sorts correctly)
+    return a.timestamp > b.timestamp
+  end)
 
-    local button, choice = hs.dialog.chooseFromList(choices, {
-      title = 'Chrome Tab Saver - Restore',
-      informativeText = 'Select which group to restore:',
-      defaultButton = 'Restore',
-      cancelButton = 'Cancel',
-    })
-
-    if button == 'Cancel' or not choice then
-      return 0
-    end
-
-    -- Extract the group number from the choice
-    local groupNum = tonumber(choice:match '^(%d+)%.')
-    if groupNum then
-      selectedGroup = { groupsForDate[groupNum] }
-    else
-      -- Restore all groups
-      selectedGroup = groupsForDate
-    end
-  else
-    -- Only one group, restore it
-    selectedGroup = groupsForDate
+  -- Limit to last 20 entries
+  local maxEntries = 20
+  local displayGroups = {}
+  for i = 1, math.min(maxEntries, #allGroups) do
+    table.insert(displayGroups, allGroups[i])
   end
 
-  -- Open tabs in Chrome
-  local restoredCount = 0
-  for _, group in ipairs(selectedGroup) do
-    -- Handle both old format (flat tabs) and new format (timestamped groups)
-    local tabs = group.tabs or { group }
+  -- Build choices for the picker
+  local choices = {}
+  for i, item in ipairs(displayGroups) do
+    -- Format: "timestamp (N tabs)"
+    table.insert(choices, {
+      text = string.format('%s (%d tabs)', item.timestamp, item.tabCount),
+      subText = string.format('Date: %s', item.date),
+      index = i,
+    })
+  end
 
-    for _, tab in ipairs(tabs) do
-      -- Escape quotes in URL
-      local escapedURL = tab.url:gsub('"', '\\"')
+  -- Create a chooser with callback
+  local self_ref = self
+  local chooser = hs.chooser.new(function(choice)
+    if choice then
+      local item = displayGroups[choice.index]
+      self_ref:restoreGroup(item.group, item.timestamp)
+    end
+  end)
 
-      local openScript = string.format(
-        [[
-              tell application "Google Chrome"
-                  if (count of windows) = 0 then
-                      make new window
-                  end if
-                  tell front window
-                      make new tab with properties {URL:"%s"}
-                  end tell
-              end tell
-          ]],
-        escapedURL
-      )
+  -- Configure and show the chooser
+  chooser:choices(choices)
+  chooser:placeholderText(string.format('Select a save session to restore (showing last %d)', #displayGroups))
+  chooser:rows(math.min(10, #choices))
+  chooser:width(30)
+  chooser:show()
 
-      local ok, result = hs.osascript.applescript(openScript)
-      if ok then
-        restoredCount = restoredCount + 1
+  -- Return 0 immediately since restoration happens in callback
+  return 0
+end
+
+--- ChromeTabSaver:restoreGroupsFromDate(groupsForDate, date)
+--- Method
+--- Restore groups from a specific date (helper method for backward compatibility)
+---
+--- Parameters:
+---  * groupsForDate - Array of groups for a specific date
+---  * date - The date string
+---
+--- Returns:
+---  * Number of tabs restored
+function obj:restoreGroupsFromDate(groupsForDate, date)
+  -- If multiple groups, let user choose which one to restore
+  if #groupsForDate == 1 then
+    -- Only one group, restore it directly
+    return self:restoreGroup(groupsForDate[1], date)
+  end
+
+  -- Multiple groups - show chooser
+  local choices = {}
+  for i, group in ipairs(groupsForDate) do
+    local timestamp = group.timestamp or 'Unknown time'
+    local tabCount = group.tabs and #group.tabs or 1
+    table.insert(choices, {
+      text = string.format('%s (%d tabs)', timestamp, tabCount),
+      subText = string.format('Group %d', i),
+      index = i,
+      isAllGroups = false,
+    })
+  end
+
+  -- Add "All groups" option
+  table.insert(choices, {
+    text = 'All groups',
+    subText = string.format('Restore all %d groups', #groupsForDate),
+    index = nil,
+    isAllGroups = true,
+  })
+
+  -- Create chooser with callback
+  local self_ref = self
+  local chooser = hs.chooser.new(function(choice)
+    if choice then
+      if choice.isAllGroups then
+        -- Restore all groups
+        local restoredCount = 0
+        for _, group in ipairs(groupsForDate) do
+          restoredCount = restoredCount + self_ref:restoreGroup(group, date)
+        end
       else
-        self.logger.e('Error opening tab: ' .. tab.url)
+        -- Restore selected group
+        self_ref:restoreGroup(groupsForDate[choice.index], date)
       end
+    end
+  end)
+
+  chooser:choices(choices)
+  chooser:placeholderText 'Select which group to restore'
+  chooser:rows(math.min(10, #choices))
+  chooser:width(30)
+  chooser:show()
+
+  return 0
+end
+
+--- ChromeTabSaver:restoreGroup(group, context)
+--- Method
+--- Restore tabs from a single group
+---
+--- Parameters:
+---  * group - The group containing tabs to restore
+---  * context - A string describing the context (timestamp or date) for notification
+---
+--- Returns:
+---  * Number of tabs restored
+function obj:restoreGroup(group, context)
+  -- Handle both old format (flat tabs) and new format (timestamped groups)
+  local tabs = group.tabs or { group }
+  local restoredCount = 0
+
+  for _, tab in ipairs(tabs) do
+    -- Escape quotes in URL
+    local escapedURL = tab.url:gsub('"', '\\"')
+
+    local openScript = string.format(
+      [[
+          tell application "Google Chrome"
+              if (count of windows) = 0 then
+                  make new window
+              end if
+              tell front window
+                  make new tab with properties {URL:"%s"}
+              end tell
+          end tell
+      ]],
+      escapedURL
+    )
+
+    local ok, result = hs.osascript.applescript(openScript)
+    if ok then
+      restoredCount = restoredCount + 1
+    else
+      self.logger.e('Error opening tab: ' .. tab.url)
     end
   end
 
   hs.notify
     .new({
       title = 'Chrome Tab Saver',
-      informativeText = string.format('Restored %d tabs from %s', restoredCount, date),
+      informativeText = string.format('Restored %d tabs from %s', restoredCount, context),
     })
     :send()
 
