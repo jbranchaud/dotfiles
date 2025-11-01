@@ -64,15 +64,12 @@ Fix the conflict and then invoke it again.
 
 # Installation
 
-Easy..
+Easy -- clone the repo and run the setup script
 
 ```sh
-git clone git@github.com:dkarter/dotfiles.git
-```
-
-Cd into the dotfiles dir: `cd dotfiles`
-
-```sh
+cd <some-base-dir>
+git clone git@github.com:jbranchaud/dotfiles.git
+cd dotfiles
 ./setup.sh
 ```
 
