@@ -298,41 +298,16 @@ function obj:saveAndCloseUnpinnedTabs()
             end if
 
             set frontWindow to front window
-            set tabsJSON to "["
+            set tabsList to {}
 
             repeat with i from 1 to count of tabs of frontWindow
                 set currentTab to tab i of frontWindow
-                set tabURL to URL of currentTab
-                set tabTitle to title of currentTab
-
-                -- Escape quotes and backslashes in title and URL for JSON
-                set tabTitle to my replaceText(tabTitle, "\\", "\\\\")
-                set tabTitle to my replaceText(tabTitle, "\"", "\\\"")
-
-                set tabURL to my replaceText(tabURL, "\\", "\\\\")
-                set tabURL to my replaceText(tabURL, "\"", "\\\"")
-
-                if i > 1 then
-                    set tabsJSON to tabsJSON & ","
-                end if
-
-                set tabsJSON to tabsJSON & "{\"tabURL\":\"" & tabURL & "\",\"tabTitle\":\"" & tabTitle & "\",\"tabIndex\":" & i & "}"
+                set tabRecord to {|tabURL|:(URL of currentTab), |tabTitle|:(title of currentTab), |tabIndex|:i}
+                set end of tabsList to tabRecord
             end repeat
 
-            set tabsJSON to tabsJSON & "]"
-            set tabCount to count of tabs of frontWindow
-
-            return "{\"tabs\":" & tabsJSON & ",\"tabCount\":" & tabCount & "}"
+            return {|tabs|:tabsList, |tabCount|:(count of tabs of frontWindow)}
         end tell
-
-        on replaceText(theText, searchString, replacementString)
-            set AppleScript's text item delimiters to searchString
-            set theTextItems to every text item of theText
-            set AppleScript's text item delimiters to replacementString
-            set theText to theTextItems as string
-            set AppleScript's text item delimiters to ""
-            return theText
-        end replaceText
     ]]
 
   local ok, result = hs.osascript.applescript(script)
@@ -358,39 +333,21 @@ function obj:saveAndCloseUnpinnedTabs()
     return nil
   end
 
-  -- Decode JSON result
-  local data
-  if type(result) == 'string' then
-    local success, decoded = pcall(hs.json.decode, result)
-    if not success or not decoded then
-      hs.notify
-        .new({
-          title = 'Chrome Tab Saver',
-          informativeText = 'Error: Could not parse Chrome data',
-        })
-        :send()
-      self.logger.e('Failed to decode JSON: ' .. tostring(result))
-      return nil
-    end
-    data = decoded
-  else
-    data = result
-  end
-
+  -- AppleScript returns native data structures (converted to Lua tables by hs.osascript)
   -- Validate result structure
-  if type(data) ~= 'table' or not data.tabs or not data.tabCount then
+  if type(result) ~= 'table' or not result.tabs or not result.tabCount then
     hs.notify
       .new({
         title = 'Chrome Tab Saver',
         informativeText = 'Error: Unexpected data format from Chrome',
       })
       :send()
-    self.logger.e('Unexpected result format: ' .. hs.inspect(data))
+    self.logger.e('Unexpected result format: ' .. hs.inspect(result))
     return nil
   end
 
-  local tabsData = data.tabs
-  local totalTabs = data.tabCount
+  local tabsData = result.tabs
+  local totalTabs = result.tabCount
 
   -- Process unpinned tabs
   local savedCount = 0
