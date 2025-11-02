@@ -1,0 +1,109 @@
+#!/bin/bash
+
+# Check if caffeinate is running and display remaining time in human-readable format
+
+# Parse command line arguments
+OUTPUT_FORMAT="default"
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+  --format)
+    OUTPUT_FORMAT="$2"
+    shift 2
+    ;;
+  --json)
+    OUTPUT_FORMAT="json"
+    shift
+    ;;
+  -h | --help)
+    echo "Usage: $0 [--format FORMAT]"
+    echo ""
+    echo "Options:"
+    echo "  --format FORMAT    Output format: 'default' or 'json' (default: default)"
+    echo "  --json            Shorthand for --format json"
+    echo "  -h, --help        Show this help message"
+    exit 0
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    echo "Use --help for usage information" >&2
+    exit 1
+    ;;
+  esac
+done
+
+# Validate format
+if [[ "$OUTPUT_FORMAT" != "default" && "$OUTPUT_FORMAT" != "json" ]]; then
+  echo "Error: Invalid format '$OUTPUT_FORMAT'. Must be 'default' or 'json'" >&2
+  exit 1
+fi
+
+# Get assertions output
+assertions=$(pmset -g assertions 2>/dev/null)
+
+# Check if caffeinate is mentioned in the assertions
+if echo "$assertions" | grep -q "caffeinate"; then
+  # Extract the timeout information
+  timeout_line=$(echo "$assertions" | grep -A 10 "caffeinate" | grep "Timeout will fire in")
+
+  if [ -n "$timeout_line" ]; then
+    # Extract the number of seconds
+    remaining_seconds=$(echo "$timeout_line" | grep -oE '[0-9]+' | head -1)
+
+    if [ -n "$remaining_seconds" ]; then
+      # Convert seconds to hours, minutes, seconds
+      hours=$((remaining_seconds / 3600))
+      minutes=$(((remaining_seconds % 3600) / 60))
+      seconds=$((remaining_seconds % 60))
+      time_formatted=$(printf "%02d:%02d:%02d" $hours $minutes $seconds)
+
+      if [ "$OUTPUT_FORMAT" = "json" ]; then
+        cat <<EOF
+{
+  "status": "active",
+  "timeout_set": true,
+  "seconds_remaining": $remaining_seconds,
+  "time_remaining": "$time_formatted",
+  "hours": $hours,
+  "minutes": $minutes,
+  "seconds": $seconds
+}
+EOF
+      else
+        echo "✓ Caffeinate session is active"
+        echo "Remaining time: $time_formatted"
+        echo "($remaining_seconds seconds)"
+      fi
+    else
+      if [ "$OUTPUT_FORMAT" = "json" ]; then
+        cat <<EOF
+{
+  "status": "active",
+  "timeout_set": false
+}
+EOF
+      else
+        echo "✓ Caffeinate session is active (no timeout set)"
+      fi
+    fi
+  else
+    # Caffeinate is running but no timeout was found
+    if [ "$OUTPUT_FORMAT" = "json" ]; then
+      cat <<EOF
+{
+  "status": "active",
+  "timeout_set": false
+}
+EOF
+    else
+      echo "✓ Caffeinate session is active (indefinite - no timeout set)"
+    fi
+  fi
+else
+  if [ "$OUTPUT_FORMAT" = "json" ]; then
+    echo '{"status": "inactive"}'
+  else
+    echo "✗ No active caffeinate session found"
+  fi
+  exit 1
+fi
