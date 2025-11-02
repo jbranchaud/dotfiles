@@ -20,6 +20,7 @@ cask 'raycast'
 
 # a terminal emulator (used primarily for wrapping terminal apps)
 cask 'iterm2'
+cask 'ghostty'
 
 # allow accessing passwords from a CLI
 cask '1password-cli'
