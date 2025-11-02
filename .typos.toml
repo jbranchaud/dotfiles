@@ -17,4 +17,5 @@ extend-exclude = [
   "config/vifm/devicons",
   "CHANGELOG.md",
   "package-lock.json",
+  "**/node_modules/**",
 ]
