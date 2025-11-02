@@ -1,0 +1,17 @@
+# Script Kit generated files
+bin/
+cache/
+.cache/
+db/
+logs/
+tmp/
+*.log
+
+# Dependencies
+node_modules/
+
+# Lock files (package.json is versioned, but locks can be regenerated)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+

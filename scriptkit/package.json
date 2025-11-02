@@ -1,0 +1,15 @@
+{
+  "name": "dotfiles-kenv",
+  "version": "1.0.0",
+  "description": "Personal Script Kit kenv for dotfiles",
+  "type": "module",
+  "scripts": {
+    "install-deps": "npm install"
+  },
+  "dependencies": {
+    "@johnlindquist/kit": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest"
+  }
+}

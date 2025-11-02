@@ -153,6 +153,15 @@ tasks:
           done
         silent: true
 
+      - cmd: |
+          if [ -d "$(realpath ./scriptkit)" ]; then
+            echo "Symlinking scriptkit kenv..."
+            mkdir -p ~/.kenv/kenvs
+            source_path=$(realpath ./scriptkit)
+            ln -s -f "$source_path" ~/.kenv/kenvs/dotfiles
+          fi
+        silent: true
+
   leaks:
     desc: Checks for secret leaks across the history of this project
     cmd: gitleaks git -v --redact -b gitleaks-report.json
