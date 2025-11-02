@@ -1,15 +1,14 @@
 # ChromeTabSaver.spoon
 
-Save and close unpinned Chrome tabs to a JSON file organized by date, and restore them later.
+Save and close Chrome tabs to a JSON file organized by date, and restore them later.
 
 ## Features
 
-- 💾 Save all unpinned tabs from your front Chrome window
+- 💾 Save all tabs from your front Chrome window
 - 🗂️ Organize saved tabs by date
 - 🔄 Restore tabs from any date
 - 👁️ View saved tabs for a specific date
 - ⚙️ Configurable data directory location
-- 🎯 Preserve pinned tabs (never saved or closed)
 - 🛡️ URL allowlist to protect specific sites (like Gmail, Calendar, etc.)
 
 ## Installation
@@ -65,15 +64,9 @@ spoon.ChromeTabSaver:bindHotkeys({
 })
 ```
 
-## Pinned Tabs & URL Allowlist
+## URL Allowlist
 
-### Pinned Tabs
-
-On first run, you'll be prompted to enter the number of pinned tabs in your Chrome window. Pinned tabs are never saved or closed. You can change this later by deleting the `config.json` file and running the save command again.
-
-### URL Allowlist
-
-The allowlist lets you specify URL patterns for tabs that should never be saved or closed, regardless of whether they're pinned. This is perfect for sites like Gmail, Calendar, or any app you always want to keep open.
+The allowlist lets you specify URL patterns for tabs that should never be saved or closed. This is perfect for sites like Gmail, Calendar, or any app you always want to keep open.
 
 #### Managing the Allowlist
 
@@ -103,7 +96,6 @@ Edit `~/.local/share/hammerspoon/ChromeTabSaver/config.json`:
 
 ```json
 {
-  "pinnedTabCount": 3,
   "urlAllowlist": [
     "gmail.com",
     "calendar.google.com",
@@ -127,7 +119,7 @@ When you save tabs, allowlisted tabs will:
 ## Usage
 
 ### Save Tabs (⌘⌃⌥S)
-Saves all unpinned tabs from your front Chrome window and closes them. Pinned tabs and allowlisted URLs remain untouched.
+Saves all tabs from your front Chrome window and closes them. Allowlisted URLs remain untouched.
 
 ### View Tabs (⌘⌃⌥V)
 Shows a list of tabs saved today (or a specific date).

@@ -1,6 +1,6 @@
 --- === ChromeTabSaver ===
 ---
---- Save and close unpinned Chrome tabs to a JSON file organized by date
+--- Save and close Chrome tabs to a JSON file organized by date
 ---
 --- Download: https://github.com/jbranchaud/dotfiles
 ---
@@ -8,10 +8,9 @@
 --- ```
 --- hs.loadSpoon("ChromeTabSaver")
 ---
---- -- Optional: Configure custom data directory (defaults to ~/.local/share/hammerspoon/ChromeTabSaver/)
---- -- spoon.ChromeTabSaver:configure({
---- --     dataDir = os.getenv('HOME') .. '/Documents/ChromeTabSaver'
---- -- })
+--- -- Optional: Configure URL allowlist to preserve specific sites
+--- -- spoon.ChromeTabSaver:addToAllowlist("gmail.com")
+--- -- spoon.ChromeTabSaver:addToAllowlist("calendar.google.com")
 ---
 --- spoon.ChromeTabSaver:bindHotkeys({
 ---     save = {{"cmd", "alt", "ctrl"}, "S"},
@@ -25,7 +24,7 @@ obj.__index = obj
 
 -- Metadata
 obj.name = 'ChromeTabSaver'
-obj.version = '0.6'
+obj.version = '0.7'
 obj.author = 'Josh Branchaud'
 obj.homepage = 'https://github.com/jbranchaud/dotfiles'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
@@ -287,41 +286,6 @@ function obj:removeFromAllowlist(pattern)
   return false
 end
 
---- ChromeTabSaver:getPinnedCount()
---- Method
---- Gets the number of pinned tabs, asking user if not configured
----
---- Returns:
----  * Number of pinned tabs, or nil if cancelled
-function obj:getPinnedCount()
-  local config = self:loadConfig()
-
-  if config.pinnedTabCount then
-    return config.pinnedTabCount
-  end
-
-  -- First run: ask user for pinned tab count
-  local button, count = hs.dialog.textPrompt(
-    'Chrome Tab Saver Setup',
-    'How many pinned tabs do you have in your front Chrome window?\n\n'
-      .. '(Pinned tabs will not be saved or closed)\n\n'
-      .. 'You can change this later by deleting:\n'
-      .. self.configPath,
-    '0',
-    'OK',
-    'Cancel'
-  )
-
-  if button == 'OK' and count then
-    local pinnedCount = tonumber(count) or 0
-    config.pinnedTabCount = pinnedCount
-    self:saveConfig(config)
-    return pinnedCount
-  end
-
-  return nil
-end
-
 --- ChromeTabSaver:loadSavedTabs()
 --- Method
 --- Loads saved tabs from JSON file
@@ -372,20 +336,14 @@ function obj:saveTabs(savedTabs)
   end
 end
 
---- ChromeTabSaver:saveAndCloseUnpinnedTabs()
+--- ChromeTabSaver:saveAndCloseTabs()
 --- Method
---- Saves unpinned Chrome tabs to JSON file and closes them
+--- Saves Chrome tabs to JSON file and closes them (excluding allowlisted URLs)
 ---
 --- Returns:
 ---  * Number of tabs saved, or nil if error
-function obj:saveAndCloseUnpinnedTabs()
+function obj:saveAndCloseTabs()
   local currentDate = os.date '%Y-%m-%d'
-
-  -- Get pinned tab count
-  local pinnedCount = self:getPinnedCount()
-  if not pinnedCount then
-    return nil
-  end
 
   -- Load existing saved tabs
   local savedTabs = self:loadSavedTabs()
@@ -454,7 +412,7 @@ function obj:saveAndCloseUnpinnedTabs()
   local tabsData = result.tabs
   local totalTabs = result.tabCount
 
-  -- Process unpinned tabs and filter out allowlisted URLs
+  -- Process tabs and filter out allowlisted URLs
   local currentTimestamp = os.date '%Y-%m-%d %H:%M:%S'
   local tabsToSave = {}
   local tabsToClose = {} -- Track tab indices to close
@@ -462,21 +420,19 @@ function obj:saveAndCloseUnpinnedTabs()
   local allowlistedCount = 0
 
   for i, tabInfo in ipairs(tabsData) do
-    if i > pinnedCount then
-      -- Check if URL is allowlisted
-      if self:isURLAllowlisted(tabInfo.tabURL) then
-        allowlistedCount = allowlistedCount + 1
-        self.logger.i('Skipping allowlisted tab: ' .. tabInfo.tabTitle)
-      else
-        -- Not allowlisted, so save and mark for closing
-        table.insert(tabsToSave, {
-          url = tabInfo.tabURL,
-          title = tabInfo.tabTitle,
-          originalIndex = i,
-        })
-        table.insert(tabsToClose, i)
-        savedCount = savedCount + 1
-      end
+    -- Check if URL is allowlisted
+    if self:isURLAllowlisted(tabInfo.tabURL) then
+      allowlistedCount = allowlistedCount + 1
+      self.logger.i('Skipping allowlisted tab: ' .. tabInfo.tabTitle)
+    else
+      -- Not allowlisted, so save and mark for closing
+      table.insert(tabsToSave, {
+        url = tabInfo.tabURL,
+        title = tabInfo.tabTitle,
+        originalIndex = i,
+      })
+      table.insert(tabsToClose, i)
+      savedCount = savedCount + 1
     end
   end
 
@@ -496,12 +452,7 @@ function obj:saveAndCloseUnpinnedTabs()
   end
 
   -- Confirm with user before saving and closing
-  local confirmMessage = string.format(
-    'Save and close %d tab%s?\n\n' .. 'Pinned tabs (%d) will be kept open.\n',
-    savedCount,
-    savedCount == 1 and '' or 's',
-    pinnedCount
-  )
+  local confirmMessage = string.format('Save and close %d tab%s?\n\n', savedCount, savedCount == 1 and '' or 's')
 
   if allowlistedCount > 0 then
     confirmMessage = confirmMessage .. string.format('Allowlisted tabs (%d) will be kept open.\n', allowlistedCount)
@@ -884,13 +835,23 @@ function obj:listSavedDates()
   return dates
 end
 
+--- ChromeTabSaver:saveAndCloseUnpinnedTabs()
+--- Method
+--- Backward compatibility alias for saveAndCloseTabs()
+---
+--- Returns:
+---  * Number of tabs saved, or nil if error
+function obj:saveAndCloseUnpinnedTabs()
+  return self:saveAndCloseTabs()
+end
+
 --- ChromeTabSaver:bindHotkeys(mapping)
 --- Method
 --- Binds hotkeys for ChromeTabSaver
 ---
 --- Parameters:
 ---  * mapping - A table containing hotkey modifier/key details for the following items:
----   * save - Save and close unpinned tabs
+---   * save - Save and close tabs (excluding allowlisted URLs)
 ---   * view - View today's saved tabs
 ---   * restore - Restore today's saved tabs
 ---
@@ -904,7 +865,7 @@ end
 --- ```
 function obj:bindHotkeys(mapping)
   local spec = {
-    save = hs.fnutils.partial(self.saveAndCloseUnpinnedTabs, self),
+    save = hs.fnutils.partial(self.saveAndCloseTabs, self),
     view = hs.fnutils.partial(self.viewSavedTabs, self),
     restore = hs.fnutils.partial(self.restoreSavedTabs, self),
   }
