@@ -20,4 +20,3 @@ lua = "5.1"
 
 [settings]
 experimental = true
-disable_backends = ["asdf"]
