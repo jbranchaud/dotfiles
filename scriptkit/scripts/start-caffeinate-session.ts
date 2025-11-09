@@ -3,6 +3,7 @@
 // Author: Josh Branchaud
 
 import '@johnlindquist/kit';
+import { spawn } from 'child_process';
 
 // Duration presets in hours
 const DURATION_PRESETS = {
@@ -40,7 +41,6 @@ async function startCaffeinateSession() {
     // -d: prevent display from sleeping
     // -i: prevent system from idle sleeping
     // -t: specify timeout in seconds
-    const { spawn } = require('child_process');
     const caffeinateProcess = spawn('caffeinate', ['-d', '-i', '-t', durationSeconds.toString()], {
       detached: true,
       stdio: 'ignore',
