@@ -213,6 +213,9 @@ brew "pgcli"
 # Timezone lib
 brew "tz"
 
+# Time Tracking
+brew "watson"
+
 # Containers
 tap "dokku/repo"
 brew "dokku/repo/dokku"
