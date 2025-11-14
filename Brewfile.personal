@@ -230,13 +230,15 @@ cask "betterdisplay"
 # Mac keychain management, gpg key
 brew "pinentry-mac"
 
+# Sanitized production Postgres dumps
+go "github.com/jackc/pg_partialcopy"
+
 # These came from a `brew bundle dump`, not sure if they belong here yet
 # go "github.com/go-delve/delve/cmd/dlv"
 # go "golang.org/x/tools/cmd/godoc"
 # go "github.com/pressly/goose/v3/cmd/goose"
 # go "golang.org/x/tools/gopls"
 # go "github.com/plutov/oq"
-# go "github.com/jackc/pg_partialcopy"
 # go "github.com/google/pprof"
 # go "honnef.co/go/tools/cmd/staticcheck"
 # go "github.com/jackc/tern/v2"
