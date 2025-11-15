@@ -196,6 +196,10 @@ brew "mailhog"
 brew "mysql"
 brew "mysql-client"
 
+# Planetscale CLI
+tap "planetscale/tap"
+brew "planetscale/tap/pscale"
+
 # Document swiss army knife
 brew "pandoc"
 
