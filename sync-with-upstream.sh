@@ -125,6 +125,42 @@ if git merge-base --is-ancestor ${TRACKING_BRANCH} HEAD; then
   exit 0
 fi
 
+# Check if Brewfile has changed between tracking branch and main
+print_info "Checking for Brewfile changes..."
+if git diff ${MAIN_BRANCH}..${TRACKING_BRANCH} --quiet -- Brewfile; then
+  print_info "No changes to Brewfile"
+else
+  print_warning "Brewfile has changed in upstream!"
+  echo ""
+  echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+  echo -e "${YELLOW}                         BREWFILE CHANGES DETECTED                           ${NC}"
+  echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+  echo ""
+  echo -e "${BLUE}The following changes have been made to Brewfile in upstream:${NC}"
+  echo ""
+  git diff ${MAIN_BRANCH}..${TRACKING_BRANCH} -- Brewfile
+  echo ""
+  echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+  echo ""
+  print_info "You should review these changes and decide if you want to update your Brewfile.personal"
+  echo ""
+  print_info "To update your Brewfile.personal:"
+  print_info "  1. Open Brewfile.personal in your editor"
+  print_info "  2. Review the diff above and apply relevant changes"
+  print_info "  3. Save your changes"
+  echo ""
+  print_info "To see the diff again later:"
+  print_info "  git diff ${MAIN_BRANCH}..${TRACKING_BRANCH} -- Brewfile"
+  echo ""
+  print_info "To compare your personal file with upstream:"
+  print_info "  git diff ${TRACKING_BRANCH}:Brewfile Brewfile.personal"
+  echo ""
+
+  # Pause and wait for user confirmation
+  read -p "Press ENTER to continue with the merge (or Ctrl+C to abort)..." -r
+  echo ""
+fi
+
 # Merge tracking branch into main
 print_info "Merging ${TRACKING_BRANCH} into ${MAIN_BRANCH}..."
 MERGE_MSG="chore(sync): merge upstream changes from $(date +%Y-%m-%d)"
