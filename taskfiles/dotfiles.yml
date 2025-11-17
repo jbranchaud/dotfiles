@@ -171,6 +171,14 @@ tasks:
           fi
         silent: true
 
+      - cmd: |
+          if [ -f "$(realpath ./claude/CLAUDE.md)" ]; then
+            echo "Symlinking system CLAUDE.md..."
+            source_path=$(realpath ./claude/CLAUDE.md)
+            ln -s -f "$source_path" ~/.claude/CLAUDE.md
+          fi
+        silent: true
+
   leaks:
     desc: Checks for secret leaks across the history of this project
     cmd: gitleaks git -v --redact -b gitleaks-report.json
