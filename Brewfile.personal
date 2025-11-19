@@ -155,6 +155,9 @@ cask 'script-kit'
 cask 'discord'
 cask 'slack'
 
+# Project Management
+cask "linear-linear"
+
 # HTTP server
 brew "caddy"
 
