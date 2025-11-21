@@ -155,6 +155,9 @@ cask 'script-kit'
 cask 'discord'
 cask 'slack'
 
+# Music
+cask "spotify"
+
 # Project Management
 cask "linear-linear"
 
