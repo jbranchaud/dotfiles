@@ -54,23 +54,36 @@ async function checkCaffeinateStatus(): Promise<CaffeinateStatus> {
   }
 }
 
+async function killCaffeinateSessions(): Promise<void> {
+  try {
+    await execAsync('pkill -x caffeinate 2>/dev/null');
+    // Wait a moment for processes to terminate
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  } catch (error) {
+    // pkill returns non-zero if no processes found, which is fine
+  }
+}
+
 async function startCaffeinateSession() {
   // Check for existing session
   const status = await checkCaffeinateStatus();
+
+  // the action of this script defaults to 'new'
+  let action = 'new';
 
   if (status.isActive) {
     const statusMessage = status.timeFormatted
       ? `Active caffeinate session found. Remaining time: ${status.timeFormatted} (${status.remainingSeconds} seconds)`
       : 'Active caffeinate session found (no timeout set)';
 
-    const action = await arg(
+    action = await arg(
       {
         placeholder: statusMessage,
         hint: 'What would you like to do?',
       },
       [
         { name: 'Keep current session', value: 'keep' },
-        { name: 'Start new session (runs in parallel)', value: 'new' },
+        { name: 'Replace with new session', value: 'replace' },
         { name: 'Cancel', value: 'cancel' },
       ],
     );
@@ -102,6 +115,11 @@ async function startCaffeinateSession() {
   const durationSeconds = Math.round(durationHours * 3600);
 
   try {
+    // cancel existing caffeinate session if action is to 'replace'
+    if (action === 'replace') {
+      await killCaffeinateSessions();
+    }
+
     // Start caffeinate as a detached background process
     // -d: prevent display from sleeping
     // -i: prevent system from idle sleeping
