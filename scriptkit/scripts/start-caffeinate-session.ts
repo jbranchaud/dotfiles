@@ -3,7 +3,10 @@
 // Author: Josh Branchaud
 
 import '@johnlindquist/kit';
-import { spawn } from 'child_process';
+import { spawn, exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 // Duration presets in hours
 const DURATION_PRESETS = {
@@ -14,7 +17,69 @@ const DURATION_PRESETS = {
   'Custom Duration': 'custom',
 };
 
+interface CaffeinateStatus {
+  isActive: boolean;
+  remainingSeconds?: number;
+  timeFormatted?: string;
+}
+
+async function checkCaffeinateStatus(): Promise<CaffeinateStatus> {
+  try {
+    const { stdout } = await execAsync('pmset -g assertions 2>/dev/null');
+
+    if (stdout.includes('caffeinate')) {
+      // Extract timeout information
+      const timeoutMatch = stdout.match(/Timeout will fire in\s+(\d+)\s+secs?/);
+
+      if (timeoutMatch && timeoutMatch[1]) {
+        const remainingSeconds = parseInt(timeoutMatch[1], 10);
+        const hours = Math.floor(remainingSeconds / 3600);
+        const minutes = Math.floor((remainingSeconds % 3600) / 60);
+        const seconds = remainingSeconds % 60;
+        const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        return {
+          isActive: true,
+          remainingSeconds,
+          timeFormatted,
+        };
+      }
+
+      return { isActive: true };
+    }
+
+    return { isActive: false };
+  } catch (error) {
+    return { isActive: false };
+  }
+}
+
 async function startCaffeinateSession() {
+  // Check for existing session
+  const status = await checkCaffeinateStatus();
+
+  if (status.isActive) {
+    const statusMessage = status.timeFormatted
+      ? `Active caffeinate session found. Remaining time: ${status.timeFormatted} (${status.remainingSeconds} seconds)`
+      : 'Active caffeinate session found (no timeout set)';
+
+    const action = await arg(
+      {
+        placeholder: statusMessage,
+        hint: 'What would you like to do?',
+      },
+      [
+        { name: 'Keep current session', value: 'keep' },
+        { name: 'Start new session (runs in parallel)', value: 'new' },
+        { name: 'Cancel', value: 'cancel' },
+      ],
+    );
+
+    if (action === 'keep' || action === 'cancel') {
+      process.exit(0);
+    }
+  }
+
   // Choose duration from presets
   const selectedPreset = await arg('Choose session duration:', Object.keys(DURATION_PRESETS));
 
