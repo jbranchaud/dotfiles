@@ -28,21 +28,28 @@ async function checkCaffeinateStatus(): Promise<CaffeinateStatus> {
     const { stdout } = await execAsync('pmset -g assertions 2>/dev/null');
 
     if (stdout.includes('caffeinate')) {
-      // Extract timeout information
-      const timeoutMatch = stdout.match(/Timeout will fire in\s+(\d+)\s+secs?/);
+      // Find the caffeinate assertion and search for timeout in its context
+      // Use grep to get caffeinate line and next 10 lines, then search for timeout
+      const { stdout: timeoutLine } = await execAsync(
+        'pmset -g assertions 2>/dev/null | grep -A 10 "caffeinate" | grep "Timeout will fire in" || true',
+      );
 
-      if (timeoutMatch && timeoutMatch[1]) {
-        const remainingSeconds = parseInt(timeoutMatch[1], 10);
-        const hours = Math.floor(remainingSeconds / 3600);
-        const minutes = Math.floor((remainingSeconds % 3600) / 60);
-        const seconds = remainingSeconds % 60;
-        const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      if (timeoutLine) {
+        const timeoutMatch = timeoutLine.match(/(\d+)\s+secs?/);
 
-        return {
-          isActive: true,
-          remainingSeconds,
-          timeFormatted,
-        };
+        if (timeoutMatch && timeoutMatch[1]) {
+          const remainingSeconds = parseInt(timeoutMatch[1], 10);
+          const hours = Math.floor(remainingSeconds / 3600);
+          const minutes = Math.floor((remainingSeconds % 3600) / 60);
+          const seconds = remainingSeconds % 60;
+          const timeFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+          return {
+            isActive: true,
+            remainingSeconds,
+            timeFormatted,
+          };
+        }
       }
 
       return { isActive: true };
