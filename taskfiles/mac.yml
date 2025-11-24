@@ -17,6 +17,9 @@ tasks:
       # Delay until repeat
       - defaults write -g InitialKeyRepeat -int 15
 
+      # disables inserting period on double-space
+      - defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
       # Set dock to auto hide with no delay
       - defaults write com.apple.dock autohide -int 1
 
