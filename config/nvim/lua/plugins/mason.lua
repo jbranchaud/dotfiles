@@ -55,6 +55,7 @@ return {
       'rust-analyzer',
       -- Ruby
       'rubocop',
+      'standardrb',
       'ruby-lsp',
       'rubyfmt',
       'shellcheck',
