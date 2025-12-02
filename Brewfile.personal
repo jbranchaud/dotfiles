@@ -169,6 +169,7 @@ brew "direnv"
 brew "mise"
 
 # CLI Utilities
+brew "ack"
 brew "fzf"
 brew "bat"
 brew "fd"
