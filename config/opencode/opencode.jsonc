@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "theme": "opencode-transparent",
   "mcp": {
     "playwright": {
       "enabled": true,
@@ -21,8 +22,12 @@
     }
   },
   "keybinds": {
+    "editor_open": "ctrl+g",
     "input_submit": "enter",
-    "input_newline": "shift+enter"
+    "messages_page_up": "ctrl+alt+u",
+    "messages_page_down": "ctrl+alt+d",
+    "messages_half_page_up": "ctrl+u",
+    "messages_half_page_down": "ctrl+d"
   },
   "permission": {
     "webfetch": "allow",
