@@ -73,3 +73,8 @@ keybind = shift+enter=text:\n
 
 # Slowdown mouse scrolling
 mouse-scroll-multiplier = 0.95
+
+# Link handling (enabled by default, explicitly setting it)
+# NOTE: Inside tmux with mouse mode on, use cmd+shift+click to open links
+# Outside tmux or with mouse mode off, use cmd+click
+link-url = true
