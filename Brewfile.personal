@@ -207,6 +207,10 @@ brew "mysql-client"
 tap "planetscale/tap"
 brew "planetscale/tap/pscale"
 
+# LLM tools
+tap "steveyegge/beads"
+brew "steveyegge/beads/bd"
+
 # Document swiss army knife
 brew "pandoc"
 
