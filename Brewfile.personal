@@ -175,6 +175,9 @@ brew "bat"
 brew "fd"
 brew "ripgrep"
 
+# Markdown
+brew "glow"
+
 # Multimedia processing
 brew "ffmpeg"
 
