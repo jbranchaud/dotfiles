@@ -168,6 +168,9 @@ brew "caddy"
 brew "direnv"
 brew "mise"
 
+# App deployment
+brew "heroku"
+
 # CLI Utilities
 brew "ack"
 brew "fzf"
