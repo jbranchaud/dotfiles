@@ -180,6 +180,7 @@ brew "ripgrep"
 
 # Multimedia processing
 brew "ffmpeg"
+brew 'ffmpegthumbnailer'
 
 # Version Control
 brew "gh"
