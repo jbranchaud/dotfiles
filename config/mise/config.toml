@@ -120,3 +120,4 @@ experimental = true
 disable_backends = ["asdf"]
 # use bun instead of npm when using npm:<package>
 npm.bun = true
+idiomatic_version_file_enable_tools = ["ruby"]
