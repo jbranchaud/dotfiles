@@ -239,9 +239,12 @@ M.lsp_diagnostic_mappings = function()
   nmap { '<leader>qd', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = 'Set loclist to LSP diagnostics' } }
 end
 
+-- stylua: ignore
 M.elixir_mappings = function()
   nmap { '<space>fp', ':ElixirFromPipe<cr>', { desc = '[F]rom [P]ipe', buffer = true, noremap = true } }
   nmap { '<space>tp', ':ElixirToPipe<cr>', { desc = '[T]o [P]ipe', buffer = true, noremap = true } }
+  nmap { '<space>tm', ':ElixirToggleMapKeys<cr>', { desc = '[T]oggle [M]ap Keys', buffer = true, noremap = true } }
+  nmap { '<space>tM', ':ElixirToggleMapKeys!<cr>', { desc = '[T]oggle [M]ap Keys (deep)', buffer = true, noremap = true } }
   vmap { '<space>em', ':ElixirExpandMacro<cr>', { desc = '[E]xpand [M]acro', buffer = true, noremap = true } }
 end
 
@@ -352,11 +355,31 @@ M.oil_nvim_mappings = {
   { '-', '<cmd>Oil<CR>', { desc = 'Open parent directory' } },
   {
     '<leader>-',
+    mode = { 'n', 'v' },
     function()
       require('oil').toggle_float()
     end,
-    { desc = 'Open parent directory (float)' },
+    desc = 'Open parent directory (float)',
   },
+}
+
+---Private function to handle Yazi toggle from Oil buffers
+---@private
+local yazi_toggle = function()
+  -- Check if we're in an Oil buffer
+  if vim.bo.filetype == 'oil' and require('oil').get_current_dir() then
+    -- Call Yazi with the actual directory path from Oil
+    require('yazi').yazi({}, require('oil').get_current_dir())
+  else
+    -- Normal Yazi call for non-Oil buffers
+    vim.cmd 'Yazi'
+  end
+end
+
+---@type LazyKeysSpec[]
+M.yazi_nvim_mappings = {
+  { '<leader>\\', yazi_toggle, { desc = 'Open parent directory' } },
+  { '<leader>|', '<cmd>Yazi cwd<CR>', { desc = 'Open CWD' } },
 }
 
 ---@type LazyKeysSpec[]
@@ -393,12 +416,9 @@ M.opencode_mappings = {
 
 ---@type LazyKeysSpec[]
 M.claudecode_mappings = {
-  { '<leader>ac', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
-  { '<leader>af', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
-  { '<leader>ar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
-  { '<leader>aC', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
   { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
-  { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send to Claude' },
+  { '<leader>aa', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send to Claude' },
+  { '<leader>aa', 'V<cmd>ClaudeCodeSend<cr>', mode = 'n', desc = 'Send line to Claude' },
   {
     '<leader>as',
     '<cmd>ClaudeCodeTreeAdd<cr>',
@@ -406,8 +426,8 @@ M.claudecode_mappings = {
     ft = { 'oil' },
   },
   -- Diff management
-  { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
-  { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
+  { '<leader>ay', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff (y)' },
+  { '<leader>an', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff (n)' },
 }
 
 M.fugitive_mappings = function()

@@ -11,14 +11,14 @@ alias l="ls"
 # just like l but a single column
 alias l1="l -1"
 # full long list with permissions, size, ownership etc
-alias ll="l -l"
+alias ll="l -l --date=relative --blocks name,size,date,user"
 # just like ll but with git status
 alias llg="ll --git"
 # sorts the list by created date asc, so that the latest file is closer to the
 # prompt
 alias llc="ll --sort=created"
 # use lsd instead of system ls
-alias ls="lsd -gahF --group-directories-first"
+alias ls="lsd -ahF --group-directories-first"
 alias ln="ln -v"
 alias mkdir="mkdir -p"
 alias rm='trash'
@@ -31,6 +31,11 @@ alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 alias tf='terraform'
 alias tfa='terraform apply'
 alias tfd='terraform destroy'
+
+# select a tv channel and return the result
+# can be composed like `cd $(tt)` and then select git-repos, then after
+# selecting a repo it will cd into it's directory
+alias tt='tv channels'
 
 # AI tooling
 alias oc='opencode'
@@ -54,7 +59,7 @@ alias mrf='mise registry | fzf'
 # --------
 #
 # Temporary Postgres Instance
-alias pgtmp='docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_HOST_AUTH_METHOD=trust -v$(pwd)/tmp/pgdata:/var/lib/postgresql/data postgres:alpine'
+alias pgtmp='docker run --rm -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_HOST_AUTH_METHOD=trust -v$(pwd)/tmp/pgdata:/var/lib/postgresql/data postgres:18-alpine'
 
 # remove .orig files created after `git mergetool` is run
 alias rmorig='rm $(fd --hidden "\.orig")'
@@ -62,8 +67,8 @@ alias rmorig='rm $(fd --hidden "\.orig")'
 # copy directory recursively
 alias cpr='cp -r'
 
-# pulumi
-alias p='pulumi'
+# file manager
+alias y='yazi'
 
 # Jira
 # transition issue

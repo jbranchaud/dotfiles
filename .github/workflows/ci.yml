@@ -22,13 +22,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libreadline-dev
 
       - name: Install Runtimes w/ MISE (and cache)
-        uses: jdx/mise-action@70d7607baefba9eee49fd86c2783b8a414ffb43a
+        uses: jdx/mise-action@bf7ce94bf71e42b9b3bb1350675aac847b7388c4
 
   yaml-lint:
     name: 'Lint: Yaml'
@@ -39,10 +39,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Runtimes w/ MISE
-        uses: jdx/mise-action@70d7607baefba9eee49fd86c2783b8a414ffb43a
+        uses: jdx/mise-action@bf7ce94bf71e42b9b3bb1350675aac847b7388c4
 
       - name: Run yamllint
         run: task ci:yaml:lint
@@ -56,10 +56,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Runtimes w/ MISE
-        uses: jdx/mise-action@70d7607baefba9eee49fd86c2783b8a414ffb43a
+        uses: jdx/mise-action@bf7ce94bf71e42b9b3bb1350675aac847b7388c4
 
       - name: Format check
         run: task ci:format:check
@@ -73,10 +73,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Runtimes w/ MISE
-        uses: jdx/mise-action@70d7607baefba9eee49fd86c2783b8a414ffb43a
+        uses: jdx/mise-action@bf7ce94bf71e42b9b3bb1350675aac847b7388c4
         with:
           reshim: true
 
@@ -92,10 +92,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Runtimes w/ MISE
-        uses: jdx/mise-action@70d7607baefba9eee49fd86c2783b8a414ffb43a
+        uses: jdx/mise-action@bf7ce94bf71e42b9b3bb1350675aac847b7388c4
 
       - name: Run Diagnostics Check
         run: task ci:shell:lint
@@ -109,10 +109,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Runtimes w/ MISE
-        uses: jdx/mise-action@70d7607baefba9eee49fd86c2783b8a414ffb43a
+        uses: jdx/mise-action@bf7ce94bf71e42b9b3bb1350675aac847b7388c4
 
       - name: Run Diagnostics Check
         run: task ci:spelling:lint

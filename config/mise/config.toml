@@ -29,7 +29,6 @@
 "cargo:fastmod" = "latest"                                                              # fast regex code modifications
 "cargo:htmlq" = "latest"                                                                # Like jq, but for HTML
 "cargo:vivid" = "latest"                                                                # generate color schemes for different tools
-"cargo:wireman" = "latest"                                                              # GRPC TUI client
 "gem:tmuxinator" = "latest"                                                             # tmux session manager
 "npm:@anthropic-ai/claude-code" = "latest"                                              # AI agent
 "npm:@commitlint/cli" = "latest"                                                        # linter for checking that commits are following conventional commits
@@ -48,6 +47,7 @@
 "ubi:babs/multiping" = "latest"                                                         # ping multiple hosts in parallel
 "ubi:chmln/sd" = "latest"                                                               # a modern alternative for sed with sensible defaults
 "ubi:dlvhdr/diffnav" = "latest"                                                         # A git diff pager based on delta but with a file tree, à la GitHub.
+"ubi:ip7z/7zip" = { version = "latest", exe = "7zz" }                                   # 7zip cli
 "ubi:ismaelgv/rnr" = "latest"                                                           # batch rename files and directories
 "ubi:joshmedeski/sesh" = "latest"                                                       # tmux session manager
 "ubi:kdash-rs/kdash" = "latest"                                                         # kubernetes dashboard in the terminal
@@ -55,6 +55,7 @@
 "ubi:mr-karan/doggo" = "latest"                                                         # DNS client (like dig but better)
 "ubi:nushell/nushell" = { version = "latest", exe = "nu" }                              # modern shell and scripting language
 "ubi:orf/gping" = "latest"                                                              # graph ping
+"ubi:preiter93/wireman" = "latest"                                                      # GRPC CLI
 "ubi:sharkdp/hyperfine" = "latest"                                                      # benchmarking tool
 "ubi:sibprogrammer/xq" = "latest"                                                       # XML and HTML beautifier and content extractor
 "ubi:tidewave-ai/mcp_proxy_rust" = { version = "latest", exe = "mcp-proxy" }            # Elixir MCP proxy
@@ -92,6 +93,7 @@ node = "22"                                                                     
 opentofu = "latest"                                                                     # terraform drop-in alternative, with more permissive license
 python = "3.12"                                                                         # Python programming language
 rebar = "latest"                                                                        # build tool for Erlang (equivalent to mix in Elixir)
+resvg = "latest"                                                                        # svg rendering library and CLI tool (used by yazi)
 ripgrep = "latest"                                                                      # modern `grep`
 ruby = "3"                                                                              # Ruby programming language
 rust = "1"                                                                              # Rust programming language
@@ -104,6 +106,7 @@ terraform = "latest"                                                            
 typos = "latest"                                                                        # type checker alternative to codespell
 usage = "latest"                                                                        # generates completion scripts for various tools (including mise)
 uv = "latest"                                                                           # install python packages
+yazi = "latest"                                                                         # terminal file manager
 zoxide = "latest"                                                                       # a modern version of autojump
 
 # allow specific asdf plugins when there's no other option
