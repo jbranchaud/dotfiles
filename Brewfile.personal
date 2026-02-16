@@ -168,6 +168,9 @@ brew "caddy"
 brew "direnv"
 brew "mise"
 
+# passwords
+cask 'bitwarden'
+
 # App deployment
 brew "heroku"
 
