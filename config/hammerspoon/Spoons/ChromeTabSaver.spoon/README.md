@@ -33,6 +33,7 @@ spoon.ChromeTabSaver:bindHotkeys({
 ### Default Location
 
 By default, saved tabs and configuration are stored in:
+
 ```
 ~/.local/share/hammerspoon/ChromeTabSaver/
 ├── saved_tabs.json
@@ -107,11 +108,13 @@ Edit `~/.local/share/hammerspoon/ChromeTabSaver/config.json`:
 #### How URL Matching Works
 
 The allowlist uses simple substring matching (case-insensitive):
+
 - `gmail.com` matches `https://mail.google.com/mail/u/0/#inbox`
 - `github.com` matches any GitHub URL
 - `localhost` matches `http://localhost:3000`
 
 When you save tabs, allowlisted tabs will:
+
 - ✅ Stay open in Chrome
 - ✅ Not be added to the saved tabs file
 - ✅ Be counted in the confirmation message
@@ -119,12 +122,15 @@ When you save tabs, allowlisted tabs will:
 ## Usage
 
 ### Save Tabs (⌘⌃⌥S)
+
 Saves all tabs from your front Chrome window and closes them. Allowlisted URLs remain untouched.
 
 ### View Tabs (⌘⌃⌥V)
+
 Shows a list of tabs saved today (or a specific date).
 
 ### Restore Tabs (⌘⌃⌥R)
+
 Reopens all tabs saved today (or a specific date) in Chrome.
 
 ## Data Format

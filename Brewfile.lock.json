@@ -49,12 +49,6 @@
           "full_name": "1password/tap/1password-cli"
         }
       },
-      "hammerspoon": {
-        "version": "1.0.0",
-        "options": {
-          "full_name": "hammerspoon"
-        }
-      },
       "docker": {
         "version": "4.36.0,175267",
         "options": {
@@ -2757,20 +2751,6 @@
               "cellar": ":any_skip_relocation",
               "url": "https://ghcr.io/v2/homebrew/core/kubernetes-cli/blobs/sha256:e9040db1000ae3ab70116fa36f2feda3e3dd3deda862633181f14ac95bf95797",
               "sha256": "e9040db1000ae3ab70116fa36f2feda3e3dd3deda862633181f14ac95bf95797"
-            }
-          }
-        }
-      },
-      "kubectx": {
-        "version": "0.9.5",
-        "bottle": {
-          "rebuild": 2,
-          "root_url": "https://ghcr.io/v2/homebrew/core",
-          "files": {
-            "all": {
-              "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/kubectx/blobs/sha256:6552e91e68ff8abda73be837c80539b47e3aadc73e5f8bab57cbb3bf0356c682",
-              "sha256": "6552e91e68ff8abda73be837c80539b47e3aadc73e5f8bab57cbb3bf0356c682"
             }
           }
         }

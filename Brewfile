@@ -24,9 +24,6 @@ cask 'iterm2'
 # allow accessing passwords from a CLI
 cask '1password-cli'
 
-# macOS automation using Lua
-cask 'hammerspoon'
-
 # run open source LLM models locally
 cask 'ollama-app'
 
@@ -90,9 +87,6 @@ cask 'docker-desktop'
 
 # build tool
 brew 'make'
-
-# terminal multiplexer
-brew 'tmux'
 
 # process video files (used by yazi, but also ffmpeg is very useful in general)
 brew 'ffmpeg'

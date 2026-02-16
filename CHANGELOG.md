@@ -2,6 +2,176 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [29.0.0](https://github.com/dkarter/dotfiles/compare/v28.4.0...v29.0.0) (2026-02-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **tmuxinator:** remove tmuxinator
+
+### Features
+
+* **mise:** add pdf-redact ([e209d15](https://github.com/dkarter/dotfiles/commit/e209d15ccea43985262055e071b22353b2961e77))
+* **nvim:** add script to check nvim plugin security ([d5ede2f](https://github.com/dkarter/dotfiles/commit/d5ede2f3be4f8ef268df3c30f950b79737117bb9))
+* **tmux:** add command palette ([aee8a45](https://github.com/dkarter/dotfiles/commit/aee8a45174473160bd7cec8d9aae1c2e5a98624a))
+* **tmux:** add more commands to command palette ([4c79bf7](https://github.com/dkarter/dotfiles/commit/4c79bf7da8bb8ce65faf4111e7dd40641c71e55e))
+* **workmux:** add global config ([1b90849](https://github.com/dkarter/dotfiles/commit/1b9084932e86ccb55b372554d55a6baf3b6c7d9c))
+* **zsh:** add `ocd` alias for opencode in docker ([083c29e](https://github.com/dkarter/dotfiles/commit/083c29e7aa6b87dc1171b397a7c97a95cbd1824d))
+* **zsh:** add http2md ([b5dd417](https://github.com/dkarter/dotfiles/commit/b5dd417066893ba08c69d3d3ed1acdba7b0c0776))
+* **zsh:** add mix autocompletion with caching ([1c0d74d](https://github.com/dkarter/dotfiles/commit/1c0d74dc9c8e964e94840d6c2be8bb6f51b751c4))
+* **zsh:** add workmux aliases ([aa76f8b](https://github.com/dkarter/dotfiles/commit/aa76f8bf50eb1caf52daf5313b1597abfd796e3e))
+
+
+### Bug Fixes
+
+* **lefthook:** use mise x for reliability ([d152cdc](https://github.com/dkarter/dotfiles/commit/d152cdcef42a76cfc7ebb6d8543c60e2b5a6fe80))
+* **nvim:** improve python support ([92e50b3](https://github.com/dkarter/dotfiles/commit/92e50b3c55f4cffdc31d974f4f0c585407340f16))
+* **nvim:** improve python support ([9516337](https://github.com/dkarter/dotfiles/commit/9516337fa198c454018eefe2a65b6539bf1eef19))
+* **tmux,ghostty:** bindings conflict ([8115ec6](https://github.com/dkarter/dotfiles/commit/8115ec6a84f3b54e1e3dfff1b673df085fecd7a2))
+* **tmux:** improve command palette ([2d29bdb](https://github.com/dkarter/dotfiles/commit/2d29bdbc2b50ef09cbf47898cb40b7aac4bb9577))
+* **tmuxinator:** remove tmuxinator ([04ddded](https://github.com/dkarter/dotfiles/commit/04dddedd3d42b0de3ca720bf3066b4bf759ad10a))
+* **tmux:** update tmux command scripts ([68656fe](https://github.com/dkarter/dotfiles/commit/68656fe3fb62fa60e4a43a846d844d75ac2764cb))
+* **tmux:** workmux add script stopped working ([b180698](https://github.com/dkarter/dotfiles/commit/b18069870eb104586cae7ed7a5e80912d7775c9e))
+* **tv:** improve shell integration ([c33a947](https://github.com/dkarter/dotfiles/commit/c33a947e9583e7492d81c4d8418be810cdc81896))
+* **workmux:** go back to original layout ([7c5ae04](https://github.com/dkarter/dotfiles/commit/7c5ae04137d42e65ce389870b56a550f008e1789))
+* **workmux:** update config for better UX ([6846e5c](https://github.com/dkarter/dotfiles/commit/6846e5c0fd2739da92fc7e319240adea695b6eb1))
+* **zsh:** add gh completions ([53cf519](https://github.com/dkarter/dotfiles/commit/53cf519ec9573f1ac2f3d1f616f82e79fd11b1c2))
+* **zsh:** give ocd access to opencode config + credentials ([2c67259](https://github.com/dkarter/dotfiles/commit/2c6725981a5e0a3bc27a8b4b75a9d91e25f520e6))
+
+## [28.4.0](https://github.com/dkarter/dotfiles/compare/v28.3.0...v28.4.0) (2026-02-02)
+
+
+### Features
+
+* **mise:** add workmux ([92aabd4](https://github.com/dkarter/dotfiles/commit/92aabd4bcd63dee3b6ba5b6641086c51d294a747))
+* **opencode:** add pr-review skill using gh cli ([#389](https://github.com/dkarter/dotfiles/issues/389)) ([86fcf12](https://github.com/dkarter/dotfiles/commit/86fcf128eea41c35f62a29431ea3b04332bac29d))
+* **violentmonkey:** add graphite user script ([ba0c0f0](https://github.com/dkarter/dotfiles/commit/ba0c0f0ddfe1fa6518f069e92170ff4c6f8a04f5))
+
+
+### Bug Fixes
+
+* **nvim:** don't warn about credo when not installed ([3b5ab96](https://github.com/dkarter/dotfiles/commit/3b5ab960ddc222d12f8bb9bfc34ad88044cdd361))
+* **task:** improve reliability of gh:sync ([0caf5a2](https://github.com/dkarter/dotfiles/commit/0caf5a20352dba684d21f79b0afa90c870726777))
+
+## [28.3.0](https://github.com/dkarter/dotfiles/compare/v28.2.0...v28.3.0) (2026-01-28)
+
+
+### Features
+
+* **tv,zsh:** add gctv alias and git-branch-checkout tv channel ([b91768f](https://github.com/dkarter/dotfiles/commit/b91768fb5ab2eafc54c89fe745c5b8e33309d4d4))
+
+
+### Bug Fixes
+
+* **mise:** lock go to minor version ([b786d16](https://github.com/dkarter/dotfiles/commit/b786d169ab35f24ec6bb8f5ca0bebeabaf0d7ffd))
+
+## [28.2.0](https://github.com/dkarter/dotfiles/compare/v28.1.0...v28.2.0) (2026-01-28)
+
+
+### Features
+
+* **opencode:** add skill-creator skill ([cf1dae5](https://github.com/dkarter/dotfiles/commit/cf1dae51b70fed40a025628fef373e7886cb189a))
+* **opencode:** add tools for managing skills ([553baea](https://github.com/dkarter/dotfiles/commit/553baea196e1c8dc2b709f0c900eff6238ea3391))
+
+
+### Bug Fixes
+
+* **nvim:** add back elixir projections ([31c84c1](https://github.com/dkarter/dotfiles/commit/31c84c1417ca6d1e9edb8d7bf743a439b4656693))
+* **nvim:** add projectionist_transformations for elixir ([c7e79c7](https://github.com/dkarter/dotfiles/commit/c7e79c74d7b86d09141232bf068e1bd003d17a44))
+* **nvim:** projectionist for Elixir was missing config ([4299931](https://github.com/dkarter/dotfiles/commit/42999314902b530c68cd68095bf40a400613584b))
+* **task:** use correct dir for yazi task import ([ab9187a](https://github.com/dkarter/dotfiles/commit/ab9187a22ef89b4f16cac17322cac74687f2cb7a))
+
+## [28.1.0](https://github.com/dkarter/dotfiles/compare/v28.0.0...v28.1.0) (2026-01-20)
+
+
+### Features
+
+* **task:** add task for committing yazi lock file ([ee29ac5](https://github.com/dkarter/dotfiles/commit/ee29ac59dba54b69c23a318b1334381304e726c3))
+* **tv:** allow including git ignored files with ctrl-s ([5a1f966](https://github.com/dkarter/dotfiles/commit/5a1f966300131aff95b354eccf31ca0854dc785e))
+* **zsh:** add gcr - resume commit with prev message ([80f42a2](https://github.com/dkarter/dotfiles/commit/80f42a27a1f311103ca0baab73f9be23ed3078c3))
+* **zsh:** add support for kctx -u + use --inline ([73ed774](https://github.com/dkarter/dotfiles/commit/73ed77415782e30fde3a029f3891d0de64e2ffe1))
+
+
+### Bug Fixes
+
+* **mise:** compile rnr from source for arm64 compat ([0698496](https://github.com/dkarter/dotfiles/commit/0698496b119918d1740cf353198912815b954dee))
+* **nvim:** start opencode with --port by default ([3ca087c](https://github.com/dkarter/dotfiles/commit/3ca087cf3fc1bab4cdf17f7ea37fc2bf4eade28f))
+* **opencode:** restrict deletions by requiring approval ([5030a3f](https://github.com/dkarter/dotfiles/commit/5030a3feaf3aa87f31025a64b5d06189406d7063))
+* **tmux:** use mise x for external mise installed tools ([4950efe](https://github.com/dkarter/dotfiles/commit/4950efef11e23b36601e420ba7964f4538f1a9e5))
+* **tv:** show hidden files by default ([f3af660](https://github.com/dkarter/dotfiles/commit/f3af6604ea314deccfed33c17c6976e359f7e503))
+* **zsh,tv:** add kns and kctx via tv ([8fac5a7](https://github.com/dkarter/dotfiles/commit/8fac5a7ae7b87c59be79a2000c2c5f586b9ce096))
+
+## [28.0.0](https://github.com/dkarter/dotfiles/compare/v27.1.0...v28.0.0) (2026-01-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **yazi:** improve tv plugin to accept channels
+* **nvim:** change ClaudeCode mappings to match open code
+
+### Features
+
+* add gbsum - git branch summary ([1fd102c](https://github.com/dkarter/dotfiles/commit/1fd102cf2a2dfc06588cf35a1ebcd75ff64eac72))
+* **brew:** add ffmpeg + ffmpegthumbnailer ([b81721f](https://github.com/dkarter/dotfiles/commit/b81721f0175fcc24ea1265c824676f5d73031f07))
+* **hyprland,walkr:** automatic migration update from Omarchy ([b9f896c](https://github.com/dkarter/dotfiles/commit/b9f896c9b8b16f757f561d3ffc7a22490cb8f445))
+* **mise:** add 7zip ([b314e25](https://github.com/dkarter/dotfiles/commit/b314e2533ce5bafbfd416a1a923b69d7b2a0ff29))
+* **mise:** add lnr (linear cli) ([5f829c2](https://github.com/dkarter/dotfiles/commit/5f829c2a8bd33bff4654e0a9ab85f4b313c2c61b))
+* **mise:** add resvg ([293e7fa](https://github.com/dkarter/dotfiles/commit/293e7fa91deebdf041bff6e7bc5cfc2388467c56))
+* **mise:** add yazi file manager ([3abab98](https://github.com/dkarter/dotfiles/commit/3abab98b9025334b6324a262504dbab0bd7167f9))
+* **nvim:** add yazi.nvim ([fc93e0a](https://github.com/dkarter/dotfiles/commit/fc93e0a796087621f5b6fee1970cd971da17a738))
+* **task:** add yazi tasks to setup scripts ([6a63fa9](https://github.com/dkarter/dotfiles/commit/6a63fa92e5b47656cf9c6e45b9159ff3d34fc30e))
+* **tmux,ghostty:** fuzzy insert file at cursor for AI agents ([73a1cfc](https://github.com/dkarter/dotfiles/commit/73a1cfc514a61b2c054e81e6be593d8f35b6ad09))
+* **tmux:** add shallow clone option to tmux-fork-repo ([d144e24](https://github.com/dkarter/dotfiles/commit/d144e24b0b89a1b1f075099167dbe701b025eeca))
+* **tv:** add `tv brew` ([7a1db7d](https://github.com/dkarter/dotfiles/commit/7a1db7d515d01f68e5f8d0c0c6b74c444512bc1d))
+* **tv:** add tv channel completion with ctrl+t ([c118add](https://github.com/dkarter/dotfiles/commit/c118addcd2ae49f281e02cfb73f58a77a7a09127))
+* **tv:** add tv elixir-modules channel ([101e4ce](https://github.com/dkarter/dotfiles/commit/101e4ce36a42075d04a2482340e9de705b523988))
+* **tv:** add zoxide tv channel ([ea9d9ee](https://github.com/dkarter/dotfiles/commit/ea9d9ee945c6b0fb34576cf27cfe92a70e0ac820))
+* **yazi:** add default config ([06e99ee](https://github.com/dkarter/dotfiles/commit/06e99eed066c5097d6e87cf458870a07649602bf))
+* **yazi:** replace fzf plugin with tv plugin ([45a2f62](https://github.com/dkarter/dotfiles/commit/45a2f6230f1f12140a1316eeff7ee05e536835a9))
+* **yazi:** use catppuccin-mocha theme ([9d34895](https://github.com/dkarter/dotfiles/commit/9d34895b81b07c9ee4b3ebc540c7e9ddb74b27d0))
+* **zsh:** add alias for tailscale from MAS ([73e3c8a](https://github.com/dkarter/dotfiles/commit/73e3c8a7a00c91f2c67450d19130ff1f1fce3a1f))
+* **zsh:** add alias for tv git-diff (tgd) ([5e80e82](https://github.com/dkarter/dotfiles/commit/5e80e8268ee391cf3c74112cd02b1a3f0ee291b8))
+* **zsh:** add mise install alias (mi) ([7886571](https://github.com/dkarter/dotfiles/commit/78865710695b4f13bc01f8955f76029b82ed4345))
+* **zsh:** add opencode completions ([87c5c08](https://github.com/dkarter/dotfiles/commit/87c5c088237af84fd256e13f9866886e3deb4290))
+* **zsh:** add tt alias ([e6cf9da](https://github.com/dkarter/dotfiles/commit/e6cf9da0ec56b9c5552844af88179a540f115a63))
+* **zsh:** add yazi alias (y) ([1b08cc9](https://github.com/dkarter/dotfiles/commit/1b08cc996c063d44e97f7babb5b43d2725ed757e))
+
+
+### Bug Fixes
+
+* expand TPM_DIR to prevent dangerous ~ dir from getting created ([ed9b66a](https://github.com/dkarter/dotfiles/commit/ed9b66a3f3af1e1b02a294b6cc6e85a220caead0))
+* **git:** ignore local claude files in nested dirs ([d6ad76d](https://github.com/dkarter/dotfiles/commit/d6ad76d4964513c6efb0b1db4481905c61772254))
+* **hypr:** conflicts with tmux + ghostty workflow ([170f3c9](https://github.com/dkarter/dotfiles/commit/170f3c97d5c095a35179273d06e842c403ef0bdf))
+* **mise:** add postinstall hook for installing git hooks ([b487f82](https://github.com/dkarter/dotfiles/commit/b487f828d154bb3c85bc57b12ab9c32a24609422))
+* **mise:** switch most ubi -&gt; github backend ([84eb8f7](https://github.com/dkarter/dotfiles/commit/84eb8f77bb4379f83ec4697e38186ad68029dd11))
+* **mise:** ubi -&gt; github ([95e0d1e](https://github.com/dkarter/dotfiles/commit/95e0d1ee0a61ce8f101e0a88f8b8dde5bd0086cc))
+* **mise:** update deprecated settings title ([9133e80](https://github.com/dkarter/dotfiles/commit/9133e80406307fb0ed75cae01ceb7b054c112319))
+* **nvim:** add &lt;leader&gt;as for sending to claude code in normal mode ([3ccb16a](https://github.com/dkarter/dotfiles/commit/3ccb16ace1c845b721ae61d08fb0efd828a922a7))
+* **nvim:** auto detect syntax for bun executable scripts ([b81e966](https://github.com/dkarter/dotfiles/commit/b81e9668f98303af0a7f00afeb416300d90fb513))
+* **nvim:** remove unused mappings for claude code ([fc01ef5](https://github.com/dkarter/dotfiles/commit/fc01ef5135855125a96311e50d681d230cef19b8))
+* **starship:** set memory usage threshold to 90% ([d5e7335](https://github.com/dkarter/dotfiles/commit/d5e733538f2dc93f335944a92ad7839cf8bf080a))
+* **tmux:** disable annoying tmux-fingers install wizard ([8a088b0](https://github.com/dkarter/dotfiles/commit/8a088b0e053a65f3e507e77e783a1459ab0e08c9))
+* **tv:** add aliases to shell_integration.channel_triggers ([6878dd0](https://github.com/dkarter/dotfiles/commit/6878dd0ecc526c0018f1c5e6da08aa73db1fea3e))
+* **tv:** add ga and gap aliases to triggers ([beb5c16](https://github.com/dkarter/dotfiles/commit/beb5c166bda8da0c4bd653b5eb8380d6bf3ad483))
+* **tv:** improve git-diff channel to show untracked files ([bfb4760](https://github.com/dkarter/dotfiles/commit/bfb4760bcff2c098b7e64071f66189366a9d47ae))
+* **tv:** zsh-history was not returning results ([b9da1b7](https://github.com/dkarter/dotfiles/commit/b9da1b75e7187395e1d9cfe0ecf64b111bd3f80e))
+* **v:** lint error ([a45d21f](https://github.com/dkarter/dotfiles/commit/a45d21f7c3e3898cde95ab4477acc7f4510b688e))
+* **yazi:** add smart-enter for more intuitive enter ([fff9e36](https://github.com/dkarter/dotfiles/commit/fff9e3603d7631d9367a875287c27e49fc3d100b))
+* **yazi:** improve tv plugin to accept channels ([1496c29](https://github.com/dkarter/dotfiles/commit/1496c29de03f407bd905442bee752a354dc28c08))
+* **yazi:** show hidden files by default ([649d049](https://github.com/dkarter/dotfiles/commit/649d04988616bd30b87af2117cd12a5e24d5c8c3))
+* **zsh:** bump pgtmp postgres to v18 ([e3204f0](https://github.com/dkarter/dotfiles/commit/e3204f0f351996f09de42b57eccf9155b4282bff))
+* **zsh:** improve ls aliases ([4bba5eb](https://github.com/dkarter/dotfiles/commit/4bba5eb1ee55fae1b3035ff4b5ba953d73b0dd81))
+
+
+### Performance Improvements
+
+* **mise:** use wireman from ubi ([92d5c6d](https://github.com/dkarter/dotfiles/commit/92d5c6dde3fecede248117253a290b6fb20d04f2))
+
+
+### Code Refactoring
+
+* **nvim:** change ClaudeCode mappings to match open code ([f3e2d06](https://github.com/dkarter/dotfiles/commit/f3e2d067b09a1576cc1b1572159ecc41d73ad4da))
+
 ## [27.1.0](https://github.com/dkarter/dotfiles/compare/v27.0.0...v27.1.0) (2025-12-24)
 
 

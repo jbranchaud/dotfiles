@@ -27,7 +27,6 @@ dependency management.
 │   ├── tmux/              # Terminal multiplexer config
 │   ├── zsh/               # Z shell configurations
 │   ├── wezterm/           # Terminal emulator config
-│   ├── hammerspoon/       # macOS automation (Lua)
 │   └── [various tools]/   # Tool-specific configurations
 ├── taskfiles/             # Task automation definitions
 ├── installer/             # Platform-specific setup scripts
@@ -236,7 +235,6 @@ git push
 
 ### macOS Integration
 
-- **Hammerspoon:** Lua-based automation
 - **Raycast:** Spotlight alternative
 - **HyperKey:** Modifier key setup
 - **System Preferences:** Automated via Task scripts
@@ -274,7 +272,7 @@ The CI pipeline (`task ci:run`) includes:
 
 - **Node.js 22:** Managed via Mise
 - **Ruby 3:** For various tools and scripts
-- **Lua:** For Neovim and Hammerspoon configs
+- **Lua:** For Neovim configs
 - **pnpm:** Package manager for Node.js dependencies
 
 ### Essential Tools (Auto-installed)

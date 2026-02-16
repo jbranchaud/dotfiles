@@ -1,23 +1,25 @@
 [tools]
 
-"ubi:evilmartians/lefthook" = "latest"
-"ubi:mazznoer/lolcrab" = "latest"
-"ubi:tamasfe/taplo" = "latest"
+"github:crate-ci/committed" = "latest"
+"github:mazznoer/lolcrab" = "latest"
 bun = "latest"
-"ubi:crate-ci/committed" = "latest"
 dprint = "latest"
 gitleaks = "latest"
+lefthook = "latest"
 lua-language-server = "2"
 node = "22"
 "npm:@logseq/cli" = "latest"
 ripgrep = "latest"
 shellcheck = "0.10"
+shfmt = "latest"
 stylua = "2"
+taplo = "latest"
 task = "latest"
 typos = "latest"
 yamllint = "1.35"
-shfmt = "latest"
-lua = "5.1"
+
+[hooks]
+postinstall = "lefthook install"
 
 [settings]
 experimental = true

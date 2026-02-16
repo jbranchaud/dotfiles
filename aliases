@@ -37,9 +37,25 @@ alias tfd='terraform destroy'
 # selecting a repo it will cd into it's directory
 alias tt='tv channels'
 
+# kubernetes context switcher (like kubectx)
+kctx() {
+  if [[ "$1" == "-u" ]]; then
+    kubectl config unset current-context
+  else
+    tv kctx --inline "$@"
+  fi
+}
+
+# kubernetes namespace switcher (like kubens)
+alias kns='tv kns --inline'
+
 # AI tooling
+alias opencode='opencode --port'
 alias oc='opencode'
 alias cld='claude'
+
+# opencode in docker
+alias ocd='docker run -it --rm -v "$(pwd):/workspace" -v "$HOME/.config/opencode:/root/.config/opencode" -v "$HOME/.local/share/opencode:/root/.local/share/opencode" -w /workspace ghcr.io/anomalyco/opencode'
 
 # check internet connection
 alias chkint='pingf kagi.com'
@@ -54,6 +70,7 @@ alias lg="lazygit"
 alias mrs='mise registry | fzf'
 # [m]ise [r]egistry [f]ind # spellchecker:disable-line
 alias mrf='mise registry | fzf'
+alias mi='mise install'
 
 # postgres
 # --------
@@ -138,6 +155,11 @@ alias gfc='git rev-list --max-parents=0 HEAD'
 alias gsu='git stash -u'
 alias gsp='git stash pop'
 alias gsa='git stash --all'
+# resume commit with previous message
+alias gcr='git commit --verbose --edit --file=.git/COMMIT_EDITMSG'
+
+# combines gbsum and tv
+alias gctv='tv git-branch-checkout'
 
 fork() {
   repo_name=$(echo "$1" | xargs basename | cut -d. -f1)
@@ -304,6 +326,10 @@ function tn() {
 # session manager using sesh + tv
 # https://github.com/joshmedeski/sesh
 alias s='tv sesh'
+alias tgd='tv git-diff'
+
+# tailscale cli - for when installed from the app store
+alias tscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
 
 # tmux attach
 alias ta='tmux attach -t'
@@ -316,6 +342,10 @@ alias rgrep='command rg'
 alias postjson='curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '
 # usage postjson http://example.com/record/1
 alias getjson='curl -i -H "Accept: application/json" -H "Content-Type: application/json"'
+
+# convert any url to markdown - uses playwright to support dynamic sites
+# usage: http2md https://diff.hex.pm/diff/tesla/1.15.3..1.16.0
+alias http2md='docker run --rm ghcr.io/dkarter/http2md'
 
 # rails
 alias twiki='be rails db:migrate && be rails db:rollback && be rails db:migrate && be rails db:test:prepare'
@@ -343,6 +373,31 @@ function mix_cmd_app() {
 }
 #  execute commands on umbrella apps
 alias ma='mix_cmd_app'
+
+# --------------------------------------------
+# Workmux Aliases
+# --------------------------------------------
+
+# Core commands
+alias wm='workmux'
+alias wma='workmux add'
+alias wmo='workmux open'
+alias wmc='workmux close'
+alias wmm='workmux merge'
+alias wmrm='workmux remove'
+alias wmls='workmux list'
+alias wmp='workmux path'
+alias wmd='workmux dashboard'
+
+# Documentation
+alias wmdocs='workmux docs'
+alias wmcl='workmux changelog'
+
+# Setup
+alias wminit='workmux init'
+
+# Claude integration
+alias wmclaude='workmux claude'
 
 # KEEP AT BOTTOM TO ALLOW OVERRIDE
 # Include machine specific aliases

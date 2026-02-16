@@ -21,7 +21,7 @@ background-blur = true
 window-padding-x = 10
 window-padding-y = 10
 
-font-size = 18
+font-size = 17
 
 desktop-notifications = true
 macos-titlebar-proxy-icon = hidden
@@ -52,10 +52,15 @@ keybind = super+digit_9=text:\x1a9
 # add quick terminal shortcut cmd+single quote
 keybind = global:super+'=toggle_quick_terminal
 
+# command palette
+keybind = super+p=text:\x1aP
+
 # open sesh
 keybind = super+j=text:\x1aT
 # open tmux windows
-keybind = super+k=text:\x1aP
+keybind = super+k=text:\x1aW
+# open tmux panes
+keybind = super+shift+k=text:\x1aK
 # toggle last session
 keybind = super+l=text:\x1aL
 # create new session
@@ -66,6 +71,8 @@ keybind = super+shift+o=text:\x1aO
 keybind = super+shift+f=text:\x1av
 # create a new linear issue
 keybind = super+shift+i=text:\x1ai
+# insert file path at cursor (for AI agents)
+keybind = super+shift+period=text:\x1aA
 
 # vimium like actions (tmux fingers)
 keybind = super+f=text:\x1aF
