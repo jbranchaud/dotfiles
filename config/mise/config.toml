@@ -57,6 +57,7 @@
 "npm:prettier" = "latest"                                                                  # code formatter (js, ts, json, yaml and more)
 "npm:tldr" = "latest"                                                                      # useful usage instructions for CLI apps
 "npm:trash-cli" = "latest"                                                                 # rm -> system trash (cross platform)
+"pipx:black" = "latest"
 "pipx:httpie" = "latest"                                                                   # modern, user-friendly CLI HTTP client
 "pipx:neovim-remote" = "latest"                                                            # allow controlling neovim remotely
 "pipx:posting" = "latest"                                                                  # like postman but a TUI
