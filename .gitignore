@@ -17,3 +17,6 @@ config/nushell/env.local.nu
 
 # themes for yazi - can be synced via `ya pkg install`
 config/yazi/flavors
+
+# Hammerspoon EmmyLua
+config/hammerspoon/Spoons/EmmyLua.spoon/

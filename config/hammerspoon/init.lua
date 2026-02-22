@@ -2,9 +2,6 @@ hs.loadSpoon 'EmmyLua'
 hs.loadSpoon 'ReloadConfiguration'
 spoon.ReloadConfiguration:start()
 
-hs.loadSpoon 'WindowLayoutMode'
-spoon.WindowLayoutMode:init()
-
 hs.loadSpoon 'ChromeTabSaver'
 
 spoon.ChromeTabSaver:addToAllowlist 'calendar.google.com'
