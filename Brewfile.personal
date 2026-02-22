@@ -49,6 +49,7 @@ brew 'sqlite'
 
 # image manipulation
 brew 'imagemagick'
+brew 'exiftool'
 
 # easily copy tabular data
 brew 'yank'
