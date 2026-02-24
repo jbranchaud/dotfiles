@@ -63,6 +63,9 @@ brew 'pspg'
 # Postgres client
 brew 'libpq'
 
+# NaCL Networking and Cryptography lib needed for Ruby
+brew 'libsodium'
+
 # compile C stuff
 brew 'cmake'
 
