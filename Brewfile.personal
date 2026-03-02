@@ -165,6 +165,9 @@ cask "spotify"
 # Project Management
 cask "linear-linear"
 
+# RSS reader
+cask "netnewswire"
+
 # HTTP server
 brew "caddy"
 
