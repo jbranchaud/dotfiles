@@ -8,6 +8,11 @@ return {
         pycodestyle = { enabled = false },
         pyflakes = { enabled = false },
         yapf = { enabled = false },
+        pylsp_mypy = {
+          enabled = true,
+          live_mode = false,
+          strict = false,
+        },
       },
     },
   },

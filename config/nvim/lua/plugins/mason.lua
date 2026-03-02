@@ -51,6 +51,7 @@ return {
       'lua-language-server',
       'powershell-editor-services',
       'python-lsp-server',
+      'mypy',
       'rust-analyzer',
       -- Ruby
       'rubocop',
