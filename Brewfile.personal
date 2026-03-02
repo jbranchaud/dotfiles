@@ -239,6 +239,9 @@ cask "postgres-unofficial"
 # PSQL alternative
 brew "pgcli"
 
+# Python
+brew "uv"
+
 # Timezone lib
 brew "tz"
 
