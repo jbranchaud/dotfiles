@@ -216,6 +216,7 @@ fallback_channel = "files"
 "alias" = ["alias", "unalias"]
 "env" = ["export", "unset"]
 "dirs" = ["cd", "ls", "ll", "l", "rmdir", "z", "rmrf"]
+"elixir-tests" = ["mt", "mix test"]
 "files" = [
   "cat",
   "less",
@@ -277,6 +278,12 @@ fallback_channel = "files"
   "kdsp",
 ]
 "channels-completion" = ["tv"]
+"opencode-models" = [
+  "opencode --model",
+  "opencode -m",
+  "opencode run --model",
+  "opencode run -m",
+]
 
 
 [shell_integration.keybindings]

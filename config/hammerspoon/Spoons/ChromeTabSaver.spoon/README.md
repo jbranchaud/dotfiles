@@ -97,11 +97,7 @@ Edit `~/.local/share/hammerspoon/ChromeTabSaver/config.json`:
 
 ```json
 {
-  "urlAllowlist": [
-    "gmail.com",
-    "calendar.google.com",
-    "github.com/notifications"
-  ]
+  "urlAllowlist": ["gmail.com", "calendar.google.com", "github.com/notifications"]
 }
 ```
 
