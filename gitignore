@@ -54,3 +54,9 @@ config/zed/*_backup.*
 
 mise.local.toml
 fnox.local.toml
+
+# ignore workmux config files globally for commercial projects
+.workmux.yaml
+
+# ignore sprite config files globally
+.sprite

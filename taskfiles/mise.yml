@@ -34,8 +34,44 @@ tasks:
     cmds:
       - cmd: mise install
 
+  tools:extras:prompt:
+    desc: Prompt to enable optional mise extras profile
+    silent: true
+    cmds:
+      - cmd: |
+          if [[ ! -t 0 ]] || [[ ! -t 1 ]]; then
+            echo "Skipping extras prompt (non-interactive shell)."
+            exit 0
+          fi
+
+          if ! mise which gum &>/dev/null; then
+            mise install gum
+          fi
+
+          zshrc_local="$HOME/.zshrc.local"
+
+          if mise exec -- gum confirm "Install optional extra mise tools?"; then
+            touch "$zshrc_local"
+
+            if grep -qE '^[[:space:]]*export[[:space:]]+MISE_ENV=' "$zshrc_local"; then
+              sed -i.bak -E 's|^[[:space:]]*export[[:space:]]+MISE_ENV=.*$|export MISE_ENV=extra|' "$zshrc_local"
+            else
+              printf '\nexport MISE_ENV=extra\n' >> "$zshrc_local"
+            fi
+
+            rm -f "$zshrc_local.bak"
+            echo "Enabled extras profile via MISE_ENV=extra in $zshrc_local"
+          else
+            if [[ -f "$zshrc_local" ]]; then
+              sed -i.bak -E '/^[[:space:]]*export[[:space:]]+MISE_ENV=extra[[:space:]]*$/d' "$zshrc_local"
+              rm -f "$zshrc_local.bak"
+            fi
+            echo "Keeping base mise toolset only."
+          fi
+
   tools:install:with-github-auth:
     desc: Installs gh first, authenticates it, then installs all mise tools
+    silent: true
     cmds:
       - cmd: |
           mise install gh
@@ -47,6 +83,12 @@ tasks:
 
           export GITHUB_TOKEN="$(mise exec -- gh auth token)"
           export MISE_GITHUB_TOKEN="$GITHUB_TOKEN"
+
+          if [[ -f "$HOME/.zshrc.local" ]] && grep -qE '^\s*export\s+MISE_ENV=extra\s*$' "$HOME/.zshrc.local"; then
+            export MISE_ENV=extra
+            echo "Detected MISE_ENV=extra in ~/.zshrc.local, installing extras too."
+          fi
+
           mise install
 
   tools:update:

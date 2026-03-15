@@ -408,10 +408,11 @@ M.neogen_mappings = {
 -- stylua: ignore
 ---@type LazyKeysSpec[]
 M.opencode_mappings = {
-  { "<leader>ot", function() require("opencode").ask("@this: ", { submit = true }) end, mode = { "n", "x" }, desc = "Ask opencode"},
-  { "<leader>oa", function() require("opencode").prompt("@this") end, mode = { "n", "x" }, desc = "Add to opencode"},
-  { "<leader>os", function() require("opencode").select() end, mode = { "n", "x" }, desc = "Select opencode action"},
-  { "<leader>oc", function() require("opencode").toggle() end, desc = "Toggle opencode"},
+  { "<leader>oo", function() require("opencode").ask("", { submit = true }) end, mode = { "n", "x" }, desc = "OpenCode Ask"},
+  { "<leader>ot", function() require("opencode").ask("@this: ", { submit = true }) end, mode = { "n", "x" }, desc = "OpenCode @this"},
+  { "<leader>oa", function() require("opencode").prompt("@this") end, mode = { "n", "x" }, desc = "OpenCode Add @this (no submit)"},
+  { "<leader>os", function() require("opencode").select() end, mode = { "n", "x" }, desc = "OpenCode select action"},
+  { "<leader>oc", function() require("opencode").toggle() end, desc = "OpenCode (Toggle)"},
 }
 
 ---@type LazyKeysSpec[]
@@ -438,12 +439,6 @@ M.fugitive_mappings = function()
   --  Revert file
   nmap { '<Leader>gR', ':Gread<CR>', { silent = true, desc = '[G]it [R]ead (reverts file)' } }
 end
-
----@type LazyKeysSpec[]
-M.blame_mappings = {
-  -- Git blame
-  { '<leader>gb', '<cmd>BlameToggle<CR>', silent = true, desc = '[G]it [B]lame' },
-}
 
 ---@type LazyKeysSpec[]
 M.diffview_mappings = {
@@ -888,20 +883,13 @@ M.gitsigns_mappings = {
     mode = 'n',
   },
   {
-    '<leader>bL',
+    'q',
     function()
-      require('gitsigns').blame_line { full = true }
+      vim.cmd 'quit'
     end,
-    desc = 'Blame Line (full)',
-    mode = 'n',
-  },
-  {
-    '<leader>bl',
-    function()
-      require('gitsigns').blame_line()
-    end,
-    desc = 'Blame Line',
-    mode = 'n',
+    ft = 'gitsigns-blame',
+    desc = 'Quit Blame Window',
+    mode = { 'n', 'v' },
   },
   {
     '<leader>hd',
@@ -934,6 +922,31 @@ M.gitsigns_mappings = {
     end,
     desc = 'Git Hunks to QF List (Buffer)',
     mode = 'n',
+  },
+  -- BLAME --
+  {
+    '<leader>bL',
+    function()
+      require('gitsigns').blame_line { full = true }
+    end,
+    desc = 'Blame Line (full)',
+    mode = 'n',
+  },
+  {
+    '<leader>bl',
+    function()
+      require('gitsigns').blame_line()
+    end,
+    desc = 'Blame Line',
+    mode = 'n',
+  },
+  {
+    '<leader>gb',
+    function()
+      require('gitsigns').blame()
+    end,
+    desc = 'Git Blame',
+    mode = { 'n', 'v' },
   },
   -- Toggles
   {
