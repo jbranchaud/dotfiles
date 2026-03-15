@@ -44,7 +44,6 @@
 "npm:opencode-ai" = "latest"          # the best AI agent wrapper
 "npm:prettier" = "latest"             # code formatter (js, ts, json, yaml and more)
 "npm:trash-cli" = "latest"            # rm -> system trash (cross platform)
-"pipx:black" = "latest"
 "pipx:httpie" = "latest"              # modern, user-friendly CLI HTTP client
 "pipx:neovim-remote" = "latest"       # allow controlling neovim remotely
 "pipx:yq" = "latest"                  # like jq but for yaml files
