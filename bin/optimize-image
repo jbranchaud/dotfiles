@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -euo pipefail
+
+OUTPUT_DIR="$HOME/images"
+MAX_WIDTH=1200
+QUALITY=80
+
+usage() {
+  echo "Usage: $(basename "$0") <input-image>"
+  echo ""
+  echo "Optimizes an image for web: resizes to max ${MAX_WIDTH}px wide,"
+  echo "compresses to ${QUALITY}% quality, and strips all EXIF data."
+  echo "Output goes to ${OUTPUT_DIR}/"
+  echo ""
+  echo "Prompts for an output filename. Press Enter to keep the original name."
+  exit 1
+}
+
+if [[ $# -lt 1 ]]; then
+  usage
+fi
+
+INPUT="$1"
+
+if [[ ! -f "$INPUT" ]]; then
+  echo "Error: file not found: $INPUT" >&2
+  exit 1
+fi
+
+# check deps
+for cmd in magick exiftool; do
+  if ! command -v "$cmd" &>/dev/null; then
+    echo "Error: $cmd is required but not installed" >&2
+    exit 1
+  fi
+done
+
+DEFAULT_NAME="$(basename "$INPUT")"
+read -rp "Output filename [${DEFAULT_NAME}]: " OUTPUT_NAME
+OUTPUT_NAME="${OUTPUT_NAME:-$DEFAULT_NAME}"
+
+mkdir -p "$OUTPUT_DIR"
+OUTPUT_PATH="${OUTPUT_DIR}/${OUTPUT_NAME}"
+
+# resize (only shrinks, never enlarges) and compress
+magick "$INPUT" -resize "${MAX_WIDTH}x>" -quality "$QUALITY" "$OUTPUT_PATH"
+
+# strip all EXIF/metadata
+exiftool -all= -overwrite_original "$OUTPUT_PATH"
+
+echo "Optimized: $OUTPUT_PATH"
