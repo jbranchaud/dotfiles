@@ -21,22 +21,35 @@ allowed-tools: Read, Bash, Glob, Grep
 
 ## Write PR description
 
-Use this template:
+First, check whether the repository has a PR template. Look in these common locations:
+
+- `.github/pull_request_template.md`
+- `.github/PULL_REQUEST_TEMPLATE.md`
+- `.github/PULL_REQUEST_TEMPLATE/*.md`
+
+If a template exists, use it as the PR body format and fill it in using the conversation and git context.
+
+If no template exists, use this fallback template:
 
 ```markdown
-## Summary
+# Motivation
 
 [1-2 sentences: what this PR does and why]
 
-## Changes
+# Summary of Changes
 
 - [Key change 1]
 - [Key change 2]
 - [Key change 3]
 
-## Testing
+# Testing
 
 [How you verified it works]
+
+# Dependencies/Special Considerations
+
+[only if there are any list them - e.g. other prs that need to be merged, manual
+steps that need to be taken - otherwise say "none"]
 ```
 
 Guidelines:
@@ -45,7 +58,8 @@ Guidelines:
 - Explain the "why" before the "how"
 - Use the conversation context to inform the description
 - Include before/after comparisons for UI or performance changes
-- Be direct and to the point
+- Be concise, direct and to the point
+- Use the "humanizer" skill to improve writing
 
 ## Create the PR
 
