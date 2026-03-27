@@ -147,6 +147,7 @@ tasks:
         - gitignore
         - gitmessage
         - ignore
+        - pgpass
         - prettierrc
         - pryrc
         - psqlrc
