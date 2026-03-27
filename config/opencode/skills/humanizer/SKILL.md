@@ -1,6 +1,6 @@
 ---
 name: humanizer
-version: 2.1.1
+version: 2.3.0
 description: |
   Remove signs of AI-generated writing from text. Use when editing or reviewing
   text to make it sound more natural and human-written. Based on Wikipedia's
@@ -9,6 +9,7 @@ description: |
   attributions, em dash overuse, rule of three, AI vocabulary words, negative
   parallelisms, and excessive conjunctive phrases.
 allowed-tools:
+  - Bash
   - Read
   - Write
   - Edit
@@ -30,6 +31,7 @@ When given text to humanize:
 3. **Preserve meaning** - Keep the core message intact
 4. **Maintain voice** - Match the intended tone (formal, casual, technical, etc.)
 5. **Add soul** - Don't just remove bad patterns; inject actual personality
+6. **Normalize mdashes** - Always run the bundled script on the final rewritten text
 
 ---
 
@@ -450,7 +452,13 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
    - Uses specific details over vague claims
    - Maintains appropriate tone for context
    - Uses simple constructions (is/are/has) where appropriate
-5. Present the humanized version
+5. Run the mdash normalization script on the rewritten text:
+   ```bash
+   bun ~/.config/opencode/skills/humanizer/scripts/replace_mdashes.ts
+   ```
+   - If needed, pass the rewritten text through stdin or run `--in-place <file>`.
+6. Verify the final output contains no em dashes (`\u2014` / `—`).
+7. Present the post-processed humanized version
 
 ## Output Format
 
@@ -458,6 +466,8 @@ Provide:
 
 1. The rewritten text
 2. A brief summary of changes made (optional, if helpful)
+
+Important: item 1 must be the post-processed text after running `scripts/replace_mdashes.ts`.
 
 ---
 
