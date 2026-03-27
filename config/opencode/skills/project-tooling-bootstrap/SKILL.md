@@ -29,6 +29,8 @@ Optional flags:
 
 The installer is idempotent: re-running without `--force` only copies missing files, reports `ok` for matching files, and leaves differing files untouched.
 
+The installer also normalizes `committed` to the `github:crate-ci/committed` backend in `mise.toml` so native arm64 binaries are selected when available.
+
 ## Add To OpenCode
 
 From the repository root, install this skill to OpenCode with the Vercel Skills CLI:

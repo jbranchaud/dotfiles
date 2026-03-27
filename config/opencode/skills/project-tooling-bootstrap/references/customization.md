@@ -6,6 +6,7 @@ Use these defaults as a baseline, then tune by project needs.
 
 - Keep tool channels on `latest` for greenfield repos.
 - Pin versions for long-lived repos where reproducibility matters.
+- Keep `committed` on `"github:crate-ci/committed"` so mise pulls native release assets on arm64 hosts.
 - Keep `pitchfork` for local command orchestration and `fnox` for secrets management unless the repo already standardizes on alternatives.
 
 ## `Taskfile.yml` and `taskfiles/ci.yml`

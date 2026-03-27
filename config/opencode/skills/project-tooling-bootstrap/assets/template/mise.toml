@@ -1,5 +1,5 @@
 [tools]
-committed = "latest"
+"github:crate-ci/committed" = "latest"
 dprint = "latest"
 fnox = "latest"
 gitleaks = "latest"

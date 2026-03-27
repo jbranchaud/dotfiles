@@ -80,7 +80,58 @@ copy_template() {
   echo "copy  $relative_path"
 }
 
+ensure_committed_github_backend() {
+  local destination="$TARGET_DIR/mise.toml"
+
+  if [[ ! -f $destination ]]; then
+    return
+  fi
+
+  python3 - "$destination" <<'PY'
+import pathlib
+import re
+import sys
+
+path = pathlib.Path(sys.argv[1])
+text = path.read_text(encoding="utf-8")
+
+github_pattern = re.compile(r'(?m)^\s*"github:crate-ci/committed"\s*=\s*"[^"]+"\s*$')
+legacy_patterns = [
+    re.compile(r'(?m)^(\s*)committed\s*=\s*"([^"]+)"\s*$'),
+    re.compile(r'(?m)^(\s*)"ubi:crate-ci/committed"\s*=\s*"([^"]+)"\s*$'),
+]
+
+if github_pattern.search(text):
+    print("ok    mise.toml (committed uses github backend)")
+    raise SystemExit(0)
+
+for pattern in legacy_patterns:
+    match = pattern.search(text)
+    if match:
+        indent, version = match.group(1), match.group(2)
+        replacement = f'{indent}"github:crate-ci/committed" = "{version}"'
+        updated = text[:match.start()] + replacement + text[match.end():]
+        path.write_text(updated, encoding="utf-8")
+        print("update mise.toml (committed -> github backend)")
+        raise SystemExit(0)
+
+if "[tools]" in text:
+    updated = re.sub(
+        r'(?m)^\[tools\]\s*$',
+        '[tools]\n"github:crate-ci/committed" = "latest"',
+        text,
+        count=1,
+    )
+else:
+    updated = text.rstrip("\n") + '\n\n[tools]\n"github:crate-ci/committed" = "latest"\n'
+
+path.write_text(updated, encoding="utf-8")
+print("update mise.toml (added committed github backend)")
+PY
+}
+
 copy_template "mise.toml"
+ensure_committed_github_backend
 copy_template "Taskfile.yml"
 copy_template "taskfiles/ci.yml"
 copy_template "dprint.json"
