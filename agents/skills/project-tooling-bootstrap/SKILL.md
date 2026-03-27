@@ -48,7 +48,7 @@ npx skills add ./project-tooling-bootstrap -a opencode -g
 If you do not use the CLI, copy the skill directory manually to one of these paths:
 
 - Project scope: `.agents/skills/project-tooling-bootstrap/`
-- Global scope: `~/.config/opencode/skills/project-tooling-bootstrap/`
+- Global scope: `~/.agents/skills/project-tooling-bootstrap/`
 
 ## What Gets Added
 

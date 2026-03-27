@@ -154,12 +154,20 @@ tasks:
         - zinitrc
         - zshenv
         - zshrc
+      FOLDERS:
+        - agents
     cmds:
       - for:
           var: FILES
           as: FILE
         cmd: |
           ln -s -f "$(realpath ./{{.FILE}})" ~/.{{.FILE}}
+
+      - for:
+          var: FOLDERS
+          as: FOLDER
+        cmd: |
+          ln -s -f "$(realpath ./{{.FOLDER}})" ~/.{{.FOLDER}}
 
       - cmd: |
           for folder in ./config/*; do

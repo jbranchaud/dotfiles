@@ -454,7 +454,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
    - Uses simple constructions (is/are/has) where appropriate
 5. Run the mdash normalization script on the rewritten text:
    ```bash
-   bun ~/.config/opencode/skills/humanizer/scripts/replace_mdashes.ts
+   bun ~/.agents/skills/humanizer/scripts/replace_mdashes.ts
    ```
    - If needed, pass the rewritten text through stdin or run `--in-place <file>`.
 6. Verify the final output contains no em dashes (`\u2014` / `—`).
