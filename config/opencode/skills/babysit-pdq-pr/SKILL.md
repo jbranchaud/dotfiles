@@ -13,6 +13,8 @@ description: Babysit PR review cycles for PDQ organization repositories only. Us
   2. Continue only if the owner is a PDQ org (owner login contains `pdq`, case-insensitive).
   3. If not PDQ, stop and tell the user this skill is not applicable.
 - Operate only on the target PR branch and do not change unrelated files.
+- Do not post noisy trigger commands (for example `@coderabbitai review`/`@coderabbitai resume`) unless the user explicitly asks.
+- Prefer automatic CodeRabbit re-reviews triggered by pushed commits.
 
 ## Setup
 
@@ -53,6 +55,7 @@ For every `coderabbitai` comment, decide `fix` or `ignore`.
 3. Commit immediately with a conventional commit title only (no body), for example:
    - `git commit -m "fix: handle nil input in session parser"`
 4. Prefer one commit per accepted concern for clean auditability.
+5. Keep commits local until the current batch of new comments is fully processed.
 
 ## If Decision Is `ignore`
 
@@ -63,10 +66,12 @@ For every `coderabbitai` comment, decide `fix` or `ignore`.
 
 After all comments in the current batch are processed:
 
-1. Push branch updates: `git push`
-   - Run this even when no new commit was created (it is a safe no-op if already up to date).
+1. Push branch updates once for the whole batch: `git push`
+   - Do not push after every single commit.
+   - If the batch produced no new commit, do not push just to poll.
 2. Update `last_checked_at` to the most recent processed CodeRabbit item.
-3. Return to waiting for the next cycle.
+3. Wait for CodeRabbit to re-review automatically; do not post trigger comments unless explicitly requested.
+4. Return to waiting for the next cycle.
 
 ## Wait Strategy
 
