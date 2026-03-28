@@ -59,3 +59,6 @@ fnox.local.toml
 
 # ignore sprite config files globally
 .sprite
+
+# ignore local implementation plans in project roots
+.plans/
