@@ -16,7 +16,7 @@ $ARGUMENTS
 ## Workflow
 
 1. Ensure `.plans/` exists in the current project root.
-2. Create a plan bundle directory at `.plans/<project-short-slug>/`.
+2. Create a plan bundle directory at `.plans/<plan-short-slug>/`
 3. Choose storage mode:
    - Single-file plan: save to `plan.md` inside the bundle directory.
    - Multi-file plan: save an entry file `index.md` and add supporting files as needed.
