@@ -34,6 +34,7 @@ local parsers = {
   'jsdoc',
   'json',
   'json5',
+  'kdl',
   'liquid',
   'llvm',
   'lua',
