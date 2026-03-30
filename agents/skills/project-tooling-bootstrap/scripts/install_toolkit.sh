@@ -132,11 +132,10 @@ PY
 
 copy_template "mise.toml"
 ensure_committed_github_backend
-copy_template "Taskfile.yml"
-copy_template "taskfiles/ci.yml"
 copy_template "dprint.json"
 copy_template "lefthook.yml"
 copy_template "committed.toml"
+copy_template "fnox.toml"
 
 if [[ $WITH_RENOVATE == "true" ]]; then
   copy_template "renovate.json"
@@ -149,6 +148,6 @@ Done.
 Run in the target repository:
   mise install
   lefthook install
-  task fmt
-  task ci:fmt:check
+  mise run fmt
+  mise run fmt-check
 EOF

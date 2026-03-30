@@ -7,12 +7,19 @@ Use these defaults as a baseline, then tune by project needs.
 - Keep tool channels on `latest` for greenfield repos.
 - Pin versions for long-lived repos where reproducibility matters.
 - Keep `committed` on `"github:crate-ci/committed"` so mise pulls native release assets on arm64 hosts.
-- Keep `pitchfork` for local command orchestration and `fnox` for secrets management unless the repo already standardizes on alternatives.
+- Keep `pitchfork` for local orchestration and `fnox` for secrets unless the repo already standardizes on alternatives.
 
-## `Taskfile.yml` and `taskfiles/ci.yml`
+## `fnox.toml`
 
-- Add language-specific tasks (`test`, `lint`, `typecheck`) in `Taskfile.yml`.
-- Keep `ci:fmt:check` lightweight and deterministic.
+- Default provider should stay `onepass` when the team uses 1Password.
+- Keep keychain fallback for `OP_SERVICE_ACCOUNT_TOKEN` for local development.
+- Commit only provider and key mappings, never secret values.
+
+## Mise built-in tasks
+
+- Add language-specific tasks (`test`, `lint`, `typecheck`) under `[tasks.*]` in `mise.toml`.
+- Keep `fmt-check` lightweight and deterministic.
+- For app commands that need secrets, prefer `fnox run -- <command>` inside task `run` entries.
 
 ## `dprint.json`
 

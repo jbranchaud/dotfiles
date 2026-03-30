@@ -5,4 +5,14 @@ fnox = "latest"
 gitleaks = "latest"
 lefthook = "latest"
 pitchfork = "latest"
-task = "latest"
+
+[hooks]
+postinstall = "lefthook install"
+
+[tasks.fmt]
+description = "Formats all supported files"
+run = "dprint fmt"
+
+[tasks.fmt-check]
+description = "Checks formatting and fails on differences"
+run = "dprint check"
