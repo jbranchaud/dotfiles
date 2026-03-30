@@ -4,7 +4,7 @@ return {
   'numToStr/Comment.nvim',
   event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
-    'dkarter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter',
     {
       'JoosepAlviste/nvim-ts-context-commentstring',
       opts = {},

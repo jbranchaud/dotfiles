@@ -65,12 +65,12 @@ return {
       'LiadOz/nvim-dap-repl-highlights',
       opts = {},
       dependencies = {
-        'dkarter/nvim-treesitter',
+        'nvim-treesitter/nvim-treesitter',
       },
       build = function()
-        -- the dap_repl parser can only be found after the plugin has loaded
-        if not require('nvim-treesitter.parsers').has_parser 'dap_repl' then
-          vim.cmd ':TSInstall dap_repl'
+        local ok, ts = pcall(require, 'nvim-treesitter')
+        if ok then
+          ts.install { 'dap_repl' }
         end
       end,
     },
