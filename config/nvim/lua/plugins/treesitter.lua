@@ -41,6 +41,7 @@ local parsers = {
   'make',
   'markdown',
   'markdown_inline',
+  'mermaid',
   'nginx',
   'promql',
   'python',
