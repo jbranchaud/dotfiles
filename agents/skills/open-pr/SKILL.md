@@ -60,6 +60,7 @@ Guidelines:
 - Include before/after comparisons for UI or performance changes
 - Be concise, direct and to the point
 - Use the "humanizer" skill to improve writing
+- IMPORTANT: always keep the pr in DRAFT mode - only a human should be allowed take a PR out of draft mode
 
 ## Create the PR
 
@@ -72,5 +73,5 @@ Guidelines:
 
 3. Open PR creation in browser (do NOT create directly):
    ```bash
-   gh pr create --web --title "<title>" --body "<body>"
+   gh pr create --draft --title "<title>" --body "<body>"
    ```
