@@ -6,6 +6,9 @@ commit-msg:
     - name: conventional commits
       run: committed --commit-file {1}
 
+    - name: check secrets
+      run: mise exec -- gitleaks git --no-banner --redact
+
 pre-push:
   parallel: true
   jobs:
