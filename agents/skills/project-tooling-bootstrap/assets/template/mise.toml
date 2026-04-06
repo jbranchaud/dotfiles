@@ -1,0 +1,18 @@
+[tools]
+"github:crate-ci/committed" = "latest"
+dprint = "latest"
+fnox = "latest"
+gitleaks = "latest"
+lefthook = "latest"
+pitchfork = "latest"
+
+[hooks]
+postinstall = "lefthook install"
+
+[tasks.fmt]
+description = "Formats all supported files"
+run = "dprint fmt"
+
+[tasks.fmt-check]
+description = "Checks formatting and fails on differences"
+run = "dprint check"

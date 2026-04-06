@@ -149,6 +149,7 @@ tasks:
         - gitmessage
         - gnupg/gpg-agent.conf
         - ignore
+        - pgpass
         - prettierrc
         - pryrc
         - psqlrc
@@ -157,12 +158,20 @@ tasks:
         - zshenv
         - zshrc
         - zshrc.local
+      FOLDERS:
+        - agents
     cmds:
       - for:
           var: FILES
           as: FILE
         cmd: |
           ln -s -f "$(realpath ./{{.FILE}})" ~/.{{.FILE}}
+
+      - for:
+          var: FOLDERS
+          as: FOLDER
+        cmd: |
+          ln -s -f "$(realpath ./{{.FOLDER}})" ~/.{{.FOLDER}}
 
       - cmd: |
           for folder in ./config/*; do

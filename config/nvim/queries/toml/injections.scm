@@ -40,3 +40,23 @@
   (#offset! @injection.content 0 1 0 -1) ; rm quotes
   (#set! injection.language "bash") ; default to bash
 )
+
+(pair
+  (bare_key) @key (#eq? @key "usage")
+  (string) @injection.content
+
+  (#is-mise?)
+  (#match? @injection.content "^['\"]{3}\n*.*") ; multiline
+  (#offset! @injection.content 0 3 0 -3) ; rm quotes
+  (#set! injection.language "kdl") ; usage spec
+)
+
+(pair
+  (bare_key) @key (#eq? @key "usage")
+  (string) @injection.content
+
+  (#is-mise?)
+  (#not-match? @injection.content "^['\"]{3}") ; not multiline
+  (#offset! @injection.content 0 1 0 -1) ; rm quotes
+  (#set! injection.language "kdl") ; usage spec
+)

@@ -90,6 +90,9 @@ brew 'btop'
 # docker desktop for containers
 cask 'docker-desktop'
 
+# alternative to docker desktop
+cask 'orbstack'
+
 # build tool
 brew 'make'
 

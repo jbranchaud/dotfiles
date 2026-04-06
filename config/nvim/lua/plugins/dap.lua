@@ -65,12 +65,12 @@ return {
       'LiadOz/nvim-dap-repl-highlights',
       opts = {},
       dependencies = {
-        'dkarter/nvim-treesitter',
+        'nvim-treesitter/nvim-treesitter',
       },
       build = function()
-        -- the dap_repl parser can only be found after the plugin has loaded
-        if not require('nvim-treesitter.parsers').has_parser 'dap_repl' then
-          vim.cmd ':TSInstall dap_repl'
+        local ok, ts = pcall(require, 'nvim-treesitter')
+        if ok then
+          ts.install { 'dap_repl' }
         end
       end,
     },
@@ -78,21 +78,21 @@ return {
     -- GO
     'leoluz/nvim-dap-go',
 
-    -- JS/TS/React/Node
-    {
-      'microsoft/vscode-js-debug',
-      -- After install, build it and rename the dist directory to out
-      build = 'git checkout .; mise use node@20.16.0 && npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out; git checkout .',
-    },
-    {
-      'mxsdev/nvim-dap-vscode-js',
-      ---@module "dap-vscode-js"
-      ---@type Settings
-      opts = {
-        debugger_path = vim.fn.resolve(vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug'),
-        adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
-      },
-    },
+    -- -- JS/TS/React/Node
+    -- {
+    --   'microsoft/vscode-js-debug',
+    --   -- After install, build it and rename the dist directory to out
+    --   build = 'git checkout .; mise use node@20.16.0 && npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out; git checkout .',
+    -- },
+    -- {
+    --   'mxsdev/nvim-dap-vscode-js',
+    --   ---@module "dap-vscode-js"
+    --   ---@type Settings
+    --   opts = {
+    --     debugger_path = vim.fn.resolve(vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug'),
+    --     adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+    --   },
+    -- },
   },
   config = function()
     local dap = require 'dap'
