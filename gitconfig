@@ -155,3 +155,5 @@
 ; https://git-scm.com/docs/git-config#_includes
 [include]
   path = ~/.gitconfig.local
+[log]
+	date = rfc-local
