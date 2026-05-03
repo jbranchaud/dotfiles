@@ -4,6 +4,34 @@ export PATH="/Applications/Cursor.app/Contents/Resources/app/bin:$PATH"
 # Set up GPG for git commit signing
 export GPG_TTY=$(tty)
 
+# ~~~ gh ~~~
+
+# Search for a pattern with `rg`, interactively look through results with `fzf`,
+# and then open in github with `gh browse`
+rgbr() {
+  local rg_cmd="rg --line-number --no-heading --color=always --smart-case"
+  local selection
+  selection=$(
+    : | fzf --ansi \
+            --disabled \
+            --query "${1:-}" \
+            --bind "start:reload:$rg_cmd {q} || true" \
+            --bind "change:reload:sleep 0.1; $rg_cmd {q} || true" \
+            --delimiter=: \
+            --preview '
+              bat --style=numbers --color=always --highlight-line {2} {1} \
+                | rg --color=always --smart-case --passthru --context 1000 {q}
+            ' \
+            --preview-window='right:60%:+{2}/2' \
+            --bind 'ctrl-/:change-preview-window(down|hidden|)'
+  ) || return 1
+
+  local file line
+  file=$(echo "$selection" | awk -F: '{print $1}')
+  line=$(echo "$selection" | awk -F: '{print $2}')
+  gh browse "${file}:${line}"
+}
+
 # ~~~ Git ~~~
 
 # Copied from https://github.com/junegunn/fzf/wiki/Examples#git
