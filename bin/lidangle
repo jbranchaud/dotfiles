@@ -1,0 +1,38 @@
+#!/usr/bin/env -S uv run --quiet --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = ["hidapi"]
+# ///
+"""Print MacBook lid angle in degrees."""
+import os, sys
+
+if sys.platform == "darwin":
+    brew = "/opt/homebrew/lib"
+    if os.path.exists(brew):
+        os.environ["DYLD_LIBRARY_PATH"] = f"{brew}:{os.environ.get('DYLD_LIBRARY_PATH','')}"
+
+import hid
+
+VENDOR_ID, PRODUCT_ID = 0x05AC, 0x8104
+USAGE_PAGE, USAGE = 0x0020, 0x008A
+REPORT_ID = 1
+
+def read_angle():
+    for info in hid.enumerate(VENDOR_ID, PRODUCT_ID):
+        if info.get("usage_page") == USAGE_PAGE and info.get("usage") == USAGE:
+            d = hid.device()
+            path = info["path"]
+            d.open_path(path if isinstance(path, bytes) else path.encode())
+            try:
+                data = d.get_feature_report(REPORT_ID, 8)
+                if data and len(data) >= 3:
+                    return float((data[2] << 8) | data[1])
+            finally:
+                d.close()
+    return None
+
+if __name__ == "__main__":
+    a = read_angle()
+    if a is None:
+        sys.exit("sensor not available")
+    print(f"{a:.0f}")
