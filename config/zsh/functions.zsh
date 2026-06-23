@@ -301,3 +301,28 @@ lci() {
     lnr
   fi
 }
+
+# repo - fuzzy find one of your GitHub repos and open it in the browser
+#
+# Lists all repos owned by your GitHub account, fuzzy selects one with fzf,
+# then opens the selected repo in the browser via `gh`.
+#
+# Usage:
+#
+#   repo            # fuzzy select a repo and open it
+#   repo <query>    # pre-seed the fzf query
+repo() {
+  local selected
+  selected="$(
+    gh repo list --limit 1000 --json nameWithOwner,description \
+      --jq '.[] | [.nameWithOwner, .description] | @tsv' \
+      | fzf --query="$1" --exit-0 \
+        --with-nth=1 --delimiter='\t' \
+        --preview='gh repo view {1}' \
+        --preview-window='right,60%' \
+        --prompt='repo> ' --border=rounded \
+      | cut -f1
+  )"
+
+  [[ -n $selected ]] && gh repo view --web "$selected"
+}
