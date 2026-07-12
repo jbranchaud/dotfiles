@@ -141,3 +141,16 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # set up starship prompt
 export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
 eval "$(starship init zsh)"
+
+# Pin `code`/`cursor` to the right app via PATH ordering. Cursor's terminal (and
+# any tmux server spawned from it) puts Cursor's bin -- which ships BOTH `code`
+# and `cursor` -- at the front of PATH, so `code` opens Cursor. Must run last,
+# after every other PATH prepend above. Prepend Cursor's bin first, then VS
+# Code's, so the final front order is [VS Code, Cursor]: `code` -> VS Code,
+# `cursor` -> Cursor. VS Code's bin has no `cursor`, so nothing is shadowed, and
+# both resolve correctly in plain terminals too.
+__cursor_bin="/Applications/Cursor.app/Contents/Resources/app/bin"
+__vscode_bin="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+[[ -d "$__cursor_bin" ]] && export PATH="$__cursor_bin:$PATH"
+[[ -d "$__vscode_bin" ]] && export PATH="$__vscode_bin:$PATH"
+unset __cursor_bin __vscode_bin
