@@ -100,7 +100,7 @@ brew 'make'
 brew 'tmux'
 
 # vimium like jumps in tmux
-tap 'morantron/tmux-fingers'
+tap 'morantron/tmux-fingers', trusted: true
 brew 'morantron/tmux-fingers/tmux-fingers'
 
 # download files from the terminal, used by some scripts
@@ -123,6 +123,9 @@ brew 'watch'
 
 # set default application for opening files on mac
 brew 'duti'
+
+# manage macOS display arrangements
+brew 'displayplacer'
 
 # for Nerves
 # brew 'xz'

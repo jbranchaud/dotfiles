@@ -2,6 +2,268 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [31.8.0](https://github.com/dkarter/dotfiles/compare/v31.7.1...v31.8.0) (2026-06-30)
+
+
+### Features
+
+* **task:** add task mise:lock ([a1e8186](https://github.com/dkarter/dotfiles/commit/a1e8186dc2eb96468059e3501a0698152accced2))
+
+
+### Bug Fixes
+
+* **opencode:** add more fields to linear-mcp-sanitize plugin ([19c94e5](https://github.com/dkarter/dotfiles/commit/19c94e522b15d87d300eb380bbbb508b82530095))
+* **opencode:** allow access to /tmp/** ([6368184](https://github.com/dkarter/dotfiles/commit/6368184e8acd9db56c2955ac0e2269cd98e60fc4))
+* **setup:** improve check for terminfo install ([b5be898](https://github.com/dkarter/dotfiles/commit/b5be8989d8ab377a52a09f5b872a53becbac3a8e))
+* **task:** improve 1password agent install ([e594425](https://github.com/dkarter/dotfiles/commit/e594425906dc2d4c797223c08674595d18c9edc1))
+* **task:** restore `--locked` to mise:tools:install task ([28eac92](https://github.com/dkarter/dotfiles/commit/28eac922a2ed65f40b5b93e53516b36b3227750b))
+* **task:** when installing mise from brew, update first ([64d79df](https://github.com/dkarter/dotfiles/commit/64d79dfc11ab3ba3c543fbfc3029a3611f40472c))
+
+## [31.7.1](https://github.com/dkarter/dotfiles/compare/v31.7.0...v31.7.1) (2026-06-27)
+
+
+### Bug Fixes
+
+* **docker:** fix build script ([bfccc5c](https://github.com/dkarter/dotfiles/commit/bfccc5cb8a22ed82eac2f9ca2b5a0b1b6d523467))
+
+## [31.7.0](https://github.com/dkarter/dotfiles/compare/v31.6.2...v31.7.0) (2026-06-27)
+
+
+### Features
+
+* add herdr ([85a7cfc](https://github.com/dkarter/dotfiles/commit/85a7cfc89ebebbe70a336597fb62960896b2061a))
+* **herdr:** add command palette ([f734396](https://github.com/dkarter/dotfiles/commit/f734396b260eb9ae0625434001292dab39517a36))
+
+
+### Bug Fixes
+
+* **aube:** update lockfile ([636052f](https://github.com/dkarter/dotfiles/commit/636052f0c0313d3843d67cb276e14dd522c52be6))
+* **nvim:** deno lsp project detection ([8174a82](https://github.com/dkarter/dotfiles/commit/8174a824f7a4a55e0cfed97ceeab996bae9a8dae))
+* **opencode:** add plugin to fix issues with Linear MCP ([53f7e35](https://github.com/dkarter/dotfiles/commit/53f7e350e0549692af162667233435c1cd2e54c0))
+
+## [31.6.2](https://github.com/dkarter/dotfiles/compare/v31.6.1...v31.6.2) (2026-06-15)
+
+
+### Bug Fixes
+
+* **mise:** remove `--locked` from mise install ([91ffd4c](https://github.com/dkarter/dotfiles/commit/91ffd4c2fb8e57b6550a4e5580614a0181165df5))
+* **skills:** improve handoff ([0adc22a](https://github.com/dkarter/dotfiles/commit/0adc22aa1a68824ae3d05882c0b5c2d204a8b452))
+* **task:** completions syntax was incorrect ([da54f41](https://github.com/dkarter/dotfiles/commit/da54f41a801e893c6dd9d43e81e2e6f009aa9f93))
+* **task:** remove mise:tools:install:with-github-auth ([c766b81](https://github.com/dkarter/dotfiles/commit/c766b81893e0629e9956dec3258e189625a40547))
+
+## [31.6.1](https://github.com/dkarter/dotfiles/compare/v31.6.0...v31.6.1) (2026-06-13)
+
+
+### Bug Fixes
+
+* mise aube tools ([5650bc1](https://github.com/dkarter/dotfiles/commit/5650bc1cf95a67f148b5e30771177f42376940ec))
+
+## [31.6.0](https://github.com/dkarter/dotfiles/compare/v31.5.0...v31.6.0) (2026-06-13)
+
+
+### Features
+
+* **ci:** sign release commits ([dce3f17](https://github.com/dkarter/dotfiles/commit/dce3f178de6057d71db0d3827ab1b97b82de0d49))
+* **mise:** add stack and openspec ([a8dee07](https://github.com/dkarter/dotfiles/commit/a8dee07a8594ff9e706fb1320c009461a7460f4e))
+* **mise:** add stack cli ([bf7b1a6](https://github.com/dkarter/dotfiles/commit/bf7b1a685e19b2894f556bb5d43ed3989acead44))
+* **nvim:** replace bullets.vim with bullets.nvim ([4fecc5d](https://github.com/dkarter/dotfiles/commit/4fecc5de752a2324aec9d9996ddb37dcf11add2b))
+* **opencode:** add linear mcp globally ([ba681fd](https://github.com/dkarter/dotfiles/commit/ba681fd22791708d74c856c26a1d5fb6bb32a8ed))
+* **opencode:** use Expert instead of ElixirLS for Elixir ([bcdd7b1](https://github.com/dkarter/dotfiles/commit/bcdd7b1c493d311427c2b1c124278807a0c8b738))
+* **pi:** add workmux plugin ([a72b2af](https://github.com/dkarter/dotfiles/commit/a72b2afb243538650c97afbe83bb0a145f745637))
+* **skills:** add /teach ([4136648](https://github.com/dkarter/dotfiles/commit/41366484496d277fa792940b1ce677142bddfb06))
+* **skills:** add caveman ([aad6bea](https://github.com/dkarter/dotfiles/commit/aad6bea24b02854463fb2b6f309d5e74e7c512e4))
+* **skills:** add handoff skill ([b8e05bc](https://github.com/dkarter/dotfiles/commit/b8e05bcc545a26993323b0932af4924db98e4a25))
+
+
+### Bug Fixes
+
+* add uv to local mise ([0dc4e58](https://github.com/dkarter/dotfiles/commit/0dc4e58d0a65fc24f43fdff09a6c39dba0bcec61))
+* **lefthook:** only format check staged files ([2c06926](https://github.com/dkarter/dotfiles/commit/2c06926e1ecdc8d0000c06b100e320f95d0ccb09))
+* **mise:** ignore some tools for minimum_release_age ([8797719](https://github.com/dkarter/dotfiles/commit/8797719df98b3931b4f57a37f7603e39cf1d2bbd))
+* **nvim:** address breaking changes with opencode.nvim ([fc14c09](https://github.com/dkarter/dotfiles/commit/fc14c0904b8b11d70fd7fbc3c4f5b7cb46f7d102))
+* **nvim:** support dprint for lua formatting ([98f9f70](https://github.com/dkarter/dotfiles/commit/98f9f706ad8ab355f976d78c2dec48d38aa2f6f5))
+* **opencode:** ask for fnox commands ([8f2a669](https://github.com/dkarter/dotfiles/commit/8f2a669be121c0dd92f208a303e41b57391d53c7))
+* **opencode:** resolve subagent background keybinding conflict ([437aea2](https://github.com/dkarter/dotfiles/commit/437aea28e6c4a308645dc99c9cf9925e0fe082ac))
+* **skills:** update grill me ([ac372ee](https://github.com/dkarter/dotfiles/commit/ac372ee869e2de5e51dc1cbeca42846a13f3e74f))
+* **tmux:** don't write the sesh return code after switch ([55fc860](https://github.com/dkarter/dotfiles/commit/55fc860d35ade791902a40d8dd3697e4aedb2ea1))
+* **tmux:** pasting in neovim prompt popup ([178ac06](https://github.com/dkarter/dotfiles/commit/178ac06497178663ee3620a9cda7ecf9571370e6))
+* **tuicr:** improve config ([97f35f9](https://github.com/dkarter/dotfiles/commit/97f35f99804faee3e34292f6195703d8e9631bf3))
+* **tuicr:** open requested repo review ([81fc265](https://github.com/dkarter/dotfiles/commit/81fc2651c8ddf27a4925b8de8e835463b1e01cbb))
+
+## [31.5.0](https://github.com/dkarter/dotfiles/compare/v31.4.0...v31.5.0) (2026-06-05)
+
+
+### Features
+
+* **skills:** add aube due diligence skill ([85b7fc0](https://github.com/dkarter/dotfiles/commit/85b7fc0b9d501f15a8d3b3ee0b437d464031ddc4))
+* **skills:** add grill-me 🥩 🔥 ([939a0c5](https://github.com/dkarter/dotfiles/commit/939a0c552ae0d4ff9ca6956cb50d295512f233d0))
+* **skills:** support local machine wide skills ([435a381](https://github.com/dkarter/dotfiles/commit/435a3814f27f876937fe015b5c98532ea37517be))
+* **tmux:** support repo shorthand in tmux-clone-repo ([2a03338](https://github.com/dkarter/dotfiles/commit/2a033383469278a5b09f3dbc62306ad7d8353aef))
+* **zsh:** add mise alias (m) ([c949c3f](https://github.com/dkarter/dotfiles/commit/c949c3f515bd98b60d3f2712511503556501e26a))
+
+
+### Bug Fixes
+
+* **aube:** exclude tinyexec ([5b64aa9](https://github.com/dkarter/dotfiles/commit/5b64aa93db065f9cf1e096203338e2e8a6cf9f50))
+* **mise:** remove disable_backends setting ([442095d](https://github.com/dkarter/dotfiles/commit/442095de2ecb3ab27fcb5b1787f5c4864a2fb088))
+* **neovim,tmux:** prevent snacks.nvim issue with markdown ([c523026](https://github.com/dkarter/dotfiles/commit/c5230269625a864e7783954fc4aeb8a72b8d578e))
+* **nvim:** bullets-vim lazy loading ([51c5d71](https://github.com/dkarter/dotfiles/commit/51c5d717c5a0b1075d58a9b50f5f11794049ab87))
+* **nvim:** revert remove render-markdown plugin ([23f1d8e](https://github.com/dkarter/dotfiles/commit/23f1d8ecfab0652e228b7a81ec771c954991ed3b))
+* **skills:** improve open-pr skill ([9e41bdc](https://github.com/dkarter/dotfiles/commit/9e41bdcdadff47f7d3c2108853acc13bcb6ed201))
+* **skill:** update tooling bootstrap gitleaks command ([ccb1487](https://github.com/dkarter/dotfiles/commit/ccb1487e163ffeb5fde074263adef419012d1ead))
+* **task:** use ROOT_DIR instead of hardcoded path for mix completion ([#414](https://github.com/dkarter/dotfiles/issues/414)) ([068f38a](https://github.com/dkarter/dotfiles/commit/068f38a075cdd4d5e4b9677ddddbd7c6e7b9f35d))
+* **tmux:** disable docker compose warning in tmux ([30d85a2](https://github.com/dkarter/dotfiles/commit/30d85a2720b6a1d88223aa14ed2d9dd06bfc5263))
+* **tv:** wrap mise registry preview ([0ad6733](https://github.com/dkarter/dotfiles/commit/0ad6733b800c45dffb124b893aea8448bf66272f))
+* **workmux:** skip mix tests outside elixir repos ([21014a9](https://github.com/dkarter/dotfiles/commit/21014a91997be8b3474493f634667d2a273804c7))
+
+## [31.4.0](https://github.com/dkarter/dotfiles/compare/v31.3.0...v31.4.0) (2026-05-17)
+
+
+### Features
+
+* add cmux config ([588d63c](https://github.com/dkarter/dotfiles/commit/588d63c0acb6908ed4b2cee3bbb3de9f55fd59db))
+* add devpod support ([af26f34](https://github.com/dkarter/dotfiles/commit/af26f345634ceef73fa68b5a8d174141cc2c7afb))
+* **ci:** include global mise tools in oci image ([8e41b23](https://github.com/dkarter/dotfiles/commit/8e41b2377f95280c01a450dbeade9f8387704bd5))
+* **ci:** publish mise oci image ([7c7a988](https://github.com/dkarter/dotfiles/commit/7c7a988964cd4ad04189053362ee060d5b30b138))
+* **ci:** publish multi-arch mise oci image ([b08769f](https://github.com/dkarter/dotfiles/commit/b08769f1882854de1346ac20fba2e5fedf983658))
+* **ci:** report critical oci vulnerabilities ([063083a](https://github.com/dkarter/dotfiles/commit/063083a81cf52206288320e9fdbbf638344e9d0c))
+* **devcontainer:** add prebuilt dotfiles image ([9caea86](https://github.com/dkarter/dotfiles/commit/9caea8678d8fde76824b5103edda9be6ecc6ea6c))
+* **opencode:** enable lsp ([28a8ee6](https://github.com/dkarter/dotfiles/commit/28a8ee6a899e91692fea43333d9518005cecbc4b))
+* **skills:** add Elixir AST refactor skill ([e4338a2](https://github.com/dkarter/dotfiles/commit/e4338a2357f24c1bdbbbb03ab2f794e3f62a6019))
+* **task:** add devcontainer tasks ([866b351](https://github.com/dkarter/dotfiles/commit/866b351019603511af553463dc4df2cf7e362517))
+* **task:** add mise:commit ([1893307](https://github.com/dkarter/dotfiles/commit/1893307e938679fc215c7a97d9f7273e443d0840))
+* **tuicr:** set side-by-side as the default layout ([ad2588f](https://github.com/dkarter/dotfiles/commit/ad2588f6141b279fcea39f5da16893d98774901c))
+
+
+### Bug Fixes
+
+* **aube:** keep install advisory setting as string ([8267386](https://github.com/dkarter/dotfiles/commit/826738627d8f6cc65daff05a846a826381f20446))
+* **aube:** switch lockfile to aube and tighten security ([201e5d9](https://github.com/dkarter/dotfiles/commit/201e5d953cf42267152d81071fbd412ea2fe4e53))
+* **ci:** authenticate mise oci checkout ([f4d81a7](https://github.com/dkarter/dotfiles/commit/f4d81a7057e0981fdf3dec611f1d99e05058db2e))
+* **ci:** avoid checkout submodule cleanup ([74e226a](https://github.com/dkarter/dotfiles/commit/74e226a090ffb5c08acea97e7f1ea4abc6cd00e4))
+* **ci:** isolate generated oci config ([aff6d2a](https://github.com/dkarter/dotfiles/commit/aff6d2af006436027cbde5b50232df665736f835))
+* **ci:** keep manual checkout for image workflows ([7cd196b](https://github.com/dkarter/dotfiles/commit/7cd196b850635ddade0bbc4a3d5af91c394ca670))
+* **ci:** publish latest mise oci tag ([af04c38](https://github.com/dkarter/dotfiles/commit/af04c38d4e2e55596018cc9d6f010a9fa17eb921))
+* **ci:** scan mise oci images for secrets ([457135d](https://github.com/dkarter/dotfiles/commit/457135d2105dd8a33b2a5ebf145bb8b10719f78a))
+* **ci:** scope registry credentials ([098bc5c](https://github.com/dkarter/dotfiles/commit/098bc5c16c080dff840bd30261ff830920ae262f))
+* **ci:** set registry auth paths at runtime ([c489490](https://github.com/dkarter/dotfiles/commit/c4894907ddb01e93b3081ed15f10bb0de63b04fc))
+* **ci:** skip unsupported arm64 oci tool ([08d0e91](https://github.com/dkarter/dotfiles/commit/08d0e91938d63fcd47c0f9b561e8542d1d1c2148))
+* **ci:** skip unsupported oci tool artifacts ([1a71261](https://github.com/dkarter/dotfiles/commit/1a712615031ccb9369eac586e0c47634f7d3b37c))
+* **ci:** use Docker login action for GHCR ([02bc576](https://github.com/dkarter/dotfiles/commit/02bc5762354b6bc4aa4c686c50cb7111d5c4366b))
+* **debian:** improve debian setup in devcontainer ([71644bb](https://github.com/dkarter/dotfiles/commit/71644bb8caee1539809991043e42037c195b4765))
+* **deps:** patch vulnerability in fast-uri ([80a8ff2](https://github.com/dkarter/dotfiles/commit/80a8ff2db200004825ec2d77b58666e729fca56b))
+* **devcontainer:** add it to mise and fix workspace ([fac8129](https://github.com/dkarter/dotfiles/commit/fac8129db905dd01043e754bfe41dd0839957118))
+* **devcontainer:** cache setup layer by inputs ([85e85e4](https://github.com/dkarter/dotfiles/commit/85e85e49872250c54d3641df75b67d895c770c98))
+* **devcontainer:** expose mise tools on path ([4ea3c02](https://github.com/dkarter/dotfiles/commit/4ea3c0293f72c9a6f3edecc99a7ccf09d2ac3bfe))
+* **devcontainer:** hash setup inputs from git index ([2eeda7a](https://github.com/dkarter/dotfiles/commit/2eeda7a049e8fa7615fb6065449e01ab5f2bcb46))
+* **devcontainer:** prewarm development tools ([886f9f8](https://github.com/dkarter/dotfiles/commit/886f9f8e7d780e0fd3005fff74df59ce3d0dcc4a))
+* **devcontainer:** publish image tags reliably ([a9deb05](https://github.com/dkarter/dotfiles/commit/a9deb0573d34550b70230bec251bb42b5c82b70a))
+* **devcontainer:** rely on mise activation for tools ([61fdba4](https://github.com/dkarter/dotfiles/commit/61fdba4a0ae25a5addabdbee2984706a0cff7e48))
+* **devcontainer:** speed up image builds ([0c0934b](https://github.com/dkarter/dotfiles/commit/0c0934b77e45ec69e5dba645b2a0c3a71064a633))
+* **devcontainer:** tolerate broken done styling ([9af929d](https://github.com/dkarter/dotfiles/commit/9af929dfff9c69582907a0b6497ca538b0bd6187))
+* **git:** add alias for mergetool + disable backups for mergetool ([d7361bf](https://github.com/dkarter/dotfiles/commit/d7361bfb32a3aca34c1cbca0ad55b22323e5f9e8))
+* **git:** ignore .codex dir ([7e385f3](https://github.com/dkarter/dotfiles/commit/7e385f3d976e2d278fe9d223843835558284a278))
+* ignore claude worktrees ([7995531](https://github.com/dkarter/dotfiles/commit/79955318968dcb78adefa269643960a9ba704ba0))
+* **mise:** build OCI image on Debian 13 ([9ac0574](https://github.com/dkarter/dotfiles/commit/9ac0574fd1c7a14099f52c45a434474c184ff025))
+* **mise:** lock global tools ([bbaead6](https://github.com/dkarter/dotfiles/commit/bbaead690ac036c270c8e7da62196215a420d3eb))
+* **mise:** remove unused tools ([9af59ef](https://github.com/dkarter/dotfiles/commit/9af59ef247f2d9ab35a5aabed4f565f92a656652))
+* **mise:** silence trust warnings ([27d8984](https://github.com/dkarter/dotfiles/commit/27d89846e28e63ddf249b48cddcb96eb1f007dda))
+* **mise:** switch npm package manager to aube ([0c2fca6](https://github.com/dkarter/dotfiles/commit/0c2fca688f5cbc0abdfb7a2d4c1493822d9a0e5f))
+* **mise:** use lock file to avoid github token ([b0695c5](https://github.com/dkarter/dotfiles/commit/b0695c530bb2ebf52eda72eeea0e3792db0f87b9))
+* **mise:** use oci safe versions ([f05dc4f](https://github.com/dkarter/dotfiles/commit/f05dc4ffd85ea1bcd34f4d4cc63d80b2b2d08640))
+* **nvim:** remove render-markdown plugin ([e7c1e70](https://github.com/dkarter/dotfiles/commit/e7c1e70afe139f2ab79a1f7fca0ca7f78d1fabe7))
+* **sesh:** remove fix that was breaking resizing ([16177e8](https://github.com/dkarter/dotfiles/commit/16177e86683162b4b50c8e244ba7bab625417fa7))
+* **sesh:** resize issue + launch session with `s` from outside tmux ([2887b6a](https://github.com/dkarter/dotfiles/commit/2887b6ad3cc6c01b6a2cec4f5f26fa86dc32faec))
+* **task:** add all mise lock files to mise:commit ([e9cc6ae](https://github.com/dkarter/dotfiles/commit/e9cc6aeec8f194e851cc91aa47b42d793e8847c4))
+* **task:** use mise install --locked for setup ([54bdf0e](https://github.com/dkarter/dotfiles/commit/54bdf0e2ffe38553a0ced246930e34c551340bde))
+* **tmux:** display message when no session found ([73f1558](https://github.com/dkarter/dotfiles/commit/73f15581134706da51f1e6808faf55e1ac3f66a2))
+* **tuicr:** disable review footer ([aca61ba](https://github.com/dkarter/dotfiles/commit/aca61ba3438937efeca64cba3da8f89b8cda0f32))
+
+## [31.3.0](https://github.com/dkarter/dotfiles/compare/v31.2.0...v31.3.0) (2026-05-04)
+
+
+### Features
+
+* add pi agent ([814ab8a](https://github.com/dkarter/dotfiles/commit/814ab8a8d7546c30fe3a7e2a44a306ee9ba4ce22))
+* **cmux:** add config ([b57e778](https://github.com/dkarter/dotfiles/commit/b57e778e36367d70b3d3ebaf2edf2a33e7ad84f8))
+* **ghostty:** add local config override ([d2f169a](https://github.com/dkarter/dotfiles/commit/d2f169a72e930174217b6875cf47904feb6ff184))
+* **hypr:** use scrolling behavior ([db34b5a](https://github.com/dkarter/dotfiles/commit/db34b5adcf63e8982952e61d4b786bed2c642480))
+* **mise:** add pi coding agent ([e64f823](https://github.com/dkarter/dotfiles/commit/e64f8239ec4adda7a8d44504906b703ce288079f))
+* **mise:** add tuicr ([5d50837](https://github.com/dkarter/dotfiles/commit/5d508377fcba2455a63629b9132600b616251086))
+* **nvim:** add sidekick.nvim ([59b8622](https://github.com/dkarter/dotfiles/commit/59b8622b10bf66e929848174ad2d714b2cf057e9))
+* **raycast:** store script commands ([cddbca1](https://github.com/dkarter/dotfiles/commit/cddbca12245dae6961759d9805c1f8e92dcdacec))
+* **skill:** add github actions version pinning skill ([7df0121](https://github.com/dkarter/dotfiles/commit/7df01217529049665b63e99d25c5464495d6c897))
+* **task:** add opencode:commit task ([5002c07](https://github.com/dkarter/dotfiles/commit/5002c07a8ce3b3dc691b8d6af6643cd5c5778e7a))
+* **tmux,ghostty:** add super+shift+e for workmux dashboard ([6521258](https://github.com/dkarter/dotfiles/commit/652125859f1bf70a2912b3fc5918530fe1513f75))
+* **zsh:** add ocr alias for opencode run ([08ea40c](https://github.com/dkarter/dotfiles/commit/08ea40c123265346ef5ed7027c484d253f933b33))
+* **zsh:** add up command ([68aa8ea](https://github.com/dkarter/dotfiles/commit/68aa8ea3e219d1a5ed4ceca633dbef65a2c7a69f))
+* **zsh:** support session name argument for `tn` function ([73407a1](https://github.com/dkarter/dotfiles/commit/73407a17ba7073e88e44750a111ba0ad103686a0))
+
+
+### Bug Fixes
+
+* **arch:** keyd config broken in latest ([ca18ccd](https://github.com/dkarter/dotfiles/commit/ca18ccd73baf40adf2c3927257e1359525232d4d))
+* **claude:** force it to use xdg config dir ([cceaf1f](https://github.com/dkarter/dotfiles/commit/cceaf1fcd3c67dd6f0d7b80d370ebb0b05f1e58a))
+* **claude:** startup fix + sync for skills ([a5a45bc](https://github.com/dkarter/dotfiles/commit/a5a45bcb4a96d83598a097113290c35b317d554e))
+* **claude:** sync skills to claude ([349d651](https://github.com/dkarter/dotfiles/commit/349d651892e681114386ba1f3e8cc063d7e20f48))
+* **gh:** opt out of telemetry ([b80917d](https://github.com/dkarter/dotfiles/commit/b80917d5c709a4c5d933c071638e1a08e82c3db2))
+* **git:** ignore dexter lsp files ([12e15d7](https://github.com/dkarter/dotfiles/commit/12e15d7e1f1d1bb7f75b8c74572a3e4a0b039258))
+* **nvim:** improve session selection ([e746883](https://github.com/dkarter/dotfiles/commit/e7468832c64a2a7b370a32a4034e1909838366fb))
+* **nvim:** inject elixir projections ([1248fb8](https://github.com/dkarter/dotfiles/commit/1248fb87d21e2de2f6040824e724a5a6efe87d60))
+* **nvim:** projections - support mix tasks compiled and not compiled ([5e4bc2c](https://github.com/dkarter/dotfiles/commit/5e4bc2c446139e881e3d5fa83597fd7c8cb38c35))
+* **nvim:** temporarily disable opencode-tmux compat ([a3b4727](https://github.com/dkarter/dotfiles/commit/a3b4727adf4b486051fa6c7da13a47d0567e0773))
+* **opencode:** enable github mcp ([b9bd2b7](https://github.com/dkarter/dotfiles/commit/b9bd2b7ab6e4025312808d225df77b45d966962f))
+* **opencode:** remove package-lock file ([2bd4870](https://github.com/dkarter/dotfiles/commit/2bd4870e637f45faeec9b8af64f7f664359c51c3))
+* **raycast:** satisfy shell lint for swap displays ([fd090e5](https://github.com/dkarter/dotfiles/commit/fd090e58bca4e71fd30697794e027f2177708088))
+* **sesh:** add temporary fix for connect function ([75bf631](https://github.com/dkarter/dotfiles/commit/75bf631de801118ce9650440c17ef1f5afa9353b))
+* **sesh:** put second connect command in else ([2bdd93f](https://github.com/dkarter/dotfiles/commit/2bdd93fbad31f9344309d1ba32ab1aeb0b52d68d))
+* **skill:** add frontmatter to pdq-add-ticket-to-pr ([da78f1b](https://github.com/dkarter/dotfiles/commit/da78f1bd4305b2e3c541e70ce98d18e68e4916f3))
+* **skills:** fix frontmatter syntax ([81e9fca](https://github.com/dkarter/dotfiles/commit/81e9fcab51cd4b8d31269db4420abec13c1ba3bd))
+* **skills:** improve description for open-pr ([15f0999](https://github.com/dkarter/dotfiles/commit/15f099911e23fb79ef2acddfec530d874483f079))
+* **skills:** make lefthook template have less output ([aad1ece](https://github.com/dkarter/dotfiles/commit/aad1eceb7379af150fe0e38fa468515b3a7af64a))
+* **skills:** specify path for skills created by skill-creator ([d9ab3d8](https://github.com/dkarter/dotfiles/commit/d9ab3d8bd62a7affd96a03d145fbf9ce941082f1))
+* **task:** symlinking was broken when folder already exists ([b4c0c3c](https://github.com/dkarter/dotfiles/commit/b4c0c3c4dc9d84d3426918c4a2359aca7de1ca00))
+* **tmux:** add new line support for coding agents ([3746e1b](https://github.com/dkarter/dotfiles/commit/3746e1b3d80f23f464eb28b8dfd492fc8b04c0b0))
+* **tmux:** disable allow-passthrough ([74e1a40](https://github.com/dkarter/dotfiles/commit/74e1a400c8c9a2a0c0cc6b78d2a1b6a2740b0233))
+* **tmux:** make tmux-popup-workmux-add popup larger ([e937c36](https://github.com/dkarter/dotfiles/commit/e937c3653d15e0cca39ba188c0d89647db3c22e8))
+* **tmux:** make workmux-add-prompt work after nvim update ([9214a5a](https://github.com/dkarter/dotfiles/commit/9214a5aa6f0999ace1ec7c65493e266899c48a37))
+* **tmux:** use markdown syntax for temp prompt files ([d4f577b](https://github.com/dkarter/dotfiles/commit/d4f577b0a83c604f2d13d028fd92d1ad1f505302))
+* **tv:** update shell integration for git checkout/switch ([1df1aee](https://github.com/dkarter/dotfiles/commit/1df1aeeaf8eba4f841b930c52ecdf902a49557f2))
+
+## [31.2.0](https://github.com/dkarter/dotfiles/compare/v31.1.0...v31.2.0) (2026-04-06)
+
+
+### Features
+
+* **mise:** add colima ([43ea204](https://github.com/dkarter/dotfiles/commit/43ea2042e2d587db03c99c4e4efcfa2372ca7a83))
+* **mise:** add docker cli ([a2bb71a](https://github.com/dkarter/dotfiles/commit/a2bb71a209508f5124cd5ec38719da266e797936))
+* **mise:** bump neovim to latest (0.12) ([3428b15](https://github.com/dkarter/dotfiles/commit/3428b15fb03b9353c693347c27fe382ac2aa520e))
+* **nvim:** add mermaid plugin ([fd7337d](https://github.com/dkarter/dotfiles/commit/fd7337d4188ef1699833079fbfd319a614afc922))
+* **opencode:** add babysit-pdq-pr skill ([d178fa7](https://github.com/dkarter/dotfiles/commit/d178fa7132830ddd34f23b5d4ee7fdd4273ac657))
+* **opencode:** add fix-flaky-pr-pdq skill ([0f57451](https://github.com/dkarter/dotfiles/commit/0f57451002f8404225bdfeb32667261c7788f283))
+* **opencode:** update humanizer to replace mdashes ([5df4ad1](https://github.com/dkarter/dotfiles/commit/5df4ad166e0e6ac6f8c84f5e38d6066d0f293ef0))
+* **postgres:** make psql connections in local dev without pass ([501e936](https://github.com/dkarter/dotfiles/commit/501e93674431716d1f2e903c2954deee76adb5fb))
+* **skills:** add pdq-add-ticket-to-pr skill ([97f426c](https://github.com/dkarter/dotfiles/commit/97f426c19a883253f90f65446a5ed1514b119af0))
+* **skills:** add plan-local-storage ([717efb2](https://github.com/dkarter/dotfiles/commit/717efb22ade0801bb9657473d4ead819660df9e8))
+* **tv:** add git diff picker integration to git reset ([8ab74f0](https://github.com/dkarter/dotfiles/commit/8ab74f0433701b57d80b6b759fea4a63ff018922))
+* **zsh:** add mr alias for mise run ([eb6fe20](https://github.com/dkarter/dotfiles/commit/eb6fe20cde3c2b3af500c607411577236b4fa63d))
+
+
+### Bug Fixes
+
+* **lefthook:** remove noisy output ([dac7d10](https://github.com/dkarter/dotfiles/commit/dac7d10be61e29bc1dafc5be5da070a4ebdb6944))
+* **nvim:** improve injections for mise tasks ([79b8ba4](https://github.com/dkarter/dotfiles/commit/79b8ba4536b4af5a84b96dbd0c01d9d9f581af50))
+* **nvim:** make vim-test vimux strategy smarter ([#403](https://github.com/dkarter/dotfiles/issues/403)) ([710ffe0](https://github.com/dkarter/dotfiles/commit/710ffe06dcdd56eaefbaecd7631022c89913d56c))
+* **nvim:** upgrade to latest treesitter ([9ab1782](https://github.com/dkarter/dotfiles/commit/9ab17825b9f3a6f4424505b7ebeae4bc849c76b2))
+* **opencode:** imrove open-pr skill ([43cee8c](https://github.com/dkarter/dotfiles/commit/43cee8c7e7ff243a49b06559baaade3ebd29debe))
+* **opencode:** tweak babysit-pdq-pr skill ([3b998f5](https://github.com/dkarter/dotfiles/commit/3b998f56f6deb9582aec118286c7ce56cb5d872b))
+* **opencode:** update graphite check ([0600b08](https://github.com/dkarter/dotfiles/commit/0600b088a844ec75604eea321f6d73164272f330))
+* **opencode:** use committed from github in tooling bootstrap skill ([1ab0190](https://github.com/dkarter/dotfiles/commit/1ab01904878d8cc34c9a622ea63585874f9e1075))
+* **skills:** add secret checking to lefthook in project-tooling-bootstrap ([1278a32](https://github.com/dkarter/dotfiles/commit/1278a325778a44b925fae8f80301cb67ff394700))
+* **skills:** update open-pr to use draft mode ([fa6fdd6](https://github.com/dkarter/dotfiles/commit/fa6fdd64988febd9fc1cabca6cac5a441f0224ff))
+* **skills:** update plan storage path ([10ded71](https://github.com/dkarter/dotfiles/commit/10ded717ddfcaa398919b043e4f00a408ef48282))
+* **skills:** update project-tooling-bootstrap ([3868a6c](https://github.com/dkarter/dotfiles/commit/3868a6c3f62fd5efcfb6be8436193c0d90ed7b6b))
+
 ## [31.1.0](https://github.com/dkarter/dotfiles/compare/v31.0.0...v31.1.0) (2026-03-21)
 
 

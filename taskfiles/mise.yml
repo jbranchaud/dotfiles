@@ -1,16 +1,39 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: 3
 
+silent: true
+
 tasks:
+  commit:
+    desc: Commits mise lockfiles if changed
+    silent: true
+    cmd: |
+      set -- \
+        './mise.lock' \
+        './config/mise/mise.lock' \
+        './config/mise/mise.extra.lock'
+
+      if [[ -z "$(git status --porcelain -- "$@")" ]]; then
+        echo "No changes in mise lockfiles"
+        exit 0
+      fi
+
+      git add -- "$@"
+      git commit -m 'chore(mise): update lockfiles'
+
   install:
     desc: Installs mise itself
     silent: true
     # https://mise.jdx.dev/getting-started.html
     cmds:
-      - cmd: brew install mise
+      - cmd: brew update && brew install mise
         platforms: [darwin]
 
       - cmd: |
+          if command -v mise &>/dev/null; then
+            exit 0
+          fi
+
           if [[ -f /etc/debian_version ]] || command -v apt &>/dev/null; then
             sudo apt update -y && sudo apt install -y gpg sudo wget curl
             sudo install -dm 755 /etc/apt/keyrings
@@ -23,6 +46,13 @@ tasks:
           fi
         platforms: [linux]
 
+  lock:
+    desc: Updates all mise lockfiles (globally and locally)
+    silent: true
+    cmds:
+      - cmd: mise lock
+      - cmd: mise lock -g
+
   sync:
     desc: Updates mise tools (runtimes), mise itself and installs packages for this project
     cmds:
@@ -32,7 +62,31 @@ tasks:
   tools:install:
     desc: Installs/updates all mise based tools
     cmds:
-      - cmd: mise install
+      - cmd: |
+          mise trust --yes --silent
+          # locked is here because despite `mise-version.jdx.dev` largely
+          # eliminating the need for a github token for checking attestations,
+          # we still need it for resolving `latest` for github backend tools
+          mise install --locked
+
+  tools:install:devcontainer:
+    desc: Installs mise tools for prebuilt devcontainer images
+    cmds:
+      - cmd: |
+          mise trust --yes --silent
+
+          if [[ -d /mise/installs ]]; then
+            echo 'Using preinstalled mise tools from /mise.'
+            exit 0
+          fi
+
+          case "$(uname -m)" in
+            aarch64|arm64)
+              export MISE_DISABLE_TOOLS='resvg,github:mazznoer/lolcrab'
+              ;;
+          esac
+          mise install --yes --cd "$HOME"
+          mise install --yes
 
   tools:extras:prompt:
     desc: Prompt to enable optional mise extras profile
@@ -68,28 +122,6 @@ tasks:
             fi
             echo "Keeping base mise toolset only."
           fi
-
-  tools:install:with-github-auth:
-    desc: Installs gh first, authenticates it, then installs all mise tools
-    silent: true
-    cmds:
-      - cmd: |
-          mise install gh
-
-          if ! mise exec -- gh auth status &>/dev/null; then
-            echo "GitHub CLI is not authenticated. Starting gh auth login..."
-            mise exec -- gh auth login
-          fi
-
-          export GITHUB_TOKEN="$(mise exec -- gh auth token)"
-          export MISE_GITHUB_TOKEN="$GITHUB_TOKEN"
-
-          if [[ -f "$HOME/.zshrc.local" ]] && grep -qE '^\s*export\s+MISE_ENV=extra\s*$' "$HOME/.zshrc.local"; then
-            export MISE_ENV=extra
-            echo "Detected MISE_ENV=extra in ~/.zshrc.local, installing extras too."
-          fi
-
-          mise install
 
   tools:update:
     desc: Updates all mise based tools

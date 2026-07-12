@@ -326,3 +326,11 @@ repo() {
 
   [[ -n $selected ]] && gh repo view --web "$selected"
 }
+
+# up [N] - cd up N directories (default: 1)
+up() {
+  local n=${1:-1}
+  local p
+  while ((n--)); do p+="../"; done
+  cd $p
+}

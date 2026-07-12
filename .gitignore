@@ -15,8 +15,25 @@ config/nushell/history.*
 # ignore local nushell environment settings
 config/nushell/env.local.nu
 
+# local machine overrides
+config/ghostty/config.local
+
 # themes for yazi - can be synced via `ya pkg install`
 config/yazi/flavors
 
 # Hammerspoon EmmyLua
 config/hammerspoon/Spoons/EmmyLua.spoon/
+
+# ignore this file because i don't care to keep it up to date in my repo
+config/opencode/package-lock.json
+
+# pi sessions/auth are machine-local and may contain sensitive data
+config/pi/agent/sessions/
+config/pi/agent/auth.json
+
+.claude/worktrees
+
+config/herdr/*.log
+config/herdr/*.sock
+config/herdr/session.json
+config/herdr/release-notes.json

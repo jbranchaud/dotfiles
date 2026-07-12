@@ -43,7 +43,7 @@ the setup script. More details can be found by reading the following files:
 
 Gotchas for NeoVim setup:
 
-- requires [fd](https://github.com/sharkdp/fd) >= 8.4 (install from brew)
+- All runtime dependencies, including neovim itself are installed via [Mise](https://mise.en.dev)
 - Tools such as formatters, LSPs, linters are automatically installed via
   `:Mason`, if one of the deps is not installing make sure to open `:Mason` to
   see the full error message.
@@ -84,8 +84,6 @@ git pull # get latest
 task sync # installs/updates tools and symlinks new configs
 ```
 
-Alternatively open `./taskfiles/dotfiles.yml` and move all the tasks in `deps` to the `cmds` section, so you can find out which one is failing.
-
 # Note about forking/versioning
 
 I generally don't recommend using other people's dotfiles, at least not when you're just starting with Vim.. these are customized to my personal taste and preferences, and are subject to change at any time.
@@ -106,13 +104,6 @@ My dotfiles are now automatically (and semantically) versioned and contain a [Ch
 > update my dots all the time to keep things fresh and fight entropy).
 
 Releases and versioning is done using [Release Please](https://github.com/googleapis/release-please), GitHub Actions, and [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-
----
-
-# Development
-
-- This repo now uses conventional commits. To install the git hooks simply run `yarn` in the project directory
-- To start development use [airmux](https://github.com/dermoumi/airmux) (alias `mux`) inside the project directory
 
 ---
 
@@ -141,7 +132,7 @@ Mise has multiple backends, and you should read a little about these to get
 the most benefit out of using Mise. Specifically learn about:
 
 - [Aqua](https://mise.jdx.dev/dev-tools/backends/aqua.html)
-- [UBI](https://mise.jdx.dev/dev-tools/backends/ubi.html)
+- [Github](https://mise.jdx.dev/dev-tools/backends/github.html)
 - [Cargo](https://mise.jdx.dev/dev-tools/backends/cargo.html)
   There are others too - but these are the ones I use the most. UBI is
   especially cool!

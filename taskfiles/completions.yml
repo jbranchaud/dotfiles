@@ -13,11 +13,12 @@ tasks:
       COMPLETIONS:
         - 'argocd|argocd completion zsh'
         - 'ast-grep|ast-grep completions zsh'
+        - 'aube|aube completion zsh'
         - 'bat|bat --completion=zsh'
         - 'bun|bun --print "await (await fetch(\"https://raw.githubusercontent.com/oven-sh/bun/refs/heads/main/completions/bun.zsh\")).text()"'
         - 'colima|colima completion zsh'
         - 'delta|delta --generate-completion zsh'
-        - 'devpod|devpod completion zsh'
+        - 'dexter|dexter completion zsh'
         - 'dprint|dprint completions zsh'
         - 'erd|erd --completions zsh'
         - 'fj|fj completion zsh'
@@ -30,17 +31,18 @@ tasks:
         - 'kubectl|kubectl completion zsh'
         - 'lefthook|lefthook completion zsh'
         - 'linear|linear completions zsh'
+        - 'lnr|lnr completion zsh'
         - 'mise|mise completion zsh'
-        - 'mix|cat "$HOME/dotfiles/scripts/mix-dynamic-completion.zsh"'
+        - 'mix|cat "{{.ROOT_DIR}}/scripts/mix-dynamic-completion.zsh"'
         - 'op|op completion zsh'
         - 'opencode|opencode completion'
+        - 'openspec|openspec completion generate zsh'
         - 'pdf-redact|pdf-redact completion zsh'
-        - 'pgroll|pgroll completion zsh'
         - 'pitchfork|pitchfork completion zsh'
         - 'rg|rg --generate=complete-zsh'
         - 'sesh|sesh completion zsh'
+        - 'stack|stack --completions zsh'
         - 'starship|starship completions zsh'
-        - 'talosctl|talosctl completion zsh'
         - 'task|task --completion zsh'
         - 'usage|usage --completions zsh'
         - 'uv|uv generate-shell-completion zsh'
@@ -58,8 +60,8 @@ tasks:
           cmd='{{splitList "|" .COMP | last}}'
           comp_path="{{.CACHE_PATH}}/_$app"
           echo -n "Generating completions for $app..."
-          if command -v "$app" >/dev/null 2>&1; then
-            eval "$cmd" > "$comp_path"
+          if app="$app" mise exec -- bash -lc 'command -v "$app"' >/dev/null 2>&1; then
+            app="$app" cmd="$cmd" comp_path="$comp_path" mise exec -- bash -lc 'eval "$cmd" > "$comp_path"'
             echo "DONE"
           else
             echo "SKIPPED (executable not found)"

@@ -3,7 +3,7 @@
 # vim: ft=zsh
 
 # remove zinit alias - so I can use zoxide's zi (z interactive)
-unalias zi
+unalias zi 2>/dev/null
 
 # Unix
 # short for ls
@@ -51,6 +51,7 @@ alias kns='tv kns --inline'
 
 # AI tooling
 alias oc='opencode --port'
+alias ocr='opencode run'
 alias cld='claude'
 
 # opencode in docker
@@ -64,11 +65,12 @@ alias lg="lazygit"
 
 # mise
 # =================================
-#
+
+alias m='mise'
 # [m]ise [r]egistry [s]earch # spellchecker:disable-line
 alias mrs='mise registry | fzf'
 # [m]ise [r]egistry [f]ind # spellchecker:disable-line
-alias mrf='mise registry | fzf'
+alias mrf='tv mise-registry'
 alias mi='mise install'
 # easy alias to run tasks
 alias mr='mise run'
@@ -158,6 +160,28 @@ alias gsp='git stash pop'
 alias gsa='git stash --all'
 # resume commit with previous message
 alias gcr='git commit --verbose --edit --file=.git/COMMIT_EDITMSG'
+
+# create a branch from an issue title using lnr's quick branch naming
+gcbq() {
+  local title branch
+
+  if [[ $# -gt 0 ]]; then
+    title="$*"
+  else
+    title=$(gum input --placeholder="Issue title...") || return
+    [[ -n "${title//[[:space:]]/}" ]] || return
+  fi
+
+  branch=$(lnr quick "$title") || return
+  [[ -n "$branch" ]] || return
+
+  git checkout -b "$branch"
+}
+
+# create a branch from an issue selected through lnr's fuzzy finder
+gcbi() {
+  git checkout -b "$(lnr issue)"
+}
 
 # combines gbsum and tv
 alias gctv='tv git-branch-checkout'
@@ -321,12 +345,25 @@ alias t=task
 alias mux='airmux'
 # tmux new
 function tn() {
-  tmux new -s "$(basename $PWD)"
+  local session_name=${1:-$(basename "$PWD")}
+  tmux new -s "$session_name"
 }
 
 # session manager using sesh + tv
 # https://github.com/joshmedeski/sesh
-alias s='tv sesh'
+unalias s 2>/dev/null
+function s() {
+  local session_name
+
+  session_name=$(tv sesh "$@") || return
+  [[ -n $session_name ]] || return
+
+  if [[ -n ${TMUX:-} ]]; then
+    sesh connect --switch "$session_name"
+  else
+    sesh connect "$session_name"
+  fi
+}
 alias tgd='tv git-diff'
 
 # tailscale cli - for when installed from the app store

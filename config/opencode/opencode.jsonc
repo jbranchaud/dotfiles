@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "plugin": ["./plugin/linear-mcp-sanitize.ts"],
   "mcp": {
     "playwright": {
       "enabled": true,
@@ -12,12 +13,26 @@
       "command": ["bunx", "@upstash/context7-mcp"]
     },
     "github": {
-      "enabled": false,
+      "enabled": true,
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
       "headers": {
-        "Authorization": "Bearer <TOKEN>"
+        "Authorization": "Bearer {env:GITHUB_TOKEN}"
       }
+    },
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp",
+      "oauth": {}
+    }
+  },
+  "lsp": {
+    "elixir-ls": {
+      "disabled": true
+    },
+    "expert": {
+      "command": ["expert", "--stdio"],
+      "extensions": [".ex", ".exs", ".heex", ".eex"]
     }
   },
   "permission": {
@@ -33,7 +48,11 @@
       "kubectl get *": "allow",
       "rg *": "allow",
       "rm -rf *": "ask",
-      "rm *": "ask"
+      "rm *": "ask",
+      "fnox *": "ask"
+    },
+    "external_directory": {
+      "/tmp/**": "allow"
     }
   },
   "agent": {

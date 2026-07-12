@@ -3,9 +3,12 @@
   "private": true,
   "version": "2.4.3",
   "devDependencies": {
-    "@commitlint/cli": "^20.0.0",
-    "@commitlint/config-conventional": "^20.0.0",
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
     "@types/node": "25",
-    "typescript": "^5.3.3"
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "js-yaml": "5.2.0"
   }
 }

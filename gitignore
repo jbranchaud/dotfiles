@@ -38,6 +38,8 @@ node_modules
 **/*/.claude/*.local.json
 CLAUDE.local.md
 
+.codex/
+
 .linear.toml
 
 config/zed/conversations
@@ -63,3 +65,9 @@ fnox.local.toml
 
 # ignore local implementation plans in project roots
 .plans/
+
+.dexter.db*
+
+# ignore playwright's logs dir that gets created each time the mcp
+# is used
+.playwright-mcp

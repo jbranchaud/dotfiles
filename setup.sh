@@ -19,10 +19,14 @@ else
   if [ "${OS}" = "Linux" ]; then
     if [ -f /etc/debian_version ]; then
       DISTRO_BASE='debian'
-      DIST=$(grep '^DISTRIB_ID' </etc/lsb-release | awk -F= '{ print $2 }')
-    elif [[ $(uname -r) =~ arch1 ]]; then
+      if [ -f /etc/lsb-release ]; then
+        DIST=$(grep '^DISTRIB_ID' </etc/lsb-release | awk -F= '{ print $2 }')
+      fi
+    elif [ -f /etc/arch-release ] || command -v pacman &>/dev/null; then
       DISTRO_BASE='arch'
-      DIST=$(grep '^DISTRIB_ID' </etc/lsb-release | awk -F= '{ print $2 }')
+      if [ -f /etc/os-release ]; then
+        DIST=$(grep '^ID=' </etc/os-release | awk -F= '{ gsub(/"/, "", $2); print $2 }')
+      fi
     fi
     if [ -f /etc/UnitedLinux-release ]; then
       DIST="${DIST}[$(tr "\n" ' ' </etc/UnitedLinux-release | sed s/VERSION.*//)]"
@@ -47,13 +51,18 @@ echo "$MACH"
 echo "==========================================="
 echo
 
-echo 'Installing shared steps...'
-./installer/shared.sh
-
 if [[ $OS == 'mac' ]]; then
   echo 'macOS detected'
-  ./installer/mac-setup.sh
+  bash ./installer/mac-setup.sh
 fi
+
+if [[ $DISTRO_BASE == 'debian' ]]; then
+  echo 'Debian-based Linux detected'
+  bash ./installer/debian-setup.sh
+fi
+
+echo 'Installing shared steps...'
+bash ./installer/shared.sh
 
 if [[ ! -f ~/.local/bin/task ]]; then
   # Install task
@@ -64,4 +73,8 @@ fi
 export PATH="$PATH:$HOME/.local/bin"
 
 # Run task
-task install "$@"
+if [[ ${DEVPOD:-} == 'true' || ${DEVCONTAINER:-} == 'true' ]]; then
+  task dot:install:devpod "$@"
+else
+  task install "$@"
+fi

@@ -26,6 +26,10 @@ includes:
   debian:
     taskfile: ./taskfiles/debian.yml
 
+  dc:
+    aliases: [devcontainer]
+    taskfile: ./taskfiles/devcontainer.yml
+
   dot:
     aliases: [dots]
     taskfile: ./taskfiles/dotfiles.yml
@@ -95,6 +99,13 @@ tasks:
     aliases: [format]
     cmds:
       - task: dot:fmt
+
+  fmt:check:precommit:
+    desc: Formats all formattable files
+    summary: An alias to dot:fmt:check:precommit
+    aliases: [format:check:precommit]
+    cmds:
+      - task: dot:fmt:check:precommit
 
   banner:
     internal: true
