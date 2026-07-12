@@ -7,6 +7,13 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "cli_default_open_behavior": "existing_window",
+  "diff_view_style": "split",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
   "agent_servers": {
     "opencode": {
       "type": "registry"
@@ -48,7 +55,11 @@
       "model": "claude-haiku-4.5"
     }
   },
-  "theme": "Catppuccin Macchiato",
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
   "vim_mode": true,
   "ui_font_size": 16,
   "buffer_font_size": 16,
