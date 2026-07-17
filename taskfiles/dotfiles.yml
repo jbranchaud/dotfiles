@@ -82,12 +82,12 @@ tasks:
       - task: arch:sync
       - task: shell:zsh:default
       - task: create:dirs
+      - task: mise:install
       - task: symlink
       - task: op:install:ssh:agent
-      - task: mac:set:defaults
       - task: zinit:install
       - task: zinit:plugins:update
-      - task: mise:install
+      - task: mac:set:defaults
       - task: mise:tools:extras:prompt
       - task: mise:tools:install
       - task: fonts:sync
@@ -115,10 +115,10 @@ tasks:
       - task: debian:tools:install:devcontainer
       - task: shell:zsh:default
       - task: create:dirs
+      - task: mise:install
       - task: symlink
       - task: op:install:ssh:agent
       - task: zinit:install
-      - task: mise:install
       - task: mise:tools:install:devcontainer
       - task: zinit:plugins:warm
       - task: nvim:install
@@ -218,6 +218,8 @@ tasks:
             source_path=$(realpath ./claude/CLAUDE.md)
             ln -s -f "$source_path" ~/.claude/CLAUDE.md
           fi
+
+      - mise bootstrap dotfiles apply --yes
       - task: skills:sync
 
   skills:sync:

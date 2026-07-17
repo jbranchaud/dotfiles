@@ -94,6 +94,6 @@
   "webapi-vim": { "branch": "master", "commit": "c7eec04aad31e1665164d8292d0ec8b5c3cc5a57" },
   "wezterm-types": { "branch": "main", "commit": "d8b1671db6de96e3c4e44ce5cfd1c9c31d3828bf" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
-  "yazi.nvim": { "branch": "main", "commit": "8d6c25cb4e7c5702d6cd5a263cb36129fa78aa4c" },
+  "yazi.nvim": { "branch": "main", "commit": "bc79c6fd57367d7ac42f1aef34c958018892034c" },
   "zinit-vim-syntax": { "branch": "main", "commit": "6f3e6b55182b92141688331c101bc07616ab0d2b" }
 }
