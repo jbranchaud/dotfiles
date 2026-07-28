@@ -224,12 +224,14 @@ brew "mysql"
 brew "mysql-client"
 
 # Planetscale CLI
-tap "planetscale/tap"
+tap "planetscale/tap", trusted: true
 brew "planetscale/tap/pscale"
 
 # LLM tools
-tap "steveyegge/beads"
+tap "steveyegge/beads", trusted: true
 brew "steveyegge/beads/bd"
+tap "anthropics/tap", trusted: true
+cask "anthropics/tap/ant"
 
 # Document swiss army knife
 brew "pandoc"
@@ -252,11 +254,11 @@ brew "uv"
 brew "tz"
 
 # Containers
-tap "dokku/repo"
+tap "dokku/repo", trusted: true
 brew "dokku/repo/dokku"
 
 # Stripe CLI
-tap "stripe/stripe-cli"
+tap "stripe/stripe-cli", trusted: true
 brew "stripe/stripe-cli/stripe"
 
 # screen resolution tool
