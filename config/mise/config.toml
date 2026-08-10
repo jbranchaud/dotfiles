@@ -36,6 +36,7 @@
 "github:ast-grep/ast-grep" = "latest" # a cli tool for searching and rewriting code using AST
 "github:chmln/sd" = "latest"          # a modern alternative for sed with sensible defaults
 "github:cli/cli" = "latest"           # GitHub CLI
+"github:dkarter/hwt" = "latest"       # deterministic Herdr worktree orchestration
 "github:dkarter/lnr" = "latest"       # linear cli
 "github:dlvhdr/diffnav" = "latest"    # A git diff pager based on delta but with a file tree, à la GitHub.
 "github:joshmedeski/sesh" = "latest"  # tmux session manager
@@ -46,6 +47,7 @@
 "npm:@openai/codex" = "latest"        # codex agent for AI assisted coding
 "npm:neovim" = "latest"               # support for javascript plugins in neovim
 "npm:trash-cli" = "latest"            # rm -> system trash (cross platform)
+"npm:varlock" = "latest"              # secret manager
 "pipx:httpie" = "latest"              # modern, user-friendly CLI HTTP client
 "pipx:neovim-remote" = "latest"       # allow controlling neovim remotely
 "pipx:yq" = "latest"                  # like jq but for yaml files
@@ -78,6 +80,7 @@ lima = "latest"                       # linux virtual machines for macOS (used b
 lsd = "latest"                        # ls with icons and colors, like `exa` but with more features
 lua-language-server = "latest"        # Lua Language Server
 node = "24"                           # node javascript runtime
+opencode = "latest"                   # coding agent
 pitchfork = "latest"                  # run multiple commands in parallel, with a nice UI
 python = "3.12"                       # Python programming language
 resvg = "latest"                      # svg rendering library and CLI tool (used by yazi)
@@ -89,25 +92,22 @@ stylua = "latest"                     # formatter for lua
 task = "latest"                       # run tasks (modern make alternative)
 television = "latest"                 # fancy fuzzy finder with shell integration and "channels"
 tmux = "latest"                       # terminal multiplexer
+tree-sitter = "latest"                # parser generator required by nvim-treesitter
 typos = "latest"                      # type checker alternative to codespell
 usage = "latest"                      # generates completion scripts for various tools (including mise)
 uv = "latest"                         # install python packages
 yazi = "latest"                       # terminal file manager
 zoxide = "latest"                     # a modern version of autojump
 
-[tools."npm:opencode-ai"] # the best AI agent wrapper
-version = "latest"
-aube_args = "--allow-build=opencode-ai"
-
 # spec driven development tool
 [tools."npm:@fission-ai/openspec"]
 version = "latest"
-aube_args = "--deny-build=@fission-ai/openspec"
+allow_builds = false
 
 # squash-safe stacked PR/MR repair CLI
 [tools."npm:@kitlangton/stack"]
 version = "latest"
-aube_args = "--allow-low-downloads"
+allow_low_downloads = true
 
 # allow specific asdf plugins when there's no other option
 # docs: https://mise.jdx.dev/dev-tools/aliases.html
@@ -116,6 +116,9 @@ aube_args = "--allow-low-downloads"
 lua = 'asdf:mise-plugins/mise-lua'
 rebar = 'asdf:mise-plugins/mise-rebar'
 redis = 'asdf:mise-plugins/mise-redis'
+
+[shell_alias]
+npx = "aubx"
 
 [settings]
 # needed to enable ruby gems install
@@ -146,11 +149,12 @@ lockfile = true
 # Exclude some tools that are frequently updated and have a low risk profile.
 minimum_release_age = "24h"
 minimum_release_age_excludes = [
-  "npm:opencode-ai",
+  "opencode",
   "npm:@openai/codex",
   "claude-code",
   "erlang",
   "elixir",
+  "github:dkarter/hwt",
   "github:dkarter/lnr",
   "github:dkarter/vstui",
 ]

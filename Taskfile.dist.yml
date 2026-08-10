@@ -1,6 +1,8 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: 3
 
+silent: true
+
 includes:
   1password:
     aliases: [op]
@@ -40,6 +42,9 @@ includes:
   gh:
     aliases: [github]
     taskfile: ./taskfiles/github.yml
+
+  herdr:
+    taskfile: ./taskfiles/herdr.yml
 
   mac:
     taskfile: ./taskfiles/mac.yml

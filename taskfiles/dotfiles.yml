@@ -1,6 +1,8 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: '3'
 
+silent: true
+
 includes:
   1password:
     taskfile: ./1password.yaml
@@ -34,6 +36,11 @@ includes:
 
   gh:
     taskfile: ./github.yml
+    internal: true
+
+  herdr:
+    taskfile: ./herdr.yml
+    dir: ../
     internal: true
 
   mac:
@@ -90,6 +97,8 @@ tasks:
       - task: mac:set:defaults
       - task: mise:tools:extras:prompt
       - task: mise:tools:install
+      - task: skills:sync
+      - task: herdr:sync
       - task: fonts:sync
       - task: brew:sync
       - task: bat:sync
@@ -120,6 +129,7 @@ tasks:
       - task: op:install:ssh:agent
       - task: zinit:install
       - task: mise:tools:install:devcontainer
+      - task: skills:sync
       - task: zinit:plugins:warm
       - task: nvim:install
       - task: print:done
@@ -137,6 +147,8 @@ tasks:
       - task: create:dirs
       - task: symlink
       - task: mise:sync
+      - task: skills:sync
+      - task: herdr:sync
       - task: brew:sync
       - task: bat:sync
       - task: tmux:sync
@@ -220,10 +232,11 @@ tasks:
           fi
 
       - mise bootstrap dotfiles apply --yes
-      - task: skills:sync
 
   skills:sync:
     desc: Synchronizes repo and local skills into global skill directories
+    vars:
+      GENERATE_CLI_SKILLS: '{{.GENERATE_CLI_SKILLS | default "true"}}'
     cmds:
       - cmd: |
           set -eu
@@ -232,8 +245,79 @@ tasks:
           repo_skills="$(realpath ./agents/skills)"
           local_skills="$HOME/.local/share/dotfiles/skills"
           skill_dests="$HOME/.agents/skills $HOME/.claude/skills"
+          generated_skills='stack|stack|skill|-|SKILL.md
+          lnr|lnr|skill|-|SKILL.md
+          hwt|hwt|skill|-|SKILL.md
+          hwt|hwt|skill|config|references/config.md'
 
           mkdir -p "$local_skills" "$HOME/.claude"
+
+          generate_cli_skills() {
+            printf '%s\n' "$generated_skills" | while IFS='|' read -r skill_name cli subcommand argument output_path; do
+              if ! command -v "$cli" >/dev/null 2>&1; then
+                rm -f "$local_skills/$skill_name/$output_path"
+                rmdir "$(dirname "$local_skills/$skill_name/$output_path")" 2>/dev/null || true
+                rmdir "$local_skills/$skill_name" 2>/dev/null || true
+                echo "Skipping generated skill $skill_name: $cli is not installed" >&2
+                continue
+              fi
+
+              skill_dir="$local_skills/$skill_name"
+              skill_file="$skill_dir/$output_path"
+              mkdir -p "$(dirname "$skill_file")"
+              temp_file="$(mktemp "$local_skills/.$skill_name.generated.XXXXXX")"
+              error_file="$(mktemp "$local_skills/.$skill_name.generated.error.XXXXXX")"
+              trap 'rm -f "$temp_file" "$error_file"' EXIT
+
+              if [ "$argument" != - ]; then
+                command_suffix=" $argument"
+                "$cli" "$subcommand" "$argument" > "$temp_file" 2> "$error_file" || generated=false
+              else
+                command_suffix=''
+                "$cli" "$subcommand" > "$temp_file" 2> "$error_file" || generated=false
+              fi
+
+              if [ "${generated:-true}" = false ]; then
+                rm -f "$temp_file"
+                if [ -f "$skill_file" ]; then
+                  while IFS= read -r line; do
+                    printf '%s\n' "$line" >&2
+                  done < "$error_file"
+                  rm -f "$error_file"
+                  echo "Failed to generate skill $skill_name with: $cli $subcommand$command_suffix" >&2
+                  exit 1
+                fi
+
+                rm -f "$error_file"
+                rmdir "$(dirname "$skill_file")" 2>/dev/null || true
+                rmdir "$skill_dir" 2>/dev/null || true
+                echo "Skipping generated skill $skill_name: $cli $subcommand$command_suffix is not supported" >&2
+              elif [ ! -s "$temp_file" ]; then
+                rm -f "$temp_file" "$error_file"
+                echo "Generated skill $skill_name is empty" >&2
+                exit 1
+              else
+                rm -f "$error_file"
+                mv "$temp_file" "$skill_file"
+                echo "Generated $skill_name/$output_path"
+              fi
+
+              unset generated
+              unset command_suffix
+              trap - EXIT
+            done
+
+            if [ -s "$local_skills/hwt/SKILL.md" ] && [ -s "$local_skills/hwt/references/config.md" ]; then
+              cat >> "$local_skills/hwt/SKILL.md" <<'EOF'
+
+          ## Synced Reference
+
+          The synchronized copy of `hwt skill config` is available at
+          [references/config.md](references/config.md). Read it only when changing
+          project configuration.
+          EOF
+            fi
+          }
 
           symlink_target() {
             realpath "$1" 2>/dev/null || readlink "$1" 2>/dev/null || true
@@ -275,6 +359,9 @@ tasks:
           ensure_skill_dir "$HOME/.agents" "$repo_agents"
           ensure_skill_dir "$HOME/.agents/skills" ""
           ensure_skill_dir "$HOME/.claude/skills" "$repo_skills"
+          if [ "{{.GENERATE_CLI_SKILLS}}" = 'true' ]; then
+            generate_cli_skills
+          fi
 
           cleanup_stale_skill_links() {
             dest="$1"

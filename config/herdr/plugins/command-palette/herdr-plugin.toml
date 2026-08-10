@@ -12,6 +12,12 @@ contexts = ["workspace"]
 command = ["./open"]
 
 [[actions]]
+id = "open-workspace-picker"
+title = "Jump to workspace"
+contexts = ["workspace"]
+command = ["./open-workspace-picker"]
+
+[[actions]]
 id = "new-worktree"
 title = "New worktree"
 contexts = ["workspace"]
@@ -29,6 +35,12 @@ title = "New agent with prompt"
 contexts = ["workspace"]
 command = ["./open-agent-prompt"]
 
+[[actions]]
+id = "open-repo-checkout"
+title = "Checkout GitHub repository"
+contexts = ["workspace"]
+command = ["./open-repo-checkout"]
+
 [[panes]]
 id = "palette"
 title = "Command Palette"
@@ -36,6 +48,22 @@ placement = "popup"
 width = "80%"
 height = "60%"
 command = ["./palette"]
+
+[[panes]]
+id = "workspace-picker"
+title = "Jump to Workspace"
+placement = "popup"
+width = "75%"
+height = "50%"
+command = ["./workspace-picker"]
+
+[[panes]]
+id = "repo-checkout"
+title = "Checkout GitHub Repository"
+placement = "popup"
+width = "95%"
+height = "90%"
+command = ["./repo-checkout"]
 
 [[panes]]
 id = "worktree"

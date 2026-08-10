@@ -26,6 +26,8 @@ config/hammerspoon/Spoons/EmmyLua.spoon/
 
 # ignore this file because i don't care to keep it up to date in my repo
 config/opencode/package-lock.json
+# machine-local OpenCode V2 service password
+config/opencode/service.json
 
 # pi sessions/auth are machine-local and may contain sensitive data
 config/pi/agent/sessions/
@@ -35,5 +37,10 @@ config/pi/agent/auth.json
 
 config/herdr/*.log
 config/herdr/*.sock
+config/herdr/.plugins.lock
+config/herdr/plugins.json
 config/herdr/session.json
 config/herdr/release-notes.json
+config/herdr/plugins/.tmp-install-*/
+config/herdr/plugins/github/
+config/herdr/session-history.json

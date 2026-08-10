@@ -21,11 +21,11 @@ background-blur = true
 window-padding-x = 10
 window-padding-y = 10
 
+font-family = Agent Mono Nerd Font
 font-size = 17
 
 desktop-notifications = true
 macos-titlebar-proxy-icon = hidden
-title = "Ghostty"
 
 # enable cursor animation
 custom-shader = "~/.config/ghostty/shaders/cursor.glsl"
@@ -35,8 +35,11 @@ custom-shader-animation = true
 # open new tab
 keybind = super+shift+t=text:\x1ac
 # navigate tabs
-keybind = super+shift+left_bracket=text:\x1ap
-keybind = super+shift+right_bracket=text:\x1an
+keybind = super+shift+[=text:\x1ap
+keybind = super+shift+]=text:\x1an
+# navigate herdr spaces (CSI u encoded ctrl+[ / ctrl+])
+keybind = super+[=csi:91;5u
+keybind = super+]=csi:93;5u
 keybind = super+digit_1=text:\x1a1
 keybind = super+digit_2=text:\x1a2
 keybind = super+digit_3=text:\x1a3
@@ -75,6 +78,8 @@ keybind = super+shift+i=text:\x1ai
 keybind = super+shift+e=text:\x1aE
 # insert file path at cursor (for AI agents)
 keybind = super+shift+period=text:\x1aA
+# toggle herdr sidebar
+keybind = super+ctrl+s=text:\x1ab
 
 # vimium like actions (tmux fingers)
 keybind = super+f=text:\x1aF

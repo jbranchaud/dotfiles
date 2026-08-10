@@ -19,21 +19,16 @@ add_command() {
   LABELS+=("$label")
 }
 
-add_command "󰙅 New workspace" "new_workspace" "prefix+shift+n"
-add_command " New worktree" "new_worktree" "prefix+shift+g"
-add_command " New worktree without ticket" "new_worktree_without_ticket"
-add_command "󰚩 New agent with prompt" "new_agent_with_prompt"
-add_command "󰚩 New agent with prompt without ticket" "new_agent_with_prompt_without_ticket"
-add_command "󰆴 Delete current worktree" "delete_current_worktree"
+source "${0:A:h}/herdr-command-definitions"
 
-color_dim=$'\e[90m'
+color_dim=$'\e[2m'
 color_reset=$'\e[0m'
 
 list_commands() {
   for label in "${LABELS[@]}"; do
     local shortcut="${SHORTCUTS[$label]}"
     if [[ -n "$shortcut" ]]; then
-      print -r -- "$label ${color_dim}(${shortcut})${color_reset}"
+      print -r -- "$label ${color_dim}(${shortcut}${color_reset}${color_dim})${color_reset}"
     else
       print -r -- "$label"
     fi
@@ -93,6 +88,18 @@ current_workspace_id() {
   herdr pane current --current | jq -er '.result.pane.workspace_id'
 }
 
+current_pane_id() {
+  local value
+  value="$(context_value '.focused_pane.pane_id // .focused_pane.id // .pane.pane_id // .pane.id')"
+
+  if [[ -n "$value" ]]; then
+    print -r -- "$value"
+    return 0
+  fi
+
+  herdr pane current --current | jq -er '.result.pane.pane_id'
+}
+
 current_pane_cwd() {
   local value
   value="$(context_value '.focused_pane.foreground_cwd // .focused_pane.cwd // .pane.foreground_cwd // .pane.cwd')"
@@ -114,13 +121,6 @@ current_pane_cwd() {
 repo_root_for_cwd() {
   local cwd="$1"
   git -C "$cwd" rev-parse --show-toplevel 2>/dev/null || true
-}
-
-workmux_config_for_repo() {
-  local repo_root="$1"
-  local config_file="$repo_root/.workmux.yaml"
-
-  [[ -f "$config_file" ]] && print -r -- "$config_file"
 }
 
 repo_config_for_repo() {
@@ -150,114 +150,10 @@ repo_config_value() {
   fi
 }
 
-repo_config_array() {
-  local repo_root="$1"
-  local path="$2"
-  local config_file
-  config_file="$(repo_config_for_repo "$repo_root")"
-
-  if [[ -n "$config_file" ]]; then
-    ruby -ryaml -e '
-      cfg = YAML.load_file(ARGV[0]) || {}
-      value = ARGV[1].split(".").reduce(cfg) { |memo, key| memo.respond_to?(:[]) ? memo[key] : nil }
-      Array(value).each { |item| puts item unless item == "<global>" }
-    ' "$config_file" "$path" 2>/dev/null || true
-  fi
-}
-
 workmux_agent_command() {
   local repo_root="$1"
 
   repo_config_value "$repo_root" agent
-}
-
-workmux_post_create_commands() {
-  local repo_root="$1"
-  local global_config project_config
-
-  global_config="$HOME/.config/workmux/config.yaml"
-  project_config="$(workmux_config_for_repo "$repo_root")"
-
-  ruby -ryaml -e '
-    global = File.file?(ARGV[0]) ? YAML.load_file(ARGV[0]) || {} : {}
-    project = File.file?(ARGV[1]) ? YAML.load_file(ARGV[1]) || {} : {}
-    global_hooks = Array(global["post_create"])
-    hooks = project.key?("post_create") ? Array(project["post_create"]) : global_hooks
-
-    hooks.each do |hook|
-      hook == "<global>" ? global_hooks.each { |global_hook| puts global_hook } : puts(hook)
-    end
-  ' "$global_config" "$project_config" 2>/dev/null || true
-}
-
-configured_worktree_dir() {
-  local repo_root="$1"
-  local dir
-  dir="$(repo_config_value "$repo_root" worktree_dir)"
-
-  if [[ -z "$dir" ]]; then
-    dir="$(repo_config_value "$repo_root" worktrees.directory)"
-  fi
-
-  print -r -- "$dir"
-}
-
-worktree_slug() {
-  local repo_root="$1"
-  local branch="$2"
-  local naming name
-  naming="$(repo_config_value "$repo_root" worktree_naming)"
-
-  if [[ "$naming" == "basename" ]]; then
-    name="${branch:t}"
-  else
-    name="$branch"
-  fi
-
-  name="${name//\//-}"
-  name="${name//[^[:alnum:]._-]/-}"
-  print -r -- "$name"
-}
-
-configured_worktree_path() {
-  local repo_root="$1"
-  local branch="$2"
-  local dir prefix slug
-  dir="$(configured_worktree_dir "$repo_root")"
-
-  [[ -z "$dir" ]] && return 0
-
-  prefix="$(repo_config_value "$repo_root" worktree_prefix)"
-  slug="$(worktree_slug "$repo_root" "$branch")"
-  dir="${dir/#\~/$HOME}"
-
-  if [[ "$dir" != /* ]]; then
-    dir="$repo_root/$dir"
-  fi
-
-  print -r -- "${dir:A}/${prefix}${slug}"
-}
-
-copy_configured_files() {
-  local repo_root="$1"
-  local checkout_path="$2"
-  local item source dest dest_parent
-
-  while IFS= read -r item; do
-    [[ -z "$item" ]] && continue
-
-    source="$repo_root/$item"
-    dest="$checkout_path/$item"
-    dest_parent="${dest:h}"
-
-    if [[ ! -e "$source" ]]; then
-      continue
-    fi
-
-    mise x -- gum style --foreground="240" "Copying $item" >&2
-    mkdir -p "$dest_parent"
-    cp -a "$source" "$dest"
-  done < <(repo_config_array "$repo_root" files.copy)
 }
 
 select_base_branch() {
@@ -305,24 +201,15 @@ prompt_worktree_name() {
 }
 
 create_worktree() {
-  local workspace_id="$1"
-  local repo_root="$2"
-  local branch="$3"
-  local base_branch="$4"
-  local configured_path create_args create_json checkout_path
+  local repo_root="$1"
+  local branch="$2"
+  local base_branch="$3"
+  local create_args create_json
 
-  configured_path="$(configured_worktree_path "$repo_root" "$branch")"
-  create_args=(worktree create --workspace "$workspace_id" --branch "$branch" --base "$base_branch" --focus --json)
+  branch="${branch//[[:space:]]/-}"
 
-  if [[ -n "$configured_path" ]]; then
-    create_args+=(--path "$configured_path")
-  fi
-
-  create_json="$(herdr "${create_args[@]}")"
-  checkout_path="$(jq -er '.result.worktree.path' <<<"$create_json")"
-
-  copy_configured_files "$repo_root" "$checkout_path"
-  run_post_create_hooks "$repo_root" "$checkout_path"
+  create_args=(create --cwd "$repo_root" --branch "$branch" --base "$base_branch" --focus --json)
+  create_json="$(hwt "${create_args[@]}")"
 
   print -r -- "$create_json"
 }
@@ -337,10 +224,48 @@ new_workspace() {
   herdr workspace create --cwd "$cwd" --label "$name" --focus >/dev/null
 }
 
+reload_herdr_config() {
+  herdr server reload-config >/dev/null
+}
+
+split_pane_right() {
+  herdr pane split --current --direction right --focus >/dev/null
+}
+
+split_pane_below() {
+  herdr pane split --current --direction down --focus >/dev/null
+}
+
+move_pane_to_new_tab() {
+  herdr pane move "$(current_pane_id)" --new-tab --focus >/dev/null
+}
+
+kill_current_pane() {
+  herdr pane close "$(current_pane_id)" >/dev/null
+}
+
+open_current_workspace_repo() {
+  local workspace_id workspace_json checkout_path cwd
+  workspace_id="$(current_workspace_id)"
+  workspace_json="$(herdr workspace get "$workspace_id")"
+  checkout_path="$(jq -er '.result.workspace.worktree.checkout_path // empty' <<<"$workspace_json" 2>/dev/null || true)"
+
+  if [[ -z "$checkout_path" ]]; then
+    cwd="$(current_pane_cwd)"
+    checkout_path="$(repo_root_for_cwd "$cwd")"
+  fi
+
+  if [[ -z "$checkout_path" ]]; then
+    mise x -- gum style --foreground="red" "Current workspace pane is not in a git repository"
+    return 1
+  fi
+
+  (cd "$checkout_path" && gh browse)
+}
+
 new_worktree() {
   local allow_ticket="${1:-true}"
-  local workspace_id cwd repo_root branch base_branch
-  workspace_id="$(current_workspace_id)"
+  local cwd repo_root branch base_branch
   cwd="$(current_pane_cwd)"
   branch="$(prompt_worktree_name "$allow_ticket")"
 
@@ -355,30 +280,99 @@ new_worktree() {
   base_branch="$(select_base_branch "$cwd")"
   [[ -z "$base_branch" ]] && return 0
 
-  create_worktree "$workspace_id" "$repo_root" "$branch" "$base_branch" >/dev/null
+  create_worktree "$repo_root" "$branch" "$base_branch" >/dev/null
 }
 
 new_worktree_without_ticket() {
   new_worktree false
 }
 
-run_post_create_hooks() {
-  local repo_root="$1"
-  local checkout_path="$2"
-  local hook
+checkout_worktree() {
+  local cwd repo_root input branch base_ref existing_ref
+  local owner repo pr current_repo pr_json fetch_output short_oid
 
-  while IFS= read -r hook; do
-    [[ -z "$hook" ]] && continue
-    mise x -- gum style --foreground="240" "Running post-create: $hook" >&2
-    (cd "$checkout_path" && zsh -lc "$hook") >&2
-  done < <(workmux_post_create_commands "$repo_root")
+  cwd="$(current_pane_cwd)"
+  repo_root="$(repo_root_for_cwd "$cwd")"
+  if [[ -z "$repo_root" ]]; then
+    mise x -- gum style --foreground="red" "Not in a git repository"
+    return 1
+  fi
+
+  input="$(mise x -- gum input --placeholder="GitHub PR URL, Graphite PR URL, or branch name...")"
+  [[ -z "$input" ]] && return 0
+
+  if [[ "$input" =~ '^https://github\.com/([^/]+)/([^/]+)/pull/([0-9]+)([/?#].*)?$' ]]; then
+    owner="$match[1]"
+    repo="$match[2]"
+    pr="$match[3]"
+  elif [[ "$input" =~ '^https://app\.graphite\.com/github/pr/([^/]+)/([^/]+)/([0-9]+)([/?#].*)?$' ]]; then
+    owner="$match[1]"
+    repo="$match[2]"
+    pr="$match[3]"
+  elif [[ "$input" == *://* ]]; then
+    mise x -- gum style --foreground="red" "Expected a GitHub PR URL, Graphite PR URL, or branch name"
+    return 1
+  fi
+
+  if [[ -n "$pr" ]]; then
+    if ! current_repo="$(cd "$repo_root" && gh repo view --json nameWithOwner --jq '.nameWithOwner' 2>&1)"; then
+      mise x -- gum style --foreground="red" "$current_repo"
+      return 1
+    fi
+
+    if [[ "${(L)current_repo}" != "${(L)owner}/${(L)repo}" ]]; then
+      mise x -- gum style --foreground="red" "PR belongs to $owner/$repo, but the current repository is $current_repo"
+      return 1
+    fi
+
+    if ! pr_json="$(gh pr view "$pr" --repo "$owner/$repo" --json headRefName 2>&1)"; then
+      mise x -- gum style --foreground="red" "$pr_json"
+      return 1
+    fi
+
+    branch="$(jq -er '.headRefName' <<<"$pr_json")"
+
+    if ! fetch_output="$(git -C "$repo_root" fetch origin "refs/pull/$pr/head" 2>&1)"; then
+      mise x -- gum style --foreground="red" "$fetch_output"
+      return 1
+    fi
+
+    base_ref="$(git -C "$repo_root" rev-parse FETCH_HEAD)"
+    if git -C "$repo_root" show-ref --verify --quiet "refs/heads/$branch"; then
+      existing_ref="$(git -C "$repo_root" rev-parse "refs/heads/$branch")"
+
+      if [[ "$existing_ref" != "$base_ref" ]]; then
+        short_oid="$(git -C "$repo_root" rev-parse --short "$base_ref")"
+        branch="pr-$pr-$short_oid"
+      fi
+    fi
+  else
+    branch="$input"
+
+    if ! git check-ref-format --branch "$branch" >/dev/null 2>&1; then
+      mise x -- gum style --foreground="red" "Invalid branch name: $branch"
+      return 1
+    fi
+
+    if git -C "$repo_root" show-ref --verify --quiet "refs/heads/$branch"; then
+      base_ref="$branch"
+    else
+      if ! fetch_output="$(git -C "$repo_root" fetch origin "+refs/heads/$branch:refs/remotes/origin/$branch" 2>&1)"; then
+        mise x -- gum style --foreground="red" "Could not fetch branch '$branch' from origin: $fetch_output"
+        return 1
+      fi
+
+      base_ref="refs/remotes/origin/$branch"
+    fi
+  fi
+
+  create_worktree "$repo_root" "$branch" "$base_ref" >/dev/null
 }
 
 new_agent_with_prompt() {
   local allow_ticket="${1:-true}"
-  local workspace_id cwd repo_root branch base_branch temp_prompt_file prompt_file prompt_text create_json checkout_path root_pane_id new_workspace_id agent_command
+  local cwd repo_root branch base_branch temp_prompt_file prompt_file prompt_text create_json checkout_path root_pane_id new_workspace_id agent_command
 
-  workspace_id="$(current_workspace_id)"
   cwd="$(current_pane_cwd)"
 
   if ! git -C "$cwd" rev-parse --git-dir >/dev/null 2>&1; then
@@ -395,28 +389,30 @@ new_agent_with_prompt() {
   [[ -z "$base_branch" ]] && return 0
 
   temp_prompt_file="$(mktemp -t herdr-command-prompt)"
-  trap 'rm -f "$temp_prompt_file"' RETURN
+  {
+    mise x -- nvim "+startinsert" "+set ft=markdown" "$temp_prompt_file"
+    prompt_text="$(<"$temp_prompt_file")"
 
-  mise x -- nvim "+startinsert" "+set ft=markdown" "$temp_prompt_file"
-  prompt_text="$(<"$temp_prompt_file")"
+    if [[ -z "${prompt_text//[[:space:]]/}" ]]; then
+      return 0
+    fi
 
-  if [[ -z "${prompt_text//[[:space:]]/}" ]]; then
-    return 0
-  fi
+    create_json="$(create_worktree "$repo_root" "$branch" "$base_branch")"
+    checkout_path="$(jq -er '.path' <<<"$create_json")"
+    root_pane_id="$(jq -er '.pane_id' <<<"$create_json")"
+    new_workspace_id="$(jq -er '.workspace_id' <<<"$create_json")"
 
-  create_json="$(create_worktree "$workspace_id" "$repo_root" "$branch" "$base_branch")"
-  checkout_path="$(jq -er '.result.worktree.path' <<<"$create_json")"
-  root_pane_id="$(jq -er '.result.root_pane.pane_id' <<<"$create_json")"
-  new_workspace_id="$(jq -er '.result.workspace.workspace_id' <<<"$create_json")"
+    cp "$temp_prompt_file" "$checkout_path/.herdr-agent-prompt.md"
+    prompt_file="$checkout_path/.herdr-agent-prompt.md"
 
-  cp "$temp_prompt_file" "$checkout_path/.herdr-agent-prompt.md"
-  prompt_file="$checkout_path/.herdr-agent-prompt.md"
+    agent_command="${HERDR_COMMANDS_AGENT_COMMAND:-$(workmux_agent_command "$repo_root")}"
+    agent_command="${agent_command:-opencode --port --model \"$(opencode-last-model)\"}"
 
-  agent_command="${HERDR_COMMANDS_AGENT_COMMAND:-$(workmux_agent_command "$repo_root")}"
-  agent_command="${agent_command:-opencode --port --model \"$(opencode-last-model)\"}"
-
-  herdr pane run "$root_pane_id" "HERDR_COMMANDS_AGENT_COMMAND=${(q)agent_command} herdr-run-agent-with-prompt ${(q)prompt_file}"
-  herdr workspace focus "$new_workspace_id" >/dev/null
+    herdr pane run "$root_pane_id" "HERDR_COMMANDS_AGENT_COMMAND=${(q)agent_command} herdr-run-agent-with-prompt ${(q)prompt_file}"
+    herdr workspace focus "$new_workspace_id" >/dev/null
+  } always {
+    rm -f "$temp_prompt_file"
+  }
 }
 
 new_agent_with_prompt_without_ticket() {
@@ -440,14 +436,12 @@ delete_current_worktree() {
     return 0
   fi
 
-  if remove_output="$(herdr worktree remove --workspace "$workspace_id" --json 2>&1)"; then
-    return 0
-  fi
-
-  mise x -- gum style --foreground="red" "$remove_output"
-
-  if mise x -- gum confirm "Git refused safe removal. Force delete dirty worktree?"; then
-    herdr worktree remove --workspace "$workspace_id" --force --json >/dev/null
+  if ! remove_output="$(hwt remove --workspace "$workspace_id" --json 2>&1)"; then
+    mise x -- gum style --foreground="red" "$remove_output"
+    if ! mise x -- gum confirm "Git refused safe removal. Force delete dirty worktree?"; then
+      return 0
+    fi
+    hwt remove --workspace "$workspace_id" --force --json >/dev/null
   fi
 }
 

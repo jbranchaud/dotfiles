@@ -2,6 +2,8 @@
 #
 version: 3
 
+silent: true
+
 tasks:
   generate:
     aliases: [gen]
@@ -29,6 +31,7 @@ tasks:
         - 'gt|gt completion' # Graphite CLI
         - 'helm|helm completion zsh'
         - 'herdr|herdr completion zsh'
+        - 'hwt|hwt completion zsh'
         - 'kubectl|kubectl completion zsh'
         - 'lefthook|lefthook completion zsh'
         - 'linear|linear completions zsh'
@@ -47,6 +50,7 @@ tasks:
         - 'task|task --completion zsh'
         - 'usage|usage --completions zsh'
         - 'uv|uv generate-shell-completion zsh'
+        - 'varlock|varlock complete zsh'
         - 'workmux|workmux completions zsh'
       CACHE_PATH:
         sh: echo "$HOME/.cache/zsh/completions"
