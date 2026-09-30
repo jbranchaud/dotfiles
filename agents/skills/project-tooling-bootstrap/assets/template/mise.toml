@@ -1,13 +1,15 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
 [tools]
 "github:crate-ci/committed" = "latest"
 dprint = "latest"
 fnox = "latest"
 gitleaks = "latest"
-lefthook = "latest"
+hk = "latest"
 pitchfork = "latest"
 
 [hooks]
-postinstall = "lefthook install"
+postinstall = "hk install --mise"
 
 [tasks.fmt]
 description = "Formats all supported files"

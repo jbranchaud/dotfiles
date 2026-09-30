@@ -58,31 +58,26 @@ keybind = global:super+'=toggle_quick_terminal
 # command palette
 keybind = super+p=text:\x1aP
 
-# open sesh
+# browse herdr workspaces and agents
 keybind = super+j=text:\x1aT
-# open tmux windows
-keybind = super+k=text:\x1aW
-# open tmux panes
-keybind = super+shift+k=text:\x1aK
+# open Herdr agent navigator
+keybind = super+k=text:\x1aJ
 # toggle last session
 keybind = super+l=text:\x1aL
 # create new session
 keybind = super+shift+n=text:\x1aN
 # open a dev dir in new/existing session
 keybind = super+o=text:\x1aO
-# fork github repo
-keybind = super+shift+f=text:\x1av
 # create a new linear issue
 keybind = super+shift+i=text:\x1ai
-# open workmux dashboard
-keybind = super+shift+e=text:\x1aE
 # insert file path at cursor (for AI agents)
 keybind = super+shift+period=text:\x1aA
+# pick a URL from visible Herdr panes
+keybind = super+u=text:\x1aY
+# pick visible files from Herdr panes
+keybind = super+shift+f=text:\x1aE
 # toggle herdr sidebar
 keybind = super+ctrl+s=text:\x1ab
-
-# vimium like actions (tmux fingers)
-keybind = super+f=text:\x1aF
 
 # send modified Enter so TUIs can distinguish Shift+Enter from Enter
 keybind = shift+enter=csi:13;2u

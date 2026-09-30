@@ -2,6 +2,240 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [32.6.0](https://github.com/dkarter/dotfiles/compare/v32.5.1...v32.6.0) (2026-08-31)
+
+<!-- pullfrog-summary:start -->
+
+## Overview
+
+`v32.6.0` expands the repository's AI-agent workflow across Pi, Herdr, Vellum, and OpenCode, while speeding up shell startup and refreshing core runtimes and editor tooling.
+
+## Notable changes
+
+- Pi now has Vim-style prompt editing, Herdr agent-state reporting, and Neovim context sharing for the current file or visual selection. Its configured model list is reduced to `openai-codex/gpt-5.6-sol`.
+- Herdr command and workspace selection moves from Television and the old `herdr-*` scripts to Vellum. New palettes cover commands, files, workspaces, and agents; `prefix+shift+j` opens the agent picker, and `prefix+u` opens the current PR or falls back to the repository.
+- OpenCode gains a responsive Git status footer and a compact Vim-mode indicator on narrow terminals. Playwright and Chrome DevTools MCPs now use Mise-managed executables, while GitHub MCP traffic goes through a local proxy.
+- Pitchfork is added to `install` and `sync` to enable boot startup for the `ghtkn` agent and GitHub MCP proxy. `ghtkn` also gets app provisioning, short-lived-token refresh, and Mise credential integration.
+- Zsh startup avoids several subprocesses, caches Vivid colors and completion metadata, compiles Zinit, and cleans stale completions.
+- Neovim moves `nvim-colorizer` to the maintained `catgoose` fork and makes Tree-sitter parser updates wait reliably for completion. Amp now disables commit co-author attribution.
+- Toolchains move to Node.js 26, Python 3.14, Go 1.27, Elixir 1.20.3, Lua Language Server 3, and ShellCheck 0.11; plugin and lockfile versions are refreshed throughout.
+
+## Migration notes
+
+- Run `task sync` after updating. This now enables and starts Pitchfork-managed global daemons on macOS and Linux.
+- The opt-in ghtkn tasks moved from `task github:ghtkn:git:configure` to `task ghtkn:git:configure`. New setups must authorize with `ghtkn auth -p dkarter/write`; `task ghtkn:unlock` enables silent refresh through 1Password.
+- Custom integrations calling `bin/herdr-commands`, `bin/herdr-workspaces`, `bin/herdr-command-definitions`, or the removed Television cables must migrate to the corresponding Vellum palettes.
+- Review compatibility before accepting the major runtime upgrades. Also note that `task mise:sync` now creates a `chore(mise): update lockfiles` commit when Mise lockfiles change.
+
+<!-- pullfrog-summary:end -->
+
+
+### Features
+
+* **amp:** add settings file ([684d7ed](https://github.com/dkarter/dotfiles/commit/684d7ed5457c71f9ee36b560913f72c37e154b35))
+* **ghtkn:** automate token refresh ([3cc06e4](https://github.com/dkarter/dotfiles/commit/3cc06e46f3d4378739129e1f873cb67375143ae9))
+* **ghtkn:** provision app configuration ([d092018](https://github.com/dkarter/dotfiles/commit/d09201868f41add4d7563c1962d5d09085d9092c))
+* **herdr:** add vellum workspace and agent palettes ([0fbc52f](https://github.com/dkarter/dotfiles/commit/0fbc52f4e535fd9eca70f0200722ce9629ab5ebc))
+* **herdr:** open repository when branch has no pull request ([f5245ee](https://github.com/dkarter/dotfiles/commit/f5245eecc168c388f47aca2b0f022f1e1a0037ee))
+* **opencode:** add git status plugin ([46b6877](https://github.com/dkarter/dotfiles/commit/46b6877438983e42fae2dab233c232aa2040012e))
+* **opencode:** persist GitHub MCP authentication ([e9eea4f](https://github.com/dkarter/dotfiles/commit/e9eea4f74c8663086ccb9afe117719fecf5add76))
+* **opencode:** use mise-managed MCP servers ([0842b04](https://github.com/dkarter/dotfiles/commit/0842b04a2b1e03b235182e66ce915d877a097052))
+* **pi:** add herdr integration ([2023a79](https://github.com/dkarter/dotfiles/commit/2023a79c1ca5ee941afd9938dd9145f6e84e438a))
+* **pi:** add Neovim editor context integration ([6fb223f](https://github.com/dkarter/dotfiles/commit/6fb223f143247ca063247f4dbd763868788badca))
+* **pi:** add vim mode ([d903470](https://github.com/dkarter/dotfiles/commit/d9034706252aa50be2ff14299ed13b84401de97b))
+* **vellum:** enhance workspace palette ([441444d](https://github.com/dkarter/dotfiles/commit/441444d5fbf78615d10bcca4e03514e1d02b9d9a))
+* **vellum:** migrate command and file palettes ([548b58f](https://github.com/dkarter/dotfiles/commit/548b58fe1828b86db1ee7898ee935770c46926f9))
+
+
+### Bug Fixes
+
+* **ci:** support LuaLS 3 diagnostics ([0339139](https://github.com/dkarter/dotfiles/commit/0339139e4154e09473aa4d197c9bef63e777fadb))
+* **deps:** update dependency solid-js to v1.9.15 ([#446](https://github.com/dkarter/dotfiles/issues/446)) ([7157d17](https://github.com/dkarter/dotfiles/commit/7157d170a0c895919473387736999663922a065d))
+* **mise:** use ghtkn as credential_command ([38ddf1f](https://github.com/dkarter/dotfiles/commit/38ddf1fb427008fdb0d25e12e3d9e63ba0ed9ae4))
+* **nvim:** migrate nvim-colorizer to maintained fork ([fd5f662](https://github.com/dkarter/dotfiles/commit/fd5f66271e24a26af6bcf66e6ebb10a265972bc8))
+* **nvim:** more reliable TSUpdate ([4325a46](https://github.com/dkarter/dotfiles/commit/4325a46aaa2d6f96dbb47600963555fbfbdecebf))
+* **opencode:** make git status responsive ([d419ad7](https://github.com/dkarter/dotfiles/commit/d419ad746edd6b817c13e0a8ceeb91c619669ff6))
+* **opencode:** make vim mode indicator responsive ([0b978fd](https://github.com/dkarter/dotfiles/commit/0b978fd658a0c6820e445303a13554ca7bc04f38))
+* **pi:** remove unused models ([cfb482b](https://github.com/dkarter/dotfiles/commit/cfb482b1583e962196755312afaa7ceb0098828c))
+* **pi:** restore shell cursor after quitting ([f9355e7](https://github.com/dkarter/dotfiles/commit/f9355e7d1b7b56119a0d9eace17eb952aad70c67))
+
+
+### Performance Improvements
+
+* **zsh:** optimize shell startup ([817cbbe](https://github.com/dkarter/dotfiles/commit/817cbbec7b55129154486f5efa876f2fdb8779f4))
+
+## [32.5.1](https://github.com/dkarter/dotfiles/compare/v32.5.0...v32.5.1) (2026-08-22)
+
+<!-- pullfrog-summary:start -->
+
+## Overview
+
+`v32.5.1` is a maintenance release that refreshes dependencies used by the OpenCode TUI plugin and the repository’s JavaScript tooling. It does not change user configuration or workflows.
+
+## Notable Changes
+
+- Updated `@opentui/core`, `@opentui/keymap`, and `@opentui/solid` from `0.5.3` to `0.5.6` for the OpenCode TUI plugin.
+- Updated the root `js-yaml` dependency override from `5.2.3` to `5.3.0`.
+
+<!-- pullfrog-summary:end -->
+
+
+### Bug Fixes
+
+* **deps:** update dependency @opentui/core to v0.5.6 ([#447](https://github.com/dkarter/dotfiles/issues/447)) ([aed4ac2](https://github.com/dkarter/dotfiles/commit/aed4ac2855614f004aee8e529c83bce5927ea4d8))
+* **deps:** update dependency @opentui/keymap to v0.5.6 ([#457](https://github.com/dkarter/dotfiles/issues/457)) ([5db0d10](https://github.com/dkarter/dotfiles/commit/5db0d100918a103c54707e265b67b711e364d1fa))
+* **deps:** update dependency @opentui/solid to v0.5.6 ([#448](https://github.com/dkarter/dotfiles/issues/448)) ([d6f1098](https://github.com/dkarter/dotfiles/commit/d6f10980702398522ba135f73a73d3aa4631d9ce))
+
+## [32.5.0](https://github.com/dkarter/dotfiles/compare/v32.4.1...v32.5.0) (2026-08-22)
+
+<!-- pullfrog-summary:start -->
+
+## Overview
+
+`v32.5.0` strengthens credential handling across the development environment and expands the configured coding-agent toolset. It adds shared secret redaction, safer opt-in GitHub authentication, Pi, and the official GitHub MCP server, while restoring compatibility with current OpenCode TUI APIs.
+
+## Notable Changes
+
+- A shared credential guard now redacts common tokens, passwords, cookies, API keys, private keys, and structured secret fields from tool results. Installation and sync wire it into Claude, Codex, Amp, OpenCode, and Pi, with automated tests covering the integrations.
+- `ghtkn` is installed through Mise and can provide short-lived credentials to Git and `gh`. New `task github:ghtkn:git:configure` and `task github:ghtkn:git:remove` commands manage the machine-local opt-in.
+- Pi is now installed through Mise and configured to use `openai-codex/gpt-5.6-sol` by default, with the credential guard extension enabled.
+- OpenCode now uses the official local `github-mcp-server` over stdio instead of the remote GitHub Copilot MCP endpoint. Credential-revealing debug config commands are denied, and Vim mode is enabled again with updated keybind and TUI plugin APIs.
+- Mise installation moves to the standalone installer. `task sync` migrates Mise to `~/.local/bin/mise`, updates it there, and removes the Homebrew formula when present.
+- Global agent guidance is now also linked to `~/.codex/AGENTS.md`.
+
+## Migration Notes
+
+- Shell startup no longer exports `GITHUB_TOKEN` or `MISE_GITHUB_TOKEN` from `gh auth token`. Scripts that relied on those implicit environment variables must provide credentials explicitly or opt in with `task github:ghtkn:git:configure`, then start a new shell.
+- On macOS and Linux, the next `task sync` may replace a package-managed Mise installation with the standalone binary in `~/.local/bin`; that path now takes precedence over Homebrew.
+
+<!-- pullfrog-summary:end -->
+
+
+### Features
+
+* add ghtkn for safer github tokens ([9ed516a](https://github.com/dkarter/dotfiles/commit/9ed516a489e44b1e3aa49e508d171041d3c87bc9))
+* **agents:** redact credentials across tool output ([08836e6](https://github.com/dkarter/dotfiles/commit/08836e6be8b6f915c52387078d5387569bf21b2e))
+* **mise:** add pi agent ([cd24707](https://github.com/dkarter/dotfiles/commit/cd247070786f088ccfac8200f1c6e6faf45c01cb))
+* **opencode:** guard credentials and restore vim mode ([e4ee69a](https://github.com/dkarter/dotfiles/commit/e4ee69a6289be02a6472f1d34c2baa470542aab4))
+
+
+### Bug Fixes
+
+* **mise:** add github official mcp stdio and ghtkn ([04490bf](https://github.com/dkarter/dotfiles/commit/04490bf9651465c80d3823640d2068f4e7727414))
+* **mise:** migrate to standalone installation ([e296550](https://github.com/dkarter/dotfiles/commit/e296550ed0befdd452260ff5493f207f7826348e))
+* **opencode:** update keybind references ([113720c](https://github.com/dkarter/dotfiles/commit/113720c7640c0bc5d61d3bf5ea20f7bc2cd6f6af))
+* **pi:** preserve default model across launches ([89b46d4](https://github.com/dkarter/dotfiles/commit/89b46d4a8e204d67df936f5f8630656d55529ecd))
+
+## [32.4.1](https://github.com/dkarter/dotfiles/compare/v32.4.0...v32.4.1) (2026-08-22)
+
+<!-- pullfrog-summary:start -->
+
+## Overview
+
+`v32.4.1` is a release automation patch. It does not change shell, editor, tool, or platform configuration, so dotfiles users do not need to migrate anything.
+
+## Notable changes
+
+- Release note summarization and publication now run in one `enrich` job, keeping the Pullfrog result and workspace available through the full workflow.
+- Release history checkout is now narrowly scoped: the workflow checks out the target tag with depth 1, identifies the two latest stable GitHub releases, and fetches only the previous tag needed for comparison.
+- The default branch is shallow-fetched into the existing workspace before preparing the changelog pull request, replacing a second full-history checkout.
+
+<!-- pullfrog-summary:end -->
+
+
+### Bug Fixes
+
+* **release:** keep enrichment output in one job ([d53b057](https://github.com/dkarter/dotfiles/commit/d53b057f0aa1cb94b114bcd7487b89e37a50a841))
+* **release:** limit enrichment checkout scope ([3db96c2](https://github.com/dkarter/dotfiles/commit/3db96c2715b2335f1a76cb12ce90085dbee6fb3f))
+
+## [32.4.0](https://github.com/dkarter/dotfiles/compare/v32.3.0...v32.4.0) (2026-08-22)
+
+<!-- pullfrog-summary:start -->
+
+## Overview
+
+`v32.4.0` focuses on release automation, adding verified, human-readable summaries to published releases and `CHANGELOG.md`. It also refreshes Yazi dependencies and adds the `nub` CLI to the Mise-managed toolset.
+
+## Notable changes
+
+- Release Please now uses the upstream action with GitHub App authentication and triggers a reusable enrichment workflow after a release is created.
+- The enrichment workflow checks out complete tag history, summarizes the verified tag diff, updates the GitHub release body, and opens or updates a changelog pull request with a GitHub-signed commit.
+- New enrichment scripts and fixtures are covered by Node tests, now included in `task ci:run`.
+- Mise installs `nub` `0.7.5`, which powers release-note processing.
+- Yazi's `smart-enter` plugin and Catppuccin Mocha flavor references were updated.
+
+## Migration notes
+
+Normal dotfiles users do not need to migrate configuration; run the usual sync process. Maintainers or forks using the release workflow must provide `RELEASE_CLIENT_ID` and `RELEASE_PRIVATE_KEY` for a GitHub App. The previous GPG signing helper, its Mise tasks, and the old release signing credentials are no longer used.
+
+<!-- pullfrog-summary:end -->
+
+
+### Features
+
+* **release:** enrich published release notes ([eac9c33](https://github.com/dkarter/dotfiles/commit/eac9c3363b74a62302233e803a020de6f5469ec0))
+
+
+### Bug Fixes
+
+* **release:** fetch complete release history ([ef932c4](https://github.com/dkarter/dotfiles/commit/ef932c453f0b1e9fe91b5aaee8e4bffcb977248e))
+* **release:** grant enrichment OIDC permission ([30b9d2c](https://github.com/dkarter/dotfiles/commit/30b9d2c5cf815b04713d059c29787453e3ecf8e0))
+* **release:** make enrichment reliable ([b03b5b7](https://github.com/dkarter/dotfiles/commit/b03b5b7b3c9636c30999bd0391c25921c5d8e7e4))
+* **release:** rely on published release trigger ([066631e](https://github.com/dkarter/dotfiles/commit/066631eecfe152c30a11ce816b55dbbe376fdde7))
+* **release:** simplify enrichment credentials ([267c3b0](https://github.com/dkarter/dotfiles/commit/267c3b03b2c2dd4d58dadd58ff7e80b7fd6fa99f))
+* **release:** use GitHub App signed commits ([e50f528](https://github.com/dkarter/dotfiles/commit/e50f528dbf6cfe95af49541eee32fe41f9eee4d2))
+
+## [32.3.0](https://github.com/dkarter/dotfiles/compare/v32.2.0...v32.3.0) (2026-08-22)
+
+
+### Features
+
+* **agents:** require signed commits ([b0da1ca](https://github.com/dkarter/dotfiles/commit/b0da1caf433a68aaa1322cd6afe896b03033de5b))
+* **herdr:** add hwt plugin ([0243c87](https://github.com/dkarter/dotfiles/commit/0243c875ae7427960adec82894788b62e5a5c096))
+* **herdr:** add non blocking herdr worktree deletion ([4b9e8d2](https://github.com/dkarter/dotfiles/commit/4b9e8d26a17e5544a3875b7c541737c4e1f8431e))
+* **herdr:** add pane swap shortcuts ([186363b](https://github.com/dkarter/dotfiles/commit/186363be12dc3e6b2a09ee1436253f76eccb5635))
+* **herdr:** label opencode v2 panes ([f2740ed](https://github.com/dkarter/dotfiles/commit/f2740ed7638a041ceb5071bd8cf104a80f309bf4))
+* **herdr:** support session history ([ad0676f](https://github.com/dkarter/dotfiles/commit/ad0676fbc4e399b614d20c70779461f62edb4250))
+* **herdr:** use hwt for worktree orchestration ([d115cae](https://github.com/dkarter/dotfiles/commit/d115cae1a5559a1d3495131819232a4fa354c82b))
+* **mise:** add Amp CLI ([4fddc2b](https://github.com/dkarter/dotfiles/commit/4fddc2ba9620711a34cf926a06382c699fab100b))
+* **mise:** add opencode v2 ([94af41b](https://github.com/dkarter/dotfiles/commit/94af41ba6d4fe6e57245d87e1fec493dc5b6a6b7))
+* **mise:** add opencode v2 beta ([8490f06](https://github.com/dkarter/dotfiles/commit/8490f0664ea0bc106a8be2a097aebec5753719a2))
+* **mise:** add opt-in pdq profile ([18fabc6](https://github.com/dkarter/dotfiles/commit/18fabc6b0cea43cfd5f8424de47159fd7af09709))
+* **opencode:** add chrome devtools mcp -&gt; helium ([f3f2343](https://github.com/dkarter/dotfiles/commit/f3f2343feb1a9740049e0e54d0ca17ac0fb1bb0b))
+* **opencode:** configure v2 TUI ([c3a433c](https://github.com/dkarter/dotfiles/commit/c3a433cd2fda95bf1db2c9c268e0358eb484964b))
+* **opencode:** enable attention notifs ([da50118](https://github.com/dkarter/dotfiles/commit/da5011898cad98a264a32c3d499bcbcd4d512c32))
+* **opencode:** install TUI plugin dependencies ([0002f95](https://github.com/dkarter/dotfiles/commit/0002f957c4dff3d854660bbe32c928bd9eed5b60))
+* **opencode:** update TUI preferences ([9ce644b](https://github.com/dkarter/dotfiles/commit/9ce644b5f2cdc47353e8c81a1814a52ecc7da4bc))
+* **pspg:** add XDG config and Tokyo Night theme ([02ef957](https://github.com/dkarter/dotfiles/commit/02ef95744febc3451529d5806aced2d61245b224))
+* **skills:** add dev process launcher ([dc7c995](https://github.com/dkarter/dotfiles/commit/dc7c99503153ca7c689952efecdc304f421190d7))
+* **skills:** add hwt skills ([6b02a22](https://github.com/dkarter/dotfiles/commit/6b02a224e2cc3bb1aaf0bc759221127d5dc46b57))
+* **skills:** add simple explanation guidance ([796032d](https://github.com/dkarter/dotfiles/commit/796032d6a70cc33c16935adecce8b82cd7a67542))
+* **skills:** address bot PR comments ([447ef47](https://github.com/dkarter/dotfiles/commit/447ef473da6db0e3814d757a0bef95a8cf02c4dd))
+* **skills:** enable model invocation for PR workflows ([0eeecbe](https://github.com/dkarter/dotfiles/commit/0eeecbe8b10086e20ce63c57f2b7fdd3a73507e9))
+* **skills:** require explicit invocation ([35289e9](https://github.com/dkarter/dotfiles/commit/35289e9655e646675d99beb84425347f5f4a82b9))
+* **skills:** sync bundled hunk skills ([22f079e](https://github.com/dkarter/dotfiles/commit/22f079e6517e1874db2d046d59e3e0916df0d965))
+* **zsh:** add oc2 alias ([a2b2445](https://github.com/dkarter/dotfiles/commit/a2b2445771dcea1177d1471e87fde94824341396))
+
+
+### Bug Fixes
+
+* **git:** resolve mise lockfile conflicts ([b4d372b](https://github.com/dkarter/dotfiles/commit/b4d372b79a0e45e5cdb43d6f12b9c60100770fd7))
+* **herdr:** add icon for psql ([fc3dfb3](https://github.com/dkarter/dotfiles/commit/fc3dfb34f427ec928f764101fc21f24a2608766f))
+* **hypr:** free herdr palette shortcuts ([1b93b2d](https://github.com/dkarter/dotfiles/commit/1b93b2d38cc6b942c46b319b96067c7f03af04a6))
+* **hypr:** free herdr shortcuts ([c23a812](https://github.com/dkarter/dotfiles/commit/c23a812b26dcaf3748d4796ca65090ef415d4217))
+* **lazygit:** auto update config ([1bf3704](https://github.com/dkarter/dotfiles/commit/1bf37049c06502dfcf42a32ec5e78aba706ff955))
+* **mise:** use correct name for amp for minimum_release_age_excludes ([f4c67d6](https://github.com/dkarter/dotfiles/commit/f4c67d629b2c34966118dda8d92b923a8fc7eb06))
+* **nvim:** opencode.nvim error when pane too small ([63e1904](https://github.com/dkarter/dotfiles/commit/63e1904b9d12eca5c4db8b8d2e9c25f9ef95224d))
+* **opencode:** consistently use persistent v2 sessions ([e77e318](https://github.com/dkarter/dotfiles/commit/e77e3184b28b61a3ff3a474a4b9df5d4911b5106))
+* **opencode:** preserve vim cursor shape ([3a5123b](https://github.com/dkarter/dotfiles/commit/3a5123b43470d31e5a207a2a573151eb93e801ed))
+* **skills:** improve open pr skill ([57757f6](https://github.com/dkarter/dotfiles/commit/57757f6bcae91b416ba63999fb6137a668e50c60))
+* **skills:** refine address-bot-pr-comments skill ([88713ee](https://github.com/dkarter/dotfiles/commit/88713ee47262a70f88f751ada4856a8a114711c4))
+* **task:** sync skills once ([201e21b](https://github.com/dkarter/dotfiles/commit/201e21bb3e854c44e4b26a57fd7f3721eb244ca7))
+* **task:** use mise exec for aube install ([46c2a8f](https://github.com/dkarter/dotfiles/commit/46c2a8f0ce1e09ae4952caf52d6f4f28e66aa77b))
+* **television:** cache gcloud project picker ([6339df2](https://github.com/dkarter/dotfiles/commit/6339df2fd7e595bdfafc32c6cdc1ed860a591020))
+* **television:** remove gcloud project cache ttl ([c611d7f](https://github.com/dkarter/dotfiles/commit/c611d7f2f759dd9c441055eccdbfa5af13200519))
+* **yamllint:** exclude all node modules ([7097589](https://github.com/dkarter/dotfiles/commit/7097589cf745f363094551d503178c342df4c842))
+
 ## [32.2.0](https://github.com/dkarter/dotfiles/compare/v32.1.0...v32.2.0) (2026-08-04)
 
 

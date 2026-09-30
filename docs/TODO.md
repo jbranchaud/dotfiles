@@ -3,7 +3,6 @@
 ## Herdr
 
 - [ ] show prs with draft status and link
-- [ ] refactor @bin/herdr-commands to smaller scripts
 - [ ] ability to change themes easily and in a synchronized way with: ghostty,
       herdr, nvim, lualine - the key is to have a fuzzy finder that shows a list of
       themes with both light and dark themes and the ability to preview them as I
@@ -17,13 +16,14 @@
 
 # Done
 
-- [x] super-l toggle last workspace like in tmux (mapped to prefix+shift-L)
+- [x] super-l toggle last workspace (mapped to prefix+shift-L)
+- [x] refactor the Herdr command palette into smaller scripts
 - [x] open dev dir
 - [x] insert file with super-shift-. with a popup
 - [x] it would be cool if there was a way to show the space/worktree title when it's focused
 - [x] resize panes with alt+hjkl
-- [x] seamless navigation with neovim (like I have in tmux between muxer panes and nvim splits)
+- [x] seamless navigation between Herdr panes and Neovim splits
 - [x] keybinds to navigate spaces and worktrees up and down - ctrl+[/] in herdr, cmd+[/] via ghostty
 - [x] vim test integration
 - [x] keybind to quickly jump to PR
-- [x] better jump to space/worktree - using tv (fuzzy finder) maybe + herdr popup - the built in one is too cluttered because it contains the panes - but I do want to steal the "state" of the agents idea from it
+- [x] better jump to space/worktree with Vellum and a Herdr popup

@@ -3,17 +3,17 @@
     "name": "opencode-transparent"
   },
   "keybinds": {
-    "editor_open": "ctrl+g",
-    "input_submit": "enter",
-    "input_newline": "shift+enter",
-    "input_move_left": "left,ctrl+b",
-    "session_background": "ctrl+alt+b",
-    "messages_page_up": "ctrl+alt+u",
-    "messages_page_down": "ctrl+alt+d",
-    "messages_half_page_up": "ctrl+u",
-    "messages_half_page_down": "ctrl+d"
+    "prompt.editor": "ctrl+g",
+    "input.submit": "enter",
+    "input.newline": "shift+enter",
+    "input.move.left": "left,ctrl+b",
+    "session.background": "ctrl+alt+b",
+    "session.page.up": "ctrl+alt+u",
+    "session.page.down": "ctrl+alt+d",
+    "session.half.page.up": "ctrl+u",
+    "session.half.page.down": "ctrl+d"
   },
-  "plugins": ["./tui-plugin/vim-mode.tsx"],
+  "plugins": ["./tui-plugin/vim-mode", "./tui-plugin/git-status", "./herdr-opencode"],
   "diffs": {
     "wrap": "word"
   },
@@ -28,6 +28,11 @@
     "layout": "horizontal"
   },
   "attention": {
-    "enabled": true
+    "enabled": true,
+    "sound": false
+  },
+  "prompt": {
+    "paste": "full",
+    "image_preview": true
   }
 }

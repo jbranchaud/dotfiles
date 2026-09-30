@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+silent: true
+
+tasks:
+  plugins:install:
+    desc: Installs dependencies for local OpenCode plugins
+    cmd: >-
+      mise exec -- aube install --fix-lockfile
+      --filter ./config/opencode/plugins
+      --filter ./config/opencode/tui-plugin
+
+  plugins:check:
+    desc: Checks that local OpenCode plugin dependencies match the lockfile
+    cmd: hk check --all --step opencode-dependencies

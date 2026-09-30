@@ -1,6 +1,6 @@
 ---
 name: project-tooling-bootstrap
-description: 'Bootstrap a repository with the Toolkit baseline developer tooling: mise, dprint, lefthook, committed, gitleaks, pitchfork, and fnox. Use when a user asks to add or standardize local tooling, Git hooks, formatting checks, commit-message linting, local command orchestration, or secrets handling in a new or existing project. Applies to polyglot repos that need repeatable local setup and pre-push quality checks.'
+description: 'Bootstrap a repository with the Toolkit baseline developer tooling: mise, dprint, hk, committed, gitleaks, pitchfork, and fnox. Use when a user asks to add or standardize local tooling, Git hooks, formatting checks, commit-message linting, local command orchestration, or secrets handling in a new or existing project. Applies to polyglot repos that need repeatable local setup and pre-push quality checks.'
 ---
 
 # Project Tooling Bootstrap
@@ -24,6 +24,7 @@ Use these defaults when applying the baseline in a target repository:
 - Install `fnox.toml` at the repository root unless the project already has a standardized secrets config.
 - Default `fnox.toml` provider should be `onepass` (1Password) with keychain fallback for local token storage.
 - Use mise built-in tasks as the default task runner.
+- Keep `#:schema https://mise.jdx.dev/schema/mise.json` at the top of `mise.toml` for Taplo validation and completion.
 
 When wiring commands/tasks:
 
@@ -102,7 +103,7 @@ Core files copied to the target repository:
 
 - `mise.toml`
 - `dprint.json`
-- `lefthook.yml`
+- `hk.pkl`
 - `committed.toml`
 - `fnox.toml`
 
@@ -116,7 +117,7 @@ Run in the target repository:
 
 ```bash
 mise install
-lefthook install
+hk install --mise
 mise run fmt
 mise run fmt-check
 ```

@@ -1,3 +1,5 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
 [tools]
 
 "github:crate-ci/committed" = "latest"
@@ -6,12 +8,13 @@ aube = "latest"
 bun = "latest"
 dprint = "latest"
 gitleaks = "latest"
-lefthook = "latest"
-lua-language-server = "2"
+hk = "latest"
+lua-language-server = "3"
 "npm:@logseq/cli" = "latest"
-node = "24"
+node = "26"
+"github:nubjs/nub" = "latest"
 ripgrep = "latest"
-shellcheck = "0.10"
+shellcheck = "0.11"
 shfmt = "latest"
 stylua = "2"
 taplo = "latest"
@@ -21,7 +24,10 @@ uv = "latest"
 yamllint = "1.38"
 
 [hooks]
-postinstall = "lefthook install"
+postinstall = "hk install --mise"
+
+[env]
+HK_HIDE_WHEN_DONE = "1"
 
 [settings]
 experimental = true
@@ -58,6 +64,8 @@ press_and_hold = false
 "~/.gitconfig" = "gitconfig"
 "~/.gitignore" = "gitignore"
 "~/.gitmessage" = "gitmessage"
+"~/.claude/CLAUDE.md" = "config/opencode/AGENTS.md"
+"~/.codex/AGENTS.md" = "config/opencode/AGENTS.md"
 "~/.ignore" = "ignore"
 "~/.pgpass" = "pgpass"
 "~/.prettierrc" = "prettierrc"
@@ -68,14 +76,6 @@ press_and_hold = false
 "~/.zshenv" = "zshenv"
 "~/.zshrc" = "zshrc"
 "~/.config/*" = "config/*"
-
-[tasks."release:signing-key"]
-description = "Generate/export the release-please GPG signing key"
-file = "scripts/release-please-gpg-key.sh"
-
-[tasks."release:signing-key:print"]
-description = "Print release-please GPG signing values to stdout"
-run = "bash scripts/release-please-gpg-key.sh --print"
 
 [tasks."tart:fresh-install"]
 description = "Run a fresh-install test in an ephemeral Tart macOS VM"

@@ -1,5 +1,25 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/dkarter/hwt/main/schema/herdr-worktree.schema.json
 worktree_naming: full
 
+agent: opencode
+
 files:
   copy: []
+
+ticket_commands:
+  default:
+    command: [lnr, quick, '{input}', --json]
+    output:
+      branch: branchName
+      metadata:
+        identifier: issueId
+        title: title
+        url: url
+  search:
+    command: [lnr, issue, search, '{input}', --json]
+    output:
+      branch: branchName
+      metadata:
+        identifier: issueId
+        title: title
+        url: url

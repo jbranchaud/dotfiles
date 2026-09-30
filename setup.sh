@@ -61,16 +61,13 @@ if [[ $DISTRO_BASE == 'debian' ]]; then
   bash ./installer/debian-setup.sh
 fi
 
-echo 'Installing shared steps...'
-bash ./installer/shared.sh
-
 if [[ ! -f ~/.local/bin/task ]]; then
   # Install task
   mkdir -p ~/.local/bin
   sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
 fi
 
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Run task
 if [[ ${DEVPOD:-} == 'true' || ${DEVCONTAINER:-} == 'true' ]]; then

@@ -1,0 +1,38 @@
+#:schema https://raw.githubusercontent.com/dkarter/vellum/refs/heads/main/schemas/vellum.schema.json
+
+[search]
+title = "Visible Files"
+placeholder = "Open a file from this tab..."
+
+[source]
+cmd = "herdr-visible-files"
+
+[actions]
+default = "open"
+menu = "ctrl-a"
+
+[[actions.items]]
+name = "open"
+label = "Open in Neovim"
+icon = "󰈙"
+command = ["herdr-open-visible-file", "$path", "$display_path"]
+on_success = "exit"
+
+[[actions.items]]
+name = "paste-path"
+label = "Paste path into active pane"
+icon = "󰏫"
+description = "Insert the selected file path into the pane that opened this picker"
+command = ["herdr-paste-visible-file", "$path"]
+on_success = "exit"
+
+[item]
+value = "$path"
+template = [
+  [
+    { token = "$display_path", bold = true },
+  ],
+  [
+    { token = "$pane_title", fg = "#565f89" },
+  ],
+]

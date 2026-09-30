@@ -84,12 +84,13 @@ rm -f "$HOME/.gitconfig"
 ensure_homebrew() {
   if command -v brew >/dev/null 2>&1; then
     eval "$(brew shellenv)"
-    return
+  else
+    echo "Installing Homebrew..."
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | NONINTERACTIVE=1 /bin/bash
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
-  echo "Installing Homebrew..."
-  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | NONINTERACTIVE=1 /bin/bash
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+  export PATH="$HOME/.local/bin:$PATH"
 }
 
 ensure_task() {
@@ -124,8 +125,6 @@ assert_symlink() {
 
 run_core_install() {
   echo "Running core install path..."
-  bash ./installer/shared.sh
-
   ensure_homebrew
   ensure_task
 

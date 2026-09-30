@@ -24,7 +24,7 @@ dependency management.
 ```
 ├── config/                # XDG-compliant configuration files
 │   ├── nvim/              # Neovim configuration (Lua-based)
-│   ├── tmux/              # Terminal multiplexer config
+│   ├── herdr/             # Terminal workspace manager config
 │   ├── zsh/               # Z shell configurations
 │   ├── wezterm/           # Terminal emulator config
 │   └── [various tools]/   # Tool-specific configurations
@@ -41,7 +41,7 @@ dependency management.
 - **Editor:** Neovim (modern Lua configuration)
 - **Terminal:** Ghostty, WezTerm as fallback
 - **Shell:** Zsh with custom configuration
-- **Multiplexer:** tmux with extensive plugin ecosystem
+- **Workspace Manager:** Herdr with HWT worktree orchestration
 - **Version Control:** Git with conventional commits
 
 ### Package Management
@@ -54,7 +54,7 @@ dependency management.
 ### Automation & Build
 
 - **Task:** Modern Makefile alternative for automation
-- **Lefthook:** Git hooks management
+- **hk:** Git hooks and file-aware check orchestration
 - **Conventional Commits:** Standardized commit messages checked with `committed` CLI
 - **Release Please:** Automated semantic versioning through GitHub Actions
 
@@ -97,7 +97,7 @@ task ci:run     # Run all linting/checks
 ### Development Workflow
 
 ```bash
-# Conventional commits are enforced via lefthook and committed
+# Conventional commits are enforced via hk and committed
 git commit -m "feat: add new feature"
 
 # CI checks run on pre-push
@@ -131,7 +131,7 @@ git push
 
 - **Conventional Commits:** Enforced via commitlint
 - **Semantic Versioning:** Automated via Release Please
-- **Hooks:** Managed by Lefthook
+- **Hooks:** Managed by hk
 - **Templates:** Custom commit message templates
 
 ### macOS Integration
@@ -181,7 +181,7 @@ The CI pipeline (`task ci:run`) includes:
 - fd, ripgrep - use these to search for files instead of find and grep
 - bat (cat replacement)
 - git, lazygit (version control)
-- tmux (terminal multiplexer)
+- herdr, hwt (terminal workspaces and worktree orchestration)
 - neovim (editor)
 
 ### macOS Specific
@@ -230,7 +230,7 @@ The CI pipeline (`task ci:run`) includes:
 3. **Document changes:** Update this file when adding new major components
 4. **Platform awareness:** Consider macOS/Linux compatibility
 5. **Performance focus:** This setup prioritizes speed and efficiency
-6. **Be aware of symlinking** this repo symlinks configs from ./config to ~/.config/ always check the local directory config first because you already have permissions to access it and it may be enough to solve issues
+6. **Manage symlinks through Mise:** This repository maps dotfiles in `mise.toml`; apply them with `mise bootstrap dotfiles apply --yes` instead of creating symlinks manually. Check `./config` first because it is usually the source for `~/.config`.
 
 ### Common Modifications
 

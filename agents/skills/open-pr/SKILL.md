@@ -1,7 +1,6 @@
 ---
 name: open-pr
-description: Always use this skill for PR creation. Use whenever the user asks to open, create, draft, prepare, or submit a pull request, unless they explicitly ask for raw CLI/API commands instead. Do not invoke automatically.
-disable-model-invocation: true
+description: Always use this skill for PR creation. Use whenever the user asks to open, create, draft, prepare, or submit a pull request, unless they explicitly ask for raw CLI/API commands instead.
 ---
 
 <!-- This is a starting point. Customize the template and guidelines to match your team's PR conventions. -->
@@ -63,7 +62,8 @@ Guidelines:
 - Explain the "why" before the "how"
 - Use the conversation context to inform the description
 - Include before/after comparisons for UI or performance changes
-- Be concise, direct and to the point
+- Be concise, direct and to the point use explain-simply skill to keep technical descriptions easy to understand
+- for the Testing Instructions section always prefer instructions for manual testing of how a human would verify the change manually by interacting with the app rather than a list of commands you ran - the list of commands is not helpful. If the change is not user facing at all you can describe how to test it more technically.
 - Use the "humanizer" skill to improve writing
 - IMPORTANT: always keep the pr in DRAFT mode - only a human should be allowed take a PR out of draft mode
 

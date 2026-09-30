@@ -28,6 +28,8 @@ export PATH="/usr/local/bin:$PATH"
 # set homebrew on path (Apple Silicon) - should be first to override system bins
 # (e.g. for updating zsh or bash)
 export PATH="/opt/homebrew/bin:$PATH"
+# locally installed tools (including mise) take precedence over Homebrew
+export PATH="$HOME/.local/bin:$PATH"
 # ===================================
 
 # mise global/local runtime version manager - must happen before all other tools
@@ -74,7 +76,7 @@ fi
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 # set cabal and haskell binaries on path
-export PATH="$HOME/.cabal/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cabal/bin:$PATH"
 
 # Golang
 export PATH="/usr/local/go/bin:$PATH"
@@ -89,12 +91,12 @@ if [[ -f ~/.ssh/id_rsa.pub ]]; then
   export SSH_FINGERPRINT=$(ssh-keygen -lf ~/.ssh/id_rsa.pub | awk '{print $2}')
 fi
 
-case "$(uname -s)" in
-  Darwin*)
+case $OSTYPE in
+  darwin*)
     # ruby-build -> configure readline path from homebrew
     export RUBY_CONFIGURE_OPTS=--with-readline-dir="$BREW_PREFIX/opt/readline"
     ;;
-  Linux*)
+  linux*)
     # ruby-build -> configure readline path
     export RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/include/readline"
     ;;
@@ -115,11 +117,11 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export PATH=$PATH:$GOPATH/bin
 
 # qt
-case "$(uname -s)" in
-  Darwin*)
+case $OSTYPE in
+  darwin*)
     # don't mess with this.. or erlang will stop compiling.
     ;;
-  Linux*)
+  linux*)
     export PATH="/usr/local/opt/libpq/bin:$PATH"
     export PATH="/usr/local/opt/qt/bin:$PATH"
     export LDFLAGS="$LDFLAGS -L/usr/local/opt/qt/lib"
@@ -130,11 +132,11 @@ esac
 # OPEN SSL
 # =====================================================
 
-case "$(uname -s)" in
-  Darwin*)
+case $OSTYPE in
+  darwin*)
     # don't mess with this.. or erlang will stop compiling.
     ;;
-  Linux*)
+  linux*)
     export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
     # For compilers to find openssl@1.1 you may need to set:
@@ -165,3 +167,13 @@ __vscode_bin="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 [[ -d "$__cursor_bin" ]] && export PATH="$__cursor_bin:$PATH"
 [[ -d "$__vscode_bin" ]] && export PATH="$__vscode_bin:$PATH"
 unset __cursor_bin __vscode_bin
+
+test -e "$HOME/.shellfishrc" && source "$HOME/.shellfishrc"
+
+if [[ "$LC_TERMINAL" == "ShellFish" ]] && shellfish_tty=$(tty 2>/dev/null); then
+  shellfish_tty_dir="$HOME/.cache/shellfish/ttys"
+  mkdir -p "$shellfish_tty_dir"
+  printf '%s\n' "$$" >> "$shellfish_tty_dir/${shellfish_tty##*/}"
+  unset shellfish_tty shellfish_tty_dir
+fi
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
