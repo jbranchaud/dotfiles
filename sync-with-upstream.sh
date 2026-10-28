@@ -32,6 +32,24 @@ print_error() {
   echo -e "${RED}✗${NC} $1"
 }
 
+# mise lockfiles are owned by upstream; local churn would block the next sync
+LOCK_PATHS=(mise.lock config/mise/*.lock config/mise/locks .mise/locks)
+
+# Install tools required by the (possibly updated) mise configs so the shell
+# doesn't warn about missing versions after a sync
+install_tools() {
+  print_info "Installing mise tools..."
+  if mise install; then
+    print_success "mise tools installed"
+  else
+    print_warning "mise install failed; re-run 'mise install' manually"
+  fi
+
+  # mise install rewrites lockfiles; discard that so the tree stays clean
+  git restore -- "${LOCK_PATHS[@]}"
+  git clean -fdq -- "${LOCK_PATHS[@]}"
+}
+
 # Check if we're in a git repository
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
   print_error "Not in a git repository"
@@ -77,6 +95,8 @@ if [ -f .git/MERGE_HEAD ]; then
   git push ${ORIGIN_REMOTE} ${MAIN_BRANCH}
   print_success "Push completed"
 
+  install_tools
+
   print_success "Sync process complete!"
   exit 0
 fi
@@ -121,6 +141,7 @@ fi
 # Check if main needs updating
 if git merge-base --is-ancestor ${TRACKING_BRANCH} HEAD; then
   print_success "${MAIN_BRANCH} is already up to date with upstream"
+  install_tools
   print_success "Sync process complete - no changes needed!"
   exit 0
 fi
@@ -186,6 +207,8 @@ print_success "Merge completed successfully"
 print_info "Pushing ${MAIN_BRANCH} to ${ORIGIN_REMOTE}..."
 git push ${ORIGIN_REMOTE} ${MAIN_BRANCH}
 print_success "Push completed"
+
+install_tools
 
 print_success "Sync process complete!"
 print_info "Your customizations in '${MAIN_BRANCH}' now include the latest upstream changes"
