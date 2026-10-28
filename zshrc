@@ -55,9 +55,6 @@ done
 ITERM2_INTEGRATION_SCRIPT="${HOME}/.iterm2_shell_integration.zsh"
 test -e "$ITERM2_INTEGRATION_SCRIPT" && source "$ITERM2_INTEGRATION_SCRIPT"
 
-# force delta pager even for small diffs
-export GIT_PAGER=delta
-
 # set nvim as default pager for man
 export MANPAGER='nvim +Man!'
 
@@ -71,6 +68,9 @@ fi
 if [ -z ${GIT_EDITOR+x} ]; then
   export GIT_EDITOR='nvim'
 fi
+
+# force hunk pager even for small diffs
+export GIT_PAGER='hunk pager'
 
 # ssh
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"

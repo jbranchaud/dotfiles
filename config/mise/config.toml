@@ -41,8 +41,7 @@
 "github:dkarter/hwt" = "latest"              # deterministic Herdr worktree orchestration
 "github:dkarter/lnr" = "latest"              # linear cli
 "github:dlvhdr/diffnav" = "latest"           # A git diff pager based on delta but with a file tree, à la GitHub.
-"github:github/github-mcp-server" = "1.12.2" # GitHub MCP server for local development
-"github:mazznoer/lolcrab" = "latest"         # like lolcat, but written in Rust and with more features
+"github:github/github-mcp-server" = "1.13.0" # GitHub MCP server for local development
 "github:modem-dev/hunk" = "latest"           # interactive terminal diff viewer
 "github:remoteoss/dexter" = "latest"         # fast af Elixir LSP
 "npm:@commitlint/cli" = "latest"             # linter for checking that commits are following conventional commits
@@ -50,7 +49,6 @@
 "npm:trash-cli" = "latest"                   # rm -> system trash (cross platform)
 "npm:varlock" = "latest"                     # secret manager
 "pipx:httpie" = "latest"                     # modern, user-friendly CLI HTTP client
-"pipx:neovim-remote" = "latest"              # allow controlling neovim remotely
 "pipx:yq" = "latest"                         # like jq but for yaml files
 aube = "latest"                              # a safe and fast alternative to pnpm
 bat = "latest"                               # modern `cat` with syntax highlighting
@@ -58,6 +56,7 @@ bun = "latest"                               # faster JS runtime
 cargo-binstall = "latest"                    # use pre-compiled binaries for rust tools (instead of compiling from source)
 choose = "latest"                            # A human-friendly and fast alternative to cut and (sometimes) awk
 claude-code = "latest"                       # slop machine
+betterleaks = "1.9.0"                        # secret scanning with contextual filtering; pin v1 CLI until v2 migration
 codex = "latest"                             # codex agent for AI assisted coding
 colima = "latest"                            # container runtime for macOS and linux
 delta = "latest"                             # nicer git diffs
@@ -71,7 +70,6 @@ fd = "latest"                                # modern `find`
 fnox = "latest"                              # secrets manager
 fx = "latest"                                # like jq, but allows interactive exploration and copying paths
 fzf = "latest"                               # fuzzy finder
-gitleaks = "latest"                          # git leaks is a tool for detecting and preventing hardcoded secrets like passwords, API keys, and tokens in git repositories
 glow = "latest"                              # Render markdown on the CLI
 go = "1.27"                                  # Go programming language
 gum = "latest"                               # CLI / scripting UI tools
@@ -107,7 +105,7 @@ zoxide = "latest"                            # a modern version of autojump
 # On version bumps, verify the microsoft1es publisher, registry signatures, official
 # source tag, tarball integrity/contents, and aube audit before replacing these exact
 # versions. Remove the exclusions once trusted-publisher or SLSA provenance returns.
-"npm:@playwright/mcp" = { version = "0.0.82", trust_policy_excludes = [
+"npm:@playwright/mcp" = { version = "0.0.83", trust_policy_excludes = [
   "@playwright/mcp@0.0.80",
   "playwright@1.63.0-alpha-2026-08-31",
   "playwright-core@1.63.0-alpha-2026-08-31",
@@ -115,6 +113,12 @@ zoxide = "latest"                            # a modern version of autojump
 "npm:chrome-devtools-mcp" = "latest"
 "github:dkarter/ink" = "latest"
 "npm:@opencode/cli" = { version = "latest", allow_builds = ["@opencode/cli"] }
+
+# Like lolcat, but written in Rust and with more features.
+# Upstream only publishes binaries for these OS/architecture combinations.
+[tools."github:mazznoer/lolcrab"]
+version = "latest"
+os = ["linux/x64", "macos/arm64", "windows/x64"]
 
 [tools."github:TBXark/mcp-proxy"]
 version = "latest"
@@ -124,11 +128,6 @@ rename_exe = "github-mcp-proxy"
 [tools."npm:@fission-ai/openspec"]
 version = "latest"
 allow_builds = false
-
-# squash-safe stacked PR/MR repair CLI
-[tools."npm:@kitlangton/stack"]
-version = "latest"
-allow_low_downloads = true
 
 # allow specific asdf plugins when there's no other option
 # docs: https://mise.jdx.dev/dev-tools/aliases.html
@@ -192,3 +191,6 @@ credential_command = "ghtkn get -m 1h"
 
 [settings.upgrade]
 auto_prune = true
+
+[settings.self_update]
+auto = true

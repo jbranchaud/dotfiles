@@ -2,28 +2,44 @@
 
 lockfile_version = 2
 
+[[tools.amp]]
+version = "0.0.1793104576-gc52692"
+aube = { path = "locks/mise.pdq/amp/0.0.1793104576-gc52692~23fc35d7", digest = "sha256:8c523416920c55f247317be879d85057ad54bbf8e8a37058ee2d9424064176ca" }
+backend = "npm:@ampcode/cli"
+specifiers = ["latest"]
+
+[tools.amp.options]
+allow_builds = '["@ampcode/cli"]'
+
 [[tools.gcloud]]
-version = "587.0.0"
+version = "590.0.1"
 backend = "vfox:mise-plugins/vfox-gcloud"
 specifiers = ["latest"]
 
 [tools.gcloud."platforms.linux-arm64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-587.0.0-linux-arm.tar.gz"
+checksum = "sha256:94d0ab7e5fd98b6d1c2f8377280cd9b8cccc47906b75d24ea1b4fdb243766d6b"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-590.0.1-linux-arm.tar.gz"
 
 [tools.gcloud."platforms.linux-arm64-musl"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-587.0.0-linux-arm.tar.gz"
+checksum = "sha256:94d0ab7e5fd98b6d1c2f8377280cd9b8cccc47906b75d24ea1b4fdb243766d6b"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-590.0.1-linux-arm.tar.gz"
 
 [tools.gcloud."platforms.linux-x64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-587.0.0-linux-x86_64.tar.gz"
+checksum = "sha256:f1f479b82db2350daf0b4db861da2c6931ac9741585db1c8abbf67f4a56e0b98"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-590.0.1-linux-x86_64.tar.gz"
 
 [tools.gcloud."platforms.linux-x64-musl"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-587.0.0-linux-x86_64.tar.gz"
+checksum = "sha256:f1f479b82db2350daf0b4db861da2c6931ac9741585db1c8abbf67f4a56e0b98"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-590.0.1-linux-x86_64.tar.gz"
 
 [tools.gcloud."platforms.macos-arm64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-587.0.0-darwin-arm.tar.gz"
+checksum = "sha256:135283328de833a70456aff1a86a602834429735ee945d3e55e528ba8fc50e3b"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-590.0.1-darwin-arm.tar.gz"
 
 [tools.gcloud."platforms.macos-x64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-587.0.0-darwin-x86_64.tar.gz"
+checksum = "sha256:bb74f8168f41f8d638a0b8ecb9d645748512803be258f68e7c472e3dadf94433"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-590.0.1-darwin-x86_64.tar.gz"
 
 [tools.gcloud."platforms.windows-x64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-587.0.0-windows-x86_64-bundled-python.zip"
+checksum = "sha256:38dad2c60c8507a2042e419ac9293e66b9f96156226c6cda92dcb1c4e8c65cf2"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-590.0.1-windows-x86_64-bundled-python.zip"

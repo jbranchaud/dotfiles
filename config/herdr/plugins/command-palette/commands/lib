@@ -1,10 +1,8 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-export PATH="$HOME/dotfiles/bin:$PATH"
-if ! command -v gum >/dev/null || ! command -v tv >/dev/null || ! command -v hwt >/dev/null || ! command -v nvim >/dev/null; then
-  export PATH="$HOME/.local/share/mise/shims:$PATH"
-fi
+# Herdr can retain version-specific Mise paths after a tool upgrade.
+export PATH="$HOME/dotfiles/bin:$HOME/.local/share/mise/shims:$PATH"
 
 context_value() {
   local query="$1"
@@ -46,7 +44,7 @@ current_pane_id() {
 
 current_pane_cwd() {
   local value
-  value="$(context_value '.focused_pane.foreground_cwd // .focused_pane.cwd // .pane.foreground_cwd // .pane.cwd')"
+  value="$(context_value '.focused_pane.foreground_cwd // .focused_pane.cwd // .pane.foreground_cwd // .pane.cwd // .focused_pane_cwd')"
 
   if [[ -n "$value" ]]; then
     print -r -- "$value"

@@ -5,6 +5,20 @@ local exclude_commit_editmsg = function(item)
   return not path or not path:match '/%.git/COMMIT_EDITMSG$'
 end
 
+local explorer_navigation = {}
+if require('core.utils').in_herdr() then
+  local keys = {}
+  for direction, name in pairs { h = 'left', j = 'down', k = 'up', l = 'right' } do
+    keys['<c-' .. direction .. '>'] = {
+      function()
+        require('core.herdr_navigator').navigate(direction, name)
+      end,
+      mode = { 'i', 'n' },
+    }
+  end
+  explorer_navigation = { input = { keys = keys }, list = { keys = keys } }
+end
+
 ---@type LazySpec
 return {
   'folke/snacks.nvim',
@@ -52,6 +66,22 @@ return {
       enabled = true,
       -- replace vim.ui.select
       ui_select = true,
+      actions = {
+        new_file = function(picker)
+          local item = picker:current()
+          local dir = item and Snacks.picker.util.path(item) and picker:dir() or picker:cwd()
+          picker:close()
+          vim.ui.input({
+            prompt = 'New file: ',
+            default = dir .. '/',
+            completion = 'file',
+          }, function(path)
+            if path and path ~= '' then
+              vim.cmd.edit(vim.fn.fnameescape(path))
+            end
+          end)
+        end,
+      },
       win = {
         input = {
           keys = {
@@ -61,17 +91,21 @@ return {
             -- the default is <c-s> but I'm used to <c-x> from telescope
             ['<c-x>'] = { 'edit_split', mode = { 'i', 'n' } },
 
+            ['<M-n>'] = { 'new_file', mode = { 'i', 'n' } },
+
             -- Herdr consumes <M-h> for resizing and forwards <M-H> as its Neovim resize signal.
             ['<M-H>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
           },
         },
         list = {
           keys = {
+            ['<M-n>'] = 'new_file',
             ['<M-H>'] = 'toggle_hidden',
           },
         },
       },
       sources = {
+        explorer = { win = explorer_navigation },
         files = {
           filter = {
             filter = exclude_commit_editmsg,

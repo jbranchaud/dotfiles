@@ -35,6 +35,13 @@
     "command": "commands/move-pane-new-tab"
   },
   {
+    "id": "move-pane-to-workspace",
+    "icon": "󰙅",
+    "label": "Move pane to workspace",
+    "shortcut": "",
+    "command": "commands/move-pane-to-workspace"
+  },
+  {
     "id": "kill-pane",
     "icon": "󰆴",
     "label": "Kill current pane",
@@ -89,6 +96,20 @@
     "label": "Checkout PR or branch",
     "shortcut": "",
     "command": "commands/checkout-worktree"
+  },
+  {
+    "id": "review-changes",
+    "icon": "",
+    "label": "Review current changes (tuicr / Hunk / CodeDiff)",
+    "shortcut": "",
+    "command": "commands/review-changes"
+  },
+  {
+    "id": "review-pr",
+    "icon": "",
+    "label": "Review pull request",
+    "shortcut": "",
+    "command": "commands/review-pr"
   },
   {
     "id": "new-agent-with-prompt",

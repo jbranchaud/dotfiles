@@ -96,6 +96,7 @@ tasks:
       - task: mise:install
       - task: symlink
       - task: agent-guard:install
+      - task: inline-command:install
       - task: op:install:ssh:agent
       - task: zinit:install
       - task: zinit:plugins:update
@@ -151,9 +152,10 @@ tasks:
       - task: arch:sync
       - task: create:dirs
       - task: symlink
-      - task: mise:sync
+      - task: mise:sync:prepare
       - task: pitchfork:sync
       - task: agent-guard:install
+      - task: inline-command:install
       - task: opencode:plugins:install
       - task: skills:sync
       - task: herdr:sync
@@ -166,6 +168,8 @@ tasks:
       - task: yazi:sync
       # completions needs the tools to be installed
       - task: completions:sync
+      # Later mise invocations can generate dependency sidecars; commit them last.
+      - task: mise:commit
       - task: print:done
 
   create:dirs:
@@ -244,6 +248,10 @@ tasks:
     desc: Installs shared credential-redaction hooks for local coding agents
     cmd: ./config/agent-guard/install.sh
 
+  inline-command:install:
+    desc: Installs inline shell command prompt hooks for Claude and Codex
+    cmd: sh ./config/inline-command/install.sh
+
   skills:sync:
     desc: Synchronizes repo and local skills into global skill directories
     vars:
@@ -256,8 +264,7 @@ tasks:
           repo_skills="$(realpath ./agents/skills)"
           local_skills="$HOME/.local/share/dotfiles/skills"
           skill_dests="$HOME/.agents/skills $HOME/.claude/skills"
-          generated_skills='stack|stack|stack|skill|-|SKILL.md
-          lnr|lnr|lnr|skill|-|SKILL.md
+          generated_skills='lnr|lnr|lnr|skill|-|SKILL.md
           hwt|hwt|hwt|skill|-|SKILL.md
           hwt|hwt|hwt|skill|config|references/config.md
           hunk-review|mise|sh|-c|cat "$(mise exec -- hunk skill path hunk-review)"|SKILL.md
@@ -477,7 +484,7 @@ tasks:
 
   leaks:
     desc: Checks for secret leaks across the history of this project
-    cmd: gitleaks git -v --redact -b gitleaks-report.json
+    cmd: betterleaks git -v --redact --validation=false --report-format json --report-path betterleaks-report.json
 
   fmt:
     desc: Format all formattable files

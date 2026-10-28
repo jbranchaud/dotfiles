@@ -6,11 +6,34 @@ import os
 import re
 import subprocess
 import sys
+from functools import lru_cache
 
 TOKEN = re.compile(r"[^\s<>\"'`]+")
 QUOTED = re.compile(r"`([^`]+)`|\"([^\"]+)\"")
-LINE_NUMBER = re.compile(r"^(.*?):\d+(?::\d+|[-–—]\d+)?$")
+LINE_NUMBER = re.compile(r"^(.*?)(:\d+(?::\d+|[-–—]\d+)?)$")
+LINE_NUMBER_CONTINUATION = re.compile(r"^(?!\d+[.)](?:\s|$))\d+(?::\d+|[-–—]\d+)?(?=$|[\s.,;!?)\]}\"'`])")
 MAX_WRAP_ROWS = 8
+
+
+@lru_cache(maxsize=32)
+def project_files(cwd):
+    """Index tracked and non-ignored untracked files once per pane directory."""
+    try:
+        root = subprocess.check_output(
+            ["git", "-C", cwd, "rev-parse", "--show-toplevel"],
+            text=True, stderr=subprocess.DEVNULL,
+        ).strip()
+        files = subprocess.check_output(
+            ["git", "-C", root, "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+            text=True, stderr=subprocess.DEVNULL,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return {}
+    by_name = {}
+    for relative in dict.fromkeys(files.split("\0")):
+        if relative:
+            by_name.setdefault(os.path.basename(relative), []).append(os.path.join(root, relative))
+    return by_name
 
 
 def herdr(*args):
@@ -20,21 +43,24 @@ def herdr(*args):
 
 
 def pane_title(pane):
-    label = pane.get("label") or ""
-    agent = pane.get("agent") or ""
-    if label and label == pane.get("display_agent") and agent:
-        return agent
-    return label or agent or pane.get("terminal_title_stripped") or pane["pane_id"]
+    return pane.get("label") or pane.get("agent") or pane.get("terminal_title_stripped") or "󰆍 terminal"
 
 
 def paths_in(text, cwd, width):
-    lines = text.splitlines()
+    rendered_lines = text.splitlines()
+    # OpenCode's scrollbar and padding are UI chrome, not part of a wrapped path.
+    lines = [re.sub(r"\s+█\s*$", "", line) for line in rendered_lines]
     for index, line in enumerate(lines):
         joined = line.rstrip()
         row = index
         wrapped = []
         while row < index + MAX_WRAP_ROWS and row + 1 < len(lines) and (
-            len(lines[row].rstrip()) >= width - 4 or lines[row].rstrip().endswith("/")
+            len(rendered_lines[row].rstrip()) >= width - 4 or lines[row].rstrip().endswith("/")
+            # Text renderers can wrap before the pane edge because of padding.
+            or (
+                lines[row].rstrip().endswith(":")
+                and LINE_NUMBER_CONTINUATION.match(lines[row + 1].lstrip())
+            )
         ):
             joined += lines[row + 1].lstrip()
             wrapped.append(joined)
@@ -63,6 +89,12 @@ def paths_on_line(text, cwd):
             path = os.path.abspath(os.path.join(cwd, os.path.expanduser(display)))
         if os.path.isfile(path):
             yield path, token
+        elif os.path.basename(display) == display and "." in display:
+            # Agent prose often names a nested project file without its directory.
+            suffix = numbered.group(2) if numbered else ""
+            for found in project_files(cwd).get(display, []):
+                if os.path.isfile(found):
+                    yield found, os.path.relpath(found, os.path.realpath(cwd)) + suffix
 
 
 def main():
@@ -80,9 +112,11 @@ def main():
         info = details[pane["pane_id"]]
         text = herdr("pane", "read", pane["pane_id"], "--source", "visible", "--format", "text")
         for path, display in paths_in(text, info.get("foreground_cwd") or info["cwd"], pane["rect"]["width"]):
-            if path not in seen:
-                seen.add(path)
-                files.append({"path": path, "display_path": display, "pane_title": pane_title(info)})
+            numbered = LINE_NUMBER.match(display)
+            reference = path + (numbered.group(2) if numbered else "")
+            if reference not in seen:
+                seen.add(reference)
+                files.append({"path": path, "reference": reference, "display_path": display, "pane_title": pane_title(info)})
     json.dump(files, sys.stdout)
     print()
 

@@ -3,11 +3,16 @@
 [tools]
 
 "github:crate-ci/committed" = "latest"
-"github:mazznoer/lolcrab" = "latest"
+# Upstream only publishes binaries for these OS/architecture combinations.
+"github:mazznoer/lolcrab" = { version = "latest", os = [
+  "linux/x64",
+  "macos/arm64",
+  "windows/x64",
+] }
 aube = "latest"
+betterleaks = "1.9.0"
 bun = "latest"
 dprint = "latest"
-gitleaks = "latest"
 hk = "latest"
 lua-language-server = "3"
 "npm:@logseq/cli" = "latest"
@@ -58,6 +63,7 @@ press_and_hold = false
 "com.apple.dock" = { showhidden = true }
 
 [dotfiles]
+"~/.config/raycast/skills" = "raycast/skills"
 "~/.aliases" = "aliases"
 "~/.ctags" = "ctags"
 "~/.gemrc" = "gemrc"
