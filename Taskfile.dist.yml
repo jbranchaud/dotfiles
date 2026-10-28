@@ -21,6 +21,9 @@ includes:
   ci:
     taskfile: ./taskfiles/ci.yml
 
+  claude:
+    taskfile: ./taskfiles/claude.yml
+
   comp:
     aliases: [c, completions]
     taskfile: ./taskfiles/completions.yml

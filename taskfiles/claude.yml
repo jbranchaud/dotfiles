@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+silent: true
+
+tasks:
+  sync:
+    desc: Configures Claude Code hooks in ~/.claude/settings.json
+    summary: |
+      Configures Claude Code hooks
+
+      Merges dotfiles-managed hooks into ~/.claude/settings.json without
+      clobbering settings Claude Code writes there itself (model, plugins, etc).
+    cmds:
+      - cmd: |
+          set -eu
+
+          settings="$HOME/.claude/settings.json"
+          hook_cmd="$(realpath ./bin/claude-unicorn-notify)"
+
+          mkdir -p "$HOME/.claude"
+          [ -f "$settings" ] || echo '{}' >"$settings"
+
+          tmp="$(mktemp)"
+          trap 'rm -f "$tmp"' EXIT
+
+          mise exec -- jq --arg cmd "$hook_cmd" '
+            .hooks //= {}
+            | .hooks.Stop //= []
+            | .hooks.Stop |= (
+                map(select(any(.hooks[]?; .command | test("claude-unicorn-notify")) | not))
+                + [{matcher: "", hooks: [{type: "command", command: $cmd}]}]
+              )
+          ' "$settings" >"$tmp"
+
+          mv "$tmp" "$settings"
+          chmod 600 "$settings"
+
+          echo "Configured Claude Code Stop hook: $hook_cmd"

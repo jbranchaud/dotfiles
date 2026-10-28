@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Claude Code hook: fire unicornleap when a session finishes responding, as a
+# visual "this session needs attention" indicator.
+#
+# Wired into ~/.claude/settings.json by `task claude:sync`.
+#
+# Env overrides:
+#   CLAUDE_UNICORN_SECONDS  animation duration (default: 2)
+#   CLAUDE_UNICORN_COUNT    number of unicorns (default: 1)
+#   CLAUDE_UNICORN_DISABLE  set to any value to skip
+
+set -euo pipefail
+
+# drain the hook payload on stdin, we don't need it
+cat >/dev/null 2>&1 || true
+
+[[ -z ${CLAUDE_UNICORN_DISABLE:-} ]] || exit 0
+
+# macOS only, and pointless without a local display
+[[ $(uname -s) == 'Darwin' ]] || exit 0
+[[ -z ${SSH_CONNECTION:-} ]] || exit 0
+[[ -z ${CI:-} ]] || exit 0
+
+command -v unicornleap >/dev/null 2>&1 || exit 0
+
+# detach so the hook doesn't block the session for the animation duration
+nohup unicornleap \
+  --seconds "${CLAUDE_UNICORN_SECONDS:-2}" \
+  --number "${CLAUDE_UNICORN_COUNT:-1}" \
+  >/dev/null 2>&1 &
+
+exit 0
