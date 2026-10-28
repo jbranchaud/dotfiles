@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+open -n -a "/Applications/Claude.app" \
+  --env "CLAUDE_CONFIG_DIR=$HOME/.claude-fsp" \
+  --args --user-data-dir="$HOME/Library/Application Support/Claude-FSP"
