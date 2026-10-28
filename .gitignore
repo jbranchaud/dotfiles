@@ -50,3 +50,6 @@ config/herdr/herdr.sock.agent
 
 # Hunk trust decisions are machine-local
 config/hunk/state.json
+
+# tmux plugins installed by tpm
+config/tmux/plugins/
