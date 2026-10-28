@@ -46,7 +46,9 @@ install_tools() {
   fi
 
   # mise install rewrites lockfiles; discard that so the tree stays clean
-  git restore -- "${LOCK_PATHS[@]}"
+  if [[ -n $(git ls-files -- "${LOCK_PATHS[@]}") ]]; then
+    git ls-files -z -- "${LOCK_PATHS[@]}" | xargs -0 git restore --
+  fi
   git clean -fdq -- "${LOCK_PATHS[@]}"
 }
 
