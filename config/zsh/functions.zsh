@@ -329,3 +329,8 @@ up() {
   while ((n--)); do p+="../"; done
   cd $p
 }
+
+# fix-merge-conflicts - have Claude resolve merge conflicts in current repo
+fix-merge-conflicts() {
+  claude -p "Can you fix the merge conflict?" --permission-mode auto
+}
